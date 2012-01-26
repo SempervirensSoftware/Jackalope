@@ -1,0 +1,1 @@
+[{"name":"Ruby", "ext":[".rb"], "decorations":[{"regex":"\\b(end|def|class|do|if|else|elsif)\\b", "style":{"color":"0x0000FF", "bold":true}},{"regex":"\\s:\\S*", "style":{"color":"0xA31E1F", "bold":true}},{"regex":"\\s@[^\\s.]*", "style":{"color":"0x275309", "bold":true}} ]}]
