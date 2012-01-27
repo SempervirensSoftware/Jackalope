@@ -23,7 +23,7 @@
 @property (strong, nonatomic) TreeNode *activeBlob;
 
 
-@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
+@property (nonatomic, retain)  UILabel *detailDescriptionLabel;
 @property (nonatomic, retain) IBOutlet PTCodeScrollView *codeView;
 
 @end

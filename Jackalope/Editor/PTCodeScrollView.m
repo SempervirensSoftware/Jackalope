@@ -404,7 +404,8 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0); self.contentInset = contentInsets;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0); 
+    self.contentInset = contentInsets;
     self.scrollIndicatorInsets = contentInsets;
         
     // If active text field is hidden by keyboard, scroll it so it's visible

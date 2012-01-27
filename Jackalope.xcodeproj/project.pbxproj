@@ -23,7 +23,6 @@
 		6E8B050B14D0C47900EBC107 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B050914D0C47900EBC107 /* InfoPlist.strings */; };
 		6E8B050E14D0C47900EBC107 /* JackalopeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B050D14D0C47900EBC107 /* JackalopeTests.m */; };
 		6E8B051C14D0CA4F00EBC107 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B051B14D0CA4F00EBC107 /* CoreText.framework */; };
-		6E8B052114D0CB9200EBC107 /* CodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B051D14D0CB9200EBC107 /* CodeView.xib */; };
 		6E8B052614D0CBF800EBC107 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B052414D0CBF800EBC107 /* file.png */; };
 		6E8B052714D0CBF800EBC107 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B052514D0CBF800EBC107 /* folder.png */; };
 		6E8B053B14D0CC1F00EBC107 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B052C14D0CC1F00EBC107 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
@@ -90,7 +89,6 @@
 		6E8B050C14D0C47900EBC107 /* JackalopeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JackalopeTests.h; sourceTree = "<group>"; };
 		6E8B050D14D0C47900EBC107 /* JackalopeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JackalopeTests.m; sourceTree = "<group>"; };
 		6E8B051B14D0CA4F00EBC107 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		6E8B051E14D0CB9200EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView.xib; sourceTree = "<group>"; };
 		6E8B052414D0CBF800EBC107 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		6E8B052514D0CBF800EBC107 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		6E8B052A14D0CC1F00EBC107 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 				6E8B054414D0CE9700EBC107 /* ViewController */,
 				6E8B052814D0CC1F00EBC107 /* libs */,
 				6E8B052314D0CBF800EBC107 /* img */,
-				6E8B051D14D0CB9200EBC107 /* CodeView.xib */,
 				6E8B04DD14D0C47900EBC107 /* Supporting Files */,
 			);
 			path = Jackalope;
@@ -462,16 +459,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E8B04E114D0C47900EBC107 /* InfoPlist.strings in Resources */,
-				6E8B052114D0CB9200EBC107 /* CodeView.xib in Resources */,
 				6E8B052614D0CBF800EBC107 /* file.png in Resources */,
 				6E8B052714D0CBF800EBC107 /* folder.png in Resources */,
 				6E8B054114D0CC1F00EBC107 /* LICENSE in Resources */,
+				6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */,
+				6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */,
 				6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */,
 				6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */,
 				6E8B058814D0DD3100EBC107 /* decoration_schema.txt in Resources */,
 				6E8B058914D0DD3100EBC107 /* decorations.json in Resources */,
-				6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */,
-				6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,14 +580,6 @@
 				6E8B050A14D0C47900EBC107 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6E8B051D14D0CB9200EBC107 /* CodeView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E8B051E14D0CB9200EBC107 /* en */,
-			);
-			name = CodeView.xib;
 			sourceTree = "<group>";
 		};
 		6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */ = {

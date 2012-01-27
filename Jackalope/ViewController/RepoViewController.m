@@ -99,7 +99,6 @@ static RepoViewController *_instance = nil;
 
 - (void) showTreeInNav:(TreeNode *) node{    
     TreeNode *tempNode = [_treeHash objectForKey:node.sha];
-    NSLog(@"getSHA:%@", node.sha);
 
     if (tempNode == nil)
     {
@@ -162,7 +161,6 @@ static RepoViewController *_instance = nil;
     }
     
     //cache the result
-    NSLog(@"setSHA:%@", responseTree.sha);
     [_treeHash setValue:responseTree forKey:responseTree.sha];
     
     // Release the connection and response data, we're done with it
