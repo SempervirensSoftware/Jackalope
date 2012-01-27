@@ -77,7 +77,7 @@
         _fileName = path;
         
         // Prototype Only!
-        [self demoInit];
+        //[self demoInit];
     }
     
     return self;

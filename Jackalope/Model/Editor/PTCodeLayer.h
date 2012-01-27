@@ -21,9 +21,9 @@
     float _leftColumnWidth;
     float _leftGutterWidth;
     float _leftCodeOffset;
-    
-    CGFloat _ascent, _descent, _leading;
     float _lineHeight;   
+    CGFloat _ascent, _descent, _leading;
+    
     NSCharacterSet* _newlineCharSet;
 }
 
@@ -43,6 +43,7 @@
 @property (nonatomic, retain)           PTTextRange*    selection;
 
 -(CFAttributedStringRef)                                copyAttributedText;
+-(NSString*)                                            fullText;
 
 -(void) updateLine:(LineOfCode*) line;
 -(void) insertLine:(LineOfCode*) newLine afterLine:(LineOfCode*) exitingLine;
@@ -51,5 +52,7 @@
 - (PTTextPosition *) closestPositionToPoint:(CGPoint)point;
 -(void)layoutLoc:(LineOfCode*)loc;
 -(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(LineOfCode*) updatedLoc;
+
+
 
 @end

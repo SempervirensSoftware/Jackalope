@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */; };
+		6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */; };
 		6E8B04D714D0C47900EBC107 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D614D0C47900EBC107 /* UIKit.framework */; };
 		6E8B04D914D0C47900EBC107 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D814D0C47900EBC107 /* Foundation.framework */; };
 		6E8B04DB14D0C47900EBC107 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04DA14D0C47900EBC107 /* CoreGraphics.framework */; };
@@ -35,8 +37,8 @@
 		6E8B054B14D0CE9800EBC107 /* CodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054614D0CE9800EBC107 /* CodeViewController.m */; };
 		6E8B054C14D0CE9800EBC107 /* RepoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054814D0CE9800EBC107 /* RepoViewController.m */; };
 		6E8B054D14D0CE9800EBC107 /* TreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054A14D0CE9800EBC107 /* TreeViewController.m */; };
-		6E8B055F14D0D42B00EBC107 /* TreeViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055B14D0D42B00EBC107 /* TreeViewController_iPad.xib */; };
-		6E8B056014D0D42B00EBC107 /* TreeViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055D14D0D42B00EBC107 /* TreeViewController_iPhone.xib */; };
+		6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */; };
+		6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */; };
 		6E8B057814D0DD0900EBC107 /* LineOfCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056814D0DD0900EBC107 /* LineOfCode.m */; };
 		6E8B057914D0DD0900EBC107 /* PTCodeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056A14D0DD0900EBC107 /* PTCodeLayer.m */; };
 		6E8B057A14D0DD0900EBC107 /* PTTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056C14D0DD0900EBC107 /* PTTextPosition.m */; };
@@ -65,6 +67,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E4101AE14D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPad.xib; sourceTree = "<group>"; };
+		6E4101B014D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPhone.xib; sourceTree = "<group>"; };
 		6E8B04D214D0C47900EBC107 /* Jackalope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jackalope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E8B04D614D0C47900EBC107 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E8B04D814D0C47900EBC107 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -111,8 +115,8 @@
 		6E8B054814D0CE9800EBC107 /* RepoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoViewController.m; sourceTree = "<group>"; };
 		6E8B054914D0CE9800EBC107 /* TreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeViewController.h; sourceTree = "<group>"; };
 		6E8B054A14D0CE9800EBC107 /* TreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeViewController.m; sourceTree = "<group>"; };
-		6E8B055C14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeViewController_iPad.xib; sourceTree = "<group>"; };
-		6E8B055E14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeViewController_iPhone.xib; sourceTree = "<group>"; };
+		6E8B055C14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPad.xib; sourceTree = "<group>"; };
+		6E8B055E14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPhone.xib; sourceTree = "<group>"; };
 		6E8B056714D0DD0900EBC107 /* LineOfCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineOfCode.h; sourceTree = "<group>"; };
 		6E8B056814D0DD0900EBC107 /* LineOfCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineOfCode.m; sourceTree = "<group>"; };
 		6E8B056914D0DD0900EBC107 /* PTCodeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeLayer.h; sourceTree = "<group>"; };
@@ -303,8 +307,10 @@
 				6E8B04E914D0C47900EBC107 /* MasterViewController.m */,
 				6E8B04EB14D0C47900EBC107 /* DetailViewController.h */,
 				6E8B04EC14D0C47900EBC107 /* DetailViewController.m */,
-				6E8B055B14D0D42B00EBC107 /* TreeViewController_iPad.xib */,
-				6E8B055D14D0D42B00EBC107 /* TreeViewController_iPhone.xib */,
+				6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */,
+				6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */,
+				6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */,
+				6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */,
 			);
 			name = "App Core";
 			sourceTree = "<group>";
@@ -460,10 +466,12 @@
 				6E8B052614D0CBF800EBC107 /* file.png in Resources */,
 				6E8B052714D0CBF800EBC107 /* folder.png in Resources */,
 				6E8B054114D0CC1F00EBC107 /* LICENSE in Resources */,
-				6E8B055F14D0D42B00EBC107 /* TreeViewController_iPad.xib in Resources */,
-				6E8B056014D0D42B00EBC107 /* TreeViewController_iPhone.xib in Resources */,
+				6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */,
+				6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */,
 				6E8B058814D0DD3100EBC107 /* decoration_schema.txt in Resources */,
 				6E8B058914D0DD3100EBC107 /* decorations.json in Resources */,
+				6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */,
+				6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +554,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E4101AE14D2346A0067A321 /* en */,
+			);
+			name = CodeView_iPad.xib;
+			sourceTree = "<group>";
+		};
+		6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E4101B014D2346A0067A321 /* en */,
+			);
+			name = CodeView_iPhone.xib;
+			sourceTree = "<group>";
+		};
 		6E8B04DF14D0C47900EBC107 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -570,20 +594,20 @@
 			name = CodeView.xib;
 			sourceTree = "<group>";
 		};
-		6E8B055B14D0D42B00EBC107 /* TreeViewController_iPad.xib */ = {
+		6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6E8B055C14D0D42B00EBC107 /* en */,
 			);
-			name = TreeViewController_iPad.xib;
+			name = TreeView_iPad.xib;
 			sourceTree = "<group>";
 		};
-		6E8B055D14D0D42B00EBC107 /* TreeViewController_iPhone.xib */ = {
+		6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6E8B055E14D0D42B00EBC107 /* en */,
 			);
-			name = TreeViewController_iPhone.xib;
+			name = TreeView_iPhone.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -711,6 +735,7 @@
 				6E8B051314D0C47900EBC107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E8B051414D0C47900EBC107 /* Build configuration list for PBXNativeTarget "JackalopeTests" */ = {
 			isa = XCConfigurationList;
@@ -719,6 +744,7 @@
 				6E8B051614D0C47900EBC107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

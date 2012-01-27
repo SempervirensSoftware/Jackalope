@@ -11,7 +11,8 @@
 
 @interface DecoratorCollection : NSObject
 {
-    NSMutableDictionary* _decoratorsForExtension;
+    NSMutableDictionary*    _decoratorsForExtension;
+    CodeDecorator*          _defaultDecorator;
 }
 
 +(DecoratorCollection *) getInstance;

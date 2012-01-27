@@ -74,11 +74,11 @@ static RepoViewController *_instance = nil;
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
         {            
-            masterViewController = [[TreeViewController alloc] initWithNibName:@"TreeViewController_iPhone" bundle:nil];
+            masterViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
         }
         else
         {
-            masterViewController = [[TreeViewController alloc] initWithNibName:@"TreeViewController_iPad" bundle:nil];   
+            masterViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
         }
                 
         [masterViewController setTitle:@"Repo Browser"];
@@ -113,7 +113,15 @@ static RepoViewController *_instance = nil;
         tempNode = node;
     }
     
-    TreeViewController *newTreeViewController = [[TreeViewController alloc] initWithNibName:@"TreeView" bundle:nil];
+    TreeViewController* newTreeViewController;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
+    {            
+        newTreeViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
+    }
+    else
+    {
+        newTreeViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
+    }
     newTreeViewController.tree = tempNode;
     
     [self.navController pushViewController:newTreeViewController animated:YES];

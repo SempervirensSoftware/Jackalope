@@ -24,23 +24,31 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    CodeViewController *detailViewController = [[CodeViewController alloc] initWithNibName:@"CodeView" bundle:nil];
+    CodeViewController *detailViewController;
     UINavigationController *masterNavigationController = [RepoViewController getInstance].navController;
-    [RepoViewController getInstance].codeViewController = detailViewController;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         // iPhone
+        
+        detailViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPhone" bundle:nil];        
+        
         self.navigationController = masterNavigationController;
         self.window.rootViewController = self.navigationController;
+        
+
     } else {
         // iPad        
+        
+        detailViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPad" bundle:nil];        
         UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-                
+        
         self.splitViewController = [[UISplitViewController alloc] init];
         self.splitViewController.delegate = detailViewController;
         self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailViewNav, nil];
         self.window.rootViewController = self.splitViewController;        
     }
+                                                
+    [RepoViewController getInstance].codeViewController = detailViewController;
     
     [self.window makeKeyAndVisible];
     return YES;

@@ -40,7 +40,8 @@ static DecoratorCollection *_instance = nil;
     
     if (self)
     {
-
+        _defaultDecorator = [[CodeDecorator alloc] init];
+        
         // load the JSON from bundle 
         NSString *jsonString = nil;
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"decorations" ofType:@"json"];  
@@ -81,7 +82,11 @@ static DecoratorCollection *_instance = nil;
     NSString *ext = @".rb";
     id decorator = [_decoratorsForExtension objectForKey:ext];
  
-    if (!decorator || [decorator isKindOfClass:[CodeDecorator class]]){
+    if (decorator == nil)
+    {
+        return _defaultDecorator;
+    }
+    else if ([decorator isKindOfClass:[CodeDecorator class]]){
         return decorator;
     }
     else if ([decorator isKindOfClass:[NSDictionary class]]){

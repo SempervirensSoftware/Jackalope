@@ -17,11 +17,25 @@
 // setup a reference type for the anonymous decoration blocks
 typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
 
+-(id) init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        _name = @"PlainText";
+        _extensions = [[NSArray alloc] init];
+        _decorations = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
+    return self;
+}
+
 -(id) initFromDictionary:(NSDictionary *)dict
 {
     self = [super init];
     
-    if (self){
+    if (self && dict){
         _name = [dict objectForKey:@"name"];
         _extensions = [dict objectForKey:@"ext"];
         _decorations = [[NSMutableArray alloc] init];
@@ -80,7 +94,7 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
 
     NSString *plainText = [code string];
     processingAttributedString = [code mutableCopy];
-    [processingAttributedString setFont:[UIFont fontWithName:@"Courier" size:18]];
+    [processingAttributedString setFont:[UIFont fontWithName:@"Courier" size:12]];
     
     for (NSDictionary* decoration in _decorations)
     {

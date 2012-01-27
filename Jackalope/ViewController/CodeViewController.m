@@ -37,14 +37,15 @@
         self.title = newBlob.name;
         
         // Update the view.
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/files/%@", 
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/files/%@.json", 
                                            [RepoViewController getInstance].repoName, 
                                            _activeBlob.sha]];
-        NSURLRequest *req = [NSURLRequest requestWithURL:url];
-        
-        // Load the request into the web view
-        [_codeView loadRequest:req];
 
+        _responseData = [[NSMutableData alloc] init];
+        NSURLRequest *req = [NSURLRequest requestWithURL:url];
+        _connection = [[NSURLConnection alloc] initWithRequest:req
+                                                      delegate:self
+                                              startImmediately:YES];        
     }
 
     if (self.masterPopoverController != nil) {
@@ -69,9 +70,7 @@
 
 -(void) commitPressed
 {
-    NSString *blobContent = [_codeView stringByEvaluatingJavaScriptFromString:@"getCodeContent();"];
-    
-    NSLog(@"blob:%@",blobContent);
+    NSString *blobContent = _codeView.code.plainText;
     
     BlobCommit *commit = [[BlobCommit alloc] initWithBlob:_activeBlob];
     commit.blobContent = blobContent;
@@ -85,6 +84,52 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
+#pragma mark - URL Connection
+
+// This method will be called several times as the data arrives
+- (void)connection:(NSURLConnection *)conn didReceiveData:(NSData *)data
+{
+    // Add the incoming chunk of data to the container we are keeping
+    // The data always comes in the correct order
+    [_responseData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)conn
+{
+    // We are just checking to make sure we are getting the XML
+    NSString *responseString = [[NSString alloc] initWithData:_responseData
+                                                     encoding:NSUTF8StringEncoding];
+    Code* code = [[Code alloc] initWithPath:_activeBlob.name AndContents:responseString];
+    _codeView.code = code;
+    
+    // Release the connection and response data, we're done with it
+    _connection = nil;
+    _responseData = nil;
+    
+}
+
+- (void)connection:(NSURLConnection *)conn
+  didFailWithError:(NSError *)error
+{
+    // Release the connection and response data, we're done with it
+    _connection = nil;
+    _responseData = nil;
+    
+    // Grab the description of the error object passed to us
+    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    
+    // Create and show an alert view with this error displayed
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                 message:errorString
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil];
+    
+    [av show];
+}
+
+
 
 #pragma mark - View lifecycle
 

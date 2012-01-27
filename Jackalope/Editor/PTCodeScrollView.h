@@ -14,7 +14,6 @@
 
 @interface PTCodeScrollView : UIScrollView <UIKeyInput>
 {
-    Code*                       _code;
     CodeDecorator*              _decorator;
     PTCursorView*               _cursorView;
     
@@ -29,10 +28,12 @@
 }
 
 @property (nonatomic, retain) PTTextRange* selection;
+@property (nonatomic, retain) Code* code;
+
 /* A system-provied input delegate is assigned when the system is interested in input changes. */
 @property (nonatomic, assign) id <UITextInputDelegate> inputDelegate;
+-(void) registerForKeyboardNotifications;
 
--(void) loadCode:(Code *)code;
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;
 -(void) setSelectionAtPoint:(CGPoint)point;
 -(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAtLayer:(PTCodeLayer*) updatedLayer;

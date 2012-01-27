@@ -13,9 +13,6 @@
 #import "PTTextPosition.h"
 #import "PTTextRange.h"
 
-
-#pragma mark EditableCoreTextView class extension for gesture recognizer
-
 // We use a tap gesture recognizer to allow the user to tap to invoke text edit mode
 @interface PTCodeScrollView() <UIGestureRecognizerDelegate>
 
@@ -28,6 +25,7 @@
 
 @synthesize inputDelegate;
 @synthesize selection = _selection;
+@synthesize code = _code;
 
 /////////////////////////////////////////////////////////////////////////////
 // MARK: - Initialization
@@ -39,6 +37,8 @@
     [self addGestureRecognizer:tap];
     tap.delegate = self;
     
+    [self registerForKeyboardNotifications];
+    
     _newlineCharSet = [NSCharacterSet newlineCharacterSet];
     _layerArray = [[NSMutableArray alloc] initWithCapacity:1];
     _cursorView = [[PTCursorView alloc] init];
@@ -48,6 +48,8 @@
                         regularExpressionWithPattern:@"^[\t ]*"
                         options:0
                         error:NULL];
+    
+    //self.contentMode = UIViewContentModeRedraw;
 }
 
 - (id)init {
@@ -74,10 +76,32 @@
     return self;
 }
 
--(void) loadCode:(Code *)code
+-(Code *) code
 {
+    NSMutableString* codeText = [[NSMutableString alloc] init];
+    
+    for (PTCodeLayer* layer in _layerArray)
+    {
+        [codeText appendString:[layer fullText]];
+    }
+    
+    _code.plainText = codeText;
+    
+    return _code;
+}
+
+
+-(void) setCode:(Code *)code
+{
+    if (!code || !(code.plainText))
+    {
+        return;
+    }
+    
     _code = code;    
     _decorator = [[DecoratorCollection getInstance] decoratorForFileName:code.fileName];        
+    _layerArray = [[NSMutableArray alloc] init];
+    [self resignFirstResponder];
     
     NSAttributedString* decoratedCode = [_decorator decorateString:code.plainText];    
     NSInteger   fullLength = [code.plainText length];
@@ -85,7 +109,7 @@
     
     NSInteger   currentIndex = 0;
     NSInteger   currentLineNum = 1;
-    CGRect      currentFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    CGRect      currentFrame = CGRectMake(0, 2, self.frame.size.width, 12);
         
     _codeEditor = [[UIView alloc] initWithFrame:currentFrame];
     
@@ -105,16 +129,18 @@
         [currentLayer setNeedsDisplay];
         
         [_layerArray addObject:currentLayer];
-        [_codeEditor.layer addSublayer:currentLayer];
-        
+        [_codeEditor setFrame:CGRectMake(_codeEditor.frame.origin.x, _codeEditor.frame.origin.y, _codeEditor.frame.size.width, (_codeEditor.frame.size.height + currentLayer.frame.size.height))];
+        [_codeEditor.layer addSublayer:currentLayer];        
         
         currentIndex = (currentIndex + numCharsLoaded);
         currentLineNum = (currentLineNum + [currentLayer.locArray count]);
         currentFrame.origin.y = (currentFrame.origin.y + currentLayer.frame.size.height);
     }
     
-    _codeEditor.frame = CGRectMake(_codeEditor.frame.origin.x, _codeEditor.frame.origin.y, _codeEditor.frame.size.width, currentFrame.size.height);
-    [self setContentSize:currentFrame.size];
+    [self setContentSize:_codeEditor.frame.size];
+
+    // clear out the old views, and add the latest and greatest
+    for (UIView* subview in self.subviews) { [subview removeFromSuperview]; }
     [self addSubview:_codeEditor];    
 }
 
@@ -181,8 +207,13 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    float _leftColumnWidth = 30;
+    float _leftColumnWidth = 25;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    
+    CGContextSetRGBFillColor(ctx, 255/255.f, 255/255.f, 255/255.f, 1);
+    CGContextFillRect(ctx, self.frame);        
+    
     
     CGRect leftColumnRect = {self.frame.origin.x, self.frame.origin.y, _leftColumnWidth, self.frame.size.height};
     CGContextSetRGBFillColor(ctx, 220/255.f, 220/255.f, 220/255.f, 1);
@@ -353,6 +384,50 @@
         }
     }
     
+}
+
+
+#pragma mark UIKeyBoard implementation
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0); self.contentInset = contentInsets;
+    self.scrollIndicatorInsets = contentInsets;
+        
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect displayRect = self.frame;
+    displayRect.size.height -= kbSize.height;  
+    
+    CGRect cursorRect = _cursorView.frame;
+    cursorRect.origin.y += _currentLayer.frame.origin.y;
+    
+    if (!CGRectContainsPoint(displayRect, cursorRect.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, cursorRect.origin.y-kbSize.height);
+        [self setContentOffset:scrollPoint animated:YES];
+    }    
+}
+
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.contentInset = contentInsets;
+    self.scrollIndicatorInsets = contentInsets;
 }
 
 -(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAtLayer:(PTCodeLayer*) updatedLayer;

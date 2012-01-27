@@ -20,15 +20,15 @@
 /////////////////////////////////////////////////////////////////////////////
 - (void)commonInit
 {    
-    _leftColumnWidth = 30;
+    _leftColumnWidth = 25;
     _leftGutterWidth = 6;
     _leftCodeOffset = _leftColumnWidth + _leftGutterWidth;
-    _lineHeight = 25;
+    _lineHeight = 0;
 
     _startingLineNum = 0;
     _suggestedLineLimit = 60;
     
-    _newlineCharSet = [NSCharacterSet newlineCharacterSet];
+    _newlineCharSet = [NSCharacterSet newlineCharacterSet];        
 }
 
 - (id)init
@@ -132,7 +132,7 @@
     CGPathAddRect(path, NULL, bigRect);    
     CTFrameRef fullFrame = CTFramesetterCreateFrame(fullFramesetter,CFRangeMake(0,0), path, NULL);
     
-    CFArrayRef displayLines = CTFrameGetLines(fullFrame);
+    CFArrayRef displayLines = CTFrameGetLines(fullFrame);    
     CFIndex lineCount = CFArrayGetCount(displayLines);    
     NSInteger deltaLineCount = (lineCount - loc.numDisplayLines);
         
@@ -206,7 +206,8 @@
     
     // create frame for the entire code document
     CTFramesetterRef fullFramesetter = CTFramesetterCreateWithAttributedString(attrCode);
-    CGRect bigRect = CGRectMake((self.bounds.origin.x + _leftCodeOffset), self.bounds.origin.y, (self.bounds.size.width - _leftCodeOffset), (self.bounds.size.height *1000));
+    //set the height impossibly high and we will calculate the actual height once we have layed the lines out
+    CGRect bigRect = CGRectMake((self.bounds.origin.x + _leftCodeOffset), self.bounds.origin.y, (self.bounds.size.width - _leftCodeOffset), (100000)); 
     CGMutablePathRef path = CGPathCreateMutable();        
     CGPathAddRect(path, NULL, bigRect);    
     CTFrameRef fullFrame = CTFramesetterCreateFrame(fullFramesetter,CFRangeMake(0,0), path, NULL);
@@ -215,6 +216,9 @@
     CFArrayRef displayLines = CTFrameGetLines(fullFrame);
     CFIndex lineCount = CFArrayGetCount(displayLines);    
     _locArray = [[NSMutableArray alloc] initWithCapacity:lineCount];
+    
+    CGPoint origins[lineCount];
+    CTFrameGetLineOrigins(fullFrame, CFRangeMake(0, lineCount), origins);        
     
     CFMutableArrayRef tempLineArray = NULL;
     CFRange tempRange = CFRangeMake(0,0);        
@@ -272,7 +276,7 @@
             
             CFArrayAppendValue(tempLineArray, currentLine);
             tempRange.length += currentLineRange.length;
-        }            
+        }                                
         
         CFRelease(lineString); 
         currentIndex += 1;
@@ -306,13 +310,15 @@
     CFTypeID lineType = CTLineGetTypeID();
     CFTypeID arrayType = CFArrayGetTypeID();
     
-    CGFloat y = (self.bounds.origin.y + (self.bounds.size.height-_lineHeight));
+    CGFloat y = self.bounds.origin.y;
+    y += self.bounds.size.height; // CoreText draws bottom up so wee need to set the drawing point at the bottom of the layer
+    y -= (_lineHeight - _descent); // Lineheight-descent calculates the text baseline, which is where CoreText expects to start drawing
     
     CGRect leftColumnRect = {self.frame.origin.x, self.frame.origin.y, _leftColumnWidth, self.frame.size.height};
     CGContextSetRGBFillColor(ctx, 220/255.f, 220/255.f, 220/255.f, 1);
     CGContextFillRect(ctx, leftColumnRect);        
     
-    CGRect leftColumnBorder = {(self.frame.origin.x + _leftColumnWidth), self.frame.origin.y, 1, self.frame.size.height};
+    CGRect leftColumnBorder = {(self.frame.origin.x + _leftColumnWidth), self.bounds.origin.y, 1, self.frame.size.height};
     CGContextSetRGBFillColor(ctx, 140/255.f, 140/255.f, 140/255.f, 1);
     CGContextFillRect(ctx, leftColumnBorder);        
     
@@ -321,14 +327,14 @@
     {                    
         // line number setup
         NSMutableAttributedString* nsNumString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",(lineIndex+_startingLineNum)]] mutableCopy];
-        [nsNumString setFont:[UIFont fontWithName:@"Courier" size:12]];
+        [nsNumString setFont:[UIFont fontWithName:@"Courier" size:10]];
         [nsNumString setTextColor:[UIColor colorWithRed:112/255.f green:112/255.f blue:112/255.f alpha:1]];
         CFAttributedStringRef lineNumString = (__bridge CFAttributedStringRef)nsNumString;        
         CTLineRef gutterLine = CTLineCreateWithAttributedString(lineNumString);
         float a,d,l;
         double width = CTLineGetTypographicBounds(gutterLine,&a,&d,&l);
         
-        CFTypeRef lineRef = loc.lineRef;
+        CFTypeRef lineRef = loc.lineRef;    
         CFTypeID id = CFGetTypeID(lineRef);            
         
         // single display line
@@ -377,6 +383,7 @@
                 }
             }
         }
+        
         
         lineIndex +=1;        
     }                                        
@@ -462,13 +469,15 @@
 {        
     LineOfCode* loc = pos.loc;
     NSInteger actualIndex = (pos.index + loc.startIndexAtTypesetting);
-    CGFloat xPos = 0.0;
-    
-    CGRect cursorRect = CGRectMake(_leftCodeOffset, (loc.displayRect.origin.y + _descent), 0, (_ascent + _descent));
+    CGFloat xOffset = 0.0;
+    CGFloat yOffset = 0.0;
+    CTLineRef cursorLine;
+
             
     if (loc.numDisplayLines == 1)
     {
-        xPos = CTLineGetOffsetForStringIndex(loc.lineRef, actualIndex, NULL);
+        xOffset = CTLineGetOffsetForStringIndex(loc.lineRef, actualIndex, NULL);
+        cursorLine = loc.lineRef;
     }
     else if (loc.numDisplayLines > 1)
     {
@@ -476,18 +485,20 @@
         // so we want to start with the last display line because it knows nothing of the earlier line's strings
         for (int i = (loc.numDisplayLines -1); i >=0 ; i--)
         {
-            xPos = CTLineGetOffsetForStringIndex(CFArrayGetValueAtIndex(loc.lineRef, i), actualIndex, NULL);    
-            if (xPos > 0.0){
-                cursorRect.origin.y += (i * _lineHeight);
+            cursorLine = CFArrayGetValueAtIndex(loc.lineRef, i);
+            xOffset = CTLineGetOffsetForStringIndex(cursorLine, actualIndex, NULL);    
+            
+            if (xOffset > 0.0){            
+                yOffset = (i * _lineHeight);
                 break;
             }
         }
     }
-    
-    cursorRect.origin.x += xPos;
-    cursorRect.size.width = 1.5;
-            
-    return cursorRect;
+
+    float ascent,descent,leading;    
+    CTLineGetTypographicBounds(cursorLine, &ascent, &descent, &leading);
+        
+    return CGRectMake((_leftCodeOffset + xOffset), (loc.displayRect.origin.y + yOffset + descent), 1, (ascent + descent));
 }
 
 -(void) setSelection:(PTTextRange *)selection
@@ -522,6 +533,15 @@
     // not sure if it is correct to call CFRelease on fulltext
     
     return fullText;
+}
+
+-(NSString*) fullText
+{
+    CFAttributedStringRef attrText = [self copyAttributedText];
+    NSString* text = [(__bridge NSString*)CFAttributedStringGetString(attrText) copy];
+    CFRelease(attrText);
+    
+    return text;
 }
 
 -(NSRange) lineNumRange
