@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface AppUser : NSObject
 
++(AppUser *) currentUser;
 
+@property(nonatomic, retain) User* user;
 
 @end

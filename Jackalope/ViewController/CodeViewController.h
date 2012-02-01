@@ -20,10 +20,8 @@
     PTCodeScrollView* _codeView;
 }
 
-@property (strong, nonatomic) TreeNode *activeBlob;
-
-
-@property (nonatomic, retain)  UILabel *detailDescriptionLabel;
 @property (nonatomic, retain) IBOutlet PTCodeScrollView *codeView;
+
+@property (strong, nonatomic) TreeNode *activeBlob;
 
 @end

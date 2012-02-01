@@ -10,6 +10,7 @@
 #import "TreeViewController.h"
 #import "SBJSON.h"
 #import "TreeNode.h"
+#import "AppUser.h"
 
 static RepoViewController *_instance = nil;
 
@@ -43,47 +44,40 @@ static RepoViewController *_instance = nil;
     // create a new instance
     self = [super init];
 
-//    TODO  This is a good place to look for a local cache of repo's
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-//        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-//        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-//        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-//    } 
-    
-    // TODO stop hardcoding the repo!
-    _repoName = @"TouchCodeRails";
-    
-    _responseData = [[NSMutableData alloc] init];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@.json",_repoName]];
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    _connection = [[NSURLConnection alloc] initWithRequest:req
-                                                  delegate:self
-                                          startImmediately:YES];
-
-    _treeHash = [[NSMutableDictionary alloc] init];
-    isRootTree = true;
+    if (self) {             
+        // TODO stop hardcoding the repo!
+        _repoName = @"TouchCodeRails";
         
+        _responseData = [[NSMutableData alloc] init];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@.json",_repoName]];
+        NSURLRequest *req = [NSURLRequest requestWithURL:url];
+        _connection = [[NSURLConnection alloc] initWithRequest:req
+                                                      delegate:self
+                                              startImmediately:YES];
+
+        _treeHash = [[NSMutableDictionary alloc] init];
+        isRootTree = true;
+    }           
     return self;
 }
 
 
 -(UIViewController *) navController{
     if (_navController == nil){
-        TreeViewController* masterViewController;
+        TreeViewController* repoTreeController;
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
         {            
-            masterViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
+            repoTreeController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
         }
         else
         {
-            masterViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
+            repoTreeController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
         }
                 
-        [masterViewController setTitle:@"Repo Browser"];
-        _navController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-    }
+        [repoTreeController setTitle:@"Repo Browser"];
+        _navController = [[UINavigationController alloc] initWithRootViewController:repoTreeController];
+    }    
     
     return _navController;
 }

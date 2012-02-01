@@ -56,12 +56,12 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
             
             tempStyle = [decoration objectForKey:@"style"];
             UIColor *tempColor = [CodeDecorator colorForHexString:[tempStyle objectForKey:@"color"]];
-            BOOL tempBold =  [[tempStyle objectForKey:@"bold"] boolValue];
+            //BOOL tempBold =  [[tempStyle objectForKey:@"bold"] boolValue];
             
             tempBlock = ^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){                
                 NSRange matchRange = [match range];
                 [processingAttributedString setTextColor:tempColor range:matchRange];
-                [processingAttributedString setTextBold:tempBold range:matchRange];                    
+                //[processingAttributedString setTextBold:tempBold range:matchRange];                    
             };
             
             finalUnit = [NSDictionary dictionaryWithObjectsAndKeys:tempRegex,@"regex", tempBlock, @"block",nil];
@@ -94,7 +94,7 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
 
     NSString *plainText = [code string];
     processingAttributedString = [code mutableCopy];
-    [processingAttributedString setFont:[UIFont fontWithName:@"Courier" size:12]];
+    [processingAttributedString setFont:[UIFont fontWithName:@"DroidSansMono" size:12]];
     
     for (NSDictionary* decoration in _decorations)
     {

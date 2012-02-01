@@ -8,51 +8,84 @@
 
 #import "AppDelegate.h"
 
-
-#import "DetailViewController.h"
-
 #import "RepoViewController.h"
 #import "CodeViewController.h"
+#import "GithubLoginViewController.h"
+#import "AppUser.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize navigationController = _navigationController;
+@synthesize repoNavigationController = _repoNavigationController;
 @synthesize splitViewController = _splitViewController;
+@synthesize loginController = _loginController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    CodeViewController *detailViewController;
-    UINavigationController *masterNavigationController = [RepoViewController getInstance].navController;
+    CodeViewController *codeViewController;
+    UINavigationController *repoController = [RepoViewController getInstance].navController;        
+    
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        // iPhone
+        _iPhoneDevice = YES;
         
-        detailViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPhone" bundle:nil];        
+        codeViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPhone" bundle:nil];        
         
-        self.navigationController = masterNavigationController;
-        self.window.rootViewController = self.navigationController;
+        self.repoNavigationController = repoController;        
+    } 
+    else 
+    {
+        _iPhoneDevice = NO;
         
-
-    } else {
-        // iPad        
-        
-        detailViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPad" bundle:nil];        
-        UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+        codeViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPad" bundle:nil];        
+        UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:codeViewController];
         
         self.splitViewController = [[UISplitViewController alloc] init];
-        self.splitViewController.delegate = detailViewController;
-        self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailViewNav, nil];
-        self.window.rootViewController = self.splitViewController;        
+        self.splitViewController.delegate = codeViewController;
+        self.splitViewController.viewControllers = [NSArray arrayWithObjects:repoController, detailViewNav, nil];
     }
                                                 
-    [RepoViewController getInstance].codeViewController = detailViewController;
+    [RepoViewController getInstance].codeViewController = codeViewController;
     
+    if ([AppUser currentUser].user)
+    {
+        [self showCodingView];
+    }
+    else
+    {
+        [self showLogin];
+    }
+        
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+-(void) showCodingView
+{
+    if (_iPhoneDevice)
+    {
+        self.window.rootViewController = self.repoNavigationController;
+    }
+    else
+    {
+        self.window.rootViewController = self.splitViewController;
+    }
+}
+
+-(void) showLogin
+{
+    if (!_loginController)
+    {
+        self.loginController = [[GithubLoginViewController alloc] initWithNibName:@"GithubLoginViewController" bundle:nil];        
+    }
+    
+    self.window.rootViewController = self.loginController;
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

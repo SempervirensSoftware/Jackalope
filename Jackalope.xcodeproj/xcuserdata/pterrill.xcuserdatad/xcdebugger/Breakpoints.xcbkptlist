@@ -9,12 +9,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Jackalope/ViewController/RepoViewController.m"
-         timestampString = "349230853.238151"
+         timestampString = "349756181.336843"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "-showBlobInCodeView:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Jackalope/NSURL+PTQueryParsing.m"
+         timestampString = "349747570.856098"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "14"
+         endingLineNumber = "14"
+         landmarkName = "-queryValueForKey:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

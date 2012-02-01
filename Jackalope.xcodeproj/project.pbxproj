@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */; };
 		6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */; };
+		6E514C3914D8B507000CBF1B /* NSURL+PTQueryParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */; };
+		6E895EFC14D8C56C00D98866 /* octocat_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895EFB14D8C56C00D98866 /* octocat_happy.png */; };
+		6E895F0114D92AE400D98866 /* Repo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F0014D92AE400D98866 /* Repo.m */; };
 		6E8B04D714D0C47900EBC107 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D614D0C47900EBC107 /* UIKit.framework */; };
 		6E8B04D914D0C47900EBC107 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D814D0C47900EBC107 /* Foundation.framework */; };
 		6E8B04DB14D0C47900EBC107 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04DA14D0C47900EBC107 /* CoreGraphics.framework */; };
 		6E8B04E114D0C47900EBC107 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B04DF14D0C47900EBC107 /* InfoPlist.strings */; };
 		6E8B04E314D0C47900EBC107 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B04E214D0C47900EBC107 /* main.m */; };
 		6E8B04E714D0C47900EBC107 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B04E614D0C47900EBC107 /* AppDelegate.m */; };
-		6E8B04EA14D0C47900EBC107 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B04E914D0C47900EBC107 /* MasterViewController.m */; };
-		6E8B04ED14D0C47900EBC107 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B04EC14D0C47900EBC107 /* DetailViewController.m */; };
 		6E8B050114D0C47900EBC107 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B050014D0C47900EBC107 /* SenTestingKit.framework */; };
 		6E8B050214D0C47900EBC107 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D614D0C47900EBC107 /* UIKit.framework */; };
 		6E8B050314D0C47900EBC107 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D814D0C47900EBC107 /* Foundation.framework */; };
@@ -53,6 +54,10 @@
 		6E8B059114D0DDC300EBC107 /* PTCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058F14D0DDC300EBC107 /* PTCursorView.m */; };
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
+		6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */; };
+		6EB90C3414D77C4000B7D378 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3314D77C4000B7D378 /* User.m */; };
+		6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */; };
+		6EB90C3914D78A4300B7D378 /* GithubLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB90C3714D78A4300B7D378 /* GithubLoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +73,11 @@
 /* Begin PBXFileReference section */
 		6E4101AE14D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPad.xib; sourceTree = "<group>"; };
 		6E4101B014D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPhone.xib; sourceTree = "<group>"; };
+		6E514C3714D8B507000CBF1B /* NSURL+PTQueryParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+PTQueryParsing.h"; sourceTree = "<group>"; };
+		6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+PTQueryParsing.m"; sourceTree = "<group>"; };
+		6E895EFB14D8C56C00D98866 /* octocat_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = octocat_happy.png; sourceTree = "<group>"; };
+		6E895EFF14D92AE400D98866 /* Repo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repo.h; sourceTree = "<group>"; };
+		6E895F0014D92AE400D98866 /* Repo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repo.m; sourceTree = "<group>"; };
 		6E8B04D214D0C47900EBC107 /* Jackalope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jackalope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E8B04D614D0C47900EBC107 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E8B04D814D0C47900EBC107 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -76,12 +86,8 @@
 		6E8B04E014D0C47900EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6E8B04E214D0C47900EBC107 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6E8B04E414D0C47900EBC107 /* Jackalope-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jackalope-Prefix.pch"; sourceTree = "<group>"; };
-		6E8B04E514D0C47900EBC107 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6E8B04E614D0C47900EBC107 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E8B04E814D0C47900EBC107 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		6E8B04E914D0C47900EBC107 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		6E8B04EB14D0C47900EBC107 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		6E8B04EC14D0C47900EBC107 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		6E8B04E514D0C47900EBC107 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
+		6E8B04E614D0C47900EBC107 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		6E8B04FF14D0C47900EBC107 /* JackalopeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JackalopeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E8B050014D0C47900EBC107 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E8B050814D0C47900EBC107 /* JackalopeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JackalopeTests-Info.plist"; sourceTree = "<group>"; };
@@ -123,8 +129,8 @@
 		6E8B056C14D0DD0900EBC107 /* PTTextPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextPosition.m; sourceTree = "<group>"; };
 		6E8B056D14D0DD0900EBC107 /* PTTextRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTextRange.h; sourceTree = "<group>"; };
 		6E8B056E14D0DD0900EBC107 /* PTTextRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextRange.m; sourceTree = "<group>"; };
-		6E8B057014D0DD0900EBC107 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUser.h; sourceTree = "<group>"; };
-		6E8B057114D0DD0900EBC107 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUser.m; sourceTree = "<group>"; };
+		6E8B057014D0DD0900EBC107 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUser.h; path = Git/AppUser.h; sourceTree = "<group>"; };
+		6E8B057114D0DD0900EBC107 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUser.m; path = Git/AppUser.m; sourceTree = "<group>"; };
 		6E8B057214D0DD0900EBC107 /* BlobCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlobCommit.h; sourceTree = "<group>"; };
 		6E8B057314D0DD0900EBC107 /* BlobCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlobCommit.m; sourceTree = "<group>"; };
 		6E8B057614D0DD0900EBC107 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNode.h; sourceTree = "<group>"; };
@@ -142,6 +148,12 @@
 		6E8B059214D0DFC000EBC107 /* Code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Code.h; sourceTree = "<group>"; };
 		6E8B059314D0DFC000EBC107 /* Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Code.m; sourceTree = "<group>"; };
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DroidSansMono.ttf; path = ../../../Downloads/DroidSansMono/DroidSansMono.ttf; sourceTree = "<group>"; };
+		6EB90C3214D77C4000B7D378 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GithubLoginViewController.h; path = ../GithubLoginViewController.h; sourceTree = "<group>"; };
+		6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GithubLoginViewController.m; path = ../GithubLoginViewController.m; sourceTree = "<group>"; };
+		6EB90C3714D78A4300B7D378 /* GithubLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GithubLoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +182,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E514C2F14D8B2F7000CBF1B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E514C3714D8B507000CBF1B /* NSURL+PTQueryParsing.h */,
+				6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		6E895EFE14D8C8FB00D98866 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6E8B058B14D0DDC300EBC107 /* Editor */,
+				6EB90C3714D78A4300B7D378 /* GithubLoginViewController.xib */,
+				6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */,
+				6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */,
+				6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */,
+				6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		6E8B04C714D0C47900EBC107 = {
 			isa = PBXGroup;
 			children = (
@@ -205,13 +239,12 @@
 		6E8B04DC14D0C47900EBC107 /* Jackalope */ = {
 			isa = PBXGroup;
 			children = (
-				6E8B054314D0CCB500EBC107 /* App Core */,
+				6EB90C1114D68B1E00B7D378 /* Assets */,
+				6E8B052814D0CC1F00EBC107 /* Libs */,
+				6E514C2F14D8B2F7000CBF1B /* Categories */,
 				6E8B056514D0DD0900EBC107 /* Model */,
-				6E8B058B14D0DDC300EBC107 /* Editor */,
-				6E8B058014D0DD3100EBC107 /* Decorator */,
-				6E8B054414D0CE9700EBC107 /* ViewController */,
-				6E8B052814D0CC1F00EBC107 /* libs */,
-				6E8B052314D0CBF800EBC107 /* img */,
+				6E895EFE14D8C8FB00D98866 /* View */,
+				6E8B054414D0CE9700EBC107 /* Controller */,
 				6E8B04DD14D0C47900EBC107 /* Supporting Files */,
 			);
 			path = Jackalope;
@@ -250,18 +283,20 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				6E895EFB14D8C56C00D98866 /* octocat_happy.png */,
 				6E8B052414D0CBF800EBC107 /* file.png */,
 				6E8B052514D0CBF800EBC107 /* folder.png */,
 			);
 			path = img;
 			sourceTree = "<group>";
 		};
-		6E8B052814D0CC1F00EBC107 /* libs */ = {
+		6E8B052814D0CC1F00EBC107 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
 				6E8B052914D0CC1F00EBC107 /* JSON */,
 				6E8B053714D0CC1F00EBC107 /* OHAttributedLabel */,
 			);
+			name = Libs;
 			path = libs;
 			sourceTree = "<group>";
 		};
@@ -295,26 +330,13 @@
 			path = OHAttributedLabel;
 			sourceTree = "<group>";
 		};
-		6E8B054314D0CCB500EBC107 /* App Core */ = {
+		6E8B054414D0CE9700EBC107 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				6E8B04E514D0C47900EBC107 /* AppDelegate.h */,
 				6E8B04E614D0C47900EBC107 /* AppDelegate.m */,
-				6E8B04E814D0C47900EBC107 /* MasterViewController.h */,
-				6E8B04E914D0C47900EBC107 /* MasterViewController.m */,
-				6E8B04EB14D0C47900EBC107 /* DetailViewController.h */,
-				6E8B04EC14D0C47900EBC107 /* DetailViewController.m */,
-				6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */,
-				6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */,
-				6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */,
-				6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */,
-			);
-			name = "App Core";
-			sourceTree = "<group>";
-		};
-		6E8B054414D0CE9700EBC107 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
+				6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */,
+				6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */,
 				6E8B054514D0CE9800EBC107 /* CodeViewController.h */,
 				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
 				6E8B054714D0CE9800EBC107 /* RepoViewController.h */,
@@ -322,14 +344,20 @@
 				6E8B054914D0CE9800EBC107 /* TreeViewController.h */,
 				6E8B054A14D0CE9800EBC107 /* TreeViewController.m */,
 			);
+			name = Controller;
 			path = ViewController;
 			sourceTree = "<group>";
 		};
 		6E8B056514D0DD0900EBC107 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6E8B058014D0DD3100EBC107 /* Decorator */,
 				6E8B056614D0DD0900EBC107 /* Editor */,
 				6E8B056F14D0DD0900EBC107 /* Git */,
+				6E8B057014D0DD0900EBC107 /* AppUser.h */,
+				6E8B057114D0DD0900EBC107 /* AppUser.m */,
+				6EB90C3214D77C4000B7D378 /* User.h */,
+				6EB90C3314D77C4000B7D378 /* User.m */,
 				6E8B059214D0DFC000EBC107 /* Code.h */,
 				6E8B059314D0DFC000EBC107 /* Code.m */,
 			);
@@ -354,12 +382,12 @@
 		6E8B056F14D0DD0900EBC107 /* Git */ = {
 			isa = PBXGroup;
 			children = (
-				6E8B057014D0DD0900EBC107 /* AppUser.h */,
-				6E8B057114D0DD0900EBC107 /* AppUser.m */,
 				6E8B057214D0DD0900EBC107 /* BlobCommit.h */,
 				6E8B057314D0DD0900EBC107 /* BlobCommit.m */,
 				6E8B057614D0DD0900EBC107 /* TreeNode.h */,
 				6E8B057714D0DD0900EBC107 /* TreeNode.m */,
+				6E895EFF14D92AE400D98866 /* Repo.h */,
+				6E895F0014D92AE400D98866 /* Repo.m */,
 			);
 			path = Git;
 			sourceTree = "<group>";
@@ -374,7 +402,8 @@
 				6E8B058514D0DD3100EBC107 /* DecoratorCollection.h */,
 				6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */,
 			);
-			path = Decorator;
+			name = Decorator;
+			path = ../Decorator;
 			sourceTree = "<group>";
 		};
 		6E8B058B14D0DDC300EBC107 /* Editor */ = {
@@ -386,6 +415,23 @@
 				6E8B058F14D0DDC300EBC107 /* PTCursorView.m */,
 			);
 			path = Editor;
+			sourceTree = "<group>";
+		};
+		6EB90C1114D68B1E00B7D378 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				6EB90C1314D68B3300B7D378 /* font */,
+				6E8B052314D0CBF800EBC107 /* img */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		6EB90C1314D68B3300B7D378 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */,
+			);
+			name = font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,6 +514,9 @@
 				6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */,
 				6E8B058814D0DD3100EBC107 /* decoration_schema.txt in Resources */,
 				6E8B058914D0DD3100EBC107 /* decorations.json in Resources */,
+				6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */,
+				6EB90C3914D78A4300B7D378 /* GithubLoginViewController.xib in Resources */,
+				6E895EFC14D8C56C00D98866 /* octocat_happy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,8 +553,6 @@
 			files = (
 				6E8B04E314D0C47900EBC107 /* main.m in Sources */,
 				6E8B04E714D0C47900EBC107 /* AppDelegate.m in Sources */,
-				6E8B04EA14D0C47900EBC107 /* MasterViewController.m in Sources */,
-				6E8B04ED14D0C47900EBC107 /* DetailViewController.m in Sources */,
 				6E8B053B14D0CC1F00EBC107 /* NSObject+SBJSON.m in Sources */,
 				6E8B053C14D0CC1F00EBC107 /* NSString+SBJSON.m in Sources */,
 				6E8B053D14D0CC1F00EBC107 /* SBJSON.m in Sources */,
@@ -528,6 +575,10 @@
 				6E8B059014D0DDC300EBC107 /* PTCodeScrollView.m in Sources */,
 				6E8B059114D0DDC300EBC107 /* PTCursorView.m in Sources */,
 				6E8B059414D0DFC000EBC107 /* Code.m in Sources */,
+				6EB90C3414D77C4000B7D378 /* User.m in Sources */,
+				6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */,
+				6E514C3914D8B507000CBF1B /* NSURL+PTQueryParsing.m in Sources */,
+				6E895F0114D92AE400D98866 /* Repo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

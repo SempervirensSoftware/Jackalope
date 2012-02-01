@@ -21,17 +21,12 @@
 
 @synthesize activeBlob = _activeBlob;
 @synthesize codeView = _codeView;
-@synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
 
 #pragma mark - Managing the detail item
 
 - (void)setActiveBlob:(TreeNode *)newBlob
-{
-    if (! _detailDescriptionLabel.hidden){
-        _detailDescriptionLabel.hidden = true;
-    }
-        
+{        
     if (_activeBlob != newBlob) {
         _activeBlob = newBlob;
         self.title = newBlob.name;
