@@ -12,9 +12,35 @@
 
 @implementation BlobNode
 
-@synthesize repoName, repoRootSHA, treeSHA, commitSHA, blobName, blobFullPath, blobSHA,  blobContent;
+@synthesize fileContent;
+
+-(Code *) createCode
+{
+    Code* code = [[Code alloc] init];
+    code.fileName = self.name;
+    code.gitBlobSHA = self.sha;
+    code.plainText = self.fileContent;
+    
+    return code;
+}
+
+-(void) setValuesFromApiResponse:(NSString *)jsonString
+{
+    self.fileContent = jsonString;
+}
+
+-(NSString *)updateURL
+{
+    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/files/%@.json", self.repoName, self.sha];
+}
+
+-(NSString *)type
+{
+    return NODE_TYPE_BLOB;
+}
 
 
+/*
 - (NSURLRequest *) urlRequest
 {    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree",repoName]];
@@ -66,7 +92,6 @@
     [av show];
 
 }
-
-
+ */
 
 @end

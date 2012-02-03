@@ -37,6 +37,9 @@
     }        
 }
 
+-(void) showLoadingWithTitle:(NSString *)titleString {}
+-(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message {}
+
 - (void)configureView
 {
     CALayer *layer = _codeView.layer;

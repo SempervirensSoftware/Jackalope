@@ -11,22 +11,13 @@
 
 @implementation TreeNode
 
-@synthesize name, fullPath, sha, type, parentSha, repo, commit, children;
-
-- (id) init
-{
-    self = [super init];
-    
-    if (self){
-        children = [[NSArray alloc] init];
-        fullPath = @"";
-    }
-    
-    return self;
-}
+@synthesize nodeProvider;
  
 - (void) setValuesFromDictionary:(NSDictionary *) valueMap 
 {
+    if ([valueMap objectForKey:@"sha"]){
+        self.sha = [valueMap objectForKey:@"sha"];
+    }
     if ([valueMap objectForKey:@"path"]){
         self.name = [valueMap objectForKey:@"path"];
     }
@@ -51,13 +42,13 @@
 
         GitNode* child;
         
-        if (childType == NODE_TYPE_TREE)
+        if ([childType isEqualToString:NODE_TYPE_TREE])
         {
-            child = [self.repo getTreeNodeWithSHA:[childHash objectForKey:@"sha"]];
+            child = [self.nodeProvider getTreeNodeWithSHA:[childHash objectForKey:@"sha"]];
         }
-        else
+        else if ([childType isEqualToString:NODE_TYPE_BLOB])
         {
-            child = [self.repo getBlobNodeWithSHA:[childHash objectForKey:@"sha"]];
+            child = [self.nodeProvider getBlobNodeWithSHA:[childHash objectForKey:@"sha"]];
         }
         
         // load all the details we can from the response object
@@ -67,44 +58,30 @@
         child.parentSha = self.sha;
         child.commit = self.commit;
         
-        if (self.fullPath.length > 0){
+        if (self.fullPath && self.fullPath.length > 0){
             child.fullPath = [NSString stringWithFormat:@"%@/%@",self.fullPath, child.name];
         }
         else{
             child.fullPath = child.name;
         }
         
+        NSLog(@"child:%@",childType);
+        
         //finally add the new child to the list
         [tempChildren addObject:child];
     }
     
-    children = [tempChildren sortedArrayUsingSelector:@selector(compare:)];
+    self.children = [tempChildren sortedArrayUsingSelector:@selector(compare:)];
 }
 
 -(NSString *)updateURL
 {
-    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree/%@.json", self.repo.name, self.sha];
+    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree/%@.json", self.repoName, self.sha];
 }
 
 -(NSString *)type
 {
-    return NODE_TYPE_REPO;
-}
-
-
-- (NSComparisonResult)compare:(TreeNode *)otherObject {
-    if ([self.type isEqualToString:otherObject.type])
-    {
-        return [self.name compare:otherObject.name];
-    }
-    else if ([self.type isEqualToString:NODE_TYPE_TREE])
-    {
-        return NSOrderedAscending;
-    }
-    else
-    {
-        return NSOrderedDescending;
-    }
+    return NODE_TYPE_TREE;
 }
 
 @end

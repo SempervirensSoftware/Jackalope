@@ -7,18 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GitNodeProvider.h"
 #import "BranchNode.h"
-#import "GitNode.h"
 
-@interface RepoNode : GitNode
+@interface RepoNode : GitNode <GitNodeProvider>
 {    
     NSMutableDictionary*    _nodeHash;        
-    
     BranchNode*             _currentBranch;
-    NSMutableArray*         _branchArray;
 }
 
--(id) getTreeNodeWithSHA:(NSString *) sha;
--(id) getBlobNodeWithSHA:(NSString *) sha;
+@property (nonatomic)           BOOL        isPrivate;
+@property (retain, nonatomic)   NSString*   masterBranch;
+@property (nonatomic, retain)   BranchNode*   currentBranch;
 
 @end

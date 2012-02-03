@@ -10,6 +10,8 @@
 #import "RepoViewController.h"
 #import "CodeViewController.h"
 
+#import "BranchNode.h"
+
 @implementation GitNodeViewController
 
 @synthesize detailViewController = _detailViewController;
@@ -135,18 +137,13 @@
 {
     GitNode *selectedNode = [_node.children objectAtIndex:[indexPath row]];
     
-    if ([selectedNode.type isEqualToString:NODE_TYPE_BLOB])
-    {
-        [[RepoViewController getInstance] showBlobInCodeView:selectedNode];
-    }
-    else 
-    {
-        [[RepoViewController getInstance] showNodeInNav:selectedNode];
-    }
-    
+    if ([self.node.type isEqualToString:NODE_TYPE_REPO])
+    {        
+        ((RepoNode*)self.node).currentBranch = ((BranchNode*)selectedNode);
+    }    
+
+    [[RepoViewController getInstance] showNode:selectedNode];
 }
-
-
 							
 - (void)didReceiveMemoryWarning
 {

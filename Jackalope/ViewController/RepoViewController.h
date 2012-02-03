@@ -10,6 +10,8 @@
 #import "CodeViewController.h"
 #import "GitNode.h"
 #import "RootNode.h"
+#import "RepoNode.h"
+#import "BlobNode.h"
 
 @interface RepoViewController : NSObject
 {
@@ -24,7 +26,7 @@
 @property (retain, readonly) UINavigationController* navController;
 @property (retain) CodeViewController* codeViewController;
 
-- (void) showNodeInNav:(GitNode*) node;
-- (void) showBlobInCodeView:(GitNode*) node;
+- (void) showNode:(GitNode*) node;
+- (void) showBlob:(BlobNode *)blob;
 
 @end

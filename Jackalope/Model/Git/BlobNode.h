@@ -7,30 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GitNode.h"
+#import "TreeNode.h"
 #import "Code.h"
 
-@interface BlobNode : GitNode
-{
-    // http handlers
-    NSMutableDictionary *_treeHash;  
-}
+@interface BlobNode : TreeNode
 
-@property (retain, nonatomic) NSString      *blobName;
-@property (retain, nonatomic) NSString      *blobFullPath;
-@property (retain, nonatomic) NSString      *blobSHA;
-@property (retain, nonatomic) NSString      *blobContent;
-
-@property (retain, nonatomic) NSString      *repoName;
-@property (retain, nonatomic) NSString      *repoRootSHA;
-@property (retain, nonatomic) NSString      *commitSHA;
-@property (retain, nonatomic) NSString      *treeSHA;
-
+@property (retain, nonatomic) NSString      *fileContent;
 
 -(Code *) createCode;
-
-- (NSURLRequest *) urlRequest;
-- (NSData *) httpBody;
-- (void) send;
 
 @end

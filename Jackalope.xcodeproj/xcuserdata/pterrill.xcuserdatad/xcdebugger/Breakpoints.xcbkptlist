@@ -18,18 +18,18 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Jackalope/Model/Git/GitNode.m"
-         timestampString = "349909656.173269"
+         filePath = "Jackalope/ViewController/RepoViewController.m"
+         timestampString = "349938096.216245"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "11"
-         endingLineNumber = "11"
-         landmarkName = "@implementation GitNode"
-         landmarkType = "3">
+         startingLineNumber = "100"
+         endingLineNumber = "100"
+         landmarkName = "-showBlob:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

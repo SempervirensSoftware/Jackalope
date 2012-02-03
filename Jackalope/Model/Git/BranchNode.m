@@ -10,8 +10,26 @@
 
 @implementation BranchNode
 
-@synthesize commitSHA, rootTreeSHA;
+@synthesize rootTreeSHA;
 
+-(void) setValuesFromDictionary:(NSDictionary *)valueMap
+{
+    if ([valueMap objectForKey:@"name"]){
+        self.name = [valueMap objectForKey:@"name"];
+    }
+    if ([valueMap objectForKey:@"commit"]){
+        NSDictionary* commitHash = [valueMap objectForKey:@"commit"];
+        
+        if ([commitHash objectForKey:@"sha"]){
+            self.commit = [commitHash objectForKey:@"sha"];
+        }
+    }
+}
+
+-(NSString *)updateURL
+{
+    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/branches/%@.json", self.repoName, self.commit];
+}
 
 -(NSString *)type
 {

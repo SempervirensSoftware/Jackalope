@@ -134,7 +134,7 @@
 		6E8B054614D0CE9800EBC107 /* CodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeViewController.m; sourceTree = "<group>"; };
 		6E8B054714D0CE9800EBC107 /* RepoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoViewController.h; sourceTree = "<group>"; };
 		6E8B054814D0CE9800EBC107 /* RepoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoViewController.m; sourceTree = "<group>"; };
-		6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GitNodeViewController.h; sourceTree = "<group>"; };
+		6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitNodeViewController.h; sourceTree = "<group>"; };
 		6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitNodeViewController.m; sourceTree = "<group>"; };
 		6E8B055C14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPad.xib; sourceTree = "<group>"; };
 		6E8B055E14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPhone.xib; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		6E8B056E14D0DD0900EBC107 /* PTTextRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextRange.m; sourceTree = "<group>"; };
 		6E8B057014D0DD0900EBC107 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUser.h; path = Git/AppUser.h; sourceTree = "<group>"; };
 		6E8B057114D0DD0900EBC107 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUser.m; path = Git/AppUser.m; sourceTree = "<group>"; };
-		6E8B057214D0DD0900EBC107 /* BlobNode.h */ = {isa = PBXFileReference; fileEncoding = 4; path = BlobNode.h; sourceTree = "<group>"; };
+		6E8B057214D0DD0900EBC107 /* BlobNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlobNode.h; sourceTree = "<group>"; };
 		6E8B057314D0DD0900EBC107 /* BlobNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlobNode.m; sourceTree = "<group>"; };
 		6E8B057614D0DD0900EBC107 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNode.h; sourceTree = "<group>"; };
 		6E8B057714D0DD0900EBC107 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeNode.m; sourceTree = "<group>"; };
@@ -167,6 +167,7 @@
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		6EB7730E14DBB22D0015FA0A /* GitNodeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitNodeProvider.h; sourceTree = "<group>"; };
 		6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DroidSansMono.ttf; path = ../../../Downloads/DroidSansMono/DroidSansMono.ttf; sourceTree = "<group>"; };
 		6EB90C3214D77C4000B7D378 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -408,14 +409,15 @@
 			children = (
 				6E895F1014DA369800D98866 /* GitNode.h */,
 				6E895F1114DA369800D98866 /* GitNode.m */,
+				6EB7730E14DBB22D0015FA0A /* GitNodeProvider.h */,
 				6EB7730B14DB27E20015FA0A /* RootNode.h */,
 				6EB7730C14DB27E20015FA0A /* RootNode.m */,
 				6E895EFF14D92AE400D98866 /* RepoNode.h */,
 				6E895F0014D92AE400D98866 /* RepoNode.m */,
-				6E895F0C14DA2DE400D98866 /* BranchNode.h */,
-				6E895F0D14DA2DE400D98866 /* BranchNode.m */,
 				6E8B057614D0DD0900EBC107 /* TreeNode.h */,
 				6E8B057714D0DD0900EBC107 /* TreeNode.m */,
+				6E895F0C14DA2DE400D98866 /* BranchNode.h */,
+				6E895F0D14DA2DE400D98866 /* BranchNode.m */,
 				6E8B057214D0DD0900EBC107 /* BlobNode.h */,
 				6E8B057314D0DD0900EBC107 /* BlobNode.m */,
 			);

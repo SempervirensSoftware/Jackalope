@@ -72,32 +72,33 @@ static RepoViewController *_instance = nil;
     return _navController;
 }
 
-- (void) showNodeInNav:(GitNode *) node
+- (void) showNode:(GitNode *) node
 {        
-    GitNodeViewController* newTreeViewController;
-
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
-    {            
-        newTreeViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
-    }
-    else
+    if ([node.type isEqualToString:NODE_TYPE_BLOB])
     {
-        newTreeViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
+        [self showBlob:(BlobNode*)node];
     }
-    
-    newTreeViewController.node = node;
-    
-    [self.navController pushViewController:newTreeViewController animated:YES];
+    else if (node)
+    {
+        GitNodeViewController* newTreeViewController;
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
+        {            
+            newTreeViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
+        }
+        else
+        {
+            newTreeViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
+        }
+        
+        newTreeViewController.node = node;
+        
+        [self.navController pushViewController:newTreeViewController animated:YES];
+    }
 }
-
-- (void) showBlobInCodeView:(GitNode *) blobNode{
-
-    if (blobNode.type != NODE_TYPE_BLOB)
-    {
-        return;
-    }
     
-    BlobNode* blob = (BlobNode*)blobNode;    
+-(void) showBlob:(BlobNode *)blob
+{
     [_codeViewController showLoadingWithTitle:blob.name];    
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
@@ -120,7 +121,6 @@ static RepoViewController *_instance = nil;
     
     [blob refreshData];    
 }
-
 
 -(void) BlobUpdateSuccess:(NSNotification*) note
 {

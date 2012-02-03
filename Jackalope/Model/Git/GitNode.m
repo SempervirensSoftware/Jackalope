@@ -10,12 +10,13 @@
 
 @implementation GitNode
 
-@synthesize sha, name, fullPath, type, parentSha, commit, children;
+@synthesize sha, name, fullPath, type, repoName, parentSha, commit, children;
 
 - (void) refreshData
 {
     _responseData = [[NSMutableData alloc] init];
     NSURL *url = [NSURL URLWithString:[self updateURL]];
+    NSLog(@"refresh@%@",[self updateURL]);
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     _connection = [[NSURLConnection alloc] initWithRequest:req
                                                   delegate:self
@@ -65,6 +66,22 @@
     
     NSLog(@"Error loading %@@%@ : %@", self.type, [conn.originalRequest.URL description], [error localizedDescription]);
 }
+
+- (NSComparisonResult)compare:(GitNode *)otherObject {
+    if ([self.type isEqualToString:otherObject.type])
+    {
+        return [self.name compare:otherObject.name];
+    }
+    else if ([self.type isEqualToString:NODE_TYPE_TREE])
+    {
+        return NSOrderedAscending;
+    }
+    else
+    {
+        return NSOrderedDescending;
+    }
+}
+
 
 // Override methods for the next generation
 - (void)        setValuesFromApiResponse:(NSString *) jsonString {}

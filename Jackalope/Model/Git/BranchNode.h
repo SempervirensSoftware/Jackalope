@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GitNode.h"
+#import "TreeNode.h"
 
-@interface BranchNode : GitNode
+@interface BranchNode : TreeNode
 
-@property (nonatomic, retain) NSString* commitSHA;
-@property (nonatomic, retain) NSString* rootTreeSHA;
+@property (nonatomic, retain) NSString*     rootTreeSHA;
 
 @end

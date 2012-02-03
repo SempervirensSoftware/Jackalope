@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SBJSON.h"
 
 @interface GitNode : NSObject
 {
@@ -18,6 +19,7 @@
 @property (retain, nonatomic)           NSString*     name;
 @property (retain, nonatomic)           NSString*     fullPath;
 @property (retain, nonatomic, readonly) NSString*     type;
+@property (retain, nonatomic)           NSString*     repoName;
 @property (retain, nonatomic)           NSString*     parentSha;
 @property (retain, nonatomic)           NSString*     commit;
 @property (retain, nonatomic)           NSArray*      children;

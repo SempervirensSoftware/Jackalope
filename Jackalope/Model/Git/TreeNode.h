@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RepoNode.h"
-#import "GitNode.h"
+#import "GitNodeProvider.h"
 
 @interface TreeNode : GitNode
 
-@property (retain, nonatomic) RepoNode*     repo;
+@property (retain, nonatomic) id <GitNodeProvider> nodeProvider;
 
 @end

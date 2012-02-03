@@ -12,10 +12,8 @@
 
 @interface Code : NSObject
 
--(id) initWithPath:(NSString*)path AndContents:(NSString*)contents;
-
-@property(nonatomic, retain)            NSString* gitBlobSHA;
-@property(nonatomic, strong, readonly)  NSString* fileName;
-@property(nonatomic, retain)            NSString* plainText;
+@property(nonatomic, retain) NSString* gitBlobSHA;
+@property(nonatomic, retain) NSString* fileName;
+@property(nonatomic, retain) NSString* plainText;
 
 @end

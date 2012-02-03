@@ -12,21 +12,6 @@
 
 @implementation Code
 
-@synthesize plainText = _plainText;
-@synthesize fileName = _fileName;
-@synthesize gitBlobSHA = _gitBlobSHA;
-
--(id) initWithPath:(NSString*)path AndContents:(NSString*)contents;
-{
-    self = [super init];
-    
-    if (self)
-    {
-        _plainText = contents;
-        _fileName = path;
-    }
-    
-    return self;
-}
+@synthesize plainText, fileName, gitBlobSHA;
    
 @end
