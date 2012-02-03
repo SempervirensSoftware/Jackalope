@@ -1,5 +1,5 @@
 //
-//  Repo.h
+//  Branch.h
 //  Jackalope
 //
 //  Created by Peter Terrill on 2/1/12.
@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GitNode.h"
 
-@interface Repo : NSObject
-{
-    NSMutableDictionary *_treeHash;    
-}
+@interface BranchNode : GitNode
 
-@property (retain) NSString* repoName;
-@property (retain) NSString* repoRootSHA;
+@property (nonatomic, retain) NSString* commitSHA;
+@property (nonatomic, retain) NSString* rootTreeSHA;
 
 @end

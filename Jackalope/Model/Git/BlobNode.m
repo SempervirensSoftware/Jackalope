@@ -6,31 +6,14 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "BlobCommit.h"
+#import "BlobNode.h"
 
 #import "SBJSON.h"
 
-@implementation BlobCommit
+@implementation BlobNode
 
 @synthesize repoName, repoRootSHA, treeSHA, commitSHA, blobName, blobFullPath, blobSHA,  blobContent;
 
-- (id) initWithBlob:(TreeNode *)blob{
-    self = [super init];
-    
-    if (self)
-    {
-        self.repoName = blob.repoName;
-        self.blobName = blob.name;
-        self.blobFullPath = blob.fullPath;
-        self.blobSHA = blob.sha;
-        self.treeSHA = blob.parentSha;
-        self.commitSHA = blob.commit;
-        
-        _responseData = [[NSMutableData alloc] init];
-    }
-    
-    return self;
-}
 
 - (NSURLRequest *) urlRequest
 {    

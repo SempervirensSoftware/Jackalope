@@ -11,7 +11,7 @@
 
 @implementation TreeNode
 
-@synthesize name, fullPath, sha, type, parentSha, repoName, commit, children;
+@synthesize name, fullPath, sha, type, parentSha, repo, commit, children;
 
 - (id) init
 {
@@ -25,46 +25,47 @@
     return self;
 }
  
-- (id) parseDictionary:(NSDictionary *) dictionary{
-
-    if ([dictionary objectForKey:@"path"]){
-        self.name = [dictionary objectForKey:@"path"];
+- (void) setValuesFromDictionary:(NSDictionary *) valueMap 
+{
+    if ([valueMap objectForKey:@"path"]){
+        self.name = [valueMap objectForKey:@"path"];
     }
-    if ([dictionary objectForKey:@"sha"])
+    if ([valueMap objectForKey:@"commit"])
     {
-        self.sha = [dictionary objectForKey:@"sha"];
+        self.commit = [valueMap objectForKey:@"commit"];
     }
-    if ([dictionary objectForKey:@"type"]){
-        self.type = [dictionary objectForKey:@"type"];
-    }
-    if ([dictionary objectForKey:@"commit"])
-    {
-        self.commit = [dictionary objectForKey:@"commit"];
-    }
-    
-    return self;
 }
 
-- (id) parseTreeApiResponse:(NSString *) jsonString{
+- (void) setValuesFromApiResponse:(NSString *) jsonString{
 
     SBJSON *jsonParser = [SBJSON new];
     NSDictionary *treeHash = (NSDictionary *) [jsonParser objectWithString:jsonString];
     
-    [self parseDictionary:treeHash];
+    [self setValuesFromDictionary:treeHash];
     
     NSArray *childrenHashes = (NSArray *) [treeHash objectForKey:@"tree"];
     NSMutableArray *tempChildren = [[NSMutableArray alloc] init];
     
     for (NSDictionary *childHash in childrenHashes) { 
-        TreeNode *child = [[TreeNode alloc] init];
+        NSString* childType = [childHash objectForKey:@"type"];
+
+        GitNode* child;
         
-        // get the details from the response object
-        child = [child parseDictionary:childHash];
+        if (childType == NODE_TYPE_TREE)
+        {
+            child = [self.repo getTreeNodeWithSHA:[childHash objectForKey:@"sha"]];
+        }
+        else
+        {
+            child = [self.repo getBlobNodeWithSHA:[childHash objectForKey:@"sha"]];
+        }
+        
+        // load all the details we can from the response object
+        [child setValuesFromDictionary:childHash];
         
         // add some local context
         child.parentSha = self.sha;
         child.commit = self.commit;
-        child.repoName = self.repoName;
         
         if (self.fullPath.length > 0){
             child.fullPath = [NSString stringWithFormat:@"%@/%@",self.fullPath, child.name];
@@ -78,9 +79,18 @@
     }
     
     children = [tempChildren sortedArrayUsingSelector:@selector(compare:)];
-
-    return self;
 }
+
+-(NSString *)updateURL
+{
+    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree/%@.json", self.repo.name, self.sha];
+}
+
+-(NSString *)type
+{
+    return NODE_TYPE_REPO;
+}
+
 
 - (NSComparisonResult)compare:(TreeNode *)otherObject {
     if ([self.type isEqualToString:otherObject.type])
@@ -96,11 +106,5 @@
         return NSOrderedDescending;
     }
 }
-
-
-NSString *const NODE_TYPE_BLOB = @"blob";
-NSString *const NODE_TYPE_TREE = @"tree";
-NSString *const NODE_TYPE_REPOS = @"repos";
-NSString *const NODE_TYPE_BRANCHES = @"branch";
 
 @end

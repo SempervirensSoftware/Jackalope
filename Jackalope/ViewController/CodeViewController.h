@@ -11,17 +11,14 @@
 #import "PTCodeScrollView.h"
 
 @interface CodeViewController : UIViewController <UISplitViewControllerDelegate>
-{    
-    // http handlers
-    NSURLConnection *_connection;
-    NSMutableData *_responseData;
-    NSMutableDictionary *_treeHash;  
-    
-    PTCodeScrollView* _codeView;
+{
+    Code* _code;
 }
 
-@property (nonatomic, retain) IBOutlet PTCodeScrollView *codeView;
+@property (nonatomic, retain) IBOutlet PTCodeScrollView* codeView;
 
-@property (strong, nonatomic) TreeNode *activeBlob;
+-(void) showCode:(Code *) code;
+-(void) showLoadingWithTitle:(NSString *)titleString;
+-(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message;
 
 @end

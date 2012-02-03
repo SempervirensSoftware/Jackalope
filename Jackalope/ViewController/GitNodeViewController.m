@@ -6,14 +6,14 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "TreeViewController.h"
+#import "GitNodeViewController.h"
 #import "RepoViewController.h"
 #import "CodeViewController.h"
 
-@implementation TreeViewController
+@implementation GitNodeViewController
 
 @synthesize detailViewController = _detailViewController;
-@synthesize tree = _tree;
+@synthesize node = _node;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,20 +23,51 @@
         self.clearsSelectionOnViewWillAppear = NO;
         self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
         
-        _tree = [[TreeNode alloc] init];
+        _isLoading = YES;
+        _isError = NO;
     }
     
     return self;
 }
 
-- (void) setTree:(TreeNode *)tree
+- (void)dealloc
 {
-    _tree = tree;
-    self.title = tree.name;
-    
-    [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];    
 }
 
+- (void) setNode:(GitNode *)node
+{
+    _node = node;
+    self.title = node.name;
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];    
+    [nc addObserver:self
+           selector:@selector(NodeUpdateSuccess:)
+               name:NODE_UPDATE_SUCCESS
+             object:node];    
+
+    [nc addObserver:self
+           selector:@selector(NodeUpdateFailed:)
+               name:NODE_UPDATE_FAILED
+             object:node];
+
+    [node refreshData];
+}
+
+-(void)NodeUpdateSuccess:(NSNotification *)note
+{
+    _isLoading = NO;
+    _isError = NO;
+    [self.tableView reloadData];    
+}
+
+-(void)NodeUpdateFailed:(NSNotification *)note
+{
+    _isLoading = NO;
+    _isError = YES;
+    [self.tableView reloadData];    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -45,7 +76,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_tree.children count];
+    if (_isLoading || _isError)
+    {
+        return 1;
+    }
+    else
+    {
+        return [_node.children count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -56,22 +94,37 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+
+    UIImage* cellIcon = nil;
+    NSString* cellText;
+    UITableViewCellAccessoryType cellAccessory = UITableViewCellAccessoryNone;
     
-    UIImage *cellIcon = nil;
-    TreeNode *node = [_tree.children objectAtIndex:[indexPath row]];
-    
-    if ([node.type isEqualToString:NODE_TYPE_TREE])
+    if (_isError)
     {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cellIcon = [UIImage imageNamed:@"folder.png"];
+        cellText = @"Error loading files.";
+    }
+    else if (_isLoading)
+    {
+        cellText = @"Loading...";
     }
     else
     {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cellIcon = [UIImage imageNamed:@"file.png"];
+        GitNode* childNode = [_node.children objectAtIndex:[indexPath row]];
+        cellText = childNode.name;
+        
+        if ([childNode.type isEqualToString:NODE_TYPE_TREE])
+        {
+            cellAccessory = UITableViewCellAccessoryDisclosureIndicator;
+            cellIcon = [UIImage imageNamed:@"folder.png"];
+        }
+        else if ([childNode.type isEqualToString:NODE_TYPE_BLOB])
+        {
+            cellIcon = [UIImage imageNamed:@"file.png"];
+        }
     }
-    
-    [[cell textLabel] setText: node.name];
+
+    cell.accessoryType = cellAccessory;
+    [[cell textLabel] setText: cellText];
     [[cell imageView] setImage:cellIcon];
     
     return cell;
@@ -80,15 +133,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TreeNode *selectedNode = (TreeNode *)[_tree.children objectAtIndex:[indexPath row]];
+    GitNode *selectedNode = [_node.children objectAtIndex:[indexPath row]];
     
     if ([selectedNode.type isEqualToString:NODE_TYPE_BLOB])
     {
         [[RepoViewController getInstance] showBlobInCodeView:selectedNode];
     }
-    else if ([selectedNode.type isEqualToString:NODE_TYPE_TREE])
+    else 
     {
-        [[RepoViewController getInstance] showTreeInNav:selectedNode];
+        [[RepoViewController getInstance] showNodeInNav:selectedNode];
     }
     
 }

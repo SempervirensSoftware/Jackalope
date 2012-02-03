@@ -11,9 +11,16 @@
 
 @class CodeViewController;
 
-@interface TreeViewController : UITableViewController
+@interface GitNodeViewController : UITableViewController
+{
+    BOOL _isLoading;
+    BOOL _isError;
+}
 
 @property (strong, nonatomic) CodeViewController *detailViewController;
-@property (strong, nonatomic) TreeNode *tree;
+@property (strong, nonatomic) GitNode *node;
+
+-(void)NodeUpdateSuccess:(NSNotification *)note;
+-(void)NodeUpdateFailed:(NSNotification *)note;
 
 @end

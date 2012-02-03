@@ -11,7 +11,14 @@
 		6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */; };
 		6E514C3914D8B507000CBF1B /* NSURL+PTQueryParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */; };
 		6E895EFC14D8C56C00D98866 /* octocat_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895EFB14D8C56C00D98866 /* octocat_happy.png */; };
-		6E895F0114D92AE400D98866 /* Repo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F0014D92AE400D98866 /* Repo.m */; };
+		6E895F0114D92AE400D98866 /* RepoNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F0014D92AE400D98866 /* RepoNode.m */; };
+		6E895F0314D9D07A00D98866 /* jackalope.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0214D9D07A00D98866 /* jackalope.png */; };
+		6E895F0614D9D11D00D98866 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0414D9D11D00D98866 /* Icon.png */; };
+		6E895F0714D9D11D00D98866 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0514D9D11D00D98866 /* Icon@2x.png */; };
+		6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0814D9D13400D98866 /* Icon@2x.png */; };
+		6E895F0B14D9D13A00D98866 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0A14D9D13900D98866 /* Icon.png */; };
+		6E895F0E14DA2DE400D98866 /* BranchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F0D14DA2DE400D98866 /* BranchNode.m */; };
+		6E895F1214DA369800D98866 /* GitNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F1114DA369800D98866 /* GitNode.m */; };
 		6E8B04D714D0C47900EBC107 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D614D0C47900EBC107 /* UIKit.framework */; };
 		6E8B04D914D0C47900EBC107 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04D814D0C47900EBC107 /* Foundation.framework */; };
 		6E8B04DB14D0C47900EBC107 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B04DA14D0C47900EBC107 /* CoreGraphics.framework */; };
@@ -36,7 +43,7 @@
 		6E8B054214D0CC1F00EBC107 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B053A14D0CC1F00EBC107 /* NSAttributedString+Attributes.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		6E8B054B14D0CE9800EBC107 /* CodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054614D0CE9800EBC107 /* CodeViewController.m */; };
 		6E8B054C14D0CE9800EBC107 /* RepoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054814D0CE9800EBC107 /* RepoViewController.m */; };
-		6E8B054D14D0CE9800EBC107 /* TreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054A14D0CE9800EBC107 /* TreeViewController.m */; };
+		6E8B054D14D0CE9800EBC107 /* GitNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */; };
 		6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */; };
 		6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */; };
 		6E8B057814D0DD0900EBC107 /* LineOfCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056814D0DD0900EBC107 /* LineOfCode.m */; };
@@ -44,7 +51,7 @@
 		6E8B057A14D0DD0900EBC107 /* PTTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056C14D0DD0900EBC107 /* PTTextPosition.m */; };
 		6E8B057B14D0DD0900EBC107 /* PTTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056E14D0DD0900EBC107 /* PTTextRange.m */; };
 		6E8B057C14D0DD0900EBC107 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057114D0DD0900EBC107 /* AppUser.m */; };
-		6E8B057D14D0DD0900EBC107 /* BlobCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057314D0DD0900EBC107 /* BlobCommit.m */; };
+		6E8B057D14D0DD0900EBC107 /* BlobNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057314D0DD0900EBC107 /* BlobNode.m */; };
 		6E8B057F14D0DD0900EBC107 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057714D0DD0900EBC107 /* TreeNode.m */; };
 		6E8B058714D0DD3100EBC107 /* CodeDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058214D0DD3100EBC107 /* CodeDecorator.m */; };
 		6E8B058814D0DD3100EBC107 /* decoration_schema.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B058314D0DD3100EBC107 /* decoration_schema.txt */; };
@@ -54,6 +61,7 @@
 		6E8B059114D0DDC300EBC107 /* PTCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058F14D0DDC300EBC107 /* PTCursorView.m */; };
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
+		6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7730C14DB27E20015FA0A /* RootNode.m */; };
 		6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */; };
 		6EB90C3414D77C4000B7D378 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3314D77C4000B7D378 /* User.m */; };
 		6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */; };
@@ -76,8 +84,17 @@
 		6E514C3714D8B507000CBF1B /* NSURL+PTQueryParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+PTQueryParsing.h"; sourceTree = "<group>"; };
 		6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+PTQueryParsing.m"; sourceTree = "<group>"; };
 		6E895EFB14D8C56C00D98866 /* octocat_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = octocat_happy.png; sourceTree = "<group>"; };
-		6E895EFF14D92AE400D98866 /* Repo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repo.h; sourceTree = "<group>"; };
-		6E895F0014D92AE400D98866 /* Repo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repo.m; sourceTree = "<group>"; };
+		6E895EFF14D92AE400D98866 /* RepoNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoNode.h; sourceTree = "<group>"; };
+		6E895F0014D92AE400D98866 /* RepoNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoNode.m; sourceTree = "<group>"; };
+		6E895F0214D9D07A00D98866 /* jackalope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jackalope.png; sourceTree = "<group>"; };
+		6E895F0414D9D11D00D98866 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6E895F0514D9D11D00D98866 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6E895F0814D9D13400D98866 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6E895F0A14D9D13900D98866 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6E895F0C14DA2DE400D98866 /* BranchNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchNode.h; sourceTree = "<group>"; };
+		6E895F0D14DA2DE400D98866 /* BranchNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchNode.m; sourceTree = "<group>"; };
+		6E895F1014DA369800D98866 /* GitNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitNode.h; sourceTree = "<group>"; };
+		6E895F1114DA369800D98866 /* GitNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitNode.m; sourceTree = "<group>"; };
 		6E8B04D214D0C47900EBC107 /* Jackalope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jackalope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E8B04D614D0C47900EBC107 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E8B04D814D0C47900EBC107 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -117,8 +134,8 @@
 		6E8B054614D0CE9800EBC107 /* CodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeViewController.m; sourceTree = "<group>"; };
 		6E8B054714D0CE9800EBC107 /* RepoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoViewController.h; sourceTree = "<group>"; };
 		6E8B054814D0CE9800EBC107 /* RepoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoViewController.m; sourceTree = "<group>"; };
-		6E8B054914D0CE9800EBC107 /* TreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeViewController.h; sourceTree = "<group>"; };
-		6E8B054A14D0CE9800EBC107 /* TreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeViewController.m; sourceTree = "<group>"; };
+		6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GitNodeViewController.h; sourceTree = "<group>"; };
+		6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitNodeViewController.m; sourceTree = "<group>"; };
 		6E8B055C14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPad.xib; sourceTree = "<group>"; };
 		6E8B055E14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPhone.xib; sourceTree = "<group>"; };
 		6E8B056714D0DD0900EBC107 /* LineOfCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineOfCode.h; sourceTree = "<group>"; };
@@ -131,8 +148,8 @@
 		6E8B056E14D0DD0900EBC107 /* PTTextRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextRange.m; sourceTree = "<group>"; };
 		6E8B057014D0DD0900EBC107 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUser.h; path = Git/AppUser.h; sourceTree = "<group>"; };
 		6E8B057114D0DD0900EBC107 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUser.m; path = Git/AppUser.m; sourceTree = "<group>"; };
-		6E8B057214D0DD0900EBC107 /* BlobCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlobCommit.h; sourceTree = "<group>"; };
-		6E8B057314D0DD0900EBC107 /* BlobCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlobCommit.m; sourceTree = "<group>"; };
+		6E8B057214D0DD0900EBC107 /* BlobNode.h */ = {isa = PBXFileReference; fileEncoding = 4; path = BlobNode.h; sourceTree = "<group>"; };
+		6E8B057314D0DD0900EBC107 /* BlobNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlobNode.m; sourceTree = "<group>"; };
 		6E8B057614D0DD0900EBC107 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNode.h; sourceTree = "<group>"; };
 		6E8B057714D0DD0900EBC107 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeNode.m; sourceTree = "<group>"; };
 		6E8B058114D0DD3100EBC107 /* CodeDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeDecorator.h; sourceTree = "<group>"; };
@@ -148,6 +165,8 @@
 		6E8B059214D0DFC000EBC107 /* Code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Code.h; sourceTree = "<group>"; };
 		6E8B059314D0DFC000EBC107 /* Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Code.m; sourceTree = "<group>"; };
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
+		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
 		6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DroidSansMono.ttf; path = ../../../Downloads/DroidSansMono/DroidSansMono.ttf; sourceTree = "<group>"; };
 		6EB90C3214D77C4000B7D378 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -207,6 +226,8 @@
 		6E8B04C714D0C47900EBC107 = {
 			isa = PBXGroup;
 			children = (
+				6E895F0A14D9D13900D98866 /* Icon.png */,
+				6E895F0814D9D13400D98866 /* Icon@2x.png */,
 				6E8B04DC14D0C47900EBC107 /* Jackalope */,
 				6E8B050614D0C47900EBC107 /* JackalopeTests */,
 				6E8B04D514D0C47900EBC107 /* Frameworks */,
@@ -283,6 +304,9 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				6E895F0414D9D11D00D98866 /* Icon.png */,
+				6E895F0514D9D11D00D98866 /* Icon@2x.png */,
+				6E895F0214D9D07A00D98866 /* jackalope.png */,
 				6E895EFB14D8C56C00D98866 /* octocat_happy.png */,
 				6E8B052414D0CBF800EBC107 /* file.png */,
 				6E8B052514D0CBF800EBC107 /* folder.png */,
@@ -341,8 +365,8 @@
 				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
 				6E8B054714D0CE9800EBC107 /* RepoViewController.h */,
 				6E8B054814D0CE9800EBC107 /* RepoViewController.m */,
-				6E8B054914D0CE9800EBC107 /* TreeViewController.h */,
-				6E8B054A14D0CE9800EBC107 /* TreeViewController.m */,
+				6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */,
+				6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */,
 			);
 			name = Controller;
 			path = ViewController;
@@ -382,12 +406,18 @@
 		6E8B056F14D0DD0900EBC107 /* Git */ = {
 			isa = PBXGroup;
 			children = (
-				6E8B057214D0DD0900EBC107 /* BlobCommit.h */,
-				6E8B057314D0DD0900EBC107 /* BlobCommit.m */,
+				6E895F1014DA369800D98866 /* GitNode.h */,
+				6E895F1114DA369800D98866 /* GitNode.m */,
+				6EB7730B14DB27E20015FA0A /* RootNode.h */,
+				6EB7730C14DB27E20015FA0A /* RootNode.m */,
+				6E895EFF14D92AE400D98866 /* RepoNode.h */,
+				6E895F0014D92AE400D98866 /* RepoNode.m */,
+				6E895F0C14DA2DE400D98866 /* BranchNode.h */,
+				6E895F0D14DA2DE400D98866 /* BranchNode.m */,
 				6E8B057614D0DD0900EBC107 /* TreeNode.h */,
 				6E8B057714D0DD0900EBC107 /* TreeNode.m */,
-				6E895EFF14D92AE400D98866 /* Repo.h */,
-				6E895F0014D92AE400D98866 /* Repo.m */,
+				6E8B057214D0DD0900EBC107 /* BlobNode.h */,
+				6E8B057314D0DD0900EBC107 /* BlobNode.m */,
 			);
 			path = Git;
 			sourceTree = "<group>";
@@ -517,6 +547,11 @@
 				6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */,
 				6EB90C3914D78A4300B7D378 /* GithubLoginViewController.xib in Resources */,
 				6E895EFC14D8C56C00D98866 /* octocat_happy.png in Resources */,
+				6E895F0314D9D07A00D98866 /* jackalope.png in Resources */,
+				6E895F0614D9D11D00D98866 /* Icon.png in Resources */,
+				6E895F0714D9D11D00D98866 /* Icon@2x.png in Resources */,
+				6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */,
+				6E895F0B14D9D13A00D98866 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,13 +597,13 @@
 				6E8B054214D0CC1F00EBC107 /* NSAttributedString+Attributes.m in Sources */,
 				6E8B054B14D0CE9800EBC107 /* CodeViewController.m in Sources */,
 				6E8B054C14D0CE9800EBC107 /* RepoViewController.m in Sources */,
-				6E8B054D14D0CE9800EBC107 /* TreeViewController.m in Sources */,
+				6E8B054D14D0CE9800EBC107 /* GitNodeViewController.m in Sources */,
 				6E8B057814D0DD0900EBC107 /* LineOfCode.m in Sources */,
 				6E8B057914D0DD0900EBC107 /* PTCodeLayer.m in Sources */,
 				6E8B057A14D0DD0900EBC107 /* PTTextPosition.m in Sources */,
 				6E8B057B14D0DD0900EBC107 /* PTTextRange.m in Sources */,
 				6E8B057C14D0DD0900EBC107 /* AppUser.m in Sources */,
-				6E8B057D14D0DD0900EBC107 /* BlobCommit.m in Sources */,
+				6E8B057D14D0DD0900EBC107 /* BlobNode.m in Sources */,
 				6E8B057F14D0DD0900EBC107 /* TreeNode.m in Sources */,
 				6E8B058714D0DD3100EBC107 /* CodeDecorator.m in Sources */,
 				6E8B058A14D0DD3100EBC107 /* DecoratorCollection.m in Sources */,
@@ -578,7 +613,10 @@
 				6EB90C3414D77C4000B7D378 /* User.m in Sources */,
 				6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */,
 				6E514C3914D8B507000CBF1B /* NSURL+PTQueryParsing.m in Sources */,
-				6E895F0114D92AE400D98866 /* Repo.m in Sources */,
+				6E895F0114D92AE400D98866 /* RepoNode.m in Sources */,
+				6E895F0E14DA2DE400D98866 /* BranchNode.m in Sources */,
+				6E895F1214DA369800D98866 /* GitNode.m in Sources */,
+				6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

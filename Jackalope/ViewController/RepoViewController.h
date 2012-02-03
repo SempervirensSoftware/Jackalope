@@ -8,17 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "CodeViewController.h"
+#import "GitNode.h"
+#import "RootNode.h"
 
 @interface RepoViewController : NSObject
 {
-    BOOL isRootTree;
-    
-    UINavigationController *_navController;
-    
-    NSURLConnection *_connection;
-    NSMutableData *_responseData;
-    NSMutableDictionary *_treeHash;    
+    UINavigationController* _navController;    
 
+    RootNode*               _rootNode;
+    RepoNode*               _currentRepo;
 }
 
 + (RepoViewController *) getInstance;
@@ -26,11 +24,7 @@
 @property (retain, readonly) UINavigationController* navController;
 @property (retain) CodeViewController* codeViewController;
 
-@property (retain) NSString* repoName;
-@property (retain) NSString* repoRootSHA;
-
-- (void) showBlobInCodeView:(TreeNode *) node;
-- (void) showTreeInNav:(TreeNode *) node;
-- (TreeNode *) getTreeNodeWithSHA:(NSString *) sha;
+- (void) showNodeInNav:(GitNode*) node;
+- (void) showBlobInCodeView:(GitNode*) node;
 
 @end

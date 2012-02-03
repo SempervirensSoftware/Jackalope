@@ -49,15 +49,17 @@
                                                 
     [RepoViewController getInstance].codeViewController = codeViewController;
     
-    if ([AppUser currentUser].user)
-    {
-        [self showCodingView];
-    }
-    else
-    {
-        [self showLogin];
-    }
-        
+//    if ([AppUser currentUser].user)
+//    {
+//        [self showCodingView];
+//    }
+//    else
+//    {
+//        [self showLogin];
+//    }
+
+    [self showCodingView];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

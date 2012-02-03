@@ -7,17 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TreeNode.h"
+#import "GitNode.h"
+#import "Code.h"
 
-@interface BlobCommit : NSObject
+@interface BlobNode : GitNode
 {
     // http handlers
-    NSURLConnection *_connection;
-    NSMutableData *_responseData;
     NSMutableDictionary *_treeHash;  
 }
-
-- (id) initWithBlob:(TreeNode *)blob;
 
 @property (retain, nonatomic) NSString      *blobName;
 @property (retain, nonatomic) NSString      *blobFullPath;
@@ -28,6 +25,9 @@
 @property (retain, nonatomic) NSString      *repoRootSHA;
 @property (retain, nonatomic) NSString      *commitSHA;
 @property (retain, nonatomic) NSString      *treeSHA;
+
+
+-(Code *) createCode;
 
 - (NSURLRequest *) urlRequest;
 - (NSData *) httpBody;

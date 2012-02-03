@@ -7,18 +7,17 @@
 //
 
 #import "RepoViewController.h"
-#import "TreeViewController.h"
+#import "GitNodeViewController.h"
 #import "SBJSON.h"
 #import "TreeNode.h"
+#import "BlobNode.h"
 #import "AppUser.h"
 
 static RepoViewController *_instance = nil;
 
 @implementation RepoViewController
 
-@synthesize repoName = _repoName;
 @synthesize codeViewController = _codeViewController;
-@synthesize repoRootSHA = _repoRootSHA;
 
 + (RepoViewController *) getInstance
 {
@@ -45,144 +44,95 @@ static RepoViewController *_instance = nil;
     self = [super init];
 
     if (self) {             
-        // TODO stop hardcoding the repo!
-        _repoName = @"TouchCodeRails";
-        
-        _responseData = [[NSMutableData alloc] init];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@.json",_repoName]];
-        NSURLRequest *req = [NSURLRequest requestWithURL:url];
-        _connection = [[NSURLConnection alloc] initWithRequest:req
-                                                      delegate:self
-                                              startImmediately:YES];
-
-        _treeHash = [[NSMutableDictionary alloc] init];
-        isRootTree = true;
+        _rootNode = [[RootNode alloc] init];
     }           
+    
     return self;
 }
 
 
 -(UIViewController *) navController{
     if (_navController == nil){
-        TreeViewController* repoTreeController;
+        GitNodeViewController* rootViewController;
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
         {            
-            repoTreeController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
+            rootViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
         }
         else
         {
-            repoTreeController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
+            rootViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
         }
                 
-        [repoTreeController setTitle:@"Repo Browser"];
-        _navController = [[UINavigationController alloc] initWithRootViewController:repoTreeController];
+        rootViewController.title = @"Repo Browser";
+        rootViewController.node  = _rootNode;
+        _navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     }    
     
     return _navController;
 }
 
-- (void) showBlobInCodeView:(TreeNode *) blob{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        [self.navController pushViewController:_codeViewController animated:YES];
-    }
-    
-    _codeViewController.activeBlob = blob;
-}
+- (void) showNodeInNav:(GitNode *) node
+{        
+    GitNodeViewController* newTreeViewController;
 
-- (void) showTreeInNav:(TreeNode *) node{    
-    TreeNode *tempNode = [_treeHash objectForKey:node.sha];
-
-    if (tempNode == nil)
-    {
-        _responseData = [[NSMutableData alloc] init];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree/%@.json", _repoName, node.sha]];
-        NSURLRequest *req = [NSURLRequest requestWithURL:url];
-        _connection = [[NSURLConnection alloc] initWithRequest:req
-                                                      delegate:self
-                                              startImmediately:YES];
-        
-        tempNode = node;
-    }
-    
-    TreeViewController* newTreeViewController;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
     {            
-        newTreeViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
+        newTreeViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPhone" bundle:nil];
     }
     else
     {
-        newTreeViewController = [[TreeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
+        newTreeViewController = [[GitNodeViewController alloc] initWithNibName:@"TreeView_iPad" bundle:nil];   
     }
-    newTreeViewController.tree = tempNode;
+    
+    newTreeViewController.node = node;
     
     [self.navController pushViewController:newTreeViewController animated:YES];
 }
 
+- (void) showBlobInCodeView:(GitNode *) blobNode{
 
-- (TreeNode *) getTreeNodeWithSHA:(NSString *) sha{
-    return (TreeNode *)[_treeHash objectForKey:sha];
-}
-
-
-
-// This method will be called several times as the data arrives
-- (void)connection:(NSURLConnection *)conn didReceiveData:(NSData *)data
-{
-    // Add the incoming chunk of data to the container we are keeping
-    // The data always comes in the correct order
-    [_responseData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)conn
-{
-    // We are just checking to make sure we are getting the XML
-    NSString *responseString = [[NSString alloc] initWithData:_responseData
-                                                     encoding:NSUTF8StringEncoding];
-    
-    TreeViewController *currentTreeView = (TreeViewController *) [_navController.childViewControllers lastObject];
-        
-    // REMOVE this is a remnant of hardcoding the repo
-    currentTreeView.tree.repoName = _repoName;
-    
-    TreeNode *responseTree = (TreeNode *)[currentTreeView.tree parseTreeApiResponse:responseString];                          
-    currentTreeView.tree = responseTree;
-    
-    if (isRootTree){
-        isRootTree = false;
-        _repoRootSHA = responseTree.sha;
+    if (blobNode.type != NODE_TYPE_BLOB)
+    {
+        return;
     }
     
-    //cache the result
-    [_treeHash setValue:responseTree forKey:responseTree.sha];
+    BlobNode* blob = (BlobNode*)blobNode;    
+    [_codeViewController showLoadingWithTitle:blob.name];    
     
-    // Release the connection and response data, we're done with it
-    _connection = nil;
-    _responseData = nil;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [self.navController pushViewController:_codeViewController animated:YES];
+    }
+        
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];    
+    [nc addObserver:self
+           selector:@selector(BlobUpdateSuccess:)
+               name:NODE_UPDATE_SUCCESS
+             object:blob];    
     
+    [nc addObserver:self
+           selector:@selector(BlobUpdateFailed:)
+               name:NODE_UPDATE_FAILED
+             object:blob];
+
+    
+    [blob refreshData];    
 }
 
-- (void)connection:(NSURLConnection *)conn
-  didFailWithError:(NSError *)error
+
+-(void) BlobUpdateSuccess:(NSNotification*) note
 {
-    // Release the connection and response data, we're done with it
-    _connection = nil;
-    _responseData = nil;
-    
-    // Grab the description of the error object passed to us
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
-    
-    // Create and show an alert view with this error displayed
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                 message:errorString
-                                                delegate:nil
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles:nil];
-    
-    [av show];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    BlobNode* blob = (BlobNode *) note.object;    
+    [_codeViewController showCode:[blob createCode]];
 }
-
-
+-(void) BlobUpdateFailed:(NSNotification*) note
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    BlobNode* blob = (BlobNode *) note.object;    
+    [_codeViewController showErrorWithTitle:blob.name andMessage:@"Error loading file"];
+}
 
 @end

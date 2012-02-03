@@ -7,23 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RepoNode.h"
+#import "GitNode.h"
 
-@interface TreeNode : NSObject
+@interface TreeNode : GitNode
 
-extern NSString *const NODE_TYPE_BLOB;
-extern NSString *const NODE_TYPE_TREE;
-extern NSString *const NODE_TYPE_REPOS;
-extern NSString *const NODE_TYPE_BRANCHES;
-
-@property (retain, nonatomic) NSString      *name;
-@property (retain, nonatomic) NSString      *fullPath;
-@property (retain, nonatomic) NSString      *sha;
-@property (retain, nonatomic) NSString      *parentSha;
-@property (retain, nonatomic) NSString      *type;
-@property (retain, nonatomic) NSString      *repoName;
-@property (retain, nonatomic) NSString      *commit;
-@property (retain, nonatomic) NSArray       *children;
-
-- (id) parseTreeApiResponse:(NSString *) jsonString;
+@property (retain, nonatomic) RepoNode*     repo;
 
 @end
