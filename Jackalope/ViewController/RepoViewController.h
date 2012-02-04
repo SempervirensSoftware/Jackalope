@@ -26,6 +26,7 @@
 @property (retain, readonly) UINavigationController* navController;
 @property (retain) CodeViewController* codeViewController;
 
+- (void) showRootNode;
 - (void) showNode:(GitNode*) node;
 - (void) showBlob:(BlobNode *)blob;
 

@@ -40,10 +40,13 @@
     if (range.location != NSIntegerMax)
     {
         NSString* token = [request.URL queryValueForKey:@"token"];
-        User* newUser = [[User alloc] init];
-        newUser.githubToken = token;
-        [AppUser currentUser].user = newUser;         
+        NSString* gitUserName = [request.URL queryValueForKey:@"gitUserName"]; 
+        [AppUser currentUser].githubToken = token;
+        [AppUser currentUser].githubUserName = gitUserName;
 
+        NSLog(@"queryString: %@", request.URL.query);
+        NSLog(@"loading user: %@(%@)", [AppUser currentUser].githubUserName, [AppUser currentUser].githubToken);
+        
         instructionLabel.hidden = YES;
         loginButton.hidden = YES;
         successLabel.hidden = NO;
@@ -58,7 +61,7 @@
         _webView.delegate = nil;
         _webView = nil;
 
-        [GlobalAppDelegate showCodingView];
+        [GlobalAppDelegate userLoggedIn];
         
         return NO;
     }

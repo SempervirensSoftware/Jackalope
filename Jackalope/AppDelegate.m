@@ -25,7 +25,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     CodeViewController *codeViewController;
-    UINavigationController *repoController = [RepoViewController getInstance].navController;        
+    UINavigationController *repoNavController = [RepoViewController getInstance].navController;        
     
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -33,7 +33,7 @@
         
         codeViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPhone" bundle:nil];        
         
-        self.repoNavigationController = repoController;        
+        self.repoNavigationController = repoNavController;        
     } 
     else 
     {
@@ -44,24 +44,28 @@
         
         self.splitViewController = [[UISplitViewController alloc] init];
         self.splitViewController.delegate = codeViewController;
-        self.splitViewController.viewControllers = [NSArray arrayWithObjects:repoController, detailViewNav, nil];
+        self.splitViewController.viewControllers = [NSArray arrayWithObjects:repoNavController, detailViewNav, nil];
     }
                                                 
     [RepoViewController getInstance].codeViewController = codeViewController;
     
-//    if ([AppUser currentUser].user)
-//    {
-//        [self showCodingView];
-//    }
-//    else
-//    {
-//        [self showLogin];
-//    }
-
-    [self showCodingView];
+    if ([AppUser currentUser].githubToken && [AppUser currentUser].githubUserName)
+    {
+        [self userLoggedIn];
+    }
+    else
+    {
+        [self showLogin];
+    }
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void) userLoggedIn
+{
+    [[RepoViewController getInstance] showRootNode];
+    [self showCodingView];
 }
 
 -(void) showCodingView
@@ -85,9 +89,6 @@
     
     self.window.rootViewController = self.loginController;
 }
-
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -13,8 +13,6 @@
 		6E895EFC14D8C56C00D98866 /* octocat_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895EFB14D8C56C00D98866 /* octocat_happy.png */; };
 		6E895F0114D92AE400D98866 /* RepoNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F0014D92AE400D98866 /* RepoNode.m */; };
 		6E895F0314D9D07A00D98866 /* jackalope.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0214D9D07A00D98866 /* jackalope.png */; };
-		6E895F0614D9D11D00D98866 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0414D9D11D00D98866 /* Icon.png */; };
-		6E895F0714D9D11D00D98866 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0514D9D11D00D98866 /* Icon@2x.png */; };
 		6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0814D9D13400D98866 /* Icon@2x.png */; };
 		6E895F0B14D9D13A00D98866 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E895F0A14D9D13900D98866 /* Icon.png */; };
 		6E895F0E14DA2DE400D98866 /* BranchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E895F0D14DA2DE400D98866 /* BranchNode.m */; };
@@ -87,8 +85,6 @@
 		6E895EFF14D92AE400D98866 /* RepoNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoNode.h; sourceTree = "<group>"; };
 		6E895F0014D92AE400D98866 /* RepoNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoNode.m; sourceTree = "<group>"; };
 		6E895F0214D9D07A00D98866 /* jackalope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jackalope.png; sourceTree = "<group>"; };
-		6E895F0414D9D11D00D98866 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		6E895F0514D9D11D00D98866 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6E895F0814D9D13400D98866 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6E895F0A14D9D13900D98866 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6E895F0C14DA2DE400D98866 /* BranchNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchNode.h; sourceTree = "<group>"; };
@@ -305,8 +301,6 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
-				6E895F0414D9D11D00D98866 /* Icon.png */,
-				6E895F0514D9D11D00D98866 /* Icon@2x.png */,
 				6E895F0214D9D07A00D98866 /* jackalope.png */,
 				6E895EFB14D8C56C00D98866 /* octocat_happy.png */,
 				6E8B052414D0CBF800EBC107 /* file.png */,
@@ -550,8 +544,6 @@
 				6EB90C3914D78A4300B7D378 /* GithubLoginViewController.xib in Resources */,
 				6E895EFC14D8C56C00D98866 /* octocat_happy.png in Resources */,
 				6E895F0314D9D07A00D98866 /* jackalope.png in Resources */,
-				6E895F0614D9D11D00D98866 /* Icon.png in Resources */,
-				6E895F0714D9D11D00D98866 /* Icon@2x.png in Resources */,
 				6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */,
 				6E895F0B14D9D13A00D98866 /* Icon.png in Resources */,
 			);

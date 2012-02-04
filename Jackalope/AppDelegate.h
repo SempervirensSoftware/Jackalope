@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UISplitViewController *splitViewController;
 @property (strong, nonatomic) UIViewController *loginController;
 
+-(void) userLoggedIn;
 -(void) showCodingView;
 -(void) showLogin;
 

@@ -8,6 +8,11 @@
 
 #import "GitNode.h"
 
+@interface GitNode()
+- (NSString *) appendUrlParamsToString:(NSString *)baseURL;
+@end
+
+
 @implementation GitNode
 
 @synthesize sha, name, fullPath, type, repoName, parentSha, commit, children;
@@ -15,8 +20,10 @@
 - (void) refreshData
 {
     _responseData = [[NSMutableData alloc] init];
-    NSURL *url = [NSURL URLWithString:[self updateURL]];
-    NSLog(@"refresh@%@",[self updateURL]);
+    
+    NSString* urlString = [self appendUrlParamsToString:[self updateURL]];
+    NSLog(@"refresh@%@",urlString);
+    NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     _connection = [[NSURLConnection alloc] initWithRequest:req
                                                   delegate:self
@@ -82,12 +89,15 @@
     }
 }
 
+- (NSString *) appendUrlParamsToString:(NSString *)baseURL
+{
+    return [NSString stringWithFormat:@"%@?token=%@&gitUserName=%@",baseURL, [AppUser currentUser].githubToken, [AppUser currentUser].githubUserName];
+}
 
 // Override methods for the next generation
 - (void)        setValuesFromApiResponse:(NSString *) jsonString {}
 - (void)        setValuesFromDictionary:(NSDictionary *) valueMap {}
 - (NSString*)   updateURL { return nil; }
-
 
 // some constants for the GitNode world
 NSString *const NODE_TYPE_ROOT = @"root";

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SBJSON.h"
+#import "AppUser.h"
 
 @interface GitNode : NSObject
 {

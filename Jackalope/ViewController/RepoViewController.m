@@ -65,11 +65,17 @@ static RepoViewController *_instance = nil;
         }
                 
         rootViewController.title = @"Repo Browser";
-        rootViewController.node  = _rootNode;
         _navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     }    
     
     return _navController;
+}
+
+- (void) showRootNode
+{
+    GitNodeViewController* rootController = [_navController.childViewControllers objectAtIndex:0];
+    rootController.node = _rootNode;
+    [_navController popToRootViewControllerAnimated:YES];
 }
 
 - (void) showNode:(GitNode *) node

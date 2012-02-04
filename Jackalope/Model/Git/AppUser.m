@@ -10,10 +10,9 @@
 
 static AppUser* _instance = nil;
 NSString * const JackalopeGithubTokenPrefKey = @"JackalopeGithubTokenPrefKey";
+NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefKey";
 
 @implementation AppUser
-
-@synthesize user = _user;
 
 + (AppUser *) currentUser
 {
@@ -42,21 +41,25 @@ NSString * const JackalopeGithubTokenPrefKey = @"JackalopeGithubTokenPrefKey";
     
     if (self)
     {
-        NSString* githubToken = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubTokenPrefKey];
+        self.githubToken = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubTokenPrefKey];
+        self.githubUserName = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubUserNamePrefKey];        
         
-        if (githubToken)
-        {
-            User* user = [[User alloc] init]; 
-            user.githubToken = githubToken;
-            self.user = user;
-        }
-        else
-        {
-            _user = nil;
-        }
+        NSLog(@"loading user: %@(%@)", self.githubUserName, self.githubToken);
     }
     
     return self;
+}
+
+-(void) setGithubToken:(NSString *)githubToken
+{
+    [super setGithubToken:githubToken];
+    [[NSUserDefaults standardUserDefaults] setValue:githubToken forKey:JackalopeGithubTokenPrefKey];
+}
+
+-(void) setGithubUserName:(NSString *)githubUserName
+{
+    [super setGithubUserName:githubUserName];
+    [[NSUserDefaults standardUserDefaults] setValue:githubUserName forKey:JackalopeGithubUserNamePrefKey];
 }
 
 @end

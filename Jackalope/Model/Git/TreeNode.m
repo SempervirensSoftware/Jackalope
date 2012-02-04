@@ -65,8 +65,6 @@
             child.fullPath = child.name;
         }
         
-        NSLog(@"child:%@",childType);
-        
         //finally add the new child to the list
         [tempChildren addObject:child];
     }
