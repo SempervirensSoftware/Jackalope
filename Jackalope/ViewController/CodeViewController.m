@@ -24,13 +24,11 @@
 
 #pragma mark - Managing the detail item
 
--(void) showCode:(Code *)code;
+-(void) showBlobNode:(BlobNode *)blob;
 {        
-    if (_code != code) {
-        _code = code;
-        self.title = _code.fileName;
-        _codeView.code = _code;
-    }
+    _blobNode = blob;
+    self.title = blob.name;
+    _codeView.code = [blob createCode];
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
@@ -57,12 +55,8 @@
 
 -(void) commitPressed
 {
-//    NSString *blobContent = _codeView.code.plainText;
-//    
-//    BlobNode *commit = [[BlobNode alloc] initWithBlob:_activeBlob];
-//    commit.blobContent = blobContent;
-//    commit.repoRootSHA = [RepoViewController getInstance].repoRootSHA;
-//    [commit send];
+    _blobNode.fileContent = _codeView.code.plainText;
+    [_blobNode commit];
 }
 
 

@@ -13,6 +13,11 @@
 #import "BlobNode.h"
 #import "AppUser.h"
 
+
+@interface RepoViewController ()
+- (void) showBlob:(BlobNode *)blob;
+@end
+
 static RepoViewController *_instance = nil;
 
 @implementation RepoViewController
@@ -78,7 +83,7 @@ static RepoViewController *_instance = nil;
     [_navController popToRootViewControllerAnimated:YES];
 }
 
-- (void) showNode:(GitNode *) node
+- (void) showNode:(GitNode *)node withParent:(GitNode *)parentNode
 {        
     if ([node.type isEqualToString:NODE_TYPE_BLOB])
     {
@@ -132,13 +137,18 @@ static RepoViewController *_instance = nil;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     BlobNode* blob = (BlobNode *) note.object;    
-    [_codeViewController showCode:[blob createCode]];
+    [_codeViewController showBlobNode:blob];
 }
 -(void) BlobUpdateFailed:(NSNotification*) note
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     BlobNode* blob = (BlobNode *) note.object;    
     [_codeViewController showErrorWithTitle:blob.name andMessage:@"Error loading file"];
+}
+
+- (void) commitCode:(Code*)code inRepo:(RepoNode*)repo
+{
+    
 }
 
 @end

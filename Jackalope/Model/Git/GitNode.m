@@ -15,7 +15,7 @@
 
 @implementation GitNode
 
-@synthesize sha, name, fullPath, type, repoName, parentSha, commit, children;
+@synthesize sha, name, fullPath, type, children;
 
 - (void) refreshData
 {

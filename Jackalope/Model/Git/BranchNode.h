@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TreeNode.h"
+#import "GitNodeProvider.h"
+#import "GitNode.h"
 
-@interface BranchNode : TreeNode
+@interface BranchNode : GitNode
 
-@property (nonatomic, retain) NSString*     rootTreeSHA;
+@property (nonatomic, retain) NSString*             repoName;
+@property (nonatomic, retain) NSString*             headCommitSHA;
+@property (nonatomic, retain) GitNode*              rootTree;
+@property (retain, nonatomic) id<GitNodeProvider>   nodeProvider;
+
+-(void) commitBlobNode:(GitNode*)blob;
 
 @end

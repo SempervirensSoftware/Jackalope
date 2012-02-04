@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TreeNode.h"
+#import "BlobNode.h"
 #import "PTCodeScrollView.h"
 
 @interface CodeViewController : UIViewController <UISplitViewControllerDelegate>
 {
-    Code* _code;
+    BlobNode*   _blobNode;
 }
 
 @property (nonatomic, retain) IBOutlet PTCodeScrollView* codeView;
 
--(void) showCode:(Code *) code;
+-(void) showBlobNode:(BlobNode *)blob;
 -(void) showLoadingWithTitle:(NSString *)titleString;
 -(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message;
 

@@ -24,14 +24,19 @@
     return code;
 }
 
+-(void) commit
+{
+    [self.parentBranch commitBlobNode:self];
+}
+
 -(void) setValuesFromApiResponse:(NSString *)jsonString
 {
-    self.fileContent = jsonString;
+    self.fileContent = jsonString;            
 }
 
 -(NSString *)updateURL
 {
-    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/files/%@.json", self.repoName, self.sha];
+    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/files/%@.json", self.parentBranch.repoName, self.sha];
 }
 
 -(NSString *)type

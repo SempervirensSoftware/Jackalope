@@ -14,6 +14,7 @@
 
 @property (retain, nonatomic) NSString      *fileContent;
 
--(Code *) createCode;
+-(void)     commit;
+-(Code *)   createCode;
 
 @end

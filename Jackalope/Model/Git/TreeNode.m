@@ -11,7 +11,7 @@
 
 @implementation TreeNode
 
-@synthesize nodeProvider;
+@synthesize nodeProvider, parentBranch;
  
 - (void) setValuesFromDictionary:(NSDictionary *) valueMap 
 {
@@ -20,10 +20,6 @@
     }
     if ([valueMap objectForKey:@"path"]){
         self.name = [valueMap objectForKey:@"path"];
-    }
-    if ([valueMap objectForKey:@"commit"])
-    {
-        self.commit = [valueMap objectForKey:@"commit"];
     }
 }
 
@@ -40,24 +36,22 @@
     for (NSDictionary *childHash in childrenHashes) { 
         NSString* childType = [childHash objectForKey:@"type"];
 
-        GitNode* child;
+        TreeNode* child;
         
         if ([childType isEqualToString:NODE_TYPE_TREE])
         {
-            child = [self.nodeProvider getTreeNodeWithSHA:[childHash objectForKey:@"sha"]];
+            child = (TreeNode*)[self.nodeProvider getTreeNodeWithSHA:[childHash objectForKey:@"sha"]];
         }
         else if ([childType isEqualToString:NODE_TYPE_BLOB])
         {
-            child = [self.nodeProvider getBlobNodeWithSHA:[childHash objectForKey:@"sha"]];
+            child = (TreeNode*)[self.nodeProvider getBlobNodeWithSHA:[childHash objectForKey:@"sha"]];
         }
         
         // load all the details we can from the response object
         [child setValuesFromDictionary:childHash];
         
         // add some local context
-        child.parentSha = self.sha;
-        child.commit = self.commit;
-        
+        child.parentBranch = self.parentBranch;        
         if (self.fullPath && self.fullPath.length > 0){
             child.fullPath = [NSString stringWithFormat:@"%@/%@",self.fullPath, child.name];
         }
@@ -74,7 +68,7 @@
 
 -(NSString *)updateURL
 {
-    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree/%@.json", self.repoName, self.sha];
+    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree/%@.json", self.parentBranch.repoName, self.sha];
 }
 
 -(NSString *)type

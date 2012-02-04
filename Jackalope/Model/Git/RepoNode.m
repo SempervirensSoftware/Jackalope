@@ -13,7 +13,7 @@
 
 @implementation RepoNode
 
-@synthesize isPrivate, masterBranch, currentBranch;
+@synthesize isPrivate, masterBranch;
 
 -(void) commonInit
 {
@@ -71,7 +71,6 @@
     {
         node = [[TreeNode alloc] init];
         node.sha = sha;
-        node.repoName = self.name;
         node.nodeProvider = self;
         [_nodeHash setObject:node forKey:sha];
     }
@@ -87,7 +86,6 @@
     {
         node = [[BlobNode alloc] init];
         node.sha = sha;
-        node.repoName = self.name;
         node.nodeProvider = self;
         [_nodeHash setObject:node forKey:sha];
     }
