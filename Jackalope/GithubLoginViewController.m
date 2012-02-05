@@ -36,6 +36,8 @@
 
     NSString* path = request.URL.path;
     NSRange range = [path rangeOfString:@"oauth/success"];
+
+    NSLog(@"navigate@%@", request.URL.absoluteString);
     
     if (range.location != NSIntegerMax)
     {

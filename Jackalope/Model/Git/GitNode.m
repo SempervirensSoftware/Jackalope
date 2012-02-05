@@ -12,10 +12,9 @@
 - (NSString *) appendUrlParamsToString:(NSString *)baseURL;
 @end
 
-
 @implementation GitNode
 
-@synthesize sha, name, fullPath, type, children;
+@synthesize sha, name, fullPath, type, children, operationQueue;
 
 - (void) refreshData
 {

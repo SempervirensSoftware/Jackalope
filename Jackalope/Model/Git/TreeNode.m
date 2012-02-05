@@ -51,7 +51,7 @@
         [child setValuesFromDictionary:childHash];
         
         // add some local context
-        child.parentBranch = self.parentBranch;        
+        child.parentBranch = self.parentBranch;     
         if (self.fullPath && self.fullPath.length > 0){
             child.fullPath = [NSString stringWithFormat:@"%@/%@",self.fullPath, child.name];
         }

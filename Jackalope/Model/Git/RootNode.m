@@ -12,6 +12,17 @@
 
 @implementation RootNode
 
+- (id) init
+{
+    self = [super init];
+    if (self)
+    {
+        self.operationQueue = [[NSOperationQueue alloc] init];
+    }
+    
+    return  self;
+}
+
 - (void) setValuesFromApiResponse:(NSString *) jsonString{
     
     SBJSON *jsonParser = [SBJSON new];
@@ -21,7 +32,8 @@
     
     for (NSDictionary *repoHash in repos) { 
         RepoNode* newNode = [[RepoNode alloc] init];
-        [newNode setValuesFromDictionary:repoHash];
+        newNode.operationQueue = self.operationQueue;
+        [newNode setValuesFromDictionary:repoHash];        
         [tempChildren addObject:newNode];
     }
 

@@ -16,11 +16,12 @@
     NSMutableData *_responseData;
 }
 
-@property (retain, nonatomic)           NSString*     sha;
-@property (retain, nonatomic)           NSString*     name;
-@property (retain, nonatomic)           NSString*     fullPath;
-@property (retain, nonatomic, readonly) NSString*     type;
-@property (retain, nonatomic)           NSArray*      children;
+@property (retain, nonatomic)           NSString*           sha;
+@property (retain, nonatomic)           NSString*           name;
+@property (retain, nonatomic)           NSString*           fullPath;
+@property (retain, nonatomic, readonly) NSString*           type;
+@property (retain, nonatomic)           NSOperationQueue*   operationQueue;
+@property (retain, nonatomic)           NSArray*            children;
 
 - (void)        refreshData;
 

@@ -57,6 +57,7 @@
         [newNode setValuesFromDictionary:branchHash];
         newNode.repoName = self.name;
         newNode.nodeProvider = self;
+        newNode.operationQueue = self.operationQueue;
         [tempChildren addObject:newNode];
     }
     
@@ -72,6 +73,7 @@
         node = [[TreeNode alloc] init];
         node.sha = sha;
         node.nodeProvider = self;
+        node.operationQueue = self.operationQueue;
         [_nodeHash setObject:node forKey:sha];
     }
     
@@ -87,6 +89,7 @@
         node = [[BlobNode alloc] init];
         node.sha = sha;
         node.nodeProvider = self;
+        node.operationQueue = self.operationQueue;
         [_nodeHash setObject:node forKey:sha];
     }
     

@@ -11,6 +11,9 @@
 #import "GitNode.h"
 
 @interface BranchNode : GitNode
+{
+    NSURLConnection* _commitConnection;
+}
 
 @property (nonatomic, retain) NSString*             repoName;
 @property (nonatomic, retain) NSString*             headCommitSHA;
