@@ -49,20 +49,20 @@
                             target:self
                             action:@selector(commitPressed)];
 
-    UIActivityIndicatorView * activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [activityView sizeToFit];
-    [activityView setBackgroundColor:[UIColor blueColor]];
-    [activityView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin 
+    _activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [_activityView sizeToFit];
+    [_activityView setBackgroundColor:[UIColor blueColor]];
+    [_activityView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin 
                                        | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
-    [activityView startAnimating];
-    _activityBtn = [[UIBarButtonItem alloc] initWithCustomView:activityView];
     
+    _activityBtn = [[UIBarButtonItem alloc] initWithCustomView:_activityView];
     
     [self.navigationItem setRightBarButtonItem:_commitBtn];
 }
 
 -(void) commitPressed
 {
+    [_activityView startAnimating];
     [self.navigationItem setRightBarButtonItem:_activityBtn];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; 
@@ -83,6 +83,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];   
     [self.navigationItem setRightBarButtonItem:_commitBtn];
+    [_activityView stopAnimating];
     [[[UIAlertView alloc] initWithTitle:@"Success!"
                                 message:@"Your changes were successfully committed to GitHub" 
                                delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];   
@@ -91,6 +92,7 @@
 -(void)BlobCommitFailed:(NSNotification *)note
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];   
+    [_activityView stopAnimating];
     [self.navigationItem setRightBarButtonItem:_commitBtn];
     [[[UIAlertView alloc] initWithTitle:@"Commit Failed"
                                 message:@"There was a problem committing your changes. Please try again." 

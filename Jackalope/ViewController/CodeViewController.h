@@ -12,8 +12,9 @@
 
 @interface CodeViewController : UIViewController <UISplitViewControllerDelegate>
 {
-    UIBarButtonItem*    _commitBtn;
-    UIBarButtonItem*    _activityBtn;
+    UIBarButtonItem*            _commitBtn;
+    UIActivityIndicatorView*    _activityView;
+    UIBarButtonItem*            _activityBtn;
     
     BlobNode*           _blobNode;
 }
