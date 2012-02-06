@@ -7,12 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GitNodeProvider.h"
+#import "GitNode.h"
 
-@interface RepoNode : GitNode <GitNodeProvider>
-{    
-    NSMutableDictionary*    _nodeHash;        
-}
+@interface RepoNode : GitNode
 
 @property (nonatomic)           BOOL        isPrivate;
 @property (retain, nonatomic)   NSString*   masterBranch;

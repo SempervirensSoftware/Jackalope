@@ -15,20 +15,6 @@
 
 @synthesize isPrivate, masterBranch;
 
--(void) commonInit
-{
-    _nodeHash = [[NSMutableDictionary alloc] init];
-}
-
--(id) init
-{
-    self = [super init];
-    if (self){
-        [self commonInit];
-    }
-    return self;
-}
-
 -(void) setValuesFromDictionary:(NSDictionary *)valueMap
 {
     if ([valueMap objectForKey:@"id"]){
@@ -56,44 +42,11 @@
         BranchNode* newNode = [[BranchNode alloc] init];
         [newNode setValuesFromDictionary:branchHash];
         newNode.repoName = self.name;
-        newNode.nodeProvider = self;
         newNode.operationQueue = self.operationQueue;
         [tempChildren addObject:newNode];
     }
     
     self.children = tempChildren;
-}
-
--(GitNode *) getTreeNodeWithSHA:(NSString *) sha
-{
-    TreeNode* node = [_nodeHash objectForKey:sha];
-
-    if (!node)
-    {
-        node = [[TreeNode alloc] init];
-        node.sha = sha;
-        node.nodeProvider = self;
-        node.operationQueue = self.operationQueue;
-        [_nodeHash setObject:node forKey:sha];
-    }
-    
-    return node;
-}
-
--(GitNode *) getBlobNodeWithSHA:(NSString *) sha
-{
-    BlobNode* node = [_nodeHash objectForKey:sha];
-    
-    if (!node)
-    {
-        node = [[BlobNode alloc] init];
-        node.sha = sha;
-        node.nodeProvider = self;
-        node.operationQueue = self.operationQueue;
-        [_nodeHash setObject:node forKey:sha];
-    }
-    
-    return node;
 }
 
 -(NSString*) updateURL

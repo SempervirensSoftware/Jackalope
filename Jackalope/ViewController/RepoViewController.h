@@ -29,6 +29,4 @@
 - (void) showRootNode;
 - (void) showNode:(GitNode*)node withParent:(GitNode*)parentNode;
 
-- (void) commitCode:(Code*)code inRepo:(RepoNode*)repo;
-
 @end

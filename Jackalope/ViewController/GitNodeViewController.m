@@ -60,9 +60,17 @@
 
 -(void)NodeUpdateSuccess:(NSNotification *)note
 {
-    _isLoading = NO;
-    _isError = NO;
-    [self.tableView reloadData];    
+    if ([self.node.type isEqualToString:NODE_TYPE_REPO] && (self.node.children.count == 1))
+    {
+        // special case to skip this node if it is the only branch in a repo
+        self.node = [self.node.children objectAtIndex:0];
+    }
+    else
+    {    
+        _isLoading = NO;
+        _isError = NO;
+        [self.tableView reloadData];    
+    }
 }
 
 -(void)NodeUpdateFailed:(NSNotification *)note

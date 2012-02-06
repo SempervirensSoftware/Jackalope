@@ -146,9 +146,4 @@ static RepoViewController *_instance = nil;
     [_codeViewController showErrorWithTitle:blob.name andMessage:@"Error loading file"];
 }
 
-- (void) commitCode:(Code*)code inRepo:(RepoNode*)repo
-{
-    
-}
-
 @end

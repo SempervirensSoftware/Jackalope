@@ -10,15 +10,28 @@
 #import "BlobNode.h"
 
 @interface BranchNode ()
-- (NSString *)      appendUrlParamsToString:(NSString *)baseURL; // private method implemented in GitNode
-
+- (void)            setValuesFromCommitResponse:(NSString*)response;
 - (NSURLRequest *)  commitRequestForBlob:(BlobNode*)blob;
 - (NSData *)        commitBodyForBlob:(BlobNode*)blob;
 @end
 
 @implementation BranchNode
 
-@synthesize repoName, nodeProvider, headCommitSHA, rootTree;
+@synthesize repoName, headCommitSHA, rootTree;
+
+-(void) commonInit
+{
+    _nodeHash = [[NSMutableDictionary alloc] init];
+}
+
+-(id) init
+{
+    self = [super init];
+    if (self){
+        [self commonInit];
+    }
+    return self;
+}
 
 -(void) commitBlobNode:(GitNode*)blob
 {
@@ -26,22 +39,29 @@
     [NSURLConnection sendAsynchronousRequest:commitRequest queue:self.operationQueue completionHandler:
      ^(NSURLResponse* response, NSData* data, NSError* error) 
      {
-         UIAlertView* av;
-         
          if (error)
-         {
-             av = [[UIAlertView alloc] initWithTitle:@"Commit Failed"
-                                             message:@"There was a problem committing your changes. Please try again." 
-                                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+         {             
+             NSNotification *note = [NSNotification notificationWithName:NODE_COMMIT_FAILED
+                                                                  object:blob
+                                                                userInfo:nil];
+             
+             [[NSNotificationCenter defaultCenter] postNotification:note];
+             
+             NSLog(@"Error committing %@ : %@", self.fullPath, [error localizedDescription]);
+
          }
          else
          {
-             av = [[UIAlertView alloc] initWithTitle:@"Success!"
-                                             message:@"Your changes were successfully committed to GitHub" 
-                                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-         }
-         
-         [av show];
+             NSString *responseString = [[NSString alloc] initWithData:data
+                                                              encoding:NSUTF8StringEncoding];
+             [self setValuesFromCommitResponse:responseString];
+             
+             NSNotification *note = [NSNotification notificationWithName:NODE_COMMIT_SUCCESS
+                                                                  object:blob
+                                                                userInfo:nil];
+             
+             [[NSNotificationCenter defaultCenter] postNotification:note];             
+         }         
      }];
 }
 
@@ -72,7 +92,57 @@
      
      return [jsonString dataUsingEncoding:NSUTF8StringEncoding];
  }
-  
+
+- (void) setValuesFromCommitResponse:(NSString*)jsonString
+{
+    SBJSON* jsonParser = [SBJSON new];
+    NSDictionary* commitHash = (NSDictionary *) [jsonParser objectWithString:jsonString];
+
+    if ([commitHash objectForKey:@"sha"]){
+        self.headCommitSHA = [commitHash objectForKey:@"sha"];
+
+    }
+    if ([commitHash objectForKey:@"tree"]){
+        NSDictionary* treeHash = [commitHash objectForKey:@"tree"];
+        
+        if ([treeHash objectForKey:@"sha"]){
+            self.rootTree.sha = [treeHash objectForKey:@"sha"];        
+        }
+    }
+}
+
+-(GitNode *) getTreeNodeWithPath:(NSString *)fullNodePath
+{
+    TreeNode* node = [_nodeHash objectForKey:fullNodePath];
+    
+    if (!node)
+    {
+        node = [[TreeNode alloc] init];
+        node.fullPath = fullNodePath;
+        node.parentBranch = self;
+        node.operationQueue = self.operationQueue;
+        [_nodeHash setObject:node forKey:fullNodePath];
+    }
+    
+    return node;
+}
+
+-(GitNode *) getBlobNodeWithPath:(NSString *)fullNodePath
+{
+    BlobNode* node = [_nodeHash objectForKey:fullNodePath];
+    
+    if (!node)
+    {
+        node = [[BlobNode alloc] init];
+        node.fullPath = fullNodePath;
+        node.parentBranch = self;
+        node.operationQueue = self.operationQueue;
+        [_nodeHash setObject:node forKey:fullNodePath];
+    }
+    
+    return node;
+}
+
 -(void) setValuesFromDictionary:(NSDictionary *)valueMap
 {
     if ([valueMap objectForKey:@"name"]){
@@ -88,13 +158,8 @@
 }
 
 -(void) setValuesFromApiResponse:(NSString *)jsonString
-{
-    SBJSON *jsonParser = [SBJSON new];
-    NSDictionary *treeHash = (NSDictionary *) [jsonParser objectWithString:jsonString];
-    
-    TreeNode* rootNode = (TreeNode*)[self.nodeProvider getTreeNodeWithSHA:[treeHash objectForKey:@"sha"]];
-    rootNode.parentBranch = self;
-    rootNode.operationQueue = self.operationQueue;
+{    
+    TreeNode* rootNode = (TreeNode*)[self getTreeNodeWithPath:@""];
     [rootNode setValuesFromApiResponse:jsonString];
     self.rootTree = rootNode;    
 }

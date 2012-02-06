@@ -17,7 +17,8 @@
     self = [super init];
     if (self)
     {
-        self.operationQueue = [[NSOperationQueue alloc] init];
+        self.operationQueue = [NSOperationQueue mainQueue];
+        self.name = @"Repositories";
     }
     
     return  self;

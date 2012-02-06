@@ -44,21 +44,58 @@
     [layer setMasksToBounds:YES];
     [layer setCornerRadius:3];
     
-    UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+    _commitBtn = [[UIBarButtonItem alloc]
                             initWithTitle:@"Commit" style:UIBarButtonItemStyleDone
                             target:self
                             action:@selector(commitPressed)];
-    
-    [self.navigationItem setRightBarButtonItem:bbi];
 
+    UIActivityIndicatorView * activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [activityView sizeToFit];
+    [activityView setBackgroundColor:[UIColor blueColor]];
+    [activityView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin 
+                                       | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
+    [activityView startAnimating];
+    _activityBtn = [[UIBarButtonItem alloc] initWithCustomView:activityView];
+    
+    
+    [self.navigationItem setRightBarButtonItem:_commitBtn];
 }
 
 -(void) commitPressed
 {
+    [self.navigationItem setRightBarButtonItem:_activityBtn];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; 
+    [nc addObserver:self
+           selector:@selector(BlobCommitSuccess:)
+               name:NODE_COMMIT_SUCCESS
+             object:_blobNode];        
+    [nc addObserver:self
+           selector:@selector(BlobCommitFailed:)
+               name:NODE_COMMIT_FAILED
+             object:_blobNode];
+    
     _blobNode.fileContent = _codeView.code.plainText;
     [_blobNode commit];
 }
 
+-(void)BlobCommitSuccess:(NSNotification *)note
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];   
+    [self.navigationItem setRightBarButtonItem:_commitBtn];
+    [[[UIAlertView alloc] initWithTitle:@"Success!"
+                                message:@"Your changes were successfully committed to GitHub" 
+                               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];   
+}
+
+-(void)BlobCommitFailed:(NSNotification *)note
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];   
+    [self.navigationItem setRightBarButtonItem:_commitBtn];
+    [[[UIAlertView alloc] initWithTitle:@"Commit Failed"
+                                message:@"There was a problem committing your changes. Please try again." 
+                               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];    
+}
 
 - (void)didReceiveMemoryWarning
 {

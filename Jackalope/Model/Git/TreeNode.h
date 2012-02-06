@@ -7,12 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GitNodeProvider.h"
 #import "BranchNode.h"
 
 @interface TreeNode : GitNode
 
-@property (retain, nonatomic)   id<GitNodeProvider> nodeProvider;
 @property (retain, nonatomic)   BranchNode*         parentBranch;
 
 @end

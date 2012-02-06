@@ -12,7 +12,10 @@
 
 @interface CodeViewController : UIViewController <UISplitViewControllerDelegate>
 {
-    BlobNode*   _blobNode;
+    UIBarButtonItem*    _commitBtn;
+    UIBarButtonItem*    _activityBtn;
+    
+    BlobNode*           _blobNode;
 }
 
 @property (nonatomic, retain) IBOutlet PTCodeScrollView* codeView;

@@ -11,7 +11,7 @@
 
 @implementation TreeNode
 
-@synthesize nodeProvider, parentBranch;
+@synthesize parentBranch;
  
 - (void) setValuesFromDictionary:(NSDictionary *) valueMap 
 {
@@ -31,33 +31,31 @@
     [self setValuesFromDictionary:treeHash];
     
     NSArray *childrenHashes = (NSArray *) [treeHash objectForKey:@"tree"];
-    NSMutableArray *tempChildren = [[NSMutableArray alloc] init];
+    NSMutableArray *tempChildren = [[NSMutableArray alloc] init];    
+
+    NSString* pathPrefix = @"";
+    if (self.fullPath && self.fullPath.length > 0) { pathPrefix = [NSString stringWithFormat:@"%@/",self.fullPath]; }
     
     for (NSDictionary *childHash in childrenHashes) { 
         NSString* childType = [childHash objectForKey:@"type"];
-
+        NSString* childName = [childHash objectForKey:@"path"];        
+        NSString* childFullPath = [NSString stringWithFormat:@"%@%@",pathPrefix,childName];        
         TreeNode* child;
         
         if ([childType isEqualToString:NODE_TYPE_TREE])
         {
-            child = (TreeNode*)[self.nodeProvider getTreeNodeWithSHA:[childHash objectForKey:@"sha"]];
+            child = (TreeNode*)[self.parentBranch getTreeNodeWithPath:childFullPath];
         }
         else if ([childType isEqualToString:NODE_TYPE_BLOB])
         {
-            child = (TreeNode*)[self.nodeProvider getBlobNodeWithSHA:[childHash objectForKey:@"sha"]];
+            child = (TreeNode*)[self.parentBranch getBlobNodeWithPath:childFullPath];
         }
         
         // load all the details we can from the response object
         [child setValuesFromDictionary:childHash];
         
-        // add some local context
-        child.parentBranch = self.parentBranch;     
-        if (self.fullPath && self.fullPath.length > 0){
-            child.fullPath = [NSString stringWithFormat:@"%@/%@",self.fullPath, child.name];
-        }
-        else{
-            child.fullPath = child.name;
-        }
+        // local context
+        child.fullPath = childFullPath;
         
         //finally add the new child to the list
         [tempChildren addObject:child];

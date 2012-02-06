@@ -7,18 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GitNodeProvider.h"
 #import "GitNode.h"
 
 @interface BranchNode : GitNode
-{
-    NSURLConnection* _commitConnection;
+{    
+    NSMutableDictionary*    _nodeHash;        
 }
 
 @property (nonatomic, retain) NSString*             repoName;
 @property (nonatomic, retain) NSString*             headCommitSHA;
 @property (nonatomic, retain) GitNode*              rootTree;
-@property (retain, nonatomic) id<GitNodeProvider>   nodeProvider;
+
+-(GitNode *) getTreeNodeWithPath:(NSString *) fullPath;
+-(GitNode *) getBlobNodeWithPath:(NSString *) fullPath;
 
 -(void) commitBlobNode:(GitNode*)blob;
 

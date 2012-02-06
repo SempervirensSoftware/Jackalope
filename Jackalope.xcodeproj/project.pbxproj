@@ -163,7 +163,6 @@
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
-		6EB7730E14DBB22D0015FA0A /* GitNodeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitNodeProvider.h; sourceTree = "<group>"; };
 		6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DroidSansMono.ttf; path = ../../../Downloads/DroidSansMono/DroidSansMono.ttf; sourceTree = "<group>"; };
 		6EB90C3214D77C4000B7D378 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -403,7 +402,6 @@
 			children = (
 				6E895F1014DA369800D98866 /* GitNode.h */,
 				6E895F1114DA369800D98866 /* GitNode.m */,
-				6EB7730E14DBB22D0015FA0A /* GitNodeProvider.h */,
 				6EB7730B14DB27E20015FA0A /* RootNode.h */,
 				6EB7730C14DB27E20015FA0A /* RootNode.m */,
 				6E895EFF14D92AE400D98866 /* RepoNode.h */,
