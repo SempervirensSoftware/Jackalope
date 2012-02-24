@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E1EF80A14F6FA91004FEAEE /* VeraMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */; };
 		6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */; };
 		6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */; };
 		6E514C3914D8B507000CBF1B /* NSURL+PTQueryParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */; };
@@ -60,6 +61,10 @@
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
 		6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7730C14DB27E20015FA0A /* RootNode.m */; };
+		6EB8D97614F7506E0079E140 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97214F7506E0079E140 /* libTestFlight.a */; };
+		6EB8D97714F7506F0079E140 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6EB8D97314F7506E0079E140 /* README.txt */; };
+		6EB8D97814F7506F0079E140 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6EB8D97414F7506E0079E140 /* release_notes.txt */; };
+		6EB8D97B14F750CB0079E140 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97A14F750CB0079E140 /* libz.dylib */; };
 		6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */; };
 		6EB90C3414D77C4000B7D378 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3314D77C4000B7D378 /* User.m */; };
 		6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */; };
@@ -77,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VeraMono.ttf; sourceTree = "<group>"; };
 		6E4101AE14D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPad.xib; sourceTree = "<group>"; };
 		6E4101B014D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPhone.xib; sourceTree = "<group>"; };
 		6E514C3714D8B507000CBF1B /* NSURL+PTQueryParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+PTQueryParsing.h"; sourceTree = "<group>"; };
@@ -163,6 +169,12 @@
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
+		6EB8D97214F7506E0079E140 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		6EB8D97314F7506E0079E140 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		6EB8D97414F7506E0079E140 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		6EB8D97514F7506E0079E140 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		6EB8D97A14F750CB0079E140 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6EB8D97E14F77D9A0079E140 /* Jackalope.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jackalope.entitlements; sourceTree = "<group>"; };
 		6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DroidSansMono.ttf; path = ../../../Downloads/DroidSansMono/DroidSansMono.ttf; sourceTree = "<group>"; };
 		6EB90C3214D77C4000B7D378 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -176,11 +188,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB8D97B14F750CB0079E140 /* libz.dylib in Frameworks */,
 				6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */,
 				6E8B051C14D0CA4F00EBC107 /* CoreText.framework in Frameworks */,
 				6E8B04D714D0C47900EBC107 /* UIKit.framework in Frameworks */,
 				6E8B04D914D0C47900EBC107 /* Foundation.framework in Frameworks */,
 				6E8B04DB14D0C47900EBC107 /* CoreGraphics.framework in Frameworks */,
+				6EB8D97614F7506E0079E140 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +257,7 @@
 		6E8B04D514D0C47900EBC107 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EB8D97A14F750CB0079E140 /* libz.dylib */,
 				6E8B059514D0E03E00EBC107 /* QuartzCore.framework */,
 				6E8B051B14D0CA4F00EBC107 /* CoreText.framework */,
 				6E8B04D614D0C47900EBC107 /* UIKit.framework */,
@@ -256,6 +271,7 @@
 		6E8B04DC14D0C47900EBC107 /* Jackalope */ = {
 			isa = PBXGroup;
 			children = (
+				6EB8D97E14F77D9A0079E140 /* Jackalope.entitlements */,
 				6EB90C1114D68B1E00B7D378 /* Assets */,
 				6E8B052814D0CC1F00EBC107 /* Libs */,
 				6E514C2F14D8B2F7000CBF1B /* Categories */,
@@ -311,6 +327,7 @@
 		6E8B052814D0CC1F00EBC107 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				6EB8D97114F7506E0079E140 /* TestFlightSDK0.8.3 */,
 				6E8B052914D0CC1F00EBC107 /* JSON */,
 				6E8B053714D0CC1F00EBC107 /* OHAttributedLabel */,
 			);
@@ -441,6 +458,17 @@
 			path = Editor;
 			sourceTree = "<group>";
 		};
+		6EB8D97114F7506E0079E140 /* TestFlightSDK0.8.3 */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8D97214F7506E0079E140 /* libTestFlight.a */,
+				6EB8D97314F7506E0079E140 /* README.txt */,
+				6EB8D97414F7506E0079E140 /* release_notes.txt */,
+				6EB8D97514F7506E0079E140 /* TestFlight.h */,
+			);
+			path = TestFlightSDK0.8.3;
+			sourceTree = "<group>";
+		};
 		6EB90C1114D68B1E00B7D378 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +481,7 @@
 		6EB90C1314D68B3300B7D378 /* font */ = {
 			isa = PBXGroup;
 			children = (
+				6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */,
 				6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */,
 			);
 			name = font;
@@ -544,6 +573,9 @@
 				6E895F0314D9D07A00D98866 /* jackalope.png in Resources */,
 				6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */,
 				6E895F0B14D9D13A00D98866 /* Icon.png in Resources */,
+				6E1EF80A14F6FA91004FEAEE /* VeraMono.ttf in Resources */,
+				6EB8D97714F7506F0079E140 /* README.txt in Resources */,
+				6EB8D97814F7506F0079E140 /* release_notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +736,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -715,7 +748,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -724,6 +757,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -732,9 +766,14 @@
 		6E8B051214D0C47900EBC107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Jackalope/libs/TestFlightSDK0.8.3\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -743,9 +782,14 @@
 		6E8B051314D0C47900EBC107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Jackalope/libs/TestFlightSDK0.8.3\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

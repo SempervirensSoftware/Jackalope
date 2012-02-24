@@ -48,6 +48,7 @@
                             initWithTitle:@"Commit" style:UIBarButtonItemStyleDone
                             target:self
                             action:@selector(commitPressed)];
+    //_commitBtn.enabled = NO;
 
     _activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
     [_activityView sizeToFit];

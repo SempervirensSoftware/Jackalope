@@ -51,7 +51,7 @@
 
 -(NSString*) updateURL
 {
-    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/branches.json",self.name];
+    return [NSString stringWithFormat:@"%@/repo/%@/branches.json",kServerRootURL,self.name];
 }
 
 -(NSString *)type

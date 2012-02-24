@@ -22,7 +22,7 @@
     
     _initialPageLoad = YES;
         
-    NSURL *url = [NSURL URLWithString:@"http://vivid-stream-9812.heroku.com/oauth/github"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth/github", kServerRootURL]];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];

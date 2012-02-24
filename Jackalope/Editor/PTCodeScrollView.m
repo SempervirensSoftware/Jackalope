@@ -49,7 +49,7 @@
                         options:0
                         error:NULL];
     
-    //self.contentMode = UIViewContentModeRedraw;
+    self.contentMode = UIViewContentModeLeft;
 }
 
 - (id)init {
@@ -110,17 +110,22 @@
     NSInteger   currentIndex = 0;
     NSInteger   currentLineNum = 1;
     CGRect      currentFrame = CGRectMake(0, 2, self.frame.size.width, 12);
-        
-    _codeEditor = [[UIView alloc] initWithFrame:currentFrame];
     
+    _codeEditor = [[UIView alloc] initWithFrame:currentFrame];
+        
     while (currentIndex < fullLength)
     {
+        NSLog(@"layerFrame (%f,%f)", currentFrame.origin.x, currentFrame.origin.y);
+        currentFrame.origin.y = ceilf(currentFrame.origin.y);
+        NSLog(@"layerFrame (%f,%f)", currentFrame.origin.x, currentFrame.origin.y);
+        
         if ((fullLength - currentIndex) < loadSize){
             loadSize = (fullLength - currentIndex);
         }
         
         PTCodeLayer* currentLayer = [[PTCodeLayer alloc] init];
         currentLayer.frame = currentFrame;
+        currentLayer.contentsScale = [UIScreen mainScreen].scale;
         currentLayer.cursorView = _cursorView;
         currentLayer.suggestedLineLimit = 10;
         currentLayer.startingLineNum = currentLineNum;
@@ -141,7 +146,7 @@
 
     // clear out the old views, and add the latest and greatest
     for (UIView* subview in self.subviews) { [subview removeFromSuperview]; }
-    [self addSubview:_codeEditor];    
+    [self addSubview:_codeEditor];   
 }
 
 #pragma mark Custom user interaction
@@ -207,7 +212,7 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    float _leftColumnWidth = 25;
+    float _leftColumnWidth = 28;
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     
@@ -251,7 +256,12 @@
     }
 
     // need to split up the inserted text to accommodate any newline characters
-    __block PTTextPosition* currentPos = [((PTTextPosition*)self.selection.start) copy];
+    __block PTTextPosition* currentPos = [((PTTextPosition*)self.selection.start) copy];    
+    if (!currentPos)
+    {
+        return;
+    }
+    
     NSInteger initLocCount = [_currentLayer.locArray count];
     CGFloat initLayerHeight = _currentLayer.frame.size.height;    
     

@@ -63,7 +63,9 @@
     if ([self.node.type isEqualToString:NODE_TYPE_REPO] && (self.node.children.count == 1))
     {
         // special case to skip this node if it is the only branch in a repo
+        NSString* repoName = self.node.name;
         self.node = [self.node.children objectAtIndex:0];
+        self.title = repoName;
     }
     else
     {    

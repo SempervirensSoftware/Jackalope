@@ -67,7 +67,7 @@
 
 - (NSURLRequest *) commitRequestForBlob:(BlobNode*)blob
  {    
-     NSString* urlString = [self appendUrlParamsToString:[NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/tree",self.repoName]];
+     NSString* urlString = [self appendUrlParamsToString:[NSString stringWithFormat:@"%@/repo/%@/tree",kServerRootURL,self.repoName]];
      NSLog(@"commit@:%@", urlString);
 
      NSURL *url = [NSURL URLWithString:urlString];     
@@ -171,7 +171,7 @@
 
 -(NSString *)updateURL
 {
-    return [NSString stringWithFormat:@"http://vivid-stream-9812.heroku.com/repo/%@/branches/%@.json", self.repoName, self.headCommitSHA];
+    return [NSString stringWithFormat:@"%@/repo/%@/branches/%@.json", kServerRootURL, self.repoName, self.headCommitSHA];
 }
 
 -(NSString *)type

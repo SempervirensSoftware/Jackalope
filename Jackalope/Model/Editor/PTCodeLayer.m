@@ -20,7 +20,7 @@
 /////////////////////////////////////////////////////////////////////////////
 - (void)commonInit
 {    
-    _leftColumnWidth = 25;
+    _leftColumnWidth = 28;
     _leftGutterWidth = 6;
     _leftCodeOffset = _leftColumnWidth + _leftGutterWidth;
     _lineHeight = 0;
@@ -285,7 +285,21 @@
     if (currentLine != NULL)
     {
         CTLineGetTypographicBounds(currentLine, &_ascent, &_descent, &_leading);
+        
+
         _lineHeight = (_ascent+_descent+_leading);        
+        NSLog(@"initHeight: %f", _lineHeight);        
+        _lineHeight = ceilf(_ascent+_descent+_leading);        
+        NSLog(@"ceilHeight: %f", _lineHeight);
+        
+        NSLog(@"(%f,%f,%f)", _ascent, _descent, _leading);
+        _ascent = ceilf(_ascent);
+        _descent = ceilf(_descent);
+        _leading = ceilf(_leading);
+        NSLog(@"(%f,%f,%f)", _ascent, _descent, _leading);
+        
+        _lineHeight = (_ascent+_descent+_leading);        
+        NSLog(@"finalHeight: %f", _lineHeight);
     }    
     
     CGRect codeFrame = self.frame;
@@ -303,85 +317,81 @@
 -(void)drawInContext:(CGContextRef)ctx{             
     CGContextSaveGState(ctx);
     
+    NSLog(@"origin: (%f,%f)", self.bounds.origin.x, self.bounds.origin.y);
+    NSLog(@"size: (%f,%f)", self.bounds.size.width, self.bounds.size.height);
+    
     CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
     CGContextTranslateCTM(ctx, 0, self.bounds.size.height);
-    CGContextScaleCTM(ctx, 1.0, -1.0);                
-    
-    CFTypeID lineType = CTLineGetTypeID();
-    CFTypeID arrayType = CFArrayGetTypeID();
+    CGContextScaleCTM(ctx, 1.0, -1.0);   
     
     CGFloat y = self.bounds.origin.y;
     y += self.bounds.size.height; // CoreText draws bottom up so wee need to set the drawing point at the bottom of the layer
     y -= (_lineHeight - _descent); // Lineheight-descent calculates the text baseline, which is where CoreText expects to start drawing
     
-    CGRect leftColumnRect = {self.frame.origin.x, self.frame.origin.y, _leftColumnWidth, self.frame.size.height};
-    CGContextSetRGBFillColor(ctx, 220/255.f, 220/255.f, 220/255.f, 1);
-    CGContextFillRect(ctx, leftColumnRect);        
-    
-    CGRect leftColumnBorder = {(self.frame.origin.x + _leftColumnWidth), self.bounds.origin.y, 1, self.frame.size.height};
-    CGContextSetRGBFillColor(ctx, 140/255.f, 140/255.f, 140/255.f, 1);
-    CGContextFillRect(ctx, leftColumnBorder);        
+//    CGRect leftColumnRect = {self.frame.origin.x, self.frame.origin.y, _leftColumnWidth, self.frame.size.height};
+//    CGContextSetRGBFillColor(ctx, 220/255.f, 220/255.f, 220/255.f, 1);
+//    CGContextFillRect(ctx, leftColumnRect);        
+//    
+//    CGRect leftColumnBorder = {(self.frame.origin.x + _leftColumnWidth), self.bounds.origin.y, 1, self.frame.size.height};
+//    CGContextSetRGBFillColor(ctx, 140/255.f, 140/255.f, 140/255.f, 1);
+//    CGContextFillRect(ctx, leftColumnBorder);        
     
     long int lineIndex = 0;
     for (LineOfCode* loc in _locArray)
     {                    
         // line number setup
         NSMutableAttributedString* nsNumString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",(lineIndex+_startingLineNum)]] mutableCopy];
-        [nsNumString setFont:[UIFont fontWithName:@"Courier" size:10]];
+        [nsNumString setFont:[UIFont fontWithName:@"DroidSansMono" size:13]];
         [nsNumString setTextColor:[UIColor colorWithRed:112/255.f green:112/255.f blue:112/255.f alpha:1]];
         CFAttributedStringRef lineNumString = (__bridge CFAttributedStringRef)nsNumString;        
         CTLineRef gutterLine = CTLineCreateWithAttributedString(lineNumString);
-        float a,d,l;
-        double width = CTLineGetTypographicBounds(gutterLine,&a,&d,&l);
         
-        CFTypeRef lineRef = loc.lineRef;    
-        CFTypeID id = CFGetTypeID(lineRef);            
+        CFTypeRef lineRef = loc.lineRef;              
         
         // single display line
-        if (lineRef != NULL && id == lineType)
+        if (lineRef != NULL && loc.numDisplayLines > 0)
         {                                
-            CGContextSetTextPosition(ctx, (self.bounds.origin.x + (_leftColumnWidth - width - 2)), y+0.5);
+            CTLineRef codeLine;
+            
+            if (loc.numDisplayLines < 2)
+            {
+                codeLine = lineRef;
+            }
+            else
+            {
+                codeLine = (CTLineRef)CFArrayGetValueAtIndex((CFArrayRef)lineRef, 0);
+            }
+            
+            float   gA,gD,gL;
+            double  gWidth = CTLineGetTypographicBounds(gutterLine,&gA,&gD,&gL);
+            float   cA, cD, cL;
+            CTLineGetTypographicBounds(codeLine,&cA,&cD,&cL);
+            float   lineNumYOffset = floorf( ((cA+cD+cL)-(gA+gD+gL)) /2 );
+            NSLog(@"yOffset:%f", lineNumYOffset);
+            
+            CGContextSetTextPosition(ctx, roundf(self.bounds.origin.x + (_leftColumnWidth - gWidth - 2)), y + 0);
             CTLineDraw(gutterLine, ctx);
             CFRelease(gutterLine);
             
-            CGContextSetTextPosition(ctx, (self.bounds.origin.x + _leftCodeOffset), y);
-            CTLineDraw((CTLineRef)lineRef, ctx);
+            CGContextSetTextPosition(ctx, (self.bounds.origin.x + _leftCodeOffset), y);            
+            CTLineDraw((CTLineRef)codeLine, ctx);
             loc.displayRect = CGRectMake(self.bounds.origin.x, ((self.bounds.size.height-y) - _lineHeight), self.bounds.size.width, _lineHeight);
             
             y -= _lineHeight;
         }
         
         // multiple display lines for this single line of code
-        else if (lineRef != NULL && id == arrayType)
+        if (lineRef != NULL && loc.numDisplayLines > 1)
         {
-            CFIndex lineCount = CFArrayGetCount((CFArrayRef)lineRef);
-            
-            // draw the first line with the line number
-            if (lineCount > 0)
+            for (int wrapIndex = 1; wrapIndex < loc.numDisplayLines; wrapIndex++)
             {
-                CGContextSetTextPosition(ctx, (self.bounds.origin.x + (_leftColumnWidth - width - 2 )), y-(_lineHeight - (a+d))/2);
-                CTLineDraw(gutterLine, ctx);
-                CFRelease(gutterLine);
-                
                 CGContextSetTextPosition(ctx, (self.bounds.origin.x + _leftCodeOffset), y);
-                CTLineDraw((CTLineRef)CFArrayGetValueAtIndex((CFArrayRef)lineRef, 0), ctx);
-                loc.displayRect = CGRectMake(self.bounds.origin.x, ((self.bounds.size.height-y) - _lineHeight), self.bounds.size.width, _lineHeight);
+                CTLineDraw((CTLineRef)CFArrayGetValueAtIndex((CFArrayRef)lineRef, wrapIndex), ctx);
+                loc.displayRect = CGRectMake(loc.displayRect.origin.x, loc.displayRect.origin.y, loc.displayRect.size.width, (loc.displayRect.size.height+_lineHeight));
                 
                 y -= _lineHeight;
             }
             
-            // draw the remainder of the display lines without a line number
-            if (lineCount > 1)
-            {                    
-                for (int wrapIndex = 1; wrapIndex < lineCount; wrapIndex++)
-                {
-                    CGContextSetTextPosition(ctx, (self.bounds.origin.x + _leftCodeOffset), y);
-                    CTLineDraw((CTLineRef)CFArrayGetValueAtIndex((CFArrayRef)lineRef, wrapIndex), ctx);
-                    loc.displayRect = CGRectMake(loc.displayRect.origin.x, loc.displayRect.origin.y, loc.displayRect.size.width, (loc.displayRect.size.height+_lineHeight));
-                    
-                    y -= _lineHeight;
-                }
-            }
         }
         
         
@@ -467,6 +477,11 @@
 
 -(CGRect) createCursorRectForPosition:(PTTextPosition*)pos
 {        
+    if (!pos || !pos.loc || pos.index == NSUIntegerMax)
+    {
+        return CGRectMake(0, 0, 1, 11);
+    }
+    
     LineOfCode* loc = pos.loc;
     NSInteger actualIndex = (pos.index + loc.startIndexAtTypesetting);
     CGFloat xOffset = 0.0;

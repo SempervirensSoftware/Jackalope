@@ -53,6 +53,4 @@
 -(void)layoutLoc:(LineOfCode*)loc;
 -(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(LineOfCode*) updatedLoc;
 
-
-
 @end

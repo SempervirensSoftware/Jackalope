@@ -94,7 +94,7 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
 
     NSString *plainText = [code string];
     processingAttributedString = [code mutableCopy];
-    [processingAttributedString setFont:[UIFont fontWithName:@"DroidSansMono" size:12]];
+    [processingAttributedString setFont:[UIFont fontWithName:@"DroidSansMono" size:14]];
     
     for (NSDictionary* decoration in _decorations)
     {

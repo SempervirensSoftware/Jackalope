@@ -24,6 +24,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [TestFlight takeOff:@"18ab5f338e897f1dd26b820d861ca021_NjAxODYyMDEyLTAyLTIzIDIzOjUzOjMyLjUzNTQwNQ"];
+    
     CodeViewController *codeViewController;
     UINavigationController *repoNavController = [RepoViewController getInstance].navController;        
     
