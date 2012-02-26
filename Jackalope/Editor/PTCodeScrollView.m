@@ -16,10 +16,31 @@
 // We use a tap gesture recognizer to allow the user to tap to invoke text edit mode
 @interface PTCodeScrollView() <UIGestureRecognizerDelegate>
 
-- (void)tap:(UITapGestureRecognizer *)tap;
+- (void) tap:(UITapGestureRecognizer *)tap;
+- (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer  withPriorityLength:(float)priorityLength;
 
 @end
 
+
+/////////////////////////////////////////////////////////////////////////////
+// MARK: - Async Operations
+/////////////////////////////////////////////////////////////////////////////
+@interface AsyncShiftLayerOperation : NSOperation
+    {
+        PTCodeScrollView*   _scrollView;
+        PTCodeLayer*        _updatedLayer;
+        float               _deltaY;
+        NSInteger           _deltaLineNums;
+    }
+
+    -(id)initWithScrollView:        (PTCodeScrollView *)scrollView updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;
+    +(id)operationWithScrollView:   (PTCodeScrollView *)scrollView updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;
+@end
+
+
+/////////////////////////////////////////////////////////////////////////////
+// MARK: - PTCodeScrollView
+/////////////////////////////////////////////////////////////////////////////
 
 @implementation PTCodeScrollView
 
@@ -42,12 +63,16 @@
     _newlineCharSet = [NSCharacterSet newlineCharacterSet];
     _layerArray = [[NSMutableArray alloc] initWithCapacity:1];
     _cursorView = [[PTCursorView alloc] init];
+
     _maxFrameSize = 50;
+    _numberOfScreensToBuffer = 3;
     
     _whiteSpaceRegex = [NSRegularExpression 
                         regularExpressionWithPattern:@"^[\t ]*"
                         options:0
                         error:NULL];
+    
+    _operationQueue = [[NSOperationQueue alloc] init];
     
     self.contentMode = UIViewContentModeLeft;
 }
@@ -320,7 +345,7 @@
     
     NSInteger deltaLocCount = ([_currentLayer.locArray count] - initLocCount);
     CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - initLayerHeight);
-    [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:deltaLocCount startingAtLayer:_currentLayer];
+    [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:deltaLocCount startingAfterLayer:_currentLayer];
 }
 
 // UIKeyInput required method - Delete a character from the displayed text.
@@ -340,8 +365,8 @@
         currentPos.loc.attributedText = (__bridge CFAttributedStringRef)[_decorator decorateString:lineString];
         [_currentLayer updateLine:currentPos.loc];
         
-        CGFloat deltaHeight = (_currentLayer.frame.size.height - oldHeight);
-        [self updateLayersByYOffset:deltaHeight andLineNumOffset:0 startingAtLayer:_currentLayer];
+        CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);        
+        [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:0 startingAfterLayer:_currentLayer];
         
         currentPos.index -= 1;
         _currentLayer.selection = self.selection;
@@ -359,8 +384,9 @@
         if (locIndex > 0){
             CGFloat oldHeight = _currentLayer.frame.size.height;
             [_currentLayer removeLine:oldLoc];
-            CGFloat deltaHeight = (_currentLayer.frame.size.height - oldHeight);
-            [self updateLayersByYOffset:deltaHeight andLineNumOffset:(-1) startingAtLayer:_currentLayer];
+
+            CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);            
+            [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:(-1) startingAfterLayer:_currentLayer];
 
             newLoc = [currentLocArray objectAtIndex:(locIndex-1)];
 
@@ -375,8 +401,9 @@
             {
                 CGFloat oldHeight = _currentLayer.frame.size.height;                
                 [_currentLayer removeLine:oldLoc];
-                CGFloat deltaHeight = (_currentLayer.frame.size.height - oldHeight);
-                [self updateLayersByYOffset:deltaHeight andLineNumOffset:(-1) startingAtLayer:_currentLayer];
+
+                CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);                
+                [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:(-1) startingAfterLayer:_currentLayer];
                 
                 _currentLayer = [_layerArray objectAtIndex:(currentLayerIndex-1)];
                 newLoc = _currentLayer.locArray.lastObject;
@@ -441,13 +468,37 @@
     self.scrollIndicatorInsets = contentInsets;
 }
 
--(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAtLayer:(PTCodeLayer*) updatedLayer;
+- (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;
+{
+    if (deltaY != 0)
+    {
+        self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height+deltaY);
+    }
+    
+    [self updateLayersByYOffset:deltaY andLineNumOffset:deltaLineNums startingAfterLayer:updatedLayer withPriorityLength:(self.frame.size.height * _numberOfScreensToBuffer)];
+}
+
+- (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer withPriorityLength:(float)priorityLength
 {
     if (updatedLayer && (deltaY != 0 || deltaLineNums != 0))
     {
-        BOOL startShiftingLayers = NO;
+        BOOL    startShiftingLayers = NO;
+        int     prevLayerIndex = -1;
+        float   currentUpdateLength = 0.f;
+        
         for (PTCodeLayer* layer in _layerArray)
-        {
+        {            
+            if (priorityLength > 0 && currentUpdateLength >= priorityLength)
+            {
+                if (prevLayerIndex >= 0)
+                {
+                    PTCodeLayer* prevLayer = [_layerArray objectAtIndex:prevLayerIndex];
+                    [_operationQueue addOperation:[AsyncShiftLayerOperation operationWithScrollView:self updateLayersByYOffset:deltaY andLineNumOffset:deltaLineNums startingAfterLayer:prevLayer]];
+                }
+                
+                return;
+            }
+            
             if (layer == updatedLayer)
             {
                 startShiftingLayers = YES;
@@ -468,16 +519,53 @@
                 
                 //draw all the layers for now. will want to the non-visible ones asynchronously in the 'future'
                 [layer setNeedsDisplay];
+                
+                currentUpdateLength += layer.frame.size.height;
             }
+            
+            prevLayerIndex++;   
         }
     }
-    
-    // have to update the scroll view size as well
-    if (deltaY != 0)
-    {
-        self.contentSize = CGSizeMake(self.contentSize.width, self.contentSize.height+deltaY);
-    }
-
 }
 
 @end
+
+/////////////////////////////////////////////////////////////////////////////
+// MARK: - Async Operations
+/////////////////////////////////////////////////////////////////////////////
+@implementation AsyncShiftLayerOperation
+
+-(id)init
+{
+	// Can only create instance with scroll view and data
+	[NSException raise:NSInternalInconsistencyException format:@"%@: must be initialized with a scroll view and data", NSStringFromClass([self class])];
+	return nil;
+}
+
+-(id)initWithScrollView:(PTCodeScrollView *)scrollView updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer
+{
+    self = [super init];
+    if (self) {
+        _scrollView = scrollView;
+        _deltaY = deltaY;
+        _deltaLineNums = deltaLineNums;
+        _updatedLayer = updatedLayer;
+    }
+    return self;
+}
+
++(id)operationWithScrollView:(PTCodeScrollView *)scrollView updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer
+{
+    return [[self alloc] initWithScrollView:scrollView updateLayersByYOffset:deltaY andLineNumOffset:deltaLineNums startingAfterLayer:updatedLayer];
+}
+
+-(void)main
+{
+    [_scrollView updateLayersByYOffset:_deltaY andLineNumOffset:_deltaLineNums startingAfterLayer:_updatedLayer withPriorityLength:0];
+}
+
+@end
+
+
+
+

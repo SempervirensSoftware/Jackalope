@@ -200,7 +200,7 @@
     
     if (!attrCode)
     {
-        // if there is no code to lay out so you don't gotta do nothing
+        // there is no code to lay out so you don't gotta do nothing
         return 0;
     }
     

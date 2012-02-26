@@ -22,9 +22,12 @@
             PTCodeLayer*        _currentLayer;  
     
     int                         _maxFrameSize;
+    int                         _numberOfScreensToBuffer;
     
     NSCharacterSet*             _newlineCharSet;
     NSRegularExpression*        _whiteSpaceRegex;
+    
+    NSOperationQueue*           _operationQueue; // for rendering layers on a seperate thread
 }
 
 @property (nonatomic, retain) PTTextRange* selection;
@@ -36,6 +39,6 @@
 
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;
 -(void) setSelectionAtPoint:(CGPoint)point;
--(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAtLayer:(PTCodeLayer*) updatedLayer;
+-(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;
 
 @end
