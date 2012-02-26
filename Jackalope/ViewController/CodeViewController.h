@@ -19,7 +19,9 @@
     BlobNode*           _blobNode;
 }
 
-@property (nonatomic, retain) IBOutlet PTCodeScrollView* codeView;
+@property (nonatomic, retain) IBOutlet PTCodeScrollView*        codeView;
+@property (nonatomic, retain) IBOutlet UILabel*                 loadingLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* loadingActivityIndicator;
 
 -(void) showBlobNode:(BlobNode *)blob;
 -(void) showLoadingWithTitle:(NSString *)titleString;

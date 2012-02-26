@@ -21,6 +21,7 @@
 
 @synthesize codeView = _codeView;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize loadingLabel, loadingActivityIndicator;
 
 #pragma mark - Managing the detail item
 
@@ -30,13 +31,32 @@
     self.title = blob.name;
     _codeView.code = [blob createCode];
 
+    self.loadingLabel.hidden = YES;
+    self.loadingActivityIndicator.hidden = YES;
+    self.codeView.hidden = NO;
+    [self.loadingActivityIndicator stopAnimating];
+    
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
     }        
 }
 
--(void) showLoadingWithTitle:(NSString *)titleString {}
--(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message {}
+-(void) showLoadingWithTitle:(NSString *)titleString 
+{
+    self.title = titleString;
+    
+    self.codeView.hidden = YES;
+    self.loadingLabel.hidden = NO;
+    self.loadingActivityIndicator.hidden = NO;
+    [self.loadingActivityIndicator startAnimating];
+}
+-(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message {
+    self.title = titleString;
+    self.codeView.hidden = YES;
+    self.loadingLabel.hidden = YES;
+    self.loadingActivityIndicator.hidden = YES;
+    [self.loadingActivityIndicator stopAnimating];
+}
 
 - (void)configureView
 {
