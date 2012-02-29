@@ -12,6 +12,7 @@
 @interface DecoratorCollection : NSObject
 {
     NSMutableDictionary*    _decoratorsForExtension;
+    NSMutableDictionary*    _defaultTheme;
     CodeDecorator*          _defaultDecorator;
 }
 

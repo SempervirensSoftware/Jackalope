@@ -12,6 +12,7 @@
 @implementation CodeDecorator
 
 @synthesize name = _name;
+@synthesize theme = _theme;
 @synthesize extensions = _extensions;
 
 // setup a reference type for the anonymous decoration blocks
@@ -31,20 +32,22 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
     return self;
 }
 
--(id) initFromDictionary:(NSDictionary *)dict
+-(id) initFromDictionary:(NSDictionary *)dict andTheme:(NSMutableDictionary *)initTheme
 {
     self = [super init];
     
     if (self && dict){
+        _theme = initTheme;
         _name = [dict objectForKey:@"name"];
         _extensions = [dict objectForKey:@"ext"];
         _decorations = [[NSMutableArray alloc] init];
       
-        NSError *error = nil;
-        NSRegularExpression *tempRegex;
-        DecoratorBlock tempBlock;
-        NSDictionary *tempStyle;
-        NSDictionary *finalUnit;
+        NSError*                error = nil;
+        NSRegularExpression*    tempRegex;
+        DecoratorBlock          tempBlock;
+        NSString*               tempStyleName;
+        UIColor*                tempColor;
+        NSDictionary*           finalUnit;
         
         NSArray *decorations = [dict objectForKey:@"decorations"];        
         for (NSDictionary* decoration in decorations)
@@ -54,14 +57,12 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
                                  options:0
                                  error:&error];
             
-            tempStyle = [decoration objectForKey:@"style"];
-            UIColor *tempColor = [CodeDecorator colorForHexString:[tempStyle objectForKey:@"color"]];
-            //BOOL tempBold =  [[tempStyle objectForKey:@"bold"] boolValue];
+            tempStyleName   = [decoration objectForKey:@"name"];
+            tempColor       = [CodeDecorator colorForHexString:[_theme objectForKey:tempStyleName]];
             
             tempBlock = ^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){                
                 NSRange matchRange = [match range];
                 [processingAttributedString setTextColor:tempColor range:matchRange];
-                //[processingAttributedString setTextBold:tempBold range:matchRange];                    
             };
             
             finalUnit = [NSDictionary dictionaryWithObjectsAndKeys:tempRegex,@"regex", tempBlock, @"block",nil];

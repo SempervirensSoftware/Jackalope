@@ -13,6 +13,20 @@ static DecoratorCollection *_instance = nil;
 
 @implementation DecoratorCollection
 
+-(void) hardcodeTheme
+{
+    [_defaultTheme setValue:@"0x0000FF" forKey:@"keyword"];
+    [_defaultTheme setValue:@"0xC5060B" forKey:@"constant"];
+    [_defaultTheme setValue:@"0x318495" forKey:@"variable"];
+    [_defaultTheme setValue:@"0x036A07" forKey:@"string"];
+    [_defaultTheme setValue:@"0x0000A2" forKey:@"entity"];
+    [_defaultTheme setValue:@"0x6D79DE" forKey:@"support.type"];  
+    [_defaultTheme setValue:@"0x06960E" forKey:@"support.constant"];  
+    [_defaultTheme setValue:@"0x3C4C72" forKey:@"support.function"];    
+    [_defaultTheme setValue:@"0x585CF6" forKey:@"constant.language"];    
+    [_defaultTheme setValue:@"0x318495" forKey:@"variable.language"];  
+}
+
 + (DecoratorCollection *) getInstance
 {
     if (!_instance) {
@@ -42,8 +56,11 @@ static DecoratorCollection *_instance = nil;
     {
         _defaultDecorator = [[CodeDecorator alloc] init];
         
+        _defaultTheme = [[NSMutableDictionary alloc] init];        
+        [self hardcodeTheme];
+        
         // load the JSON from bundle 
-        NSString *jsonString = nil;
+        NSString *jsonString = nil; 
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"decorations" ofType:@"json"];  
         if (filePath) {  
            jsonString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];  
@@ -66,10 +83,6 @@ static DecoratorCollection *_instance = nil;
                 }
             }            
         }
-        else
-        {
-            _decoratorsForExtension = nil;
-        }
     }
     
     return self;
@@ -79,7 +92,7 @@ static DecoratorCollection *_instance = nil;
 
     //TODO: parse filename and get real extension
     // For now hardcode to ruby because that's all I have ;)
-    NSString *ext = @".rb";
+    NSString *ext = [filename pathExtension];
     id decorator = [_decoratorsForExtension objectForKey:ext];
  
     if (decorator == nil)
@@ -90,7 +103,7 @@ static DecoratorCollection *_instance = nil;
         return decorator;
     }
     else if ([decorator isKindOfClass:[NSDictionary class]]){
-        CodeDecorator *newDecorator = [[CodeDecorator alloc] initFromDictionary:decorator];
+        CodeDecorator *newDecorator = [[CodeDecorator alloc] initFromDictionary:decorator andTheme:_defaultTheme];
         for (NSString* tempExt in [newDecorator extensions]){
             [_decoratorsForExtension setValue:newDecorator forKey:tempExt];
         }

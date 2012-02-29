@@ -10,19 +10,20 @@
 
 @interface CodeDecorator : NSObject
 {
-    NSMutableArray* _decorations;
-    __block NSMutableAttributedString *processingAttributedString;
-    NSError* _regexError;
+            NSMutableArray*                 _decorations;
+            NSError*                        _regexError;
+    __block NSMutableAttributedString*      processingAttributedString;
 }
 
--(id) initFromDictionary:(NSDictionary *)dict;
+-(id) initFromDictionary:(NSDictionary *)dict andTheme:(NSMutableDictionary *)initTheme;
 
 -(NSAttributedString *) decorateString:(NSString *)code;
 -(NSAttributedString *) decorateAttributedString:(NSAttributedString *)code;
 
 +(UIColor *) colorForHexString:(NSString *)hexString;
 
-@property (strong, nonatomic, readonly) NSString *name;
-@property (strong, nonatomic, readonly) NSArray *extensions;
+@property (strong, nonatomic, readonly) NSString*        name;
+@property (strong, nonatomic, readonly) NSArray*         extensions;
+@property (strong, nonatomic)           NSDictionary*    theme;
 
 @end
