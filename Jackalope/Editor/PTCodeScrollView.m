@@ -60,12 +60,14 @@
     
     [self registerForKeyboardNotifications];
     
+    _keyboardRect = CGRectNull;
     _newlineCharSet = [NSCharacterSet newlineCharacterSet];
     _layerArray = [[NSMutableArray alloc] initWithCapacity:1];
     _cursorView = [[PTCursorView alloc] init];
 
-    _maxFrameSize = 50;
-    _numberOfScreensToBuffer = 3;
+    _maxFrameSize               = 50;
+    _numberOfScreensToBuffer    = 3;
+    _numberOfExtraScrollLines   = 2;
     
     _whiteSpaceRegex = [NSRegularExpression 
                         regularExpressionWithPattern:@"^[\t ]*"
@@ -140,9 +142,7 @@
         
     while (currentIndex < fullLength)
     {
-        NSLog(@"layerFrame (%f,%f)", currentFrame.origin.x, currentFrame.origin.y);
         currentFrame.origin.y = ceilf(currentFrame.origin.y);
-        NSLog(@"layerFrame (%f,%f)", currentFrame.origin.x, currentFrame.origin.y);
         
         if ((fullLength - currentIndex) < loadSize){
             loadSize = (fullLength - currentIndex);
@@ -341,6 +341,7 @@
     if (moveCursor){
         self.selection = [[PTTextRange alloc] initWithStartPosition:currentPos andEndPosition:currentPos];
         _currentLayer.selection = self.selection;
+        [self scrollToCursor];
     }
     
     NSInteger deltaLocCount = ([_currentLayer.locArray count] - initLocCount);
@@ -421,6 +422,7 @@
         }
     }
     
+    [self scrollToCursor];
 }
 
 
@@ -440,32 +442,52 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0); 
+    CGRect kbRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    _keyboardRect = [self convertRect:kbRect toView:nil];
+    
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, _keyboardRect.size.height, 0.0); 
     self.contentInset = contentInsets;
     self.scrollIndicatorInsets = contentInsets;
-        
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your application might not need or want this behavior.
-    CGRect displayRect = self.frame;
-    displayRect.size.height -= kbSize.height;  
-    
-    CGRect cursorRect = _cursorView.frame;
-    cursorRect.origin.y += _currentLayer.frame.origin.y;
-    
-    if (!CGRectContainsPoint(displayRect, cursorRect.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, cursorRect.origin.y-kbSize.height);
-        [self setContentOffset:scrollPoint animated:YES];
-    }    
-}
 
+    [self scrollToCursor];
+    NSLog(@"beginEdit");
+    [TestFlight passCheckpoint:@"BeginEdit"];
+}
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
+    _keyboardRect = CGRectNull;
+    
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.contentInset = contentInsets;
     self.scrollIndicatorInsets = contentInsets;
+    NSLog(@"endEdit");
+    [TestFlight passCheckpoint:@"EndEdit"];
+}
+
+// If the cursor is hidden by keyboard, scroll so that it is visible with a few extra lines
+-(void) scrollToCursor
+{
+    if (!CGRectIsNull(_keyboardRect)) {
+
+        CGRect displayRect = self.frame;
+        displayRect.origin.y += self.contentOffset.y;
+        displayRect.size.height -= _keyboardRect.size.height;  
+        
+        CGRect cursorRect = _cursorView.frame;
+        cursorRect = [self convertRect:cursorRect toView:self];
+        cursorRect.origin.y += _currentLayer.frame.origin.y;
+        // enlarge the 'cursor' rect to make sure we have a couple lines visible on each side
+        cursorRect.origin.y -= (cursorRect.size.height * _numberOfExtraScrollLines);
+        cursorRect.size.height += (cursorRect.size.height * (_numberOfExtraScrollLines*2));        
+        
+        if (!CGRectContainsRect(displayRect, cursorRect)) {
+            [self scrollRectToVisible:cursorRect animated:YES];
+        }
+
+    }
 }
 
 - (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;

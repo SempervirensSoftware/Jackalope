@@ -44,7 +44,8 @@ NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefK
         self.githubToken = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubTokenPrefKey];
         self.githubUserName = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubUserNamePrefKey];        
         
-        NSLog(@"loading user: %@(%@)", self.githubUserName, self.githubToken);
+        NSLog(@"loadUser: %@(%@)", self.githubUserName, self.githubToken);
+        [TestFlight passCheckpoint:@"AutoLogin"];
     }
     
     return self;

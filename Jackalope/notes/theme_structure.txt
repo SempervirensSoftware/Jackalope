@@ -1,0 +1,28 @@
+comment
+keyword, storage
+constant.numeric
+constant
+constant.language
+variable.language, variable.other
+string
+constant.character.escape, string source
+keyword.control.import
+entity.name.function, support.function.any-method
+entity.name.type
+support.function
+support.class, support.type
+support.constant
+support.variable
+invalid
+text source, string.unquoted
+
+Common:
+Plain Text
+Comment
+Keyword
+Number
+Variable
+String
+Function name
+Type name
+Preprocessor directive

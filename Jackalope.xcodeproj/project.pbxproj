@@ -52,7 +52,6 @@
 		6E8B057D14D0DD0900EBC107 /* BlobNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057314D0DD0900EBC107 /* BlobNode.m */; };
 		6E8B057F14D0DD0900EBC107 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057714D0DD0900EBC107 /* TreeNode.m */; };
 		6E8B058714D0DD3100EBC107 /* CodeDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058214D0DD3100EBC107 /* CodeDecorator.m */; };
-		6E8B058814D0DD3100EBC107 /* decoration_schema.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B058314D0DD3100EBC107 /* decoration_schema.txt */; };
 		6E8B058914D0DD3100EBC107 /* decorations.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B058414D0DD3100EBC107 /* decorations.json */; };
 		6E8B058A14D0DD3100EBC107 /* DecoratorCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */; };
 		6E8B059014D0DDC300EBC107 /* PTCodeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058D14D0DDC300EBC107 /* PTCodeScrollView.m */; };
@@ -60,6 +59,7 @@
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
 		6EA61F5B14FA25A200A36228 /* blacktocat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA61F5A14FA25A200A36228 /* blacktocat.png */; };
+		6EB1898114FEF72E00B17DF9 /* IconIPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB1898014FEF72E00B17DF9 /* IconIPad.png */; };
 		6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7730C14DB27E20015FA0A /* RootNode.m */; };
 		6EB8D97614F7506E0079E140 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97214F7506E0079E140 /* libTestFlight.a */; };
 		6EB8D97714F7506F0079E140 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6EB8D97314F7506E0079E140 /* README.txt */; };
@@ -155,7 +155,6 @@
 		6E8B057714D0DD0900EBC107 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeNode.m; sourceTree = "<group>"; };
 		6E8B058114D0DD3100EBC107 /* CodeDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeDecorator.h; sourceTree = "<group>"; };
 		6E8B058214D0DD3100EBC107 /* CodeDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeDecorator.m; sourceTree = "<group>"; };
-		6E8B058314D0DD3100EBC107 /* decoration_schema.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = decoration_schema.txt; sourceTree = "<group>"; };
 		6E8B058414D0DD3100EBC107 /* decorations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = decorations.json; sourceTree = "<group>"; };
 		6E8B058514D0DD3100EBC107 /* DecoratorCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecoratorCollection.h; sourceTree = "<group>"; };
 		6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecoratorCollection.m; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		6E8B059314D0DFC000EBC107 /* Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Code.m; sourceTree = "<group>"; };
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6EA61F5A14FA25A200A36228 /* blacktocat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacktocat.png; sourceTree = "<group>"; };
+		6EB1898014FEF72E00B17DF9 /* IconIPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconIPad.png; sourceTree = "<group>"; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
 		6EB8D97214F7506E0079E140 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -236,6 +236,7 @@
 		6E8B04C714D0C47900EBC107 = {
 			isa = PBXGroup;
 			children = (
+				6EB1898014FEF72E00B17DF9 /* IconIPad.png */,
 				6E895F0A14D9D13900D98866 /* Icon.png */,
 				6E895F0814D9D13400D98866 /* Icon@2x.png */,
 				6E8B04DC14D0C47900EBC107 /* Jackalope */,
@@ -438,7 +439,6 @@
 			children = (
 				6E8B058114D0DD3100EBC107 /* CodeDecorator.h */,
 				6E8B058214D0DD3100EBC107 /* CodeDecorator.m */,
-				6E8B058314D0DD3100EBC107 /* decoration_schema.txt */,
 				6E8B058414D0DD3100EBC107 /* decorations.json */,
 				6E8B058514D0DD3100EBC107 /* DecoratorCollection.h */,
 				6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */,
@@ -565,7 +565,6 @@
 				6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */,
 				6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */,
 				6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */,
-				6E8B058814D0DD3100EBC107 /* decoration_schema.txt in Resources */,
 				6E8B058914D0DD3100EBC107 /* decorations.json in Resources */,
 				6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */,
 				6EB90C3914D78A4300B7D378 /* GithubLoginViewController.xib in Resources */,
@@ -576,6 +575,7 @@
 				6EB8D97714F7506F0079E140 /* README.txt in Resources */,
 				6EB8D97814F7506F0079E140 /* release_notes.txt in Resources */,
 				6EA61F5B14FA25A200A36228 /* blacktocat.png in Resources */,
+				6EB1898114FEF72E00B17DF9 /* IconIPad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,6 +767,7 @@
 		6E8B051214D0C47900EBC107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -782,6 +783,7 @@
 		6E8B051314D0C47900EBC107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -834,7 +836,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -843,6 +846,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -853,6 +857,9 @@
 		6EB8D98014F833600079E140 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -861,6 +868,8 @@
 					"\"$(SRCROOT)/Jackalope/libs/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc";

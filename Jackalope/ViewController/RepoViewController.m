@@ -138,6 +138,7 @@ static RepoViewController *_instance = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     BlobNode* blob = (BlobNode *) note.object;    
     [_codeViewController showBlobNode:blob];
+    NSLog(@"openBlob:%@",blob.fullPath);
 }
 -(void) BlobUpdateFailed:(NSNotification*) note
 {

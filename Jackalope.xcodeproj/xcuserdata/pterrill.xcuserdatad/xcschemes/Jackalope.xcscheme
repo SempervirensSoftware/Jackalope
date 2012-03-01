@@ -89,6 +89,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Ad Hoc"
+      customArchiveName = "Jackalope"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

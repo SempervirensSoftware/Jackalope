@@ -21,6 +21,7 @@ static DecoratorCollection *_instance = nil;
     [_defaultTheme setValue:@"0x036A07" forKey:@"string"];
     [_defaultTheme setValue:@"0x0000A2" forKey:@"entity"];
     [_defaultTheme setValue:@"0x6D79DE" forKey:@"support.type"];  
+    [_defaultTheme setValue:@"0x6D79DE" forKey:@"support.class"];      
     [_defaultTheme setValue:@"0x06960E" forKey:@"support.constant"];  
     [_defaultTheme setValue:@"0x3C4C72" forKey:@"support.function"];    
     [_defaultTheme setValue:@"0x585CF6" forKey:@"constant.language"];    
@@ -93,10 +94,12 @@ static DecoratorCollection *_instance = nil;
     //TODO: parse filename and get real extension
     // For now hardcode to ruby because that's all I have ;)
     NSString *ext = [filename pathExtension];
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"OpenFile:%@",ext]];
     id decorator = [_decoratorsForExtension objectForKey:ext];
  
     if (decorator == nil)
     {
+        NSLog(@"decoratorMissing:%@",ext);        
         return _defaultDecorator;
     }
     else if ([decorator isKindOfClass:[CodeDecorator class]]){

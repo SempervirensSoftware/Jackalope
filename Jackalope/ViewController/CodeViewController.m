@@ -108,6 +108,7 @@
     [[[UIAlertView alloc] initWithTitle:@"Success!"
                                 message:@"Your changes were successfully committed to GitHub" 
                                delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];   
+     [TestFlight passCheckpoint:@"CommitSuccess"];
 }
 
 -(void)BlobCommitFailed:(NSNotification *)note
@@ -118,6 +119,7 @@
     [[[UIAlertView alloc] initWithTitle:@"Commit Failed"
                                 message:@"There was a problem committing your changes. Please try again." 
                                delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];    
+     [TestFlight passCheckpoint:@"CommitFailed"];
 }
 
 - (void)didReceiveMemoryWarning

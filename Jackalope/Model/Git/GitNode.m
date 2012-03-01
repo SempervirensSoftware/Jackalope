@@ -17,7 +17,6 @@
 - (void) refreshData
 {
     NSString* urlString = [self appendUrlParamsToString:[self updateURL]];
-    NSLog(@"refresh@%@",urlString);
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
 
@@ -49,6 +48,8 @@
             [[NSNotificationCenter defaultCenter] postNotification:note];
         }
      }];
+    
+    NSLog(@"refresh%@@%@", self.type, urlString);
 }
 
 - (NSString *) appendUrlParamsToString:(NSString *)baseURL

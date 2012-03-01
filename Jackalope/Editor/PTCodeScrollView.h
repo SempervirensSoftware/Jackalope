@@ -16,18 +16,23 @@
 {
     CodeDecorator*              _decorator;
     PTCursorView*               _cursorView;
+    CGRect                      _keyboardRect;
     
             UIView*             _codeEditor;
     __block NSMutableArray*     _layerArray;
             PTCodeLayer*        _currentLayer;  
-    
-    int                         _maxFrameSize;
-    int                         _numberOfScreensToBuffer;
-    
+        
     NSCharacterSet*             _newlineCharSet;
     NSRegularExpression*        _whiteSpaceRegex;
     
     NSOperationQueue*           _operationQueue; // for rendering layers on a seperate thread
+    
+    // Display scaling factors
+    // Tune these for ideal performance and appearance.
+    int                         _maxFrameSize;
+    int                         _numberOfScreensToBuffer;
+    int                         _numberOfExtraScrollLines;
+
 }
 
 @property (nonatomic, retain) PTTextRange* selection;
@@ -39,6 +44,7 @@
 
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;
 -(void) setSelectionAtPoint:(CGPoint)point;
+-(void) scrollToCursor;
 -(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;
 
 @end

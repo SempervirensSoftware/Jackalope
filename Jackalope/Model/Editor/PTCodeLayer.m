@@ -286,20 +286,15 @@
     {
         CTLineGetTypographicBounds(currentLine, &_ascent, &_descent, &_leading);
         
-
+// TODO: revisit if the full pixel alignment is still neccesary. could have been solved with scaling fix and haven't revisited
         _lineHeight = (_ascent+_descent+_leading);        
-        NSLog(@"initHeight: %f", _lineHeight);        
         _lineHeight = ceilf(_ascent+_descent+_leading);        
-        NSLog(@"ceilHeight: %f", _lineHeight);
         
-        NSLog(@"(%f,%f,%f)", _ascent, _descent, _leading);
         _ascent = ceilf(_ascent);
         _descent = ceilf(_descent);
-        _leading = ceilf(_leading);
-        NSLog(@"(%f,%f,%f)", _ascent, _descent, _leading);
+        _leading = ceilf(_leading);    
         
         _lineHeight = (_ascent+_descent+_leading);        
-        NSLog(@"finalHeight: %f", _lineHeight);
     }    
     
     CGRect codeFrame = self.frame;
@@ -316,9 +311,6 @@
 
 -(void)drawInContext:(CGContextRef)ctx{             
     CGContextSaveGState(ctx);
-    
-    NSLog(@"origin: (%f,%f)", self.bounds.origin.x, self.bounds.origin.y);
-    NSLog(@"size: (%f,%f)", self.bounds.size.width, self.bounds.size.height);
     
     CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
     CGContextTranslateCTM(ctx, 0, self.bounds.size.height);
@@ -366,9 +358,7 @@
             double  gWidth = CTLineGetTypographicBounds(gutterLine,&gA,&gD,&gL);
             float   cA, cD, cL;
             CTLineGetTypographicBounds(codeLine,&cA,&cD,&cL);
-            float   lineNumYOffset = floorf( ((cA+cD+cL)-(gA+gD+gL)) /2 );
-            NSLog(@"yOffset:%f", lineNumYOffset);
-            
+
             CGContextSetTextPosition(ctx, roundf(self.bounds.origin.x + (_leftColumnWidth - gWidth - 2)), y + 0);
             CTLineDraw(gutterLine, ctx);
             CFRelease(gutterLine);

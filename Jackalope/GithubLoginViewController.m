@@ -33,11 +33,8 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-
     NSString* path = request.URL.path;
     NSRange range = [path rangeOfString:@"oauth/success"];
-
-    NSLog(@"navigate@%@", request.URL.absoluteString);
     
     if (range.location != NSIntegerMax)
     {
@@ -45,9 +42,8 @@
         NSString* gitUserName = [request.URL queryValueForKey:@"gitUserName"]; 
         [AppUser currentUser].githubToken = token;
         [AppUser currentUser].githubUserName = gitUserName;
-
-        NSLog(@"queryString: %@", request.URL.query);
-        NSLog(@"loading user: %@(%@)", [AppUser currentUser].githubUserName, [AppUser currentUser].githubToken);
+        NSLog(@"loginUser: %@(%@)", [AppUser currentUser].githubUserName, [AppUser currentUser].githubToken);
+        [TestFlight passCheckpoint:@"LoginSuccess"];
         
         instructionLabel.hidden = YES;
         loginButton.hidden = YES;

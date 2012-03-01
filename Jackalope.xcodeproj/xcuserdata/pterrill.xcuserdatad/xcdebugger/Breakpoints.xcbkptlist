@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Jackalope/Model/Git/GitNode.m"
-         timestampString = "350205621.826153"
+         timestampString = "352247683.013739"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
          landmarkName = "-refreshData"
          landmarkType = "5">
       </FileBreakpoint>
