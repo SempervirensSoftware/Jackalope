@@ -12,7 +12,7 @@
 
 @implementation BlobNode
 
-@synthesize fileContent;
+@synthesize fileContent, commitMessage;
 
 -(Code *) createCode
 {

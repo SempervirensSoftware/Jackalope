@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6E1EF80A14F6FA91004FEAEE /* VeraMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */; };
+		6E3FF2C3150AC1940027D980 /* CommitView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3FF2C1150AC1940027D980 /* CommitView_iPad.xib */; };
+		6E3FF2C7150AC1A70027D980 /* CommitView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3FF2C5150AC1A70027D980 /* CommitView_iPhone.xib */; };
+		6E3FF2CA150AC1E00027D980 /* CommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3FF2C9150AC1E00027D980 /* CommitViewController.m */; };
 		6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */; };
 		6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */; };
 		6E514C3914D8B507000CBF1B /* NSURL+PTQueryParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E514C3814D8B507000CBF1B /* NSURL+PTQueryParsing.m */; };
@@ -83,6 +86,10 @@
 
 /* Begin PBXFileReference section */
 		6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VeraMono.ttf; sourceTree = "<group>"; };
+		6E3FF2C2150AC1940027D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CommitView_iPad.xib; sourceTree = "<group>"; };
+		6E3FF2C6150AC1A70027D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CommitView_iPhone.xib; sourceTree = "<group>"; };
+		6E3FF2C8150AC1E00027D980 /* CommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitViewController.h; sourceTree = "<group>"; };
+		6E3FF2C9150AC1E00027D980 /* CommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitViewController.m; sourceTree = "<group>"; };
 		6E4101AE14D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPad.xib; sourceTree = "<group>"; };
 		6E4101B014D2346A0067A321 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CodeView_iPhone.xib; sourceTree = "<group>"; };
 		6E514C3714D8B507000CBF1B /* NSURL+PTQueryParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+PTQueryParsing.h"; sourceTree = "<group>"; };
@@ -229,6 +236,8 @@
 				6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */,
 				6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */,
 				6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */,
+				6E3FF2C1150AC1940027D980 /* CommitView_iPad.xib */,
+				6E3FF2C5150AC1A70027D980 /* CommitView_iPhone.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -373,12 +382,14 @@
 				6E8B04E614D0C47900EBC107 /* AppDelegate.m */,
 				6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */,
 				6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */,
-				6E8B054514D0CE9800EBC107 /* CodeViewController.h */,
-				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
 				6E8B054714D0CE9800EBC107 /* RepoViewController.h */,
 				6E8B054814D0CE9800EBC107 /* RepoViewController.m */,
 				6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */,
 				6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */,
+				6E8B054514D0CE9800EBC107 /* CodeViewController.h */,
+				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
+				6E3FF2C8150AC1E00027D980 /* CommitViewController.h */,
+				6E3FF2C9150AC1E00027D980 /* CommitViewController.m */,
 			);
 			name = Controller;
 			path = ViewController;
@@ -576,6 +587,8 @@
 				6EB8D97814F7506F0079E140 /* release_notes.txt in Resources */,
 				6EA61F5B14FA25A200A36228 /* blacktocat.png in Resources */,
 				6EB1898114FEF72E00B17DF9 /* IconIPad.png in Resources */,
+				6E3FF2C3150AC1940027D980 /* CommitView_iPad.xib in Resources */,
+				6E3FF2C7150AC1A70027D980 /* CommitView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +654,7 @@
 				6E895F0E14DA2DE400D98866 /* BranchNode.m in Sources */,
 				6E895F1214DA369800D98866 /* GitNode.m in Sources */,
 				6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */,
+				6E3FF2CA150AC1E00027D980 /* CommitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +677,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6E3FF2C1150AC1940027D980 /* CommitView_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E3FF2C2150AC1940027D980 /* en */,
+			);
+			name = CommitView_iPad.xib;
+			sourceTree = "<group>";
+		};
+		6E3FF2C5150AC1A70027D980 /* CommitView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E3FF2C6150AC1A70027D980 /* en */,
+			);
+			name = CommitView_iPhone.xib;
+			sourceTree = "<group>";
+		};
 		6E4101AD14D2346A0067A321 /* CodeView_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -767,7 +797,8 @@
 		6E8B051214D0C47900EBC107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -776,6 +807,8 @@
 					"\"$(SRCROOT)/Jackalope/libs/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -783,7 +816,6 @@
 		6E8B051314D0C47900EBC107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -857,7 +889,6 @@
 		6EB8D98014F833600079E140 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -8,6 +8,7 @@
 
 #import "CodeViewController.h"
 #import "RepoViewController.h"
+#import "CommitViewController.h"
 #import "TreeNode.h"
 #import "BlobNode.h"
 #import <QuartzCore/QuartzCore.h>
@@ -82,44 +83,20 @@
 }
 
 -(void) commitPressed
-{
-    [_activityView startAnimating];
-    [self.navigationItem setRightBarButtonItem:_activityBtn];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; 
-    [nc addObserver:self
-           selector:@selector(BlobCommitSuccess:)
-               name:NODE_COMMIT_SUCCESS
-             object:_blobNode];        
-    [nc addObserver:self
-           selector:@selector(BlobCommitFailed:)
-               name:NODE_COMMIT_FAILED
-             object:_blobNode];
-    
-    _blobNode.fileContent = _codeView.code.plainText;
-    [_blobNode commit];
-}
+{    
+    CommitViewController* commitController; 
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
+    {            
+        commitController = [[CommitViewController alloc] initWithNibName:@"CommitView_iPhone" bundle:nil];   
+    }
+    else
+    {
+        commitController = [[CommitViewController alloc] initWithNibName:@"CommitView_iPad" bundle:nil];   
+    }
 
--(void)BlobCommitSuccess:(NSNotification *)note
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];   
-    [self.navigationItem setRightBarButtonItem:_commitBtn];
-    [_activityView stopAnimating];
-    [[[UIAlertView alloc] initWithTitle:@"Success!"
-                                message:@"Your changes were successfully committed to GitHub" 
-                               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];   
-     [TestFlight passCheckpoint:@"CommitSuccess"];
-}
-
--(void)BlobCommitFailed:(NSNotification *)note
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];   
-    [_activityView stopAnimating];
-    [self.navigationItem setRightBarButtonItem:_commitBtn];
-    [[[UIAlertView alloc] initWithTitle:@"Commit Failed"
-                                message:@"There was a problem committing your changes. Please try again." 
-                               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];    
-     [TestFlight passCheckpoint:@"CommitFailed"];
+     _blobNode.fileContent = _codeView.code.plainText;
+    commitController.blobNode = _blobNode;
+    [self.navigationController pushViewController:commitController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

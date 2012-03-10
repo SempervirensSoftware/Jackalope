@@ -16,7 +16,7 @@
     UIActivityIndicatorView*    _activityView;
     UIBarButtonItem*            _activityBtn;
     
-    BlobNode*           _blobNode;
+    BlobNode*                   _blobNode;
 }
 
 @property (nonatomic, retain) IBOutlet PTCodeScrollView*        codeView;

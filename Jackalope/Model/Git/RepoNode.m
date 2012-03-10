@@ -42,6 +42,7 @@
         BranchNode* newNode = [[BranchNode alloc] init];
         [newNode setValuesFromDictionary:branchHash];
         newNode.repoName = self.name;
+        newNode.fullPath = [NSString stringWithFormat:@"%@/%@",self.name, newNode.name];
         newNode.operationQueue = self.operationQueue;
         [tempChildren addObject:newNode];
     }

@@ -13,6 +13,7 @@
 @interface BlobNode : TreeNode
 
 @property (retain, nonatomic) NSString      *fileContent;
+@property (retain, nonatomic) NSString      *commitMessage;
 
 -(void)     commit;
 -(Code *)   createCode;

@@ -85,7 +85,7 @@
  {     
      NSDictionary *map = [[NSDictionary alloc] initWithObjectsAndKeys:
      self.repoName, @"repoName", self.rootTree.sha, @"repoRootSHA", self.headCommitSHA, @"commitSHA", self.name, @"branchName",
-     blob.name, @"blobName", blob.fullPath, @"blobFullPath", blob.sha, @"blobSHA", blob.fileContent, @"blobContent", nil];
+     blob.name, @"blobName", blob.fullPath, @"blobFullPath", blob.sha, @"blobSHA", blob.fileContent, @"blobContent", blob.commitMessage, @"commitMessage", nil];
      
      SBJSON *jsonWriter = [SBJSON new];
      NSString *jsonString = [jsonWriter stringWithObject:map];
