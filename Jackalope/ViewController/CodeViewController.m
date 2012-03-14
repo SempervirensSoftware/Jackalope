@@ -22,15 +22,52 @@
 
 @synthesize codeView = _codeView;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize unsavedChanges = _unsavedChanges;
 @synthesize loadingLabel, loadingActivityIndicator;
 
 #pragma mark - Managing the detail item
+
+- (void)configureView
+{
+    [_codeView addTextInputDelegate:self];
+    CALayer *layer = _codeView.layer;
+    [layer setMasksToBounds:YES];
+    [layer setCornerRadius:3];    
+    
+    _commitBtn = [[UIBarButtonItem alloc]
+                  initWithTitle:@"Commit" style:UIBarButtonItemStyleDone
+                  target:self
+                  action:@selector(commitPressed)];
+    _commitBtn.enabled = NO;
+    _unsavedChanges = false;
+    
+    _activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [_activityView sizeToFit];
+    [_activityView setBackgroundColor:[UIColor blueColor]];
+    [_activityView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin 
+                                        | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
+    
+    _activityBtn = [[UIBarButtonItem alloc] initWithCustomView:_activityView];
+    
+    [self.navigationItem setRightBarButtonItem:_commitBtn];
+}
+
+-(void) dealloc
+{
+    [_codeView removeTextInputDelegate:self];
+}
 
 -(void) showBlobNode:(BlobNode *)blob;
 {        
     _blobNode = blob;
     self.title = blob.name;
     _codeView.code = [blob createCode];
+    
+    if (_unsavedChanges)
+    {
+        _unsavedChanges = false;
+        _commitBtn.enabled = NO;
+    }
 
     self.loadingLabel.hidden = YES;
     self.loadingActivityIndicator.hidden = YES;
@@ -46,10 +83,17 @@
 {
     self.title = titleString;
     
+    [self.codeView hideKeyboard];
     self.codeView.hidden = YES;
     self.loadingLabel.hidden = NO;
     self.loadingActivityIndicator.hidden = NO;
     [self.loadingActivityIndicator startAnimating];
+    
+    if (_unsavedChanges)
+    {
+        _unsavedChanges = false;
+        _commitBtn.enabled = NO;
+    }
 }
 -(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message {
     self.title = titleString;
@@ -59,28 +103,17 @@
     [self.loadingActivityIndicator stopAnimating];
 }
 
-- (void)configureView
+-(void) textDidChange:(id<UITextInput>)textInput
 {
-    CALayer *layer = _codeView.layer;
-    [layer setMasksToBounds:YES];
-    [layer setCornerRadius:3];
-    
-    _commitBtn = [[UIBarButtonItem alloc]
-                            initWithTitle:@"Commit" style:UIBarButtonItemStyleDone
-                            target:self
-                            action:@selector(commitPressed)];
-    //_commitBtn.enabled = NO;
-
-    _activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [_activityView sizeToFit];
-    [_activityView setBackgroundColor:[UIColor blueColor]];
-    [_activityView setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin 
-                                       | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
-    
-    _activityBtn = [[UIBarButtonItem alloc] initWithCustomView:_activityView];
-    
-    [self.navigationItem setRightBarButtonItem:_commitBtn];
+    if (! _unsavedChanges)
+    {
+        _unsavedChanges = YES;
+        _commitBtn.enabled = YES;        
+    }
 }
+-(void) textWillChange:(id<UITextInput>)textInput {}
+-(void) selectionDidChange:(id<UITextInput>)textInput {}
+-(void) selectionWillChange:(id<UITextInput>)textInput {}
 
 -(void) commitPressed
 {    

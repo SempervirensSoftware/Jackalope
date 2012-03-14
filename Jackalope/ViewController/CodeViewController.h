@@ -10,18 +10,20 @@
 #import "BlobNode.h"
 #import "PTCodeScrollView.h"
 
-@interface CodeViewController : UIViewController <UISplitViewControllerDelegate>
+@interface CodeViewController : UIViewController <UISplitViewControllerDelegate, UITextInputDelegate>
 {
     UIBarButtonItem*            _commitBtn;
     UIActivityIndicatorView*    _activityView;
     UIBarButtonItem*            _activityBtn;
     
-    BlobNode*                   _blobNode;
+    BlobNode*                   _blobNode;    
 }
 
-@property (nonatomic, retain) IBOutlet PTCodeScrollView*        codeView;
-@property (nonatomic, retain) IBOutlet UILabel*                 loadingLabel;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* loadingActivityIndicator;
+@property (nonatomic, retain) IBOutlet  PTCodeScrollView*           codeView;
+@property (nonatomic, retain) IBOutlet  UILabel*                    loadingLabel;
+@property (nonatomic, retain) IBOutlet  UIActivityIndicatorView*    loadingActivityIndicator;
+
+@property (nonatomic, readonly)         BOOL                        unsavedChanges;
 
 -(void) showBlobNode:(BlobNode *)blob;
 -(void) showLoadingWithTitle:(NSString *)titleString;

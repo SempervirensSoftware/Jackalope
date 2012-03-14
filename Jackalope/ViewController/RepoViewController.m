@@ -87,7 +87,17 @@ static RepoViewController *_instance = nil;
 {        
     if ([node.type isEqualToString:NODE_TYPE_BLOB])
     {
-        [self showBlob:(BlobNode*)node];
+        if (_codeViewController.unsavedChanges){
+            _pendingBlob = (BlobNode*)node;
+            [[[UIAlertView alloc] initWithTitle:@"Unsaved Changes"
+                                        message:@"Would you like to discard your changes?" 
+                                       delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Discard", nil] show];   
+            
+        }
+        else
+        {        
+            [self showBlob:(BlobNode*)node];
+        }
     }
     else if (node)
     {
@@ -147,4 +157,12 @@ static RepoViewController *_instance = nil;
     [_codeViewController showErrorWithTitle:blob.name andMessage:@"Error loading file"];
 }
 
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex)
+    {
+        [self showBlob:_pendingBlob];
+    }
+    _pendingBlob = nil;
+}
 @end

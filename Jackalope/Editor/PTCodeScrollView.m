@@ -19,6 +19,13 @@
 - (void) tap:(UITapGestureRecognizer *)tap;
 - (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer  withPriorityLength:(float)priorityLength;
 
+-(void) registerForKeyboardNotifications;
+
+-(void) textDidChange;
+-(void) textWillChange;
+-(void) selectionDidChange;
+-(void) selectionWillChange;
+
 @end
 
 
@@ -44,9 +51,10 @@
 
 @implementation PTCodeScrollView
 
-@synthesize inputDelegate;
 @synthesize selection = _selection;
 @synthesize code = _code;
+
+@synthesize markedTextRange, markedTextStyle, selectedTextRange, beginningOfDocument, endOfDocument, inputDelegate, tokenizer;
 
 /////////////////////////////////////////////////////////////////////////////
 // MARK: - Initialization
@@ -75,6 +83,7 @@
                         error:NULL];
     
     _operationQueue = [[NSOperationQueue alloc] init];
+    _textInputDelegates = [[NSMutableArray alloc] initWithCapacity:1];
     
     self.contentMode = UIViewContentModeLeft;
 }
@@ -128,7 +137,7 @@
     _code = code;    
     _decorator = [[DecoratorCollection getInstance] decoratorForFileName:code.fileName];        
     _layerArray = [[NSMutableArray alloc] init];
-    [self resignFirstResponder];
+    [self hideKeyboard];
     
     NSAttributedString* decoratedCode = [_decorator decorateString:code.plainText];    
     NSInteger   fullLength = [code.plainText length];
@@ -176,13 +185,6 @@
 
 #pragma mark Custom user interaction
 
-// UIResponder protocol override - our view can become first responder to 
-// receive user text input
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
 -(void) setSelectionAtPoint:(CGPoint)point
 {
     NSInteger frameIndex = 0;
@@ -204,15 +206,6 @@
     }    
 }
   
-// UIResponder protocol override - called when our view is being asked to resign 
-// first responder state (in this sample by using the "Done" button)  
-- (BOOL)resignFirstResponder
-{
-	// Flag that underlying SimpleCoreTextView is no longer in edit mode
-    //_textView.editing = NO;	
-	return [super resignFirstResponder];
-}
-
 - (void)tap:(UITapGestureRecognizer *)tap{
     if (![self isFirstResponder]) { 
 		// Inform controller that we're about to enter editing mode
@@ -220,19 +213,13 @@
 		// Flag that underlying SimpleCoreTextView is now in edit mode
         //_textView.editing = YES;
 		// Become first responder state (which shows software keyboard, if applicable)
-        [self becomeFirstResponder];
+        [self showKeyboard];
     }
-    
-    
-    //[self.inputDelegate selectionWillChange:self];
         
-    // Find and update insertion point
-    
+    // Find and update insertion point    
+    [self selectionWillChange];
     [self setSelectionAtPoint:[tap locationInView:_codeEditor]];    
-    
-    
-    // Let inputDelegate know selection has changed
-    //[self.inputDelegate selectionDidChange:self];            
+    [self selectionDidChange];            
 }
 
 -(void)drawRect:(CGRect)rect
@@ -286,6 +273,8 @@
     {
         return;
     }
+    
+    [self textWillChange];
     
     NSInteger initLocCount = [_currentLayer.locArray count];
     CGFloat initLayerHeight = _currentLayer.frame.size.height;    
@@ -347,6 +336,8 @@
     NSInteger deltaLocCount = ([_currentLayer.locArray count] - initLocCount);
     CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - initLayerHeight);
     [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:deltaLocCount startingAfterLayer:_currentLayer];
+    
+    [self textDidChange];
 }
 
 // UIKeyInput required method - Delete a character from the displayed text.
@@ -355,6 +346,12 @@
 - (void)deleteBackward 
 {
     PTTextPosition* currentPos = (PTTextPosition*)self.selection.start;
+    if (!currentPos)
+    {
+        return;
+    }
+    
+    [self textWillChange];
     NSMutableString* lineString = [(__bridge NSString*)CFAttributedStringGetString(currentPos.loc.attributedText) mutableCopy];    
 
     // Standard case. Just delete the character to the left of the cursor
@@ -423,10 +420,135 @@
     }
     
     [self scrollToCursor];
+    [self textDidChange];
+}
+
+-(void) addTextInputDelegate:(id<UITextInputDelegate>)delegate{
+    [_textInputDelegates addObject:delegate];
+}
+-(void) removeTextInputDelegate:(id<UITextInputDelegate>)delegate{
+    [_textInputDelegates removeObject:delegate];
+}
+-(void) textDidChange{
+    [self.inputDelegate textDidChange:self];
+    
+    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+        [delegate textDidChange:self];
+    }
+}
+-(void) textWillChange{
+    [self.inputDelegate textWillChange:self];
+    
+    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+        [delegate textWillChange:self];
+    }    
+}
+-(void) selectionDidChange{
+    [self.inputDelegate selectionDidChange:self];
+    
+    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+        [delegate selectionDidChange:self];
+    }        
+}
+-(void) selectionWillChange{
+    [self.inputDelegate selectionWillChange:self];
+    
+    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+        [delegate selectionWillChange:self];
+    }    
+}
+
+
+#pragma mark UITextInput methods
+- (NSString *)textInRange:(UITextRange *)range{
+    NSLog(@"Unimplemented - textInRange:");
+    return nil;
+}
+- (void)replaceRange:(UITextRange *)range withText:(NSString *)text{
+    NSLog(@"Unimplemented - replaceRange:withText:");
+}
+
+- (void)setMarkedText:(NSString *)markedText selectedRange:(NSRange)selectedRange{  // selectedRange is a range within the markedText
+    NSLog(@"Unimplemented - setMarkedText:selectedRange:");
+}
+- (void)unmarkText{
+    NSLog(@"Unimplemented - unmarkText");
+}
+
+/* Methods for creating ranges and positions. */
+- (UITextRange *)textRangeFromPosition:(UITextPosition *)fromPosition toPosition:(UITextPosition *)toPosition{
+    NSLog(@"Unimplemented - textRangeFromPosition:toPosition");
+    return nil;    
+}
+- (UITextPosition *)positionFromPosition:(UITextPosition *)position offset:(NSInteger)offset{
+    NSLog(@"Unimplemented - positionFromPosition:offset");
+    return nil;    
+}
+- (UITextPosition *)positionFromPosition:(UITextPosition *)position inDirection:(UITextLayoutDirection)direction offset:(NSInteger)offset{
+    NSLog(@"Unimplemented - positionFromPosition:inDirection:offset");
+    return nil;    
+}
+
+/* Simple evaluation of positions */
+- (NSComparisonResult)comparePosition:(UITextPosition *)position toPosition:(UITextPosition *)other{
+    NSLog(@"Unimplemented - comparePosition:toPosition");
+    return NSOrderedSame;
+}
+- (NSInteger)offsetFromPosition:(UITextPosition *)from toPosition:(UITextPosition *)toPosition{
+    NSLog(@"Unimplemented - offsetFromPosition:toPosition");
+    return 1;
+}
+
+/* Layout questions. */
+- (UITextPosition *)positionWithinRange:(UITextRange *)range farthestInDirection:(UITextLayoutDirection)direction{
+    NSLog(@"Unimplemented - positionWithinRange:farthestInDirection");
+    return nil;    
+}
+- (UITextRange *)characterRangeByExtendingPosition:(UITextPosition *)position inDirection:(UITextLayoutDirection)direction{
+    NSLog(@"Unimplemented - characterRangeByExtendingPosition:inDirection");
+    return nil;    
+}
+
+/* Writing direction */
+- (UITextWritingDirection)baseWritingDirectionForPosition:(UITextPosition *)position inDirection:(UITextStorageDirection)direction{
+    NSLog(@"Unimplemented - baseWritingDirectionForPosition:inDirection");
+    return UITextWritingDirectionLeftToRight;    
+}
+- (void)setBaseWritingDirection:(UITextWritingDirection)writingDirection forRange:(UITextRange *)range{
+    NSLog(@"Unimplemented - setBaseWritingDirection:forRange");
+}
+
+/* Geometry used to provide, for example, a correction rect. */
+- (CGRect)firstRectForRange:(UITextRange *)range{
+     NSLog(@"Unimplemented - firstRectForRange:");
+    return CGRectMake(0, 0, 0, 0);
+}
+- (CGRect)caretRectForPosition:(UITextPosition *)position{
+    NSLog(@"Unimplemented - caretRectForPosition:");
+    return CGRectMake(0, 0, 0, 0);
+}
+
+/* Hit testing. */
+- (UITextPosition *)closestPositionToPoint:(CGPoint)point{
+    NSLog(@"Unimplemented - closestPositionToPoint:");
+    return nil;    
+}
+- (UITextPosition *)closestPositionToPoint:(CGPoint)point withinRange:(UITextRange *)range{
+    NSLog(@"Unimplemented - closestPositionToPoint:withinRange");
+    return nil;    
+}
+- (UITextRange *)characterRangeAtPoint:(CGPoint)point{
+    NSLog(@"Unimplemented - characterRangeAtPoint:");
+    return nil;        
 }
 
 
 #pragma mark UIKeyBoard implementation
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
 
 - (void)registerForKeyboardNotifications
 {
@@ -438,10 +560,18 @@
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
 
+-(void) showKeyboard{
+    [self becomeFirstResponder];
+}
+
+-(void) hideKeyboard{
+    [self resignFirstResponder];
+}
+
 // Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (void)keyboardWasShown:(NSNotification*)notification
 {
-    NSDictionary* info = [aNotification userInfo];
+    NSDictionary* info = [notification userInfo];
     CGRect kbRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     _keyboardRect = [self convertRect:kbRect toView:nil];
     
@@ -456,7 +586,7 @@
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+- (void)keyboardWillBeHidden:(NSNotification*)notification
 {
     _keyboardRect = CGRectNull;
     
@@ -486,7 +616,6 @@
         if (!CGRectContainsRect(displayRect, cursorRect)) {
             [self scrollRectToVisible:cursorRect animated:YES];
         }
-
     }
 }
 

@@ -13,12 +13,14 @@
 #import "RepoNode.h"
 #import "BlobNode.h"
 
-@interface RepoViewController : NSObject
+@interface RepoViewController : NSObject <UINavigationBarDelegate, UIAlertViewDelegate>
 {
     UINavigationController* _navController;    
 
     RootNode*               _rootNode;
     RepoNode*               _currentRepo;
+    
+    BlobNode*               _pendingBlob;
 }
 
 + (RepoViewController *) getInstance;
