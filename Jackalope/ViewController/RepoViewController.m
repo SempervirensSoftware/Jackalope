@@ -161,7 +161,11 @@ static RepoViewController *_instance = nil;
 {
     if (buttonIndex != alertView.cancelButtonIndex)
     {
-        [self showBlob:_pendingBlob];
+        [self showBlob:_pendingBlob];        
+    }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [self.navController pushViewController:_codeViewController animated:YES];
     }
     _pendingBlob = nil;
 }
