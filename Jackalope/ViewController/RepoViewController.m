@@ -16,6 +16,7 @@
 
 @interface RepoViewController ()
 - (void) showBlob:(BlobNode *)blob;
+- (void) showCodeView;
 @end
 
 static RepoViewController *_instance = nil;
@@ -87,7 +88,10 @@ static RepoViewController *_instance = nil;
 {        
     if ([node.type isEqualToString:NODE_TYPE_BLOB])
     {
-        if (_codeViewController.unsavedChanges){
+        if (_codeViewController.blobNode == node){
+            [self showCodeView];
+        }
+        else if (_codeViewController.unsavedChanges){
             _pendingBlob = (BlobNode*)node;
             [[[UIAlertView alloc] initWithTitle:@"Unsaved Changes"
                                         message:@"Would you like to discard your changes?" 
@@ -121,11 +125,7 @@ static RepoViewController *_instance = nil;
 -(void) showBlob:(BlobNode *)blob
 {
     [_codeViewController showLoadingWithTitle:blob.name];    
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        [self.navController pushViewController:_codeViewController animated:YES];
-    }
+    [self showCodeView];
         
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self];    
@@ -143,11 +143,18 @@ static RepoViewController *_instance = nil;
     [blob refreshData];    
 }
 
+-(void) showCodeView{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [self.navController pushViewController:_codeViewController animated:YES];
+    }
+}
+
 -(void) BlobUpdateSuccess:(NSNotification*) note
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     BlobNode* blob = (BlobNode *) note.object;    
-    [_codeViewController showBlobNode:blob];
+    _codeViewController.blobNode = blob;
     NSLog(@"openBlob:%@",blob.fullPath);
 }
 -(void) BlobUpdateFailed:(NSNotification*) note
@@ -163,9 +170,9 @@ static RepoViewController *_instance = nil;
     {
         [self showBlob:_pendingBlob];        
     }
-    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    else 
     {
-        [self.navController pushViewController:_codeViewController animated:YES];
+        [self showCodeView];
     }
     _pendingBlob = nil;
 }

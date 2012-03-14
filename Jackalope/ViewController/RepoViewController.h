@@ -13,7 +13,7 @@
 #import "RepoNode.h"
 #import "BlobNode.h"
 
-@interface RepoViewController : NSObject <UINavigationBarDelegate, UIAlertViewDelegate>
+@interface RepoViewController : NSObject <UIAlertViewDelegate>
 {
     UINavigationController* _navController;    
 
@@ -25,8 +25,8 @@
 
 + (RepoViewController *) getInstance;
 
-@property (retain, readonly) UINavigationController* navController;
-@property (retain) CodeViewController* codeViewController;
+@property (retain, readonly)    UINavigationController* navController;
+@property (retain)              CodeViewController*     codeViewController;
 
 - (void) showRootNode;
 - (void) showNode:(GitNode*)node withParent:(GitNode*)parentNode;

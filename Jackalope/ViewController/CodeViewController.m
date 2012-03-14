@@ -24,6 +24,7 @@
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize unsavedChanges = _unsavedChanges;
 @synthesize loadingLabel, loadingActivityIndicator;
+@synthesize blobNode = _blobNode;
 
 #pragma mark - Managing the detail item
 
@@ -57,26 +58,29 @@
     [_codeView removeTextInputDelegate:self];
 }
 
--(void) showBlobNode:(BlobNode *)blob;
+-(void) setBlobNode:(BlobNode *)blob;
 {        
-    _blobNode = blob;
-    self.title = blob.name;
-    _codeView.code = [blob createCode];
-    
-    if (_unsavedChanges)
+    if (_blobNode != blob)
     {
-        _unsavedChanges = false;
-        _commitBtn.enabled = NO;
-    }
+        _blobNode = blob;
+        self.title = blob.name;
+        _codeView.code = [blob createCode];
+        
+        if (_unsavedChanges)
+        {
+            _unsavedChanges = false;
+            _commitBtn.enabled = NO;
+        }
 
-    self.loadingLabel.hidden = YES;
-    self.loadingActivityIndicator.hidden = YES;
-    self.codeView.hidden = NO;
-    [self.loadingActivityIndicator stopAnimating];
-    
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
+        self.loadingLabel.hidden = YES;
+        self.loadingActivityIndicator.hidden = YES;
+        self.codeView.hidden = NO;
+        [self.loadingActivityIndicator stopAnimating];
+        
+        if (self.masterPopoverController != nil) {
+            [self.masterPopoverController dismissPopoverAnimated:YES];
+        }
+    }
 }
 
 -(void) showLoadingWithTitle:(NSString *)titleString 

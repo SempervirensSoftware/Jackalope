@@ -16,16 +16,16 @@
     UIActivityIndicatorView*    _activityView;
     UIBarButtonItem*            _activityBtn;
     
-    BlobNode*                   _blobNode;    
+
 }
 
 @property (nonatomic, retain) IBOutlet  PTCodeScrollView*           codeView;
 @property (nonatomic, retain) IBOutlet  UILabel*                    loadingLabel;
 @property (nonatomic, retain) IBOutlet  UIActivityIndicatorView*    loadingActivityIndicator;
 
+@property (nonatomic, retain)           BlobNode*                   blobNode;
 @property (nonatomic, readonly)         BOOL                        unsavedChanges;
 
--(void) showBlobNode:(BlobNode *)blob;
 -(void) showLoadingWithTitle:(NSString *)titleString;
 -(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message;
 
