@@ -458,6 +458,10 @@
     }    
 }
 
+#pragma mark UITextInputTraits methods
+-(UITextAutocapitalizationType) autocapitalizationType  {return UITextAutocapitalizationTypeNone;}
+-(UITextAutocorrectionType)     autocorrectionType      {return UITextAutocorrectionTypeNo;}
+-(UITextSpellCheckingType)      spellCheckingType       {return UITextSpellCheckingTypeNo;}
 
 #pragma mark UITextInput methods
 - (NSString *)textInRange:(UITextRange *)range{

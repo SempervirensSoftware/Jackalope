@@ -94,7 +94,7 @@ static RepoViewController *_instance = nil;
         else if (_codeViewController.unsavedChanges){
             _pendingBlob = (BlobNode*)node;
             [[[UIAlertView alloc] initWithTitle:@"Unsaved Changes"
-                                        message:@"Would you like to discard your changes?" 
+                                        message:[NSString stringWithFormat:@"Would you like to discard your changes to %@?",_pendingBlob.name] 
                                        delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Discard", nil] show];   
             
         }
