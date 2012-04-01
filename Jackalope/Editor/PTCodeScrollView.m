@@ -86,6 +86,9 @@
     _textInputDelegates = [[NSMutableArray alloc] initWithCapacity:1];
     
     self.contentMode = UIViewContentModeLeft;
+    self.minimumZoomScale = 1.0;
+    self.maximumZoomScale = 1.0;
+    self.delegate = self;
 }
 
 - (id)init {
@@ -220,6 +223,16 @@
     [self selectionWillChange];
     [self setSelectionAtPoint:[tap locationInView:_codeEditor]];    
     [self selectionDidChange];            
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    //return _codeEditor;
+    return nil;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale{
+    NSLog(@"scale:%f",scale);
 }
 
 -(void)drawRect:(CGRect)rect

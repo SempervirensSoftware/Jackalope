@@ -10,6 +10,6 @@
 
 @implementation User
 
-@synthesize name, githubToken, githubUserName;
+@synthesize name;
 
 @end

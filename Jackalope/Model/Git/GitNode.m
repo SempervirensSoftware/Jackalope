@@ -7,7 +7,6 @@
 //
 
 #import "GitNode.h"
-#import "AppUser.h"
 
 @implementation GitNode
 
@@ -54,7 +53,7 @@
 
 - (NSString *) appendUrlParamsToString:(NSString *)baseURL
 {
-    return [NSString stringWithFormat:@"%@?token=%@&gitUserName=%@",baseURL, [AppUser currentUser].githubToken, [AppUser currentUser].githubUserName];
+    return [NSString stringWithFormat:@"%@?token=%@&gitUserName=%@",baseURL, CurrentUser.githubToken, CurrentUser.githubUserName];
 }
 
 - (void) setSha:(NSString *)sha

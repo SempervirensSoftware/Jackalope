@@ -30,6 +30,12 @@
         _isError = NO;
     }
     
+    UIBarButtonItem* _settingsBtn = [[UIBarButtonItem alloc] 
+                                     initWithImage:[UIImage imageNamed:@"glyphicons_019_cogwheel.png"] 
+                                     style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];                                     
+    self.navigationItem.rightBarButtonItem = _settingsBtn;
+
+    
     return self;
 }
 
@@ -195,6 +201,12 @@
 {
     // Return YES for supported orientations
     return YES;
+}
+
+- (void) showSettings
+{
+    [CurrentUser logout];
+    [GlobalAppDelegate showLogin];
 }
 
 @end

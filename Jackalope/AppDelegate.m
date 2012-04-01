@@ -11,14 +11,12 @@
 #import "RepoViewController.h"
 #import "CodeViewController.h"
 #import "GithubLoginViewController.h"
-#import "AppUser.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize repoNavigationController = _repoNavigationController;
 @synthesize splitViewController = _splitViewController;
-@synthesize loginController = _loginController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -51,7 +49,7 @@
                                                 
     [RepoViewController getInstance].codeViewController = codeViewController;
     
-    if ([AppUser currentUser].githubToken && [AppUser currentUser].githubUserName)
+    if (CurrentUser.isLoggedIn)
     {
         [self userLoggedIn];
     }
@@ -84,12 +82,8 @@
 
 -(void) showLogin
 {
-    if (!_loginController)
-    {
-        self.loginController = [[GithubLoginViewController alloc] initWithNibName:@"GithubLoginViewController" bundle:nil];        
-    }
-    
-    self.window.rootViewController = self.loginController;
+    UIViewController* loginController = [[GithubLoginViewController alloc] initWithNibName:@"GithubLoginViewController" bundle:nil];
+    self.window.rootViewController = loginController;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -106,6 +100,8 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -129,6 +125,8 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

@@ -8,7 +8,6 @@
 
 #import "GithubLoginViewController.h"
 #import "NSURL+PTQueryParsing.h"
-#import "AppUser.h"
 
 @implementation GithubLoginViewController
 
@@ -25,6 +24,15 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth/github", kServerRootURL]];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *cookieStore = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [cookieStore cookies]) {
+        if ([cookie.domain rangeOfString:@"github.com"].location != NSNotFound)
+        {
+            [cookieStore deleteCookie:cookie];
+        }        
+    }
+    
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     _webView.delegate = self;
     _webView.scalesPageToFit = YES;
@@ -40,9 +48,8 @@
     {
         NSString* token = [request.URL queryValueForKey:@"token"];
         NSString* gitUserName = [request.URL queryValueForKey:@"gitUserName"]; 
-        [AppUser currentUser].githubToken = token;
-        [AppUser currentUser].githubUserName = gitUserName;
-        NSLog(@"loginUser: %@(%@)", [AppUser currentUser].githubUserName, [AppUser currentUser].githubToken);
+        [CurrentUser loginWithToken:token andUserName:gitUserName];
+        NSLog(@"loginUser: %@(%@)", CurrentUser.githubUserName, CurrentUser.githubToken);
         [TestFlight passCheckpoint:@"LoginSuccess"];
         
         instructionLabel.hidden = YES;
@@ -100,6 +107,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    activityIndicator.hidden = YES;
 }
 
 - (void)viewDidUnload

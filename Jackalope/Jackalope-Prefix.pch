@@ -4,6 +4,7 @@
 
 #import <Availability.h>
 #import "AppDelegate.h"
+#import "AppUser.h"
 
 #ifndef __IPHONE_4_0
 #warning "This project uses features only available in iOS SDK 4.0 and later."
@@ -16,5 +17,6 @@
 #endif
 
 #define GlobalAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate) 
+#define CurrentUser [AppUser currentUser]
 #define kServerRootURL @"http://jackalope.me"
 

@@ -13,4 +13,11 @@
 
 +(AppUser *) currentUser;
 
+@property(nonatomic, readonly, retain) NSString* githubUserName;
+@property(nonatomic, readonly, retain) NSString* githubToken;
+
+-(void) loginWithToken:(NSString *)token andUserName:(NSString *)userName;
+-(void) logout;
+-(BOOL) isLoggedIn;
+
 @end

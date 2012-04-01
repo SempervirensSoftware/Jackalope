@@ -62,6 +62,9 @@
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
 		6EA61F5B14FA25A200A36228 /* blacktocat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA61F5A14FA25A200A36228 /* blacktocat.png */; };
+		6EA68BEC1527B11800A3660E /* glyphicons_019_cogwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */; };
+		6EA68BED1527B11800A3660E /* glyphicons_019_cogwheel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */; };
+		6EA68BF01527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEF1527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png */; };
 		6EB1898114FEF72E00B17DF9 /* IconIPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB1898014FEF72E00B17DF9 /* IconIPad.png */; };
 		6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7730C14DB27E20015FA0A /* RootNode.m */; };
 		6EB8D97614F7506E0079E140 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97214F7506E0079E140 /* libTestFlight.a */; };
@@ -173,6 +176,9 @@
 		6E8B059314D0DFC000EBC107 /* Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Code.m; sourceTree = "<group>"; };
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6EA61F5A14FA25A200A36228 /* blacktocat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacktocat.png; sourceTree = "<group>"; };
+		6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_019_cogwheel.png; sourceTree = "<group>"; };
+		6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_019_cogwheel@2x.png"; sourceTree = "<group>"; };
+		6EA68BEF1527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_halflings_018_cogwheel.png; sourceTree = "<group>"; };
 		6EB1898014FEF72E00B17DF9 /* IconIPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconIPad.png; sourceTree = "<group>"; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
@@ -326,6 +332,9 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				6EA68BEF1527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png */,
+				6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */,
+				6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */,
 				6EA61F5A14FA25A200A36228 /* blacktocat.png */,
 				6E895F0214D9D07A00D98866 /* jackalope.png */,
 				6E8B052414D0CBF800EBC107 /* file.png */,
@@ -543,7 +552,7 @@
 		6E8B04C914D0C47900EBC107 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 6E8B04CC14D0C47900EBC107 /* Build configuration list for PBXProject "Jackalope" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -589,6 +598,9 @@
 				6EB1898114FEF72E00B17DF9 /* IconIPad.png in Resources */,
 				6E3FF2C3150AC1940027D980 /* CommitView_iPad.xib in Resources */,
 				6E3FF2C7150AC1A70027D980 /* CommitView_iPhone.xib in Resources */,
+				6EA68BEC1527B11800A3660E /* glyphicons_019_cogwheel.png in Resources */,
+				6EA68BED1527B11800A3660E /* glyphicons_019_cogwheel@2x.png in Resources */,
+				6EA68BF01527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

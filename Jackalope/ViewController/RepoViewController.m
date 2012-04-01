@@ -11,8 +11,6 @@
 #import "SBJSON.h"
 #import "TreeNode.h"
 #import "BlobNode.h"
-#import "AppUser.h"
-
 
 @interface RepoViewController ()
 - (void) showBlob:(BlobNode *)blob;

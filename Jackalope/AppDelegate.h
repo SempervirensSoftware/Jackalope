@@ -16,10 +16,9 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController *repoNavigationController;
 @property (strong, nonatomic) UISplitViewController *splitViewController;
-@property (strong, nonatomic) UIViewController *loginController;
 
 -(void) userLoggedIn;
--(void) showCodingView;
 -(void) showLogin;
+-(void) showCodingView;
 
 @end

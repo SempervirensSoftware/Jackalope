@@ -12,7 +12,7 @@
 #import "PTCodeLayer.h"
 #import "PTCursorView.h"
 
-@interface PTCodeScrollView : UIScrollView <UITextInput>
+@interface PTCodeScrollView : UIScrollView <UITextInput, UIScrollViewDelegate>
 {
     CodeDecorator*              _decorator;
     PTCursorView*               _cursorView;

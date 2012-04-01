@@ -11,7 +11,5 @@
 @interface User : NSObject
 
 @property(nonatomic, retain) NSString* name;
-@property(nonatomic, retain) NSString* githubUserName;
-@property(nonatomic, retain) NSString* githubToken;
 
 @end
