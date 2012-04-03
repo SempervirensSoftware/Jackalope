@@ -16,7 +16,7 @@
 @property(nonatomic, readonly, retain) NSString* githubUserName;
 @property(nonatomic, readonly, retain) NSString* githubToken;
 
--(void) loginWithToken:(NSString *)token andUserName:(NSString *)userName;
+-(void) loginWithToken:(NSString *)token email:(NSString *)email andUserName:(NSString *)userName;
 -(void) logout;
 -(BOOL) isLoggedIn;
 

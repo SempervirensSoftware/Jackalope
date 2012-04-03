@@ -73,8 +73,8 @@
     [[[UIAlertView alloc] initWithTitle:@"Success!"
                                 message:@"Your changes were successfully committed to GitHub" 
                                delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];   
-
     [self.navigationController popViewControllerAnimated:YES];
+    
     [TestFlight passCheckpoint:@"CommitSuccess"];
 }
 

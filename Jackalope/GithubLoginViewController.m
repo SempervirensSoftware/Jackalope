@@ -48,7 +48,9 @@
     {
         NSString* token = [request.URL queryValueForKey:@"token"];
         NSString* gitUserName = [request.URL queryValueForKey:@"gitUserName"]; 
-        [CurrentUser loginWithToken:token andUserName:gitUserName];
+        NSString* email = [request.URL queryValueForKey:@"email"]; 
+        [CurrentUser loginWithToken:token email:email andUserName:gitUserName];
+
         NSLog(@"loginUser: %@(%@)", CurrentUser.githubUserName, CurrentUser.githubToken);
         [TestFlight passCheckpoint:@"LoginSuccess"];
         

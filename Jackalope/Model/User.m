@@ -10,6 +10,6 @@
 
 @implementation User
 
-@synthesize name;
+@synthesize name, email;
 
 @end

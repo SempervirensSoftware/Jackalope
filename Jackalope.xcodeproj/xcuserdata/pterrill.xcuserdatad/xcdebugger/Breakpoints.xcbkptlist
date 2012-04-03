@@ -78,33 +78,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Jackalope/Model/Git/AppUser.m"
-         timestampString = "354928523.303614"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
-         landmarkName = "-setGithubUserName:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Jackalope/Model/Git/AppUser.m"
-         timestampString = "354928523.303614"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
-         landmarkName = "-setGithubToken:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Jackalope/Model/Git/AppUser.m"
-         timestampString = "354928523.303614"
+         timestampString = "355100182.567538"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "106"
@@ -117,12 +91,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Jackalope/Model/Git/AppUser.m"
-         timestampString = "354928523.303614"
+         timestampString = "355100182.567538"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
-         landmarkName = "-init"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
+         landmarkName = "-setGithubToken:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Jackalope/Model/Git/AppUser.m"
+         timestampString = "355100182.567538"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "-setGithubUserName:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -17,7 +17,7 @@
 
 @implementation BranchNode
 
-@synthesize repoName, headCommitSHA, rootTree;
+@synthesize repoOwner, repoName, headCommitSHA, rootTree;
 
 -(void) commonInit
 {
@@ -67,7 +67,7 @@
 
 - (NSURLRequest *) commitRequestForBlob:(BlobNode*)blob
  {    
-     NSString* urlString = [self appendUrlParamsToString:[NSString stringWithFormat:@"%@/repo/%@/tree",kServerRootURL,self.repoName]];
+     NSString* urlString = [self appendUrlParamsToString:[NSString stringWithFormat:@"%@/repo/%@/%@/tree",kServerRootURL,self.repoOwner,self.repoName]];
      NSLog(@"commitBlob:%@", blob.fullPath);
 
      NSURL *url = [NSURL URLWithString:urlString];     
@@ -84,8 +84,9 @@
 - (NSData *) commitBodyForBlob:(BlobNode*)blob
  {     
      NSDictionary *map = [[NSDictionary alloc] initWithObjectsAndKeys:
-     self.repoName, @"repoName", self.rootTree.sha, @"repoRootSHA", self.headCommitSHA, @"commitSHA", self.name, @"branchName",
-     blob.name, @"blobName", blob.fullPath, @"blobFullPath", blob.sha, @"blobSHA", blob.fileContent, @"blobContent", blob.commitMessage, @"commitMessage", nil];
+                          self.repoName, @"repoName", self.rootTree.sha, @"repoRootSHA", self.headCommitSHA, @"commitSHA", self.name, @"branchName",
+                          blob.name, @"blobName", blob.fullPath, @"blobFullPath", blob.sha, @"blobSHA", blob.fileContent, @"blobContent", 
+                          blob.commitMessage, @"commitMessage", CurrentUser.email, @"authorEmail", CurrentUser.githubUserName, @"authorName", nil];
      
      SBJSON *jsonWriter = [SBJSON new];
      NSString *jsonString = [jsonWriter stringWithObject:map];
@@ -171,7 +172,7 @@
 
 -(NSString *)updateURL
 {
-    return [NSString stringWithFormat:@"%@/repo/%@/branches/%@.json", kServerRootURL, self.repoName, self.headCommitSHA];
+    return [NSString stringWithFormat:@"%@/repo/%@/%@/branches/%@.json", kServerRootURL, self.repoOwner, self.repoName, self.headCommitSHA];
 }
 
 -(NSString *)type

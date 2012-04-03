@@ -53,7 +53,7 @@
 
 - (NSString *) appendUrlParamsToString:(NSString *)baseURL
 {
-    return [NSString stringWithFormat:@"%@?token=%@&gitUserName=%@",baseURL, CurrentUser.githubToken, CurrentUser.githubUserName];
+    return [NSString stringWithFormat:@"%@?token=%@",baseURL, CurrentUser.githubToken];
 }
 
 - (void) setSha:(NSString *)sha

@@ -56,6 +56,7 @@
 -(void) dealloc
 {
     [_codeView removeTextInputDelegate:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void) setBlobNode:(BlobNode *)blob;
@@ -80,6 +81,11 @@
         if (self.masterPopoverController != nil) {
             [self.masterPopoverController dismissPopoverAnimated:YES];
         }
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc removeObserver:self];
+        [nc addObserver:self selector:@selector(BlobCommitSuccess:) 
+                   name:NODE_COMMIT_SUCCESS object:_blobNode]; 
     }
 }
 
@@ -134,6 +140,11 @@
      _blobNode.fileContent = _codeView.code.plainText;
     commitController.blobNode = _blobNode;
     [self.navigationController pushViewController:commitController animated:YES];
+}
+
+-(void)BlobCommitSuccess:(NSNotification *)note
+{
+    _unsavedChanges = NO;
 }
 
 - (void)didReceiveMemoryWarning

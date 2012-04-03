@@ -14,6 +14,7 @@
     NSMutableDictionary*    _nodeHash;        
 }
 
+@property (nonatomic, retain) NSString*             repoOwner;
 @property (nonatomic, retain) NSString*             repoName;
 @property (nonatomic, retain) NSString*             headCommitSHA;
 @property (nonatomic, retain) GitNode*              rootTree;

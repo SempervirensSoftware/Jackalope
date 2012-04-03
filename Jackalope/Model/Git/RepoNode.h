@@ -12,6 +12,7 @@
 @interface RepoNode : GitNode
 
 @property (nonatomic)           BOOL        isPrivate;
+@property (retain, nonatomic)   NSString*   repoOwner;
 @property (retain, nonatomic)   NSString*   masterBranch;
 
 @end

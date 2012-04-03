@@ -61,10 +61,14 @@
 		6E8B059114D0DDC300EBC107 /* PTCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058F14D0DDC300EBC107 /* PTCursorView.m */; };
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
+		6EA19F6B152911AE00DA67A4 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA19F6A152911AE00DA67A4 /* FeedViewController.m */; };
+		6EA19F6F1529124E00DA67A4 /* FeedView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */; };
+		6EA19F721529130600DA67A4 /* FeedView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */; };
+		6EA19F751529157300DA67A4 /* FeedCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */; };
+		6EA19F781529311700DA67A4 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA19F771529311700DA67A4 /* FeedCell.m */; };
 		6EA61F5B14FA25A200A36228 /* blacktocat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA61F5A14FA25A200A36228 /* blacktocat.png */; };
 		6EA68BEC1527B11800A3660E /* glyphicons_019_cogwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */; };
 		6EA68BED1527B11800A3660E /* glyphicons_019_cogwheel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */; };
-		6EA68BF01527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEF1527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png */; };
 		6EB1898114FEF72E00B17DF9 /* IconIPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB1898014FEF72E00B17DF9 /* IconIPad.png */; };
 		6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7730C14DB27E20015FA0A /* RootNode.m */; };
 		6EB8D97614F7506E0079E140 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97214F7506E0079E140 /* libTestFlight.a */; };
@@ -175,10 +179,16 @@
 		6E8B059214D0DFC000EBC107 /* Code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Code.h; sourceTree = "<group>"; };
 		6E8B059314D0DFC000EBC107 /* Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Code.m; sourceTree = "<group>"; };
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6EA19F69152911AE00DA67A4 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		6EA19F6A152911AE00DA67A4 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		6EA19F6E1529124E00DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedView_iPad.xib; sourceTree = "<group>"; };
+		6EA19F711529130600DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedView_iPhone.xib; sourceTree = "<group>"; };
+		6EA19F741529157300DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedCell_iPhone.xib; sourceTree = "<group>"; };
+		6EA19F761529311700DA67A4 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
+		6EA19F771529311700DA67A4 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
 		6EA61F5A14FA25A200A36228 /* blacktocat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacktocat.png; sourceTree = "<group>"; };
 		6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_019_cogwheel.png; sourceTree = "<group>"; };
 		6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_019_cogwheel@2x.png"; sourceTree = "<group>"; };
-		6EA68BEF1527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_halflings_018_cogwheel.png; sourceTree = "<group>"; };
 		6EB1898014FEF72E00B17DF9 /* IconIPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconIPad.png; sourceTree = "<group>"; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
@@ -244,6 +254,11 @@
 				6E4101AF14D2346A0067A321 /* CodeView_iPhone.xib */,
 				6E3FF2C1150AC1940027D980 /* CommitView_iPad.xib */,
 				6E3FF2C5150AC1A70027D980 /* CommitView_iPhone.xib */,
+				6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */,
+				6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */,
+				6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */,
+				6EA19F761529311700DA67A4 /* FeedCell.h */,
+				6EA19F771529311700DA67A4 /* FeedCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -332,7 +347,6 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
-				6EA68BEF1527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png */,
 				6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */,
 				6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */,
 				6EA61F5A14FA25A200A36228 /* blacktocat.png */,
@@ -389,16 +403,18 @@
 			children = (
 				6E8B04E514D0C47900EBC107 /* AppDelegate.h */,
 				6E8B04E614D0C47900EBC107 /* AppDelegate.m */,
-				6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */,
-				6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */,
-				6E8B054714D0CE9800EBC107 /* RepoViewController.h */,
-				6E8B054814D0CE9800EBC107 /* RepoViewController.m */,
-				6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */,
-				6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */,
 				6E8B054514D0CE9800EBC107 /* CodeViewController.h */,
 				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
 				6E3FF2C8150AC1E00027D980 /* CommitViewController.h */,
 				6E3FF2C9150AC1E00027D980 /* CommitViewController.m */,
+				6EA19F69152911AE00DA67A4 /* FeedViewController.h */,
+				6EA19F6A152911AE00DA67A4 /* FeedViewController.m */,
+				6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */,
+				6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */,
+				6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */,
+				6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */,
+				6E8B054714D0CE9800EBC107 /* RepoViewController.h */,
+				6E8B054814D0CE9800EBC107 /* RepoViewController.m */,
 			);
 			name = Controller;
 			path = ViewController;
@@ -600,7 +616,9 @@
 				6E3FF2C7150AC1A70027D980 /* CommitView_iPhone.xib in Resources */,
 				6EA68BEC1527B11800A3660E /* glyphicons_019_cogwheel.png in Resources */,
 				6EA68BED1527B11800A3660E /* glyphicons_019_cogwheel@2x.png in Resources */,
-				6EA68BF01527B58E00A3660E /* glyphicons_halflings_018_cogwheel.png in Resources */,
+				6EA19F6F1529124E00DA67A4 /* FeedView_iPad.xib in Resources */,
+				6EA19F721529130600DA67A4 /* FeedView_iPhone.xib in Resources */,
+				6EA19F751529157300DA67A4 /* FeedCell_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +685,8 @@
 				6E895F1214DA369800D98866 /* GitNode.m in Sources */,
 				6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */,
 				6E3FF2CA150AC1E00027D980 /* CommitViewController.m in Sources */,
+				6EA19F6B152911AE00DA67A4 /* FeedViewController.m in Sources */,
+				6EA19F781529311700DA67A4 /* FeedCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +773,30 @@
 			name = TreeView_iPhone.xib;
 			sourceTree = "<group>";
 		};
+		6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EA19F6E1529124E00DA67A4 /* en */,
+			);
+			name = FeedView_iPad.xib;
+			sourceTree = "<group>";
+		};
+		6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EA19F711529130600DA67A4 /* en */,
+			);
+			name = FeedView_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EA19F741529157300DA67A4 /* en */,
+			);
+			name = FeedCell_iPhone.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -809,6 +853,7 @@
 		6E8B051214D0C47900EBC107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -828,6 +873,7 @@
 		6E8B051314D0C47900EBC107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -901,6 +947,7 @@
 		6EB8D98014F833600079E140 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

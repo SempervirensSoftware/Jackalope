@@ -13,7 +13,7 @@
 
 @implementation RepoNode
 
-@synthesize isPrivate, masterBranch;
+@synthesize isPrivate, repoOwner, masterBranch;
 
 -(void) setValuesFromDictionary:(NSDictionary *)valueMap
 {
@@ -29,6 +29,13 @@
     if ([valueMap objectForKey:@"master_branch"]){
         self.masterBranch = [valueMap objectForKey:@"master_branch"];
     }
+    if ([valueMap objectForKey:@"owner"]){
+        NSDictionary* ownerHash = [valueMap objectForKey:@"owner"];
+        
+        if ([ownerHash objectForKey:@"login"]){
+            self.repoOwner = [ownerHash objectForKey:@"login"];
+        }
+    }
 }
 
 -(void) setValuesFromApiResponse:(NSString *)jsonString
@@ -41,6 +48,7 @@
     for (NSDictionary *branchHash in branches) { 
         BranchNode* newNode = [[BranchNode alloc] init];
         [newNode setValuesFromDictionary:branchHash];
+        newNode.repoOwner = self.repoOwner;
         newNode.repoName = self.name;
         newNode.fullPath = [NSString stringWithFormat:@"%@/%@",self.name, newNode.name];
         newNode.operationQueue = self.operationQueue;
@@ -52,7 +60,7 @@
 
 -(NSString*) updateURL
 {
-    return [NSString stringWithFormat:@"%@/repo/%@/branches.json",kServerRootURL,self.name];
+    return [NSString stringWithFormat:@"%@/repo/%@/%@/branches.json",kServerRootURL,self.repoOwner,self.name];
 }
 
 -(NSString *)type

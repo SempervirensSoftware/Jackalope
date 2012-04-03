@@ -52,6 +52,7 @@
     if (CurrentUser.isLoggedIn)
     {
         [self userLoggedIn];
+        [TestFlight passCheckpoint:@"AutoLogin"];
     }
     else
     {

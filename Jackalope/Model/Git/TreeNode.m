@@ -66,7 +66,7 @@
 
 -(NSString *)updateURL
 {
-    return [NSString stringWithFormat:@"%@/repo/%@/tree/%@.json", kServerRootURL, self.parentBranch.repoName, self.sha];
+    return [NSString stringWithFormat:@"%@/repo/%@/%@/tree/%@.json", kServerRootURL, self.parentBranch.repoOwner, self.parentBranch.repoName, self.sha];
 }
 
 -(NSString *)type

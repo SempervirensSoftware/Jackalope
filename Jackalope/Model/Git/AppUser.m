@@ -11,12 +11,13 @@
 static AppUser* _instance = nil;
 NSString * const JackalopeGithubTokenPrefKey = @"JackalopeGithubTokenPrefKey";
 NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefKey";
+NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
 
 @implementation AppUser
 
 @synthesize githubToken = _githubToken;
 @synthesize githubUserName = _githubUserName;
-
+@synthesize email = _email;
 
 + (AppUser *) currentUser
 {
@@ -45,29 +46,30 @@ NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefK
     
     if (self)
     {
-        _githubToken = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubTokenPrefKey];
+        _githubToken    = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubTokenPrefKey];
         _githubUserName = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubUserNamePrefKey];        
+        _email          = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeEmailPrefKey];
         
         NSLog(@"loadUser: %@(%@)", self.githubUserName, self.githubToken);
-        [TestFlight passCheckpoint:@"AutoLogin"];
     }
     
     return self;
 }
 
 -(BOOL) isLoggedIn{
-    if (self.githubToken && self.githubUserName){
+    if (self.githubToken && self.githubUserName && self.email){
         return YES;
     }
     
     return NO;
 }
 
--(void) loginWithToken:(NSString *)token andUserName:(NSString *)userName
+-(void) loginWithToken:(NSString *)token email:(NSString *)Email andUserName:(NSString *)userName
 {
     self.name = userName;
     self.githubUserName = userName;
     self.githubToken = token;
+    self.email = Email;
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -77,6 +79,7 @@ NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefK
     self.name = nil;
     self.githubToken = nil;
     self.githubUserName = nil;
+    self.email = nil;
 
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -106,5 +109,19 @@ NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefK
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:JackalopeGithubUserNamePrefKey];
     }
 }
+
+-(void) setEmail:(NSString *)email
+{
+    _email = email;
+    
+    if (email)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:email forKey:JackalopeEmailPrefKey];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:JackalopeEmailPrefKey];
+    }
+}
+
 
 @end
