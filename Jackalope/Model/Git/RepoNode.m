@@ -13,36 +13,24 @@
 
 @implementation RepoNode
 
-@synthesize isPrivate, repoOwner, masterBranch;
+@synthesize repoOwner;
 
 -(void) setValuesFromDictionary:(NSDictionary *)valueMap
 {
-    if ([valueMap objectForKey:@"id"]){
-        self.sha = [valueMap objectForKey:@"id"];
-    }
     if ([valueMap objectForKey:@"name"]){
         self.name = [valueMap objectForKey:@"name"];
     }
-    if ([valueMap objectForKey:@"private"]){
-        self.isPrivate = [[valueMap objectForKey:@"private"] boolValue];
-    }
-    if ([valueMap objectForKey:@"master_branch"]){
-        self.masterBranch = [valueMap objectForKey:@"master_branch"];
-    }
     if ([valueMap objectForKey:@"owner"]){
-        NSDictionary* ownerHash = [valueMap objectForKey:@"owner"];
-        
-        if ([ownerHash objectForKey:@"login"]){
-            self.repoOwner = [ownerHash objectForKey:@"login"];
-        }
+        self.repoOwner = [valueMap objectForKey:@"owner"];
     }
 }
 
--(void) setValuesFromApiResponse:(NSString *)jsonString
+-(void) setValuesFromRefreshResponse:(id)responseObject
 {
-    SBJSON *jsonParser = [SBJSON new];
-    NSArray *branches = (NSArray *) [jsonParser objectWithString:jsonString];
-
+    if (![responseObject isKindOfClass:[NSArray class]])
+    {  return; }
+    
+    NSArray* branches = (NSArray*) responseObject;
     NSMutableArray *tempChildren = [[NSMutableArray alloc] init];
     
     for (NSDictionary *branchHash in branches) { 

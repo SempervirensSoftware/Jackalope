@@ -8,7 +8,6 @@
 
 #import "RootNode.h"
 #import "RepoNode.h"
-#import "SBJSON.h"
 
 @implementation RootNode
 
@@ -24,11 +23,11 @@
     return  self;
 }
 
-- (void) setValuesFromApiResponse:(NSString *) jsonString{
+- (void) setValuesFromRefreshResponse:(id)responseObject{
+    if (![responseObject isKindOfClass:[NSArray class]])
+        {  return; }
     
-    SBJSON *jsonParser = [SBJSON new];
-    NSArray *repos = (NSArray *) [jsonParser objectWithString:jsonString];
-    
+    NSArray* repos = (NSArray*) responseObject;
     NSMutableArray *tempChildren = [[NSMutableArray alloc] init];
     
     for (NSDictionary *repoHash in repos) { 

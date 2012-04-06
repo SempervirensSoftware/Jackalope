@@ -7,7 +7,6 @@
 //
 
 #import "TreeNode.h"
-#import "SBJSON.h"
 
 @implementation TreeNode
 
@@ -23,11 +22,12 @@
     }
 }
 
-- (void) setValuesFromApiResponse:(NSString *) jsonString{
-
-    SBJSON *jsonParser = [SBJSON new];
-    NSDictionary *treeHash = (NSDictionary *) [jsonParser objectWithString:jsonString];
+- (void) setValuesFromRefreshResponse:(id)responseObject
+{
+    if (![responseObject isKindOfClass:[NSDictionary class]])
+    {  return; }
     
+    NSDictionary* treeHash = (NSDictionary*) responseObject;    
     [self setValuesFromDictionary:treeHash];
     
     NSArray *childrenHashes = (NSArray *) [treeHash objectForKey:@"tree"];

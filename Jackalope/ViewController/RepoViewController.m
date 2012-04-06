@@ -138,7 +138,7 @@ static RepoViewController *_instance = nil;
              object:blob];
 
     
-    [blob refreshData];    
+    [blob refresh];    
 }
 
 -(void) showCodeView{

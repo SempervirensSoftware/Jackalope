@@ -61,7 +61,7 @@
                name:NODE_UPDATE_FAILED
              object:node];
 
-    [node refreshData];
+    [node refresh];
 }
 
 -(void)NodeUpdateSuccess:(NSNotification *)note

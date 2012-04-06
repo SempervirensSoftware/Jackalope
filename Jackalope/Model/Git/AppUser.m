@@ -76,6 +76,8 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
 
 -(void) logout
 {
+    NSLog(@"logout (%@)",self.name);
+    
     self.name = nil;
     self.githubToken = nil;
     self.githubUserName = nil;

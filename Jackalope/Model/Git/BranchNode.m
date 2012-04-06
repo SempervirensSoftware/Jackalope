@@ -158,10 +158,10 @@
     }
 }
 
--(void) setValuesFromApiResponse:(NSString *)jsonString
+-(void) setValuesFromRefreshResponse:(id)responseObject
 {    
     TreeNode* rootNode = (TreeNode*)[self getTreeNodeWithPath:@""];
-    [rootNode setValuesFromApiResponse:jsonString];
+    [rootNode setValuesFromRefreshResponse:responseObject];
     self.rootTree = rootNode;    
 }
 

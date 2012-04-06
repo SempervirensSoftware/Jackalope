@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6E1EF80A14F6FA91004FEAEE /* VeraMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */; };
+		6E3C678C152AA91D00BD8953 /* SettingsView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C678A152AA91D00BD8953 /* SettingsView_iPhone.xib */; };
+		6E3C6798152AD24D00BD8953 /* LoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C6797152AD24D00BD8953 /* LoginTableViewCell.m */; };
+		6E3C679C152B89C100BD8953 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C679B152B89C100BD8953 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		6E3FF2C3150AC1940027D980 /* CommitView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3FF2C1150AC1940027D980 /* CommitView_iPad.xib */; };
 		6E3FF2C7150AC1A70027D980 /* CommitView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3FF2C5150AC1A70027D980 /* CommitView_iPhone.xib */; };
 		6E3FF2CA150AC1E00027D980 /* CommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3FF2C9150AC1E00027D980 /* CommitViewController.m */; };
@@ -93,6 +96,11 @@
 
 /* Begin PBXFileReference section */
 		6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VeraMono.ttf; sourceTree = "<group>"; };
+		6E3C678B152AA91D00BD8953 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsView_iPhone.xib; sourceTree = "<group>"; };
+		6E3C6796152AD24D00BD8953 /* LoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCell.h; sourceTree = "<group>"; };
+		6E3C6797152AD24D00BD8953 /* LoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCell.m; sourceTree = "<group>"; };
+		6E3C679A152B89C100BD8953 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		6E3C679B152B89C100BD8953 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		6E3FF2C2150AC1940027D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CommitView_iPad.xib; sourceTree = "<group>"; };
 		6E3FF2C6150AC1A70027D980 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CommitView_iPhone.xib; sourceTree = "<group>"; };
 		6E3FF2C8150AC1E00027D980 /* CommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitViewController.h; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 		6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GithubLoginViewController.h; path = ../GithubLoginViewController.h; sourceTree = "<group>"; };
 		6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GithubLoginViewController.m; path = ../GithubLoginViewController.m; sourceTree = "<group>"; };
 		6EB90C3714D78A4300B7D378 /* GithubLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GithubLoginViewController.xib; sourceTree = "<group>"; };
+		6ED8BC6F152F664C0009E451 /* Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +243,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E3C6799152B89C100BD8953 /* NSData_Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				6E3C679A152B89C100BD8953 /* NSData+Base64.h */,
+				6E3C679B152B89C100BD8953 /* NSData+Base64.m */,
+			);
+			path = NSData_Base64;
+			sourceTree = "<group>";
+		};
 		6E514C2F14D8B2F7000CBF1B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +277,9 @@
 				6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */,
 				6EA19F761529311700DA67A4 /* FeedCell.h */,
 				6EA19F771529311700DA67A4 /* FeedCell.m */,
+				6E3C678A152AA91D00BD8953 /* SettingsView_iPhone.xib */,
+				6E3C6796152AD24D00BD8953 /* LoginTableViewCell.h */,
+				6E3C6797152AD24D00BD8953 /* LoginTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -360,6 +381,7 @@
 		6E8B052814D0CC1F00EBC107 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				6E3C6799152B89C100BD8953 /* NSData_Base64 */,
 				6EB8D97114F7506E0079E140 /* TestFlightSDK0.8.3 */,
 				6E8B052914D0CC1F00EBC107 /* JSON */,
 				6E8B053714D0CC1F00EBC107 /* OHAttributedLabel */,
@@ -432,6 +454,7 @@
 				6EB90C3314D77C4000B7D378 /* User.m */,
 				6E8B059214D0DFC000EBC107 /* Code.h */,
 				6E8B059314D0DFC000EBC107 /* Code.m */,
+				6ED8BC6F152F664C0009E451 /* Error.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -619,6 +642,7 @@
 				6EA19F6F1529124E00DA67A4 /* FeedView_iPad.xib in Resources */,
 				6EA19F721529130600DA67A4 /* FeedView_iPhone.xib in Resources */,
 				6EA19F751529157300DA67A4 /* FeedCell_iPhone.xib in Resources */,
+				6E3C678C152AA91D00BD8953 /* SettingsView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +711,8 @@
 				6E3FF2CA150AC1E00027D980 /* CommitViewController.m in Sources */,
 				6EA19F6B152911AE00DA67A4 /* FeedViewController.m in Sources */,
 				6EA19F781529311700DA67A4 /* FeedCell.m in Sources */,
+				6E3C6798152AD24D00BD8953 /* LoginTableViewCell.m in Sources */,
+				6E3C679C152B89C100BD8953 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +735,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6E3C678A152AA91D00BD8953 /* SettingsView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E3C678B152AA91D00BD8953 /* en */,
+			);
+			name = SettingsView_iPhone.xib;
+			sourceTree = "<group>";
+		};
 		6E3FF2C1150AC1940027D980 /* CommitView_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -853,7 +887,6 @@
 		6E8B051214D0C47900EBC107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -873,7 +906,6 @@
 		6E8B051314D0C47900EBC107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -947,7 +979,6 @@
 		6EB8D98014F833600079E140 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

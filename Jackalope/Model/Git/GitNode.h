@@ -10,6 +10,11 @@
 #import "SBJSON.h"
 
 @interface GitNode : NSObject
+{
+    int _refreshRetryCount;
+}
+
+
 
 @property (retain, nonatomic)           NSString*           sha;
 @property (retain, nonatomic)           NSString*           name;
@@ -18,15 +23,17 @@
 @property (retain, nonatomic)           NSOperationQueue*   operationQueue;
 @property (retain, nonatomic)           NSArray*            children;
 
-- (void)        refreshData;
+- (void)        refresh;
+- (BOOL)        validateRefreshResponse:(id)responseObject;
 - (NSString *)  appendUrlParamsToString:(NSString *)baseURL;
 
 // ******************************************************************* //
 //   These should be overriden as appropriate for the child classes
 // ******************************************************************* //
-- (void)        setValuesFromApiResponse:(NSString *) jsonString;
+- (void)        setValuesFromRefreshResponse:(id) responseObjects;
 - (void)        setValuesFromDictionary:(NSDictionary *) valueMap;
 - (NSString*)   updateURL;
+// ******************************************************************* //
 
 extern NSString *const NODE_TYPE_ROOT;
 extern NSString *const NODE_TYPE_REPO;
@@ -38,6 +45,7 @@ extern NSString *const NODE_COMMIT_SUCCESS;
 extern NSString *const NODE_COMMIT_FAILED;
 
 extern NSString *const NODE_UPDATE_SUCCESS;
+extern NSString *const NODE_UPDATE_RETRY;
 extern NSString *const NODE_UPDATE_FAILED;
 
 @end

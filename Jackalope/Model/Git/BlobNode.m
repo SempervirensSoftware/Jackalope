@@ -8,8 +8,6 @@
 
 #import "BlobNode.h"
 
-#import "SBJSON.h"
-
 @implementation BlobNode
 
 @synthesize fileContent, commitMessage;
@@ -29,9 +27,21 @@
     [self.parentBranch commitBlobNode:self];
 }
 
--(void) setValuesFromApiResponse:(NSString *)jsonString
+- (void) setValuesFromDictionary:(NSDictionary *) valueMap 
 {
-    self.fileContent = jsonString;            
+    [super setValuesFromDictionary:valueMap];
+    
+    if ([valueMap objectForKey:@"content"]){
+        self.fileContent = [valueMap objectForKey:@"content"];
+    }
+}
+
+-(void) setValuesFromRefreshResponse:(id)responseObject
+{
+    if (![responseObject isKindOfClass:[NSDictionary class]])
+    {  return; }
+    
+    [self setValuesFromDictionary:(NSDictionary*) responseObject];
 }
 
 -(NSString *)updateURL
