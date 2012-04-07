@@ -61,6 +61,10 @@
                name:NODE_UPDATE_FAILED
              object:node];
 
+    _isError = NO;
+    _isLoading = YES;
+    [self.tableView reloadData];
+
     [node refresh];
 }
 

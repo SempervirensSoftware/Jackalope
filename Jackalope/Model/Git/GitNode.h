@@ -14,8 +14,6 @@
     int _refreshRetryCount;
 }
 
-
-
 @property (retain, nonatomic)           NSString*           sha;
 @property (retain, nonatomic)           NSString*           name;
 @property (retain, nonatomic)           NSString*           fullPath;

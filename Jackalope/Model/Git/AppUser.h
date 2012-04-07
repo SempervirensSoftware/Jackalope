@@ -20,4 +20,7 @@
 -(void) logout;
 -(BOOL) isLoggedIn;
 
+extern NSString *const APPUSER_LOGIN;
+extern NSString *const APPUSER_LOGOUT;
+
 @end

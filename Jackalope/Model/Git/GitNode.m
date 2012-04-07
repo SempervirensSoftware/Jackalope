@@ -48,7 +48,7 @@ const int _maxRefreshCount = 1;
              NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
              SBJSON *jsonParser = [SBJSON new];
-             id responseObject = (NSArray *) [jsonParser objectWithString:responseString];
+             id responseObject = [jsonParser objectWithString:responseString];
 
              if ([self validateRefreshResponse:responseObject])
              {
@@ -79,37 +79,37 @@ const int _maxRefreshCount = 1;
         _refreshRetryCount = 0;
         return NO; 
     }
-
-    if ([responseObject isMemberOfClass:[NSDictionary class]])
-    {
-        NSDictionary* error = [(NSDictionary*)responseObject objectForKey:@"error"];
+    
+    NSDictionary* error = nil;    
+    if ([responseObject respondsToSelector:@selector(objectForKey:)]) {
+        error = [responseObject objectForKey:@"error"];  
+    }
+    
+    if (error){
+        int errorCode = [((NSString *)[error objectForKey:@"code"]) intValue];
+        NSLog(@"Error Refreshing Data (%d)", errorCode);
         
-        if (error){
-            int errorCode = [((NSString *)[error objectForKey:@"code"]) intValue];
-            NSLog(@"Error Refreshing Data (%d)", errorCode);
-            
-            switch (errorCode) {
-                case ERROR_USER_NOT_FOUND:
-                case ERROR_PARAM_TOKEN_NOT_FOUND:
-                    [CurrentUser logout];
-                    [GlobalAppDelegate showLogin];
+        switch (errorCode) {
+            case ERROR_USER_NOT_FOUND:
+            case ERROR_PARAM_TOKEN_NOT_FOUND:
+                [CurrentUser logout];
+                [GlobalAppDelegate showLogin];
+                _refreshRetryCount = 0;
+                break;                    
+            default:
+                // try again
+                if (_refreshRetryCount <= _maxRefreshCount){
+                    // the counter should be incremented before calling refresh
+                    _refreshRetryCount++;
+                    [self refresh];
+                }
+                else {
                     _refreshRetryCount = 0;
-                    break;                    
-                default:
-                    // try again
-                    if (_refreshRetryCount <= _maxRefreshCount){
-                        // the counter should be incremented before calling refresh
-                        _refreshRetryCount++;
-                        [self refresh];
-                    }
-                    else {
-                        _refreshRetryCount = 0;
-                    }
-                    break;
-            }
-            
-            return NO;
+                }
+                break;
         }
+        
+        return NO;
     }
     
     _refreshRetryCount =  0;

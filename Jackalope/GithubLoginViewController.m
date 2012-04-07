@@ -118,7 +118,7 @@
          {
              statusLabel.text = @"Error loading data. Please try again.";
              loginButton.enabled = YES;          
-             NSLog(@"Unknown Registration Error:%@", [error.userInfo description]);                 
+             NSLog(@"Registration Error: %@", [error.userInfo objectForKey:@"NSLocalizedDescription"]);                 
              return;
          }
          else

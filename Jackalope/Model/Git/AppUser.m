@@ -70,7 +70,9 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
     self.githubUserName = userName;
     self.githubToken = token;
     self.email = Email;
-    
+
+    NSNotification* note = [NSNotification notificationWithName:APPUSER_LOGIN object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:note];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -83,6 +85,8 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
     self.githubUserName = nil;
     self.email = nil;
 
+    NSNotification* note = [NSNotification notificationWithName:APPUSER_LOGOUT object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:note];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -125,5 +129,7 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
     }
 }
 
+NSString *const APPUSER_LOGIN = @"aIN";
+NSString *const APPUSER_LOGOUT = @"aOUT";
 
 @end

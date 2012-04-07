@@ -49,6 +49,9 @@ static RepoViewController *_instance = nil;
 
     if (self) {             
         _rootNode = [[RootNode alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedIn:) name:APPUSER_LOGIN object:nil];    
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedOut:) name:APPUSER_LOGOUT object:nil];    
+
     }           
     
     return self;
@@ -92,7 +95,8 @@ static RepoViewController *_instance = nil;
         else if (_codeViewController.unsavedChanges){
             _pendingBlob = (BlobNode*)node;
             [[[UIAlertView alloc] initWithTitle:@"Unsaved Changes"
-                                        message:[NSString stringWithFormat:@"Would you like to discard your changes to %@?",_pendingBlob.name] 
+                                        message:[NSString stringWithFormat:@"Would you like to discard your changes to %@?", 
+                                                 _codeViewController.blobNode.name] 
                                        delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Discard", nil] show];   
             
         }
@@ -147,6 +151,17 @@ static RepoViewController *_instance = nil;
         [self.navController pushViewController:_codeViewController animated:YES];
     }
 }
+
+-(void) UserLoggedIn:(NSNotification*) note
+{
+    _rootNode = [[RootNode alloc] init]; 
+}
+
+-(void) UserLoggedOut:(NSNotification*) note
+{
+    _rootNode = nil;
+}
+
 
 -(void) BlobUpdateSuccess:(NSNotification*) note
 {
