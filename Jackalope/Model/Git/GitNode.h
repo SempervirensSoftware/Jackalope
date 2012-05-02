@@ -23,12 +23,11 @@
 
 - (void)        refresh;
 - (BOOL)        validateRefreshResponse:(id)responseObject;
-- (NSString *)  appendUrlParamsToString:(NSString *)baseURL;
 
 // ******************************************************************* //
 //   These should be overriden as appropriate for the child classes
 // ******************************************************************* //
-- (void)        setValuesFromRefreshResponse:(id) responseObjects;
+- (void)        setValuesFromRefreshResponse:(id) responseObject;
 - (void)        setValuesFromDictionary:(NSDictionary *) valueMap;
 - (NSString*)   updateURL;
 // ******************************************************************* //

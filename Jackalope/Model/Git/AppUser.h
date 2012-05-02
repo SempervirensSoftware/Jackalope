@@ -13,12 +13,14 @@
 
 +(AppUser *) currentUser;
 
-@property(nonatomic, readonly, retain) NSString* githubUserName;
-@property(nonatomic, readonly, retain) NSString* githubToken;
+@property(nonatomic, readonly, retain)  NSString* githubUserName;
+@property(nonatomic, readonly, retain)  NSString* githubToken;
+@property(nonatomic, retain)            NSString* deviceToken;
 
 -(void) loginWithToken:(NSString *)token email:(NSString *)email andUserName:(NSString *)userName;
 -(void) logout;
 -(BOOL) isLoggedIn;
+-(NSString *) appendAuthTokenToUrlString:(NSString *)urlString;
 
 extern NSString *const APPUSER_LOGIN;
 extern NSString *const APPUSER_LOGOUT;

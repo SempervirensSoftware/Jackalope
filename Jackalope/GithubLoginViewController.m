@@ -12,6 +12,10 @@
 #import "SBJSON.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface  GithubLoginViewController ()
+-(void) initLoginTable;
+@end
+
 @implementation GithubLoginViewController
 
 @synthesize loginButton, activityIndicator, instructionLabel, statusLabel;
@@ -170,12 +174,27 @@
     // Do any additional setup after loading the view from its nib.
     activityIndicator.hidden = YES;
     
-    UITableView* table = [[UITableView alloc] initWithFrame:CGRectMake(5, 50, self.view.frame.size.width-10, 120) style:UITableViewStyleGrouped];
+    [self initLoginTable];   
+}
+
+-(void) initLoginTable
+{
+    // set default frame for iPhone view
+    CGRect tableFrame = CGRectMake(5, 50, self.view.frame.size.width-10, 120);    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPhone) {        
+        tableFrame.origin.y = 150;
+        tableFrame.size.width = 300;
+        tableFrame.origin.x = (self.view.frame.size.width - tableFrame.size.width)/2;
+    }
+    
+    UITableView* table = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     table.backgroundColor = [UIColor clearColor];
+    table.backgroundView = nil;
     table.scrollEnabled = NO;
     table.allowsSelection = NO;
+    
     [self.view addSubview:table];
 }
 

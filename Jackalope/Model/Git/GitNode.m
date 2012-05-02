@@ -7,7 +7,6 @@
 //
 
 #import "GitNode.h"
-#import "Error.h"
 
 @implementation GitNode
 
@@ -30,7 +29,7 @@ const int _maxRefreshCount = 1;
 
 - (void) refresh
 {
-    NSString* urlString = [self appendUrlParamsToString:[self updateURL]];
+    NSString* urlString = [CurrentUser appendAuthTokenToUrlString:[self updateURL]];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
 
@@ -114,11 +113,6 @@ const int _maxRefreshCount = 1;
     
     _refreshRetryCount =  0;
     return YES;
-}
-
-- (NSString *) appendUrlParamsToString:(NSString *)baseURL
-{
-    return [NSString stringWithFormat:@"%@?token=%@",baseURL, CurrentUser.githubToken];
 }
 
 - (void) setSha:(NSString *)sha

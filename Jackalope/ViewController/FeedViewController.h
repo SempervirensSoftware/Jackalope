@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedViewController : UITableViewController
+{
+    BOOL _isLoading;
+    BOOL _isError;
+    
+    NSMutableArray*     _feed;
+    UITableViewCell*    _notifyCell;
+}
+
+-(void) refreshFeed;
 
 @end

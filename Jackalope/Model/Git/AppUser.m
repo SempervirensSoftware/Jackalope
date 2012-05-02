@@ -11,12 +11,14 @@
 static AppUser* _instance = nil;
 NSString * const JackalopeGithubTokenPrefKey = @"JackalopeGithubTokenPrefKey";
 NSString * const JackalopeGithubUserNamePrefKey = @"JackalopeGithubUserNamePrefKey";
+NSString * const JackalopeDeviceTokenPrefKey = @"JackalopeDeviceTokenPrefKey";
 NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
 
 @implementation AppUser
 
 @synthesize githubToken = _githubToken;
 @synthesize githubUserName = _githubUserName;
+@synthesize deviceToken = _deviceToken;
 @synthesize email = _email;
 
 + (AppUser *) currentUser
@@ -49,7 +51,7 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
         _githubToken    = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubTokenPrefKey];
         _githubUserName = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeGithubUserNamePrefKey];        
         _email          = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeEmailPrefKey];
-        
+        //_deviceToken    = [[NSUserDefaults standardUserDefaults] objectForKey:JackalopeDeviceTokenPrefKey];
         NSLog(@"loadUser: %@(%@)", self.githubUserName, self.githubToken);
     }
     
@@ -70,10 +72,13 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
     self.githubUserName = userName;
     self.githubToken = token;
     self.email = Email;
+    self.deviceToken = GlobalAppDelegate.deviceToken;
 
-    NSNotification* note = [NSNotification notificationWithName:APPUSER_LOGIN object:self userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:note];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    if ([self isLoggedIn]){
+        NSNotification* note = [NSNotification notificationWithName:APPUSER_LOGIN object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:note];
+        [[NSUserDefaults standardUserDefaults] synchronize];        
+    }
 }
 
 -(void) logout
@@ -84,16 +89,34 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
     self.githubToken = nil;
     self.githubUserName = nil;
     self.email = nil;
+    self.deviceToken = nil;
 
     NSNotification* note = [NSNotification notificationWithName:APPUSER_LOGOUT object:self userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:note];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (NSString *) appendAuthTokenToUrlString:(NSString *)urlString
+{
+    NSRange qmarkRange = [urlString rangeOfString:@"?"];
+    NSString* paramSeperator = @"&";
+
+    if (qmarkRange.location == NSNotFound)
+    {
+        paramSeperator = @"?";
+    }
+    
+    return [NSString stringWithFormat:@"%@%@token=%@",urlString,paramSeperator,self.githubToken];
+}
+
+
 -(void) setGithubToken:(NSString *)githubToken
 {
-    _githubToken = githubToken;
+    // Don't need to update everything if the value hasn't changed
+    if ([githubToken isEqualToString:_githubToken])
+    { return; }
 
+    _githubToken = githubToken;
     if (githubToken)
     {
         [[NSUserDefaults standardUserDefaults] setObject:githubToken forKey:JackalopeGithubTokenPrefKey];
@@ -105,8 +128,11 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
 
 -(void) setGithubUserName:(NSString *)githubUserName
 {
-    _githubUserName = githubUserName;
+    // Don't need to update everything if the value hasn't changed
+    if ([githubUserName isEqualToString:_githubUserName])
+    { return; }
     
+    _githubUserName = githubUserName;    
     if (githubUserName)
     {
         [[NSUserDefaults standardUserDefaults] setObject:githubUserName forKey:JackalopeGithubUserNamePrefKey];
@@ -118,8 +144,11 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
 
 -(void) setEmail:(NSString *)email
 {
-    _email = email;
-    
+    // Don't need to update everything if the value hasn't changed
+    if ([email isEqualToString:_email])
+        { return; }
+
+    _email = email;    
     if (email)
     {
         [[NSUserDefaults standardUserDefaults] setObject:email forKey:JackalopeEmailPrefKey];
@@ -128,6 +157,41 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:JackalopeEmailPrefKey];
     }
 }
+
+-(void) setDeviceToken:(NSString*)deviceToken
+{
+    // Don't need to update everything if the value hasn't changed
+    if ([deviceToken isEqualToString:_deviceToken])
+        { return; }
+    
+    if (!deviceToken)
+    {
+        _deviceToken = deviceToken;
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:JackalopeDeviceTokenPrefKey];
+        return;
+    }
+        
+    NSString* urlString = [CurrentUser appendAuthTokenToUrlString:[NSString stringWithFormat:@"%@/user/apns?apnsToken=%@", kServerRootURL, deviceToken]];
+    NSURL *url = [NSURL URLWithString:urlString];     
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:[NSOperationQueue mainQueue] completionHandler:
+     ^(NSURLResponse* response, NSData* data, NSError* error) 
+     {
+         if (error || ( ((NSHTTPURLResponse*)response).statusCode != 200) )
+         {
+             NSLog(@"APNS Registration Error:(%d) %@", ((NSHTTPURLResponse*)response).statusCode, [error.userInfo objectForKey:@"NSLocalizedDescription"]);                 
+             return;
+         }
+         else
+         {
+             _deviceToken = deviceToken;
+             [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:JackalopeDeviceTokenPrefKey];
+             return;
+         }
+     }];
+}
+
 
 NSString *const APPUSER_LOGIN = @"aIN";
 NSString *const APPUSER_LOGOUT = @"aOUT";

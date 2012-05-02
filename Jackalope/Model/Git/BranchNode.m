@@ -67,7 +67,9 @@
 
 - (NSURLRequest *) commitRequestForBlob:(BlobNode*)blob
  {    
-     NSString* urlString = [self appendUrlParamsToString:[NSString stringWithFormat:@"%@/repo/%@/%@/tree",kServerRootURL,self.repoOwner,self.repoName]];
+     
+     NSString* urlString = [NSString stringWithFormat:@"%@/repo/%@/%@/tree",kServerRootURL,self.repoOwner,self.repoName];
+     urlString = [CurrentUser appendAuthTokenToUrlString:urlString];
      NSLog(@"commitBlob:%@", blob.fullPath);
 
      NSURL *url = [NSURL URLWithString:urlString];     

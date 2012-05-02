@@ -7,20 +7,82 @@
 //
 
 #import "FeedViewController.h"
+#import "SBJSON.h"
+#import "FeedItem.h"
 
 @interface FeedViewController ()
-
+-(void)customInit;
 @end
 
 @implementation FeedViewController
+
+-(void)customInit
+{
+    self.tabBarItem = [[UITabBarItem alloc]
+                       initWithTitle:@"Feed"
+                       image:[UIImage imageNamed:@"166-newspaper.png"] 
+                       tag:APP_TAB_FEED]; 
+    
+    _feed = [[NSMutableArray alloc] init];
+    _isLoading  = YES;
+    _isError    = NO;
+    _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
+    
+    [self refreshFeed];
+}
+
+- (id) init
+{
+    return [self initWithStyle:UITableViewStylePlain];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        [self customInit];
     }
     return self;
+}
+
+- (void)refreshFeed
+{
+    NSString* urlString = [NSString stringWithFormat:@"%@/feed.json", kServerRootURL];
+    urlString = [CurrentUser appendAuthTokenToUrlString:urlString];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    
+    [NSURLConnection sendAsynchronousRequest:req queue:[NSOperationQueue mainQueue] completionHandler:
+     ^(NSURLResponse* response, NSData* data, NSError* error) 
+     {
+         if (error)
+         {
+             _isError = YES;
+             NSLog(@"Error loading feed@%@ : %@", [req.URL absoluteString], [error localizedDescription]);
+         }
+         else
+         {             
+             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             
+             SBJSON *jsonParser = [SBJSON new];
+             id responseObject = [jsonParser objectWithString:responseString];
+             
+             if (![responseObject isKindOfClass:[NSArray class]])
+             {  return; }
+
+             NSArray* feedItems = (NSArray*) responseObject; 
+             [_feed removeAllObjects];
+             for (NSDictionary* feedItemDictionary in feedItems) {
+                 [_feed addObject:[[FeedItem alloc] initWithDictionary:feedItemDictionary]];
+             }
+         }
+
+         _isLoading = NO;
+         [self.tableView reloadData];
+     }];
+    
+    NSLog(@"refreshFeed@%@", urlString);
+
 }
 
 - (void)viewDidLoad
@@ -50,24 +112,51 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    if (_isLoading || _isError)
+    {
+        return 1;
+    }
+    else
+    {
+        return _feed.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    UIImage* cellIcon = nil;
+    NSString* cellText;
+    UITableViewCellAccessoryType cellAccessory = UITableViewCellAccessoryNone;
+    
+    if (_isError)
+    {
+        cellText = @"Error loading files.";
+    }
+    else if (_isLoading)
+    {
+        cellText = @"Loading...";
+    }
+    else
+    {
+        FeedItem* feedItem = [_feed objectAtIndex:[indexPath row]];
+        cellText = [NSString stringWithFormat:@"%@", feedItem.message];
+    }
+    
+    cell.accessoryType = cellAccessory;
+    [[cell textLabel] setText: cellText];
+    [[cell imageView] setImage:cellIcon];
     
     return cell;
 }

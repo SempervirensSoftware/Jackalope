@@ -15,8 +15,6 @@
     UIBarButtonItem*            _commitBtn;
     UIActivityIndicatorView*    _activityView;
     UIBarButtonItem*            _activityBtn;
-    
-
 }
 
 @property (nonatomic, retain) IBOutlet  PTCodeScrollView*           codeView;

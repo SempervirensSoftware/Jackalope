@@ -51,7 +51,6 @@ static RepoViewController *_instance = nil;
         _rootNode = [[RootNode alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedIn:) name:APPUSER_LOGIN object:nil];    
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedOut:) name:APPUSER_LOGOUT object:nil];    
-
     }           
     
     return self;
@@ -73,6 +72,11 @@ static RepoViewController *_instance = nil;
                 
         rootViewController.title = @"Repo Browser";
         _navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+        _navController.tabBarItem = [[UITabBarItem alloc]
+                                         initWithTitle:@"Repos"
+                                         image:[UIImage imageNamed:@"33-cabinet.png"] 
+                                         tag:APP_TAB_REPOS]; 
+
     }    
     
     return _navController;
@@ -155,6 +159,7 @@ static RepoViewController *_instance = nil;
 -(void) UserLoggedIn:(NSNotification*) note
 {
     _rootNode = [[RootNode alloc] init]; 
+    [self showRootNode];
 }
 
 -(void) UserLoggedOut:(NSNotification*) note
@@ -189,4 +194,5 @@ static RepoViewController *_instance = nil;
     }
     _pendingBlob = nil;
 }
+
 @end

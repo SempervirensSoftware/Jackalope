@@ -35,6 +35,7 @@
                                      style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];                                     
     self.navigationItem.rightBarButtonItem = _settingsBtn;
 
+    self.clearsSelectionOnViewWillAppear = YES;    
     
     return self;
 }
@@ -49,6 +50,9 @@
     _node = node;
     self.title = node.name;
     
+    _isError = NO;
+    _isLoading = YES;
+    
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self];    
     [nc addObserver:self
@@ -61,8 +65,6 @@
                name:NODE_UPDATE_FAILED
              object:node];
 
-    _isError = NO;
-    _isLoading = YES;
     [self.tableView reloadData];
 
     [node refresh];
@@ -170,8 +172,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    //[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 }
 
 - (void)viewDidUnload
