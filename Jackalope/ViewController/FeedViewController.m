@@ -28,6 +28,9 @@
     _isError    = NO;
     _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedIn:) name:APPUSER_LOGIN object:nil];    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedOut:) name:APPUSER_LOGOUT object:nil];    
+    
     [self refreshFeed];
 }
 
@@ -83,6 +86,17 @@
     
     NSLog(@"refreshFeed@%@", urlString);
 
+}
+
+-(void) UserLoggedIn:(NSNotification*) note
+{
+    [self refreshFeed];
+}
+
+-(void) UserLoggedOut:(NSNotification*) note
+{
+    _feed = [[NSMutableArray alloc] init];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad

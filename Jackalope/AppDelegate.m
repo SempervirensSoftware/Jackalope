@@ -11,6 +11,7 @@
 #import "CodeViewController.h"
 #import "GithubLoginViewController.h"
 #import "AppModesTabBarController.h"
+#import "RepoViewController.h"
 
 @interface AppDelegate ()
 
@@ -54,7 +55,7 @@
         self.splitViewController.viewControllers = [NSArray arrayWithObjects:appTab, detailViewNav, nil];
     }
                                                 
-    //[RepoViewController getInstance].codeViewController = codeViewController;
+    [RepoViewController getInstance].codeViewController = codeViewController;
 
     //Setup the app for notifications
     UIRemoteNotificationType noteTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound;

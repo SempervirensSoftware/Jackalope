@@ -111,7 +111,7 @@
 
 -(void) registerWithJackalope:(NSString *)GithubToken
 {
-    NSString* urlString = [NSString stringWithFormat:@"%@/users/register?token=%@", kServerRootURL, GithubToken];
+    NSString* urlString = [NSString stringWithFormat:@"%@/users/register.json?token=%@", kServerRootURL, GithubToken];
     NSURL *url = [NSURL URLWithString:urlString];     
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     
