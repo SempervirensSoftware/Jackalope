@@ -10,9 +10,13 @@
 #import "SBJSON.h"
 #import "FeedItem.h"
 
+NSString * const _cellIdentifier = @"feed";
+
 @interface FeedViewController ()
 -(void)customInit;
 @end
+
+
 
 @implementation FeedViewController
 
@@ -143,30 +147,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    if (_isError)
+    {
+        _notifyCell.textLabel.text = @"Error loading feed.";
+        return _notifyCell;
+    }
+    else if (_isLoading)
+    {
+        _notifyCell.textLabel.text = @"Loading...";
+        return _notifyCell;
+    }
+        
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
     }
     
     UIImage* cellIcon = nil;
     NSString* cellText;
     UITableViewCellAccessoryType cellAccessory = UITableViewCellAccessoryNone;
     
-    if (_isError)
-    {
-        cellText = @"Error loading files.";
-    }
-    else if (_isLoading)
-    {
-        cellText = @"Loading...";
-    }
-    else
-    {
-        FeedItem* feedItem = [_feed objectAtIndex:[indexPath row]];
-        cellText = [NSString stringWithFormat:@"%@", feedItem.message];
-    }
+    FeedItem* feedItem = [_feed objectAtIndex:[indexPath row]];
+    cellText = [NSString stringWithFormat:@"%@", feedItem.message];
+
     
     cell.accessoryType = cellAccessory;
     [[cell textLabel] setText: cellText];

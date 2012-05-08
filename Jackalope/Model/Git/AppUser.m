@@ -7,6 +7,7 @@
 //
 
 #import "AppUser.h"
+#import "UIDevice+IdentifierAddition.h"
 
 static AppUser* _instance = nil;
 NSString * const JackalopeGithubTokenPrefKey = @"JackalopeGithubTokenPrefKey";
@@ -171,7 +172,7 @@ NSString * const JackalopeEmailPrefKey = @"JackalopeEmailPrefKey";
         return;
     }
         
-    NSString* urlString = [CurrentUser appendAuthTokenToUrlString:[NSString stringWithFormat:@"%@/user/apns?apnsToken=%@", kServerRootURL, deviceToken]];
+    NSString* urlString = [CurrentUser appendAuthTokenToUrlString:[NSString stringWithFormat:@"%@/user/apns?apnsToken=%@&deviceId=%@", kServerRootURL, deviceToken, [[UIDevice currentDevice] uniqueDeviceIdentifier]]];
     NSURL *url = [NSURL URLWithString:urlString];     
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     

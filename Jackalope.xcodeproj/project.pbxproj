@@ -85,6 +85,9 @@
 		6EB3D92E15490F55003BD13E /* GithubLogin_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3D92C15490F55003BD13E /* GithubLogin_iPhone.xib */; };
 		6EB467121550E59E00CF3C1E /* 166-newspaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB467101550E59E00CF3C1E /* 166-newspaper.png */; };
 		6EB467131550E59E00CF3C1E /* 166-newspaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB467111550E59E00CF3C1E /* 166-newspaper@2x.png */; };
+		6EB467281558A39B00CF3C1E /* license in Resources */ = {isa = PBXBuildFile; fileRef = 6EB467231558A39B00CF3C1E /* license */; };
+		6EB467291558A39B00CF3C1E /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB467251558A39B00CF3C1E /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
+		6EB4672A1558A39B00CF3C1E /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB467271558A39B00CF3C1E /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7730C14DB27E20015FA0A /* RootNode.m */; };
 		6EB8D97614F7506E0079E140 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97214F7506E0079E140 /* libTestFlight.a */; };
 		6EB8D97714F7506F0079E140 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6EB8D97314F7506E0079E140 /* README.txt */; };
@@ -224,6 +227,11 @@
 		6EB3D92D15490F55003BD13E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GithubLogin_iPhone.xib; sourceTree = "<group>"; };
 		6EB467101550E59E00CF3C1E /* 166-newspaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "166-newspaper.png"; sourceTree = "<group>"; };
 		6EB467111550E59E00CF3C1E /* 166-newspaper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "166-newspaper@2x.png"; sourceTree = "<group>"; };
+		6EB467231558A39B00CF3C1E /* license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
+		6EB467241558A39B00CF3C1E /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		6EB467251558A39B00CF3C1E /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		6EB467261558A39B00CF3C1E /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		6EB467271558A39B00CF3C1E /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		6EB7730B14DB27E20015FA0A /* RootNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNode.h; sourceTree = "<group>"; };
 		6EB7730C14DB27E20015FA0A /* RootNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNode.m; sourceTree = "<group>"; };
 		6EB8D97214F7506E0079E140 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -414,6 +422,7 @@
 		6E8B052814D0CC1F00EBC107 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				6EB467221558A39B00CF3C1E /* UDID */,
 				6E3C6799152B89C100BD8953 /* NSData_Base64 */,
 				6EB8D97114F7506E0079E140 /* TestFlightSDK0.8.3 */,
 				6E8B052914D0CC1F00EBC107 /* JSON */,
@@ -554,6 +563,18 @@
 			path = Editor;
 			sourceTree = "<group>";
 		};
+		6EB467221558A39B00CF3C1E /* UDID */ = {
+			isa = PBXGroup;
+			children = (
+				6EB467231558A39B00CF3C1E /* license */,
+				6EB467241558A39B00CF3C1E /* NSString+MD5Addition.h */,
+				6EB467251558A39B00CF3C1E /* NSString+MD5Addition.m */,
+				6EB467261558A39B00CF3C1E /* UIDevice+IdentifierAddition.h */,
+				6EB467271558A39B00CF3C1E /* UIDevice+IdentifierAddition.m */,
+			);
+			path = UDID;
+			sourceTree = "<group>";
+		};
 		6EB8D97114F7506E0079E140 /* TestFlightSDK0.8.3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,6 +710,7 @@
 				6EB3D92E15490F55003BD13E /* GithubLogin_iPhone.xib in Resources */,
 				6EB467121550E59E00CF3C1E /* 166-newspaper.png in Resources */,
 				6EB467131550E59E00CF3C1E /* 166-newspaper@2x.png in Resources */,
+				6EB467281558A39B00CF3C1E /* license in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +783,8 @@
 				6E3C679C152B89C100BD8953 /* NSData+Base64.m in Sources */,
 				6EB312DE15324A06000C8046 /* AppModesTabBarController.m in Sources */,
 				6EB3D9271541E982003BD13E /* FeedItem.m in Sources */,
+				6EB467291558A39B00CF3C1E /* NSString+MD5Addition.m in Sources */,
+				6EB4672A1558A39B00CF3C1E /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +976,7 @@
 		6E8B051214D0C47900EBC107 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -972,6 +997,7 @@
 		6E8B051314D0C47900EBC107 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
 				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
@@ -1046,6 +1072,7 @@
 		6EB8D98014F833600079E140 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Jackalope/Jackalope.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
