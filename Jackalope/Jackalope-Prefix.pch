@@ -21,4 +21,3 @@
 #define CurrentUser [AppUser currentUser]
 #define kServerRootURL @"http://jackalope.me"
 //#define kServerRootURL @"http://localhost:3000"
-

@@ -17,6 +17,8 @@
     UITableViewCell*    _notifyCell;
 }
 
+//@property (nonatomic, assign) IBOutlet UITableViewCell *feedCell;
+
 -(void) refreshFeed;
 
 @end

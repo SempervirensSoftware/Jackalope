@@ -8,15 +8,19 @@
 
 #import "FeedViewController.h"
 #import "SBJSON.h"
-#import "FeedItem.h"
+#import "EventFactory.h"
+#import "Commit.h"
+#import "PushEventCell.h"
 
-NSString * const _cellIdentifier = @"feed";
+NSString* const _cellIdentifier     = @"FeedCell";
+NSInteger const _cellHeight         = 120;
+NSInteger const _cellUsernameTag    = 1;
+NSInteger const _cellMessageTag     = 2;
+NSInteger const _cellRepoTag        = 3;
 
 @interface FeedViewController ()
 -(void)customInit;
 @end
-
-
 
 @implementation FeedViewController
 
@@ -26,6 +30,9 @@ NSString * const _cellIdentifier = @"feed";
                        initWithTitle:@"Feed"
                        image:[UIImage imageNamed:@"166-newspaper.png"] 
                        tag:APP_TAB_FEED]; 
+    
+    self.tableView.rowHeight = _cellHeight;
+    self.tableView.allowsSelection = NO;
     
     _feed = [[NSMutableArray alloc] init];
     _isLoading  = YES;
@@ -80,7 +87,7 @@ NSString * const _cellIdentifier = @"feed";
              NSArray* feedItems = (NSArray*) responseObject; 
              [_feed removeAllObjects];
              for (NSDictionary* feedItemDictionary in feedItems) {
-                 [_feed addObject:[[FeedItem alloc] initWithDictionary:feedItemDictionary]];
+                 [_feed addObject:[EventFactory createEventForDictionary:feedItemDictionary]];
              }
          }
 
@@ -157,27 +164,32 @@ NSString * const _cellIdentifier = @"feed";
         _notifyCell.textLabel.text = @"Loading...";
         return _notifyCell;
     }
-        
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    Event* feedEvent = [_feed objectAtIndex:[indexPath row]];
+    
+    PushEventCell* cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
-    }
-    
-    UIImage* cellIcon = nil;
-    NSString* cellText;
-    UITableViewCellAccessoryType cellAccessory = UITableViewCellAccessoryNone;
-    
-    FeedItem* feedItem = [_feed objectAtIndex:[indexPath row]];
-    cellText = [NSString stringWithFormat:@"%@", feedItem.message];
-
-    
-    cell.accessoryType = cellAccessory;
-    [[cell textLabel] setText: cellText];
-    [[cell imageView] setImage:cellIcon];
-    
+        cell = [[PushEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
+        cell.frame = CGRectMake(0.0, 0.0, 320.0, _cellHeight);
+    }               
+     
+    cell.event = (EventPush*)feedEvent;
     return cell;
 }
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_isError || _isLoading)
+    {
+        return 40;
+    }    
+    
+    Event* feedEvent = [_feed objectAtIndex:[indexPath row]];
+    
+    return [PushEventCell heightForEvent:(EventPush*)feedEvent];
+}
+
 
 /*
 // Override to support conditional editing of the table view.
