@@ -15,8 +15,9 @@
 @property (retain, nonatomic)           NSString*           actorLogin;
 @property (retain, nonatomic)           NSString*           repoOwner;
 @property (retain, nonatomic)           NSString*           repoName;
-@property (retain, nonatomic)           NSString*           created_at;
+@property (retain, nonatomic)           NSDate*             created_at;
 
 - (id) initWithDictionary:(NSDictionary*)values;
+- (NSString*) timeSinceNow;
 
 @end

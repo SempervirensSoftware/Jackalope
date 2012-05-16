@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "EventPush.h"
+#import "Commit.h"
 
 @interface PushEventView : UIView
 {
     EventPush*  _event;
     UIFont*     _headerFont;
     UIFont*     _detailFont;
+    UIFont*     _subFont;
     
     NSString*   _repoStr;
+    NSString*   _timeStr;
+    CGSize      _timeStrSize;
 }
 
 @property (nonatomic, retain) EventPush* event;

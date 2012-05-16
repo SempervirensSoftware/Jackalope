@@ -31,7 +31,7 @@ NSInteger const _cellRepoTag        = 3;
                        image:[UIImage imageNamed:@"166-newspaper.png"] 
                        tag:APP_TAB_FEED]; 
     
-    self.tableView.rowHeight = _cellHeight;
+    self.tableView.rowHeight = _cellHeight;    
     self.tableView.allowsSelection = NO;
     
     _feed = [[NSMutableArray alloc] init];
@@ -96,7 +96,6 @@ NSInteger const _cellRepoTag        = 3;
      }];
     
     NSLog(@"refreshFeed@%@", urlString);
-
 }
 
 -(void) UserLoggedIn:(NSNotification*) note
@@ -234,13 +233,8 @@ NSInteger const _cellRepoTag        = 3;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    Event* feedEvent = [_feed objectAtIndex:[indexPath row]];
+    NSLog(@"actor:%@",feedEvent.actorLogin);
 }
 
 @end
