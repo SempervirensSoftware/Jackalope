@@ -8,7 +8,7 @@
 
 #import "AppModesTabBarController.h"
 #import "RepoViewController.h"
-#import "FeedViewController.h"
+#import "FeedTableViewController.h"
 
 @interface AppModesTabBarController ()
 -(void) customInit;
@@ -21,9 +21,10 @@
     repoNavController.title = nil;
     [[RepoViewController getInstance] showRootNode];
     
-    FeedViewController* feedController = [[FeedViewController alloc] init];
+    FeedTableViewController* feedController = [[FeedTableViewController alloc] init];
+    UINavigationController* feedNavController = [[UINavigationController alloc] initWithRootViewController:feedController];
     
-    NSArray* modesArray = [[NSArray alloc] initWithObjects:feedController, repoNavController, nil];
+    NSArray* modesArray = [[NSArray alloc] initWithObjects:feedNavController, repoNavController, nil];
     self.viewControllers = modesArray;
 }
 

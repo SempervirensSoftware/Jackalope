@@ -39,7 +39,6 @@
         newNode.repoOwner = self.repoOwner;
         newNode.repoName = self.name;
         newNode.fullPath = [NSString stringWithFormat:@"%@/%@",self.name, newNode.name];
-        newNode.operationQueue = self.operationQueue;
         [tempChildren addObject:newNode];
     }
     

@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "EventPush.h"
 #import "PushEventView.h"
+#import "FeedTableViewController.h"
 
 @interface PushEventCell : UITableViewCell{
     PushEventView*  _eventView;
 }
 
 @property(nonatomic, retain) EventPush* event;
+@property(nonatomic, retain) FeedTableViewController* feedController;
 
 + (CGFloat) heightForEvent:(EventPush*)event;
 

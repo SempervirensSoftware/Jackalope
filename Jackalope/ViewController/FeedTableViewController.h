@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Commit.h"
 
-@interface FeedViewController : UITableViewController
+@interface FeedTableViewController : UITableViewController
 {
     BOOL _isLoading;
     BOOL _isError;
     
     NSMutableArray*     _feed;
     UITableViewCell*    _notifyCell;
+    
+    UINavigationController* _navController;    
 }
 
-//@property (nonatomic, assign) IBOutlet UITableViewCell *feedCell;
-
 -(void) refreshFeed;
+-(void) showCommit:(Commit*)commit;
 
 @end

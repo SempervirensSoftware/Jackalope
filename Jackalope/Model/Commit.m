@@ -7,24 +7,45 @@
 //
 
 #import "Commit.h"
+#import "CommitFile.h"
+#import "SBJSON.h"
 
 @implementation Commit
 
-@synthesize authorName, authorEmail, sha, message;
+@synthesize authorName, authorEmail, message, files, repoName, repoOwner;
 
-- (id) initWithDictionary:(NSDictionary*)values
+-(void) setValuesFromRefreshResponse:(id)responseObject
 {
-    self = [super init];
+    if (![responseObject isKindOfClass:[NSDictionary class]])
+    {  return; }
+    NSDictionary* values = (NSDictionary*)responseObject;
     
-    if (self)
+    NSMutableArray* tempFiles = [[NSMutableArray alloc] init];  
+    NSArray* fileArray = [values objectForKey:@"files"];
+    for (NSDictionary* fileMap in fileArray)
     {
-        self.sha = [values objectForKey:@"sha"];
-        self.message = [values objectForKey:@"message"];                
-        self.authorName = [values objectForKey:@"authorName"];
-        self.authorEmail = [values objectForKey:@"authorEmail"];
+        [tempFiles addObject:[[CommitFile alloc] initWithDictionary:fileMap]];
     }
-
-    return self;
+    self.files = tempFiles;
 }
+
+- (void) setValuesFromDictionary:(NSDictionary *)valueMap
+{
+    self.sha = [valueMap objectForKey:@"sha"];
+    self.message = [valueMap objectForKey:@"message"];                
+    self.authorName = [valueMap objectForKey:@"authorName"];
+    self.authorEmail = [valueMap objectForKey:@"authorEmail"];
+}
+
+- (NSString*)   updateURL
+{
+   return [NSString stringWithFormat:@"%@/repo/%@/%@/commit/%@.json", kServerRootURL, self.repoOwner, self.repoName, self.sha]; 
+}
+
+-(NSString *)type
+{
+    return NODE_TYPE_COMMIT;
+}
+
 
 @end

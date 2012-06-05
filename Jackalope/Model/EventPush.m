@@ -25,9 +25,14 @@
         if (commitHashes && commitHashes.count > 0)
         {
             NSMutableArray* tempCommits = [[NSMutableArray alloc] initWithCapacity:commitHashes.count];
+            Commit* tempCommit = nil;
             for (NSDictionary* commitHash in commitHashes)
             {
-                [tempCommits addObject:[[Commit alloc] initWithDictionary:commitHash]];
+                tempCommit = [[Commit alloc] init];
+                [tempCommit setValuesFromDictionary:commitHash];
+                tempCommit.repoName = self.repoName;
+                tempCommit.repoOwner = self.repoOwner;
+                [tempCommits addObject:tempCommit];
             }        
             self.commits = tempCommits;
         }

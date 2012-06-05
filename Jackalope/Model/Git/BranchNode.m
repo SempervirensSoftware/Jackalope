@@ -36,7 +36,7 @@
 -(void) commitBlobNode:(GitNode*)blob
 {
     NSURLRequest* commitRequest = [self commitRequestForBlob:(BlobNode*) blob];
-    [NSURLConnection sendAsynchronousRequest:commitRequest queue:self.operationQueue completionHandler:
+    [NSURLConnection sendAsynchronousRequest:commitRequest queue:[NSOperationQueue mainQueue] completionHandler:
      ^(NSURLResponse* response, NSData* data, NSError* error) 
      {
          if (error)
@@ -123,7 +123,6 @@
         node = [[TreeNode alloc] init];
         node.fullPath = fullNodePath;
         node.parentBranch = self;
-        node.operationQueue = self.operationQueue;
         [_nodeHash setObject:node forKey:fullNodePath];
     }
     
@@ -139,7 +138,6 @@
         node = [[BlobNode alloc] init];
         node.fullPath = fullNodePath;
         node.parentBranch = self;
-        node.operationQueue = self.operationQueue;
         [_nodeHash setObject:node forKey:fullNodePath];
     }
     

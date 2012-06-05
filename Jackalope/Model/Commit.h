@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GitNode.h"
 
-@interface Commit : NSObject
+@interface Commit : GitNode
 
-@property (retain, nonatomic)           NSString*           sha;
 @property (retain, nonatomic)           NSString*           message;
+@property (retain, nonatomic)           NSString*           repoOwner;
+@property (retain, nonatomic)           NSString*           repoName;
 @property (retain, nonatomic)           NSString*           authorEmail;
 @property (retain, nonatomic)           NSString*           authorName;
-
-- (id) initWithDictionary:(NSDictionary*)values;
+@property (retain, nonatomic)           NSArray*            files;
 
 @end

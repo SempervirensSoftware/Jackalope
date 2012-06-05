@@ -16,7 +16,6 @@
     self = [super init];
     if (self)
     {
-        self.operationQueue = [NSOperationQueue mainQueue];
         self.name = @"Repositories";
     }
     
@@ -32,7 +31,6 @@
     
     for (NSDictionary *repoHash in repos) { 
         RepoNode* newNode = [[RepoNode alloc] init];
-        newNode.operationQueue = self.operationQueue;
         [newNode setValuesFromDictionary:repoHash];        
         [tempChildren addObject:newNode];
     }

@@ -6,23 +6,21 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FeedViewController.h"
+#import "FeedTableViewController.h"
 #import "SBJSON.h"
 #import "EventFactory.h"
 #import "Commit.h"
 #import "PushEventCell.h"
+#import "FeedCommitViewController.h"
 
 NSString* const _cellIdentifier     = @"FeedCell";
-NSInteger const _cellHeight         = 120;
-NSInteger const _cellUsernameTag    = 1;
-NSInteger const _cellMessageTag     = 2;
-NSInteger const _cellRepoTag        = 3;
+NSInteger const _cellHeight         = 50;
 
-@interface FeedViewController ()
+@interface FeedTableViewController ()
 -(void)customInit;
 @end
 
-@implementation FeedViewController
+@implementation FeedTableViewController
 
 -(void)customInit
 {
@@ -38,6 +36,7 @@ NSInteger const _cellRepoTag        = 3;
     _isLoading  = YES;
     _isError    = NO;
     _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
+    _navController = [[UINavigationController alloc] initWithRootViewController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedIn:) name:APPUSER_LOGIN object:nil];    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedOut:) name:APPUSER_LOGOUT object:nil];    
@@ -96,6 +95,12 @@ NSInteger const _cellRepoTag        = 3;
      }];
     
     NSLog(@"refreshFeed@%@", urlString);
+}
+
+-(void) showCommit:(Commit*)commit
+{
+    FeedCommitViewController* feedVC = [[FeedCommitViewController alloc] initWithCommit:commit];
+    [self.navigationController pushViewController:feedVC animated:YES];
 }
 
 -(void) UserLoggedIn:(NSNotification*) note
@@ -171,6 +176,7 @@ NSInteger const _cellRepoTag        = 3;
     if (cell == nil) {
         cell = [[PushEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
         cell.frame = CGRectMake(0.0, 0.0, 320.0, _cellHeight);
+        cell.feedController = self;
     }               
      
     cell.event = (EventPush*)feedEvent;
@@ -181,7 +187,7 @@ NSInteger const _cellRepoTag        = 3;
 {
     if (_isError || _isLoading)
     {
-        return 40;
+        return _cellHeight;
     }    
     
     Event* feedEvent = [_feed objectAtIndex:[indexPath row]];

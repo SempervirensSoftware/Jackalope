@@ -10,7 +10,7 @@
 
 @implementation GitNode
 
-@synthesize name, fullPath, type, children, operationQueue;
+@synthesize name, fullPath, type, children;
 @synthesize sha = _sha;
 
 const int _maxRefreshCount = 1;
@@ -33,7 +33,7 @@ const int _maxRefreshCount = 1;
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
 
-    [NSURLConnection sendAsynchronousRequest:req queue:self.operationQueue completionHandler:
+    [NSURLConnection sendAsynchronousRequest:req queue:[NSOperationQueue mainQueue] completionHandler:
      ^(NSURLResponse* response, NSData* data, NSError* error) 
      {
          NSNotification* note = nil;
@@ -154,6 +154,7 @@ NSString *const NODE_TYPE_REPO = @"repo";
 NSString *const NODE_TYPE_BRANCH = @"branch";
 NSString *const NODE_TYPE_TREE = @"tree";
 NSString *const NODE_TYPE_BLOB = @"blob";
+NSString *const NODE_TYPE_COMMIT = @"commit";
 
 NSString *const NODE_COMMIT_SUCCESS = @"cS";
 NSString *const NODE_COMMIT_FAILED = @"cF";

@@ -18,7 +18,6 @@
 @property (retain, nonatomic)           NSString*           name;
 @property (retain, nonatomic)           NSString*           fullPath;
 @property (retain, nonatomic, readonly) NSString*           type;
-@property (retain, nonatomic)           NSOperationQueue*   operationQueue;
 @property (retain, nonatomic)           NSArray*            children;
 
 - (void)        refresh;
@@ -37,6 +36,7 @@ extern NSString *const NODE_TYPE_REPO;
 extern NSString *const NODE_TYPE_BRANCH;
 extern NSString *const NODE_TYPE_TREE;
 extern NSString *const NODE_TYPE_BLOB;
+extern NSString *const NODE_TYPE_COMMIT;
 
 extern NSString *const NODE_COMMIT_SUCCESS;
 extern NSString *const NODE_COMMIT_FAILED;

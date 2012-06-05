@@ -73,7 +73,7 @@
 		6E910E581563015B00C71B1D /* PushEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E910E571563015B00C71B1D /* PushEventCell.m */; };
 		6E910E5B1563082100C71B1D /* PushEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E910E5A1563082100C71B1D /* PushEventView.m */; };
 		6E910E5D1563358B00C71B1D /* glyphicons_358_file_import@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E910E5C1563358B00C71B1D /* glyphicons_358_file_import@2x.png */; };
-		6EA19F6B152911AE00DA67A4 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA19F6A152911AE00DA67A4 /* FeedViewController.m */; };
+		6EA19F6B152911AE00DA67A4 /* FeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA19F6A152911AE00DA67A4 /* FeedTableViewController.m */; };
 		6EA19F6F1529124E00DA67A4 /* FeedView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */; };
 		6EA19F721529130600DA67A4 /* FeedView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */; };
 		6EA19F751529157300DA67A4 /* FeedCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */; };
@@ -103,6 +103,15 @@
 		6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */; };
 		6EB90C3414D77C4000B7D378 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3314D77C4000B7D378 /* User.m */; };
 		6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */; };
+		6EBC3D7D1576CE50008377B8 /* CommitFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC3D7C1576CE50008377B8 /* CommitFile.m */; };
+		6EBC3D80157D7D8F008377B8 /* CodeDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC3D7F157D7D8F008377B8 /* CodeDiffViewController.m */; };
+		6EE41405156F4CD800DD7135 /* FeedCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE41404156F4CD800DD7135 /* FeedCommitView.m */; };
+		6EE4140B156F588C00DD7135 /* FeedCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */; };
+		6EE4140D15706E7B00DD7135 /* FeedCommitView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140C15706E7B00DD7135 /* FeedCommitView_iPhone.xib */; };
+		6EE41410157457AA00DD7135 /* 32-speechbubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140E157457AA00DD7135 /* 32-speechbubble.png */; };
+		6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */; };
+		6EE4141415759A9D00DD7135 /* 09-lightning.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141215759A9D00DD7135 /* 09-lightning.png */; };
+		6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,8 +222,8 @@
 		6E910E451560E45900C71B1D /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		6E910E4A1560E53100C71B1D /* EventPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventPush.h; sourceTree = "<group>"; };
 		6E910E4B1560E53100C71B1D /* EventPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventPush.m; sourceTree = "<group>"; };
-		6E910E4D1560E5DD00C71B1D /* Commit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commit.h; sourceTree = "<group>"; };
-		6E910E4E1560E5DD00C71B1D /* Commit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commit.m; sourceTree = "<group>"; };
+		6E910E4D1560E5DD00C71B1D /* Commit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Commit.h; path = ../Commit.h; sourceTree = "<group>"; };
+		6E910E4E1560E5DD00C71B1D /* Commit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Commit.m; path = ../Commit.m; sourceTree = "<group>"; };
 		6E910E501561B77600C71B1D /* EventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventFactory.h; sourceTree = "<group>"; };
 		6E910E511561B77600C71B1D /* EventFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventFactory.m; sourceTree = "<group>"; };
 		6E910E531561CC4200C71B1D /* checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin.png; sourceTree = "<group>"; };
@@ -223,8 +232,8 @@
 		6E910E591563082100C71B1D /* PushEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushEventView.h; path = View/PushEventView.h; sourceTree = "<group>"; };
 		6E910E5A1563082100C71B1D /* PushEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushEventView.m; path = View/PushEventView.m; sourceTree = "<group>"; };
 		6E910E5C1563358B00C71B1D /* glyphicons_358_file_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_358_file_import@2x.png"; sourceTree = "<group>"; };
-		6EA19F69152911AE00DA67A4 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
-		6EA19F6A152911AE00DA67A4 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		6EA19F69152911AE00DA67A4 /* FeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedTableViewController.h; sourceTree = "<group>"; };
+		6EA19F6A152911AE00DA67A4 /* FeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedTableViewController.m; sourceTree = "<group>"; };
 		6EA19F6E1529124E00DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedView_iPad.xib; sourceTree = "<group>"; };
 		6EA19F711529130600DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedView_iPhone.xib; sourceTree = "<group>"; };
 		6EA19F741529157300DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedCell_iPhone.xib; sourceTree = "<group>"; };
@@ -263,6 +272,19 @@
 		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GithubLoginViewController.h; path = ../GithubLoginViewController.h; sourceTree = "<group>"; };
 		6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GithubLoginViewController.m; path = ../GithubLoginViewController.m; sourceTree = "<group>"; };
+		6EBC3D7B1576CE50008377B8 /* CommitFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitFile.h; sourceTree = "<group>"; };
+		6EBC3D7C1576CE50008377B8 /* CommitFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitFile.m; sourceTree = "<group>"; };
+		6EBC3D7E157D7D8F008377B8 /* CodeDiffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeDiffViewController.h; sourceTree = "<group>"; };
+		6EBC3D7F157D7D8F008377B8 /* CodeDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeDiffViewController.m; sourceTree = "<group>"; };
+		6EE41403156F4CD800DD7135 /* FeedCommitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCommitView.h; path = View/FeedCommitView.h; sourceTree = "<group>"; };
+		6EE41404156F4CD800DD7135 /* FeedCommitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitView.m; path = View/FeedCommitView.m; sourceTree = "<group>"; };
+		6EE41409156F588C00DD7135 /* FeedCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCommitViewController.h; sourceTree = "<group>"; };
+		6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCommitViewController.m; sourceTree = "<group>"; };
+		6EE4140C15706E7B00DD7135 /* FeedCommitView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedCommitView_iPhone.xib; sourceTree = "<group>"; };
+		6EE4140E157457AA00DD7135 /* 32-speechbubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble.png"; sourceTree = "<group>"; };
+		6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble@2x.png"; sourceTree = "<group>"; };
+		6EE4141215759A9D00DD7135 /* 09-lightning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning.png"; sourceTree = "<group>"; };
+		6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +437,10 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				6EE4141215759A9D00DD7135 /* 09-lightning.png */,
+				6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */,
+				6EE4140E157457AA00DD7135 /* 32-speechbubble.png */,
+				6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */,
 				6E910E5C1563358B00C71B1D /* glyphicons_358_file_import@2x.png */,
 				6E910E531561CC4200C71B1D /* checkin.png */,
 				6E910E3E1560CCAD00C71B1D /* glyphicons_358_file_import.png */,
@@ -488,10 +514,14 @@
 				6EB312DD15324A06000C8046 /* AppModesTabBarController.m */,
 				6E8B054514D0CE9800EBC107 /* CodeViewController.h */,
 				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
+				6EBC3D7E157D7D8F008377B8 /* CodeDiffViewController.h */,
+				6EBC3D7F157D7D8F008377B8 /* CodeDiffViewController.m */,
 				6E3FF2C8150AC1E00027D980 /* CommitViewController.h */,
 				6E3FF2C9150AC1E00027D980 /* CommitViewController.m */,
-				6EA19F69152911AE00DA67A4 /* FeedViewController.h */,
-				6EA19F6A152911AE00DA67A4 /* FeedViewController.m */,
+				6EA19F69152911AE00DA67A4 /* FeedTableViewController.h */,
+				6EA19F6A152911AE00DA67A4 /* FeedTableViewController.m */,
+				6EE41409156F588C00DD7135 /* FeedCommitViewController.h */,
+				6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */,
 				6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */,
 				6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */,
 				6E8B054914D0CE9800EBC107 /* GitNodeViewController.h */,
@@ -551,6 +581,8 @@
 				6E8B057714D0DD0900EBC107 /* TreeNode.m */,
 				6E8B057214D0DD0900EBC107 /* BlobNode.h */,
 				6E8B057314D0DD0900EBC107 /* BlobNode.m */,
+				6E910E4D1560E5DD00C71B1D /* Commit.h */,
+				6E910E4E1560E5DD00C71B1D /* Commit.m */,
 			);
 			path = Git;
 			sourceTree = "<group>";
@@ -586,10 +618,10 @@
 				6E910E451560E45900C71B1D /* Event.m */,
 				6E910E4A1560E53100C71B1D /* EventPush.h */,
 				6E910E4B1560E53100C71B1D /* EventPush.m */,
-				6E910E4D1560E5DD00C71B1D /* Commit.h */,
-				6E910E4E1560E5DD00C71B1D /* Commit.m */,
 				6E910E501561B77600C71B1D /* EventFactory.h */,
 				6E910E511561B77600C71B1D /* EventFactory.m */,
+				6EBC3D7B1576CE50008377B8 /* CommitFile.h */,
+				6EBC3D7C1576CE50008377B8 /* CommitFile.m */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -604,6 +636,9 @@
 				6E910E571563015B00C71B1D /* PushEventCell.m */,
 				6E910E591563082100C71B1D /* PushEventView.h */,
 				6E910E5A1563082100C71B1D /* PushEventView.m */,
+				6EE41403156F4CD800DD7135 /* FeedCommitView.h */,
+				6EE41404156F4CD800DD7135 /* FeedCommitView.m */,
+				6EE4140C15706E7B00DD7135 /* FeedCommitView_iPhone.xib */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -759,6 +794,11 @@
 				6E910E401560CCAD00C71B1D /* glyphicons_358_file_import.png in Resources */,
 				6E910E541561CC4200C71B1D /* checkin.png in Resources */,
 				6E910E5D1563358B00C71B1D /* glyphicons_358_file_import@2x.png in Resources */,
+				6EE4140D15706E7B00DD7135 /* FeedCommitView_iPhone.xib in Resources */,
+				6EE41410157457AA00DD7135 /* 32-speechbubble.png in Resources */,
+				6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */,
+				6EE4141415759A9D00DD7135 /* 09-lightning.png in Resources */,
+				6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,7 +865,7 @@
 				6E895F1214DA369800D98866 /* GitNode.m in Sources */,
 				6EB7730D14DB27E20015FA0A /* RootNode.m in Sources */,
 				6E3FF2CA150AC1E00027D980 /* CommitViewController.m in Sources */,
-				6EA19F6B152911AE00DA67A4 /* FeedViewController.m in Sources */,
+				6EA19F6B152911AE00DA67A4 /* FeedTableViewController.m in Sources */,
 				6E3C6798152AD24D00BD8953 /* LoginTableViewCell.m in Sources */,
 				6E3C679C152B89C100BD8953 /* NSData+Base64.m in Sources */,
 				6EB312DE15324A06000C8046 /* AppModesTabBarController.m in Sources */,
@@ -837,6 +877,10 @@
 				6E910E521561B77600C71B1D /* EventFactory.m in Sources */,
 				6E910E581563015B00C71B1D /* PushEventCell.m in Sources */,
 				6E910E5B1563082100C71B1D /* PushEventView.m in Sources */,
+				6EE41405156F4CD800DD7135 /* FeedCommitView.m in Sources */,
+				6EE4140B156F588C00DD7135 /* FeedCommitViewController.m in Sources */,
+				6EBC3D7D1576CE50008377B8 /* CommitFile.m in Sources */,
+				6EBC3D80157D7D8F008377B8 /* CodeDiffViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -76,7 +76,6 @@ static RepoViewController *_instance = nil;
                                          initWithTitle:@"Repos"
                                          image:[UIImage imageNamed:@"33-cabinet.png"] 
                                          tag:APP_TAB_REPOS]; 
-
     }    
     
     return _navController;

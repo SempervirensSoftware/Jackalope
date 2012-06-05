@@ -13,6 +13,8 @@
 #define DETAIL_START_Y  60
 #define DETAIL_HEIGHT   25
 
+@synthesize feedController;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -72,7 +74,7 @@
     
     if (commit)
     {
-        NSLog(@"tap: %@", commit.message);
+        [self.feedController showCommit:commit];
     }
 }
 
