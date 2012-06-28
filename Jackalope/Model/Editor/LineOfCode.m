@@ -80,6 +80,12 @@
     return self;
 }
 
+-(void) dealloc
+{
+    CFRelease(_attributedText);
+    CFRelease(_lineRef);
+}
+
 -(void) setAttributedText:(CFAttributedStringRef)attributedText
 {
     if (attributedText != _attributedText)

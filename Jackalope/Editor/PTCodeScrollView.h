@@ -36,8 +36,9 @@
 
 }
 
-@property (nonatomic, retain) PTTextRange* selection;
-@property (nonatomic, retain) Code* code;
+@property (nonatomic, retain)   PTTextRange*  selection;
+@property (nonatomic, retain)   Code*         code;
+@property (nonatomic)           BOOL          isDiff;
 
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;
 -(void) setSelectionAtPoint:(CGPoint)point;

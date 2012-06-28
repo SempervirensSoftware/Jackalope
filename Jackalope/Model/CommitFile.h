@@ -17,6 +17,7 @@
 
 @property (nonatomic)                   NSInteger           adds;
 @property (nonatomic)                   NSInteger           deletes;
+@property (nonatomic)                   BOOL                diffExpanded;
 
 - (id) initWithDictionary:(NSDictionary*)values;
 

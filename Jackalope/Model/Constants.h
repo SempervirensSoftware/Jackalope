@@ -18,3 +18,11 @@ typedef enum {
     APP_TAB_REPOS, 
     APP_TAB_COMMITS
 }APP_TAB;
+
+typedef enum {
+    EDITOR_DISPLAY_LINENUMS,
+    EDITOR_DISPLAY_DIFF
+}EDITOR_DISPLAY_MODES;
+
+
+

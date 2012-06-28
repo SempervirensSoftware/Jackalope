@@ -74,9 +74,6 @@
 		6E910E5B1563082100C71B1D /* PushEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E910E5A1563082100C71B1D /* PushEventView.m */; };
 		6E910E5D1563358B00C71B1D /* glyphicons_358_file_import@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E910E5C1563358B00C71B1D /* glyphicons_358_file_import@2x.png */; };
 		6EA19F6B152911AE00DA67A4 /* FeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA19F6A152911AE00DA67A4 /* FeedTableViewController.m */; };
-		6EA19F6F1529124E00DA67A4 /* FeedView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */; };
-		6EA19F721529130600DA67A4 /* FeedView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */; };
-		6EA19F751529157300DA67A4 /* FeedCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */; };
 		6EA61F5B14FA25A200A36228 /* blacktocat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA61F5A14FA25A200A36228 /* blacktocat.png */; };
 		6EA68BEC1527B11800A3660E /* glyphicons_019_cogwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */; };
 		6EA68BED1527B11800A3660E /* glyphicons_019_cogwheel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */; };
@@ -104,10 +101,12 @@
 		6EB90C3414D77C4000B7D378 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3314D77C4000B7D378 /* User.m */; };
 		6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */; };
 		6EBC3D7D1576CE50008377B8 /* CommitFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC3D7C1576CE50008377B8 /* CommitFile.m */; };
-		6EBC3D80157D7D8F008377B8 /* CodeDiffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC3D7F157D7D8F008377B8 /* CodeDiffViewController.m */; };
-		6EE41405156F4CD800DD7135 /* FeedCommitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE41404156F4CD800DD7135 /* FeedCommitView.m */; };
+		6EBC3D83157E85DE008377B8 /* FeedCommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC3D82157E85DE008377B8 /* FeedCommitCell.m */; };
+		6EC4B781159C201600E3A629 /* FeedCommitSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4B780159C201600E3A629 /* FeedCommitSectionHeader.m */; };
+		6EC4B785159CDD7000E3A629 /* carat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4B783159CDD7000E3A629 /* carat.png */; };
+		6EC4B786159CDD7000E3A629 /* carat-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4B784159CDD7000E3A629 /* carat-open.png */; };
+		6EC4B789159D108200E3A629 /* FeedCommitSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */; };
 		6EE4140B156F588C00DD7135 /* FeedCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */; };
-		6EE4140D15706E7B00DD7135 /* FeedCommitView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140C15706E7B00DD7135 /* FeedCommitView_iPhone.xib */; };
 		6EE41410157457AA00DD7135 /* 32-speechbubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140E157457AA00DD7135 /* 32-speechbubble.png */; };
 		6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */; };
 		6EE4141415759A9D00DD7135 /* 09-lightning.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141215759A9D00DD7135 /* 09-lightning.png */; };
@@ -234,9 +233,6 @@
 		6E910E5C1563358B00C71B1D /* glyphicons_358_file_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_358_file_import@2x.png"; sourceTree = "<group>"; };
 		6EA19F69152911AE00DA67A4 /* FeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedTableViewController.h; sourceTree = "<group>"; };
 		6EA19F6A152911AE00DA67A4 /* FeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedTableViewController.m; sourceTree = "<group>"; };
-		6EA19F6E1529124E00DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedView_iPad.xib; sourceTree = "<group>"; };
-		6EA19F711529130600DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedView_iPhone.xib; sourceTree = "<group>"; };
-		6EA19F741529157300DA67A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FeedCell_iPhone.xib; sourceTree = "<group>"; };
 		6EA61F5A14FA25A200A36228 /* blacktocat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacktocat.png; sourceTree = "<group>"; };
 		6EA68BEA1527B11800A3660E /* glyphicons_019_cogwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_019_cogwheel.png; sourceTree = "<group>"; };
 		6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_019_cogwheel@2x.png"; sourceTree = "<group>"; };
@@ -274,13 +270,16 @@
 		6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GithubLoginViewController.m; path = ../GithubLoginViewController.m; sourceTree = "<group>"; };
 		6EBC3D7B1576CE50008377B8 /* CommitFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitFile.h; sourceTree = "<group>"; };
 		6EBC3D7C1576CE50008377B8 /* CommitFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitFile.m; sourceTree = "<group>"; };
-		6EBC3D7E157D7D8F008377B8 /* CodeDiffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeDiffViewController.h; sourceTree = "<group>"; };
-		6EBC3D7F157D7D8F008377B8 /* CodeDiffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeDiffViewController.m; sourceTree = "<group>"; };
-		6EE41403156F4CD800DD7135 /* FeedCommitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCommitView.h; path = View/FeedCommitView.h; sourceTree = "<group>"; };
-		6EE41404156F4CD800DD7135 /* FeedCommitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitView.m; path = View/FeedCommitView.m; sourceTree = "<group>"; };
+		6EBC3D81157E85DE008377B8 /* FeedCommitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCommitCell.h; path = View/FeedCommitCell.h; sourceTree = "<group>"; };
+		6EBC3D82157E85DE008377B8 /* FeedCommitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitCell.m; path = View/FeedCommitCell.m; sourceTree = "<group>"; };
+		6EC4B77F159C201600E3A629 /* FeedCommitSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCommitSectionHeader.h; path = View/FeedCommitSectionHeader.h; sourceTree = "<group>"; };
+		6EC4B780159C201600E3A629 /* FeedCommitSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitSectionHeader.m; path = View/FeedCommitSectionHeader.m; sourceTree = "<group>"; };
+		6EC4B783159CDD7000E3A629 /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		6EC4B784159CDD7000E3A629 /* carat-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carat-open.png"; sourceTree = "<group>"; };
+		6EC4B787159D108200E3A629 /* FeedCommitSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCommitSectionFooter.h; path = View/FeedCommitSectionFooter.h; sourceTree = "<group>"; };
+		6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitSectionFooter.m; path = View/FeedCommitSectionFooter.m; sourceTree = "<group>"; };
 		6EE41409156F588C00DD7135 /* FeedCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCommitViewController.h; sourceTree = "<group>"; };
 		6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCommitViewController.m; sourceTree = "<group>"; };
-		6EE4140C15706E7B00DD7135 /* FeedCommitView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedCommitView_iPhone.xib; sourceTree = "<group>"; };
 		6EE4140E157457AA00DD7135 /* 32-speechbubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble.png"; sourceTree = "<group>"; };
 		6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble@2x.png"; sourceTree = "<group>"; };
 		6EE4141215759A9D00DD7135 /* 09-lightning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning.png"; sourceTree = "<group>"; };
@@ -437,6 +436,8 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				6EC4B783159CDD7000E3A629 /* carat.png */,
+				6EC4B784159CDD7000E3A629 /* carat-open.png */,
 				6EE4141215759A9D00DD7135 /* 09-lightning.png */,
 				6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */,
 				6EE4140E157457AA00DD7135 /* 32-speechbubble.png */,
@@ -514,8 +515,6 @@
 				6EB312DD15324A06000C8046 /* AppModesTabBarController.m */,
 				6E8B054514D0CE9800EBC107 /* CodeViewController.h */,
 				6E8B054614D0CE9800EBC107 /* CodeViewController.m */,
-				6EBC3D7E157D7D8F008377B8 /* CodeDiffViewController.h */,
-				6EBC3D7F157D7D8F008377B8 /* CodeDiffViewController.m */,
 				6E3FF2C8150AC1E00027D980 /* CommitViewController.h */,
 				6E3FF2C9150AC1E00027D980 /* CommitViewController.m */,
 				6EA19F69152911AE00DA67A4 /* FeedTableViewController.h */,
@@ -629,16 +628,16 @@
 		6E910E55156300CA00C71B1D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */,
-				6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */,
-				6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */,
 				6E910E561563015B00C71B1D /* PushEventCell.h */,
 				6E910E571563015B00C71B1D /* PushEventCell.m */,
 				6E910E591563082100C71B1D /* PushEventView.h */,
 				6E910E5A1563082100C71B1D /* PushEventView.m */,
-				6EE41403156F4CD800DD7135 /* FeedCommitView.h */,
-				6EE41404156F4CD800DD7135 /* FeedCommitView.m */,
-				6EE4140C15706E7B00DD7135 /* FeedCommitView_iPhone.xib */,
+				6EBC3D81157E85DE008377B8 /* FeedCommitCell.h */,
+				6EBC3D82157E85DE008377B8 /* FeedCommitCell.m */,
+				6EC4B77F159C201600E3A629 /* FeedCommitSectionHeader.h */,
+				6EC4B780159C201600E3A629 /* FeedCommitSectionHeader.m */,
+				6EC4B787159D108200E3A629 /* FeedCommitSectionFooter.h */,
+				6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -776,9 +775,6 @@
 				6E3FF2C7150AC1A70027D980 /* CommitView_iPhone.xib in Resources */,
 				6EA68BEC1527B11800A3660E /* glyphicons_019_cogwheel.png in Resources */,
 				6EA68BED1527B11800A3660E /* glyphicons_019_cogwheel@2x.png in Resources */,
-				6EA19F6F1529124E00DA67A4 /* FeedView_iPad.xib in Resources */,
-				6EA19F721529130600DA67A4 /* FeedView_iPhone.xib in Resources */,
-				6EA19F751529157300DA67A4 /* FeedCell_iPhone.xib in Resources */,
 				6E3C678C152AA91D00BD8953 /* SettingsView_iPhone.xib in Resources */,
 				6EB312E215328A79000C8046 /* glyphicons_113_justify.png in Resources */,
 				6EB312E315328A79000C8046 /* glyphicons_113_justify@2x.png in Resources */,
@@ -794,11 +790,12 @@
 				6E910E401560CCAD00C71B1D /* glyphicons_358_file_import.png in Resources */,
 				6E910E541561CC4200C71B1D /* checkin.png in Resources */,
 				6E910E5D1563358B00C71B1D /* glyphicons_358_file_import@2x.png in Resources */,
-				6EE4140D15706E7B00DD7135 /* FeedCommitView_iPhone.xib in Resources */,
 				6EE41410157457AA00DD7135 /* 32-speechbubble.png in Resources */,
 				6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */,
 				6EE4141415759A9D00DD7135 /* 09-lightning.png in Resources */,
 				6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */,
+				6EC4B785159CDD7000E3A629 /* carat.png in Resources */,
+				6EC4B786159CDD7000E3A629 /* carat-open.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,10 +874,11 @@
 				6E910E521561B77600C71B1D /* EventFactory.m in Sources */,
 				6E910E581563015B00C71B1D /* PushEventCell.m in Sources */,
 				6E910E5B1563082100C71B1D /* PushEventView.m in Sources */,
-				6EE41405156F4CD800DD7135 /* FeedCommitView.m in Sources */,
 				6EE4140B156F588C00DD7135 /* FeedCommitViewController.m in Sources */,
 				6EBC3D7D1576CE50008377B8 /* CommitFile.m in Sources */,
-				6EBC3D80157D7D8F008377B8 /* CodeDiffViewController.m in Sources */,
+				6EBC3D83157E85DE008377B8 /* FeedCommitCell.m in Sources */,
+				6EC4B781159C201600E3A629 /* FeedCommitSectionHeader.m in Sources */,
+				6EC4B789159D108200E3A629 /* FeedCommitSectionFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,30 +971,6 @@
 				6E8B055E14D0D42B00EBC107 /* en */,
 			);
 			name = TreeView_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		6EA19F6D1529124E00DA67A4 /* FeedView_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EA19F6E1529124E00DA67A4 /* en */,
-			);
-			name = FeedView_iPad.xib;
-			sourceTree = "<group>";
-		};
-		6EA19F701529130600DA67A4 /* FeedView_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EA19F711529130600DA67A4 /* en */,
-			);
-			name = FeedView_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		6EA19F731529157300DA67A4 /* FeedCell_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EA19F741529157300DA67A4 /* en */,
-			);
-			name = FeedCell_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		6EB3D92915490F1F003BD13E /* GithubLogin_iPad.xib */ = {

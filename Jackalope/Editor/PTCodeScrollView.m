@@ -26,6 +26,8 @@
 -(void) selectionDidChange;
 -(void) selectionWillChange;
 
+-(void) clearCodeEditor;
+
 @end
 
 
@@ -53,6 +55,7 @@
 
 @synthesize selection = _selection;
 @synthesize code = _code;
+@synthesize isDiff = _isDiff;
 
 @synthesize markedTextRange, markedTextStyle, selectedTextRange, beginningOfDocument, endOfDocument, inputDelegate, tokenizer;
 
@@ -132,8 +135,11 @@
 
 -(void) setCode:(Code *)code
 {
+    [self clearCodeEditor];
+    
     if (!code || !(code.plainText))
     {
+        [_codeEditor setNeedsDisplay];
         return;
     }
     
@@ -166,6 +172,10 @@
         currentLayer.cursorView = _cursorView;
         currentLayer.suggestedLineLimit = 10;
         currentLayer.startingLineNum = currentLineNum;
+        if (self.isDiff)
+        {
+            currentLayer.displayMode = EDITOR_DISPLAY_DIFF;
+        }
         
         NSInteger numCharsLoaded = [currentLayer loadAttributedString:[decoratedCode attributedSubstringFromRange:NSMakeRange(currentIndex, loadSize)]];
         [currentLayer setNeedsDisplay];
@@ -184,6 +194,16 @@
     // clear out the old views, and add the latest and greatest
     for (UIView* subview in self.subviews) { [subview removeFromSuperview]; }
     [self addSubview:_codeEditor];   
+}
+
+-(void) clearCodeEditor
+{
+    for (CALayer* layer in _layerArray)
+    {
+        [layer removeFromSuperlayer];
+    }
+    
+    [_layerArray removeAllObjects];
 }
 
 #pragma mark Custom user interaction

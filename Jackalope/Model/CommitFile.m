@@ -10,7 +10,7 @@
 
 @implementation CommitFile
 
-@synthesize sha,name,patch,status,adds,deletes;
+@synthesize sha,name,patch,status,adds,deletes,diffExpanded;
 
 - (id) initWithDictionary:(NSDictionary*)values
 {
@@ -24,6 +24,7 @@
         self.patch = [values objectForKey:@"patch"];
         self.adds = [[values objectForKey:@"additions"] integerValue];
         self.deletes = [[values objectForKey:@"deletions"] integerValue];
+        self.diffExpanded = NO;
     }
     
     return self;

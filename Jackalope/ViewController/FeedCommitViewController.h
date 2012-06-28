@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Commit.h"
+#import "FeedCommitSectionHeader.h"
 
-@interface FeedCommitViewController : UITableViewController
+@interface FeedCommitViewController : UITableViewController <FeedCommitSectionHeaderDelegate>
 {
     BOOL        _isLoading;
     BOOL        _isError;
     
     Commit*     _commit;
+    UITableViewCell*    _headerCell;
+    UITableViewCell*    _notifyCell;
 }
 
 -(id) initWithCommit:(Commit*)commit;

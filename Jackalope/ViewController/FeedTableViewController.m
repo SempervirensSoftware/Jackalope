@@ -32,10 +32,12 @@ NSInteger const _cellHeight         = 50;
     self.tableView.rowHeight = _cellHeight;    
     self.tableView.allowsSelection = NO;
     
+    self.title = @"Jackalope";
     _feed = [[NSMutableArray alloc] init];
     _isLoading  = YES;
     _isError    = NO;
     _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
+    
     _navController = [[UINavigationController alloc] initWithRootViewController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoggedIn:) name:APPUSER_LOGIN object:nil];    
@@ -175,7 +177,7 @@ NSInteger const _cellHeight         = 50;
     PushEventCell* cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     if (cell == nil) {
         cell = [[PushEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
-        cell.frame = CGRectMake(0.0, 0.0, 320.0, _cellHeight);
+        cell.frame = CGRectMake(0.0, 0.0, cell.frame.size.width, _cellHeight);
         cell.feedController = self;
     }               
      

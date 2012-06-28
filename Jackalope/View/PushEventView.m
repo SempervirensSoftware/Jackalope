@@ -76,8 +76,6 @@
 
     drawPoint = CGPointMake(boundsX + DETAIL_TEXT_OFFSET, currentY);
     [_repoStr drawAtPoint:drawPoint forWidth:DETAIL_TEXT_WIDTH withFont:_subFont minFontSize:SUB_MIN_FONT_SIZE actualFontSize:NULL lineBreakMode:UILineBreakModeTailTruncation baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
-
-    //currentY += 5;
     
     for (Commit* commit in _event.commits)
     {

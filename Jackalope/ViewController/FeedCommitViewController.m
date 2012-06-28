@@ -8,7 +8,16 @@
 
 #import "FeedCommitViewController.h"
 #import "CommitFile.h"
-#import "CodeDiffViewController.h"
+#import "FeedCommitCell.h"
+#import "FeedCommitSectionFooter.h"
+
+NSInteger const _headerCellHeight         = 50;
+NSInteger const _notifyCellHeight         = 20;
+NSInteger const _sectionHeaderHeight      = 40;
+NSInteger const _sectionFooterHeight      = 1;
+NSInteger const _fileCellHeight           = 250;
+NSString* const _fileCellIdentifier       = @"fileCell";
+
 
 @implementation FeedCommitViewController
 
@@ -32,7 +41,15 @@
         
         _isLoading = YES;
         _isError = NO;
+        
+        _headerCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"header"];
+        _headerCell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+        _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
+        _notifyCell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+        
+        self.title = @"Jackalope";
         self.tableView.allowsSelection = NO; // not selectable until we get the content back
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.tableView reloadData];
         
         [commit refresh];
@@ -45,7 +62,6 @@
 {
     _isLoading = NO;
     _isError = NO;
-    self.tableView.allowsSelection = YES;
     [self.tableView reloadData];    
 }
 
@@ -59,67 +75,100 @@
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    NSInteger sections = 1; // first section is the summary info or status message
+    
+    if (!_isLoading && !_isError)
+    {
+        sections += _commit.files.count;
+    }
+    
+    return sections;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rows = 1;
-    
-    if (!_isLoading && !_isError)
-    {
-        rows = _commit.files.count;
+    if (section > 0) {
+        CommitFile* file = [_commit.files objectAtIndex:(section-1)];
+        
+        if (file.diffExpanded)
+        {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
-    
-    return rows;
+    else {
+        return 1;
+    }
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_isError || _isLoading)
+    {
+        return _notifyCellHeight;
+    }
+    else if (indexPath.section == 0)
+    {
+        return _headerCellHeight;
+    }
+    else {
+        return _fileCellHeight;
+    }    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* cellIdentifier = @"fileCell";
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }               
-    
-    if (_isError) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = @"Error Loading";
+    if (_isError)
+    {
+        _notifyCell.textLabel.text = @"Error loading feed.";
+        return _notifyCell;
     }
     else if (_isLoading)
     {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = @"Loading Files...";
+        _notifyCell.textLabel.text = @"Loading...";
+        return _notifyCell;
+    }
+    else if (indexPath.section == 0)
+    {
+        _headerCell.textLabel.text = _commit.message;
+        return _headerCell;
     }
     else {
-        CommitFile* file = [_commit.files objectAtIndex:indexPath.row];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-        cell.textLabel.text = file.name;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+        FeedCommitCell* cell = [tableView dequeueReusableCellWithIdentifier:_fileCellIdentifier];
+        if (cell == nil) {
+            cell = [[FeedCommitCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_fileCellIdentifier cellHeight:_fileCellHeight];
+        }               
+        
+        NSInteger fileIndex = (indexPath.section - 1); //factor out the initial header section
+        CommitFile* file = [_commit.files objectAtIndex:fileIndex];
+        [cell setDiff:file.patch forFileName:file.name];
+        
+        return cell;
     }
-    
-    return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommitFile* file = [_commit.files objectAtIndex:indexPath.row];
-    Code* code = [[Code alloc] init];
-    code.fileName = file.name;
-    code.plainText = file.patch;
-    
-    CodeDiffViewController* diffViewer = [[CodeDiffViewController alloc] initWithCode:code]; 
-    [self.navigationController pushViewController:diffViewer animated:YES];
+//    CommitFile* file = [_commit.files objectAtIndex:indexPath.row];
+//    Code* code = [[Code alloc] init];
+//    code.fileName = file.name;
+//    code.plainText = file.patch;
+//    
+//    CodeDiffViewController* diffViewer = [[CodeDiffViewController alloc] initWithCode:code]; 
+//    [self.navigationController pushViewController:diffViewer animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     CGFloat height = 0.f;
-    
-    if (section == 0)
+
+    if (section > 0)
     {
-        height = 50.f;
+        height = _sectionHeaderHeight;
     }
     
     return height;
@@ -127,17 +176,47 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView* header;
-    
-    if (section == 0)
+    if (section > 0)
     {        
-        UILabel* labelView = [[UILabel alloc] init];
-        labelView.text = _commit.message;
-        
-        header = labelView;
+        CGRect frame = CGRectMake(0, 0, tableView.frame.size.width, _sectionHeaderHeight);
+        CommitFile* file = [_commit.files objectAtIndex:(section-1)];
+        FeedCommitSectionHeader* fileHeader = [[FeedCommitSectionHeader alloc] initWithFrame:frame title:file.name section:section delegate:self];
+        fileHeader.disclosureButton.selected = file.diffExpanded;
+        return fileHeader;
     }
+    else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return _sectionFooterHeight;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    CGRect frame = CGRectMake(0, 0, tableView.frame.size.width, _sectionFooterHeight);
+    FeedCommitSectionFooter* footer = [[FeedCommitSectionFooter alloc] initWithFrame:frame];
+    return footer;
+}
+
+-(void) fileSectionOpened:(NSInteger)section
+{
+    CommitFile* file = [_commit.files objectAtIndex:(section-1)];
+    file.diffExpanded = YES;
     
-    return header;
+    NSIndexPath* path = [NSIndexPath indexPathForRow:0 inSection:section];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationTop];
+}
+
+-(void) fileSectionClosed:(NSInteger)section
+{
+    CommitFile* file = [_commit.files objectAtIndex:(section-1)];
+    file.diffExpanded = NO;
+
+    NSIndexPath* path = [NSIndexPath indexPathForRow:0 inSection:section];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

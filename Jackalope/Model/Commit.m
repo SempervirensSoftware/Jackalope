@@ -24,7 +24,12 @@
     NSArray* fileArray = [values objectForKey:@"files"];
     for (NSDictionary* fileMap in fileArray)
     {
-        [tempFiles addObject:[[CommitFile alloc] initWithDictionary:fileMap]];
+        CommitFile* tempFile = [[CommitFile alloc] initWithDictionary:fileMap];
+        NSString* fileName = [tempFile.name lastPathComponent];
+        if ([fileName characterAtIndex:0] != '.')
+        {
+            [tempFiles addObject:tempFile];
+        }
     }
     self.files = tempFiles;
 }

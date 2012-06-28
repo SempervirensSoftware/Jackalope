@@ -35,6 +35,7 @@
 // returns the range of the string that it was able to fit within the maxDisplayLines limit
 -(NSInteger)loadAttributedString:(NSAttributedString*)attributedText;
 
+@property (nonatomic)                   NSInteger       displayMode;
 @property (nonatomic)                   NSInteger       startingLineNum;
 @property (nonatomic)                   NSInteger       suggestedLineLimit;
 @property (nonatomic, assign, readonly) NSArray*        locArray;

@@ -14,6 +14,7 @@
 @synthesize suggestedLineLimit = _suggestedLineLimit;
 @synthesize cursorView = _cursorView;
 @synthesize selection = _selection;
+@synthesize displayMode = _displayMode;
 
 /////////////////////////////////////////////////////////////////////////////
 // MARK: - Initialization
@@ -26,6 +27,7 @@
     _lineHeight = 0;
 
     _startingLineNum = 0;
+    _displayMode = EDITOR_DISPLAY_LINENUMS;
     _suggestedLineLimit = 60;
     
     _newlineCharSet = [NSCharacterSet newlineCharacterSet];        
@@ -65,6 +67,11 @@
         [self loadAttributedString:attributedString];
     }
     return self;    
+}
+
+-(void) dealloc
+{
+    [_locArray removeAllObjects];
 }
 
 -(void) updateLine:(LineOfCode*) updatedLine
@@ -214,7 +221,9 @@
     
     //iterate through all the lines and setup the 'masterArray'
     CFArrayRef displayLines = CTFrameGetLines(fullFrame);
-    CFIndex lineCount = CFArrayGetCount(displayLines);    
+    CFIndex lineCount = CFArrayGetCount(displayLines);
+
+    [_locArray removeAllObjects];
     _locArray = [[NSMutableArray alloc] initWithCapacity:lineCount];
     
     CGPoint origins[lineCount];
@@ -331,16 +340,28 @@
     long int lineIndex = 0;
     for (LineOfCode* loc in _locArray)
     {                    
+        NSMutableAttributedString* nsGutterString;
+        CFAttributedStringRef cfGutterString;
+        CTLineRef gutterLine;
+        
         // line number setup
-        NSMutableAttributedString* nsNumString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",(lineIndex+_startingLineNum)]] mutableCopy];
-        [nsNumString setFont:[UIFont fontWithName:@"DroidSansMono" size:13]];
-        [nsNumString setTextColor:[UIColor colorWithRed:112/255.f green:112/255.f blue:112/255.f alpha:1]];
-        CFAttributedStringRef lineNumString = (__bridge CFAttributedStringRef)nsNumString;        
-        CTLineRef gutterLine = CTLineCreateWithAttributedString(lineNumString);
+        if (_displayMode == EDITOR_DISPLAY_LINENUMS)
+        {
+            nsGutterString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",(lineIndex+_startingLineNum)]] mutableCopy];
+        }
+        else if (_displayMode == EDITOR_DISPLAY_DIFF)
+        {
+            nsGutterString = [[[NSAttributedString alloc] initWithString:@"•"] mutableCopy];
+        }
+        
+        [nsGutterString setFont:[UIFont fontWithName:@"DroidSansMono" size:13]];
+        [nsGutterString setTextColor:[UIColor colorWithRed:112/255.f green:112/255.f blue:112/255.f alpha:1]];
+        cfGutterString = (__bridge CFAttributedStringRef)nsGutterString;        
+        gutterLine = CTLineCreateWithAttributedString(cfGutterString);
         
         CFTypeRef lineRef = loc.lineRef;              
         
-        // single display line
+        // first display line
         if (lineRef != NULL && loc.numDisplayLines > 0)
         {                                
             CTLineRef codeLine;
@@ -370,7 +391,7 @@
             y -= _lineHeight;
         }
         
-        // multiple display lines for this single line of code
+        // multiple subsequent display lines for this single line of code
         if (lineRef != NULL && loc.numDisplayLines > 1)
         {
             for (int wrapIndex = 1; wrapIndex < loc.numDisplayLines; wrapIndex++)

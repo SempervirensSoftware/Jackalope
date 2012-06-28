@@ -1,13 +1,13 @@
 //
-//  FeedCommitView.h
+//  FeedCommitSectionFooter.h
 //  Jackalope
 //
-//  Created by Peter Terrill on 5/24/12.
+//  Created by Peter Terrill on 6/28/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface FeedCommitView : UIView
+@interface FeedCommitSectionFooter : UIView
 
 @end
