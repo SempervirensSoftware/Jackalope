@@ -6,13 +6,14 @@
 //  Copyright 2011 TestFlight. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#define TESTFLIGHT_SDK_VERSION @"0.8.3"
+#define TESTFLIGHT_SDK_VERSION @"1.1"
 #undef TFLog
 
 #if __cplusplus
 extern "C" { 
 #endif
-    void TFLog(NSString *format, ...);   
+    void TFLog(NSString *format, ...);
+    void TFLogv(NSString *format, va_list arg_list);
 #if __cplusplus
 }
 #endif
@@ -55,6 +56,10 @@ extern "C" {
  *                                                               NO  - sends log statements to TestFlight log only
  *   sendLogOnlyOnCrash          [ NSNumber numberWithBool:YES ] NO  - default, sends logs to TestFlight at the end of every session
  *                                                               YES - sends logs statements to TestFlight only if there was a crash
+ *   attachBacktraceToFeedback   [ NSNumber numberWithBool:YES ] NO  - default, feedback is sent exactly as the user enters it
+ *                                                               YES - attaches the current backtrace, with symbols, to the feedback.
+ *   disableInAppUpdates         [ NSNumber numberWithBool:YES ] NO  - default, in application updates are allowed
+ *                                                               YES - the in application update screen will not be displayed
  */
 + (void)setOptions:(NSDictionary*)options;
 
@@ -77,5 +82,20 @@ extern "C" {
  * @param feedback Your users feedback, method does nothing if feedback is nil
  */
 + (void)submitFeedback:(NSString*)feedback;
+
+/**
+ * Sets the Device Identifier. 
+ * The SDK no longer obtains the device unique identifier. This method should only be used during testing so that you can 
+ * identify a testers test data with them. If you do not provide the identifier you will still see all session data, with checkpoints 
+ * and logs, but the data will be anonymized.
+ * It is recommended that you only use this method during testing. We also recommended that you wrap this method with a pre-processor
+ * directive that is only active for non-app store builds. 
+ * #ifndef RELEASE 
+ * [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+ * #endif
+ *
+ * @param deviceIdentifer The current devices device identifier
+ */
++ (void)setDeviceIdentifier:(NSString*)deviceIdentifer;
 
 @end
