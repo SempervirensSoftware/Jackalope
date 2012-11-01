@@ -12,13 +12,28 @@
 
 @implementation Commit
 
-@synthesize authorName, authorEmail, message, files, repoName, repoOwner;
+@synthesize authorName, authorEmail, message, files, repoName, repoOwner, date;
 
 -(void) setValuesFromRefreshResponse:(id)responseObject
 {
     if (![responseObject isKindOfClass:[NSDictionary class]])
     {  return; }
     NSDictionary* values = (NSDictionary*)responseObject;
+
+    NSDictionary* commit = [values objectForKey:@"commit"];
+    if (commit)
+    {
+        NSDictionary* committer = [commit objectForKey:@"committer"];
+        if (committer)
+        {
+            NSString* dateStr = [committer objectForKey:@"date"];
+            dateStr = [dateStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HHmmssZ"];
+            [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+            self.date = [dateFormatter dateFromString:dateStr];
+        }
+    }
     
     NSMutableArray* tempFiles = [[NSMutableArray alloc] init];  
     NSArray* fileArray = [values objectForKey:@"files"];

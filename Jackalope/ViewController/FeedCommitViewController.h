@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Commit.h"
 #import "FeedCommitSectionHeader.h"
+#import "FeedCommitInfoCell.h"
 
 @interface FeedCommitViewController : UITableViewController <FeedCommitSectionHeaderDelegate>
 {
@@ -16,7 +17,8 @@
     BOOL        _isError;
     
     Commit*     _commit;
-    UITableViewCell*    _headerCell;
+    
+    FeedCommitInfoCell* _infoCell;
     UITableViewCell*    _notifyCell;
 }
 

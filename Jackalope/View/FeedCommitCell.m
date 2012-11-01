@@ -8,9 +8,9 @@
 
 #import "FeedCommitCell.h"
 
-CGFloat const _defaultCodeHeight = 150.f;
-CGFloat const _codeXPadding = 0.f;
-CGFloat const _codeBottomPadding = 10.f;
+CGFloat const _CommitCellCodeHeight = 150.f;
+CGFloat const _CommitCellXPadding = 0.f;
+CGFloat const _CommitCellBottomPadding = 10.f;
 
 @implementation FeedCommitCell
 
@@ -18,7 +18,7 @@ CGFloat const _codeBottomPadding = 10.f;
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        CGRect viewFrame = CGRectMake(_codeXPadding, 0.f, self.frame.size.width-(2*_codeXPadding), (height-_codeBottomPadding));        
+        CGRect viewFrame = CGRectMake(_CommitCellXPadding, 0.f, self.frame.size.width-(2*_CommitCellXPadding), (height-_CommitCellBottomPadding));        
         _codeView = [[PTCodeScrollView alloc] initWithFrame:viewFrame];
         _codeView.isDiff = YES;
                 
@@ -31,7 +31,7 @@ CGFloat const _codeBottomPadding = 10.f;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    return [self initWithStyle:style reuseIdentifier:reuseIdentifier cellHeight:_defaultCodeHeight];
+    return [self initWithStyle:style reuseIdentifier:reuseIdentifier cellHeight:_CommitCellCodeHeight];
 }
 
 -(void)setDiff:(NSString *)diff forFileName:(NSString *)fileName

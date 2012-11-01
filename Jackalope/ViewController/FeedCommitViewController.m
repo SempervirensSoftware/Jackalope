@@ -11,12 +11,13 @@
 #import "FeedCommitCell.h"
 #import "FeedCommitSectionFooter.h"
 
-NSInteger const _headerCellHeight         = 50;
-NSInteger const _notifyCellHeight         = 20;
-NSInteger const _sectionHeaderHeight      = 40;
-NSInteger const _sectionFooterHeight      = 1;
-NSInteger const _fileCellHeight           = 250;
-NSString* const _fileCellIdentifier       = @"fileCell";
+NSInteger const _infoCellHeight         = 80;
+NSInteger const _notifyCellHeight       = 20;
+NSInteger const _sectionHeaderHeight    = 40;
+NSInteger const _sectionFooterHeight    = 1;
+NSInteger const _fileCellHeight         = 250;
+NSString* const _fileCellIdentifier     = @"fileCell";
+NSString* const _infoCellIdentifier     = @"infoCell";
 
 
 @implementation FeedCommitViewController
@@ -42,8 +43,6 @@ NSString* const _fileCellIdentifier       = @"fileCell";
         _isLoading = YES;
         _isError = NO;
         
-        _headerCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"header"];
-        _headerCell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
         _notifyCell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
         
@@ -62,6 +61,7 @@ NSString* const _fileCellIdentifier       = @"fileCell";
 {
     _isLoading = NO;
     _isError = NO;
+    [_infoCell refresh];
     [self.tableView reloadData];    
 }
 
@@ -112,7 +112,7 @@ NSString* const _fileCellIdentifier       = @"fileCell";
     }
     else if (indexPath.section == 0)
     {
-        return _headerCellHeight;
+        return _infoCellHeight;
     }
     else {
         return _fileCellHeight;
@@ -133,8 +133,11 @@ NSString* const _fileCellIdentifier       = @"fileCell";
     }
     else if (indexPath.section == 0)
     {
-        _headerCell.textLabel.text = _commit.message;
-        return _headerCell;
+        if (_infoCell == nil) {
+            _infoCell = [[FeedCommitInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_infoCellIdentifier];
+            _infoCell.commit = _commit;
+        }
+        return _infoCell;
     }
     else {
 

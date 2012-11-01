@@ -106,6 +106,8 @@
 		6EC4B785159CDD7000E3A629 /* carat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4B783159CDD7000E3A629 /* carat.png */; };
 		6EC4B786159CDD7000E3A629 /* carat-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4B784159CDD7000E3A629 /* carat-open.png */; };
 		6EC4B789159D108200E3A629 /* FeedCommitSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */; };
+		6EC77140159D240F008AD118 /* FeedCommitInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7713F159D240F008AD118 /* FeedCommitInfoCell.m */; };
+		6EC77143159D26F2008AD118 /* TEMP_CommitInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC77142159D26F2008AD118 /* TEMP_CommitInfo.xib */; };
 		6EE4140B156F588C00DD7135 /* FeedCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */; };
 		6EE41410157457AA00DD7135 /* 32-speechbubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140E157457AA00DD7135 /* 32-speechbubble.png */; };
 		6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */; };
@@ -278,6 +280,9 @@
 		6EC4B784159CDD7000E3A629 /* carat-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carat-open.png"; sourceTree = "<group>"; };
 		6EC4B787159D108200E3A629 /* FeedCommitSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCommitSectionFooter.h; path = View/FeedCommitSectionFooter.h; sourceTree = "<group>"; };
 		6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitSectionFooter.m; path = View/FeedCommitSectionFooter.m; sourceTree = "<group>"; };
+		6EC7713E159D240F008AD118 /* FeedCommitInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FeedCommitInfoCell.h; path = View/FeedCommitInfoCell.h; sourceTree = "<group>"; };
+		6EC7713F159D240F008AD118 /* FeedCommitInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitInfoCell.m; path = View/FeedCommitInfoCell.m; sourceTree = "<group>"; };
+		6EC77142159D26F2008AD118 /* TEMP_CommitInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TEMP_CommitInfo.xib; sourceTree = "<group>"; };
 		6EE41409156F588C00DD7135 /* FeedCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCommitViewController.h; sourceTree = "<group>"; };
 		6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCommitViewController.m; sourceTree = "<group>"; };
 		6EE4140E157457AA00DD7135 /* 32-speechbubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble.png"; sourceTree = "<group>"; };
@@ -632,12 +637,15 @@
 				6E910E571563015B00C71B1D /* PushEventCell.m */,
 				6E910E591563082100C71B1D /* PushEventView.h */,
 				6E910E5A1563082100C71B1D /* PushEventView.m */,
-				6EBC3D81157E85DE008377B8 /* FeedCommitCell.h */,
-				6EBC3D82157E85DE008377B8 /* FeedCommitCell.m */,
+				6EC7713E159D240F008AD118 /* FeedCommitInfoCell.h */,
+				6EC7713F159D240F008AD118 /* FeedCommitInfoCell.m */,
 				6EC4B77F159C201600E3A629 /* FeedCommitSectionHeader.h */,
 				6EC4B780159C201600E3A629 /* FeedCommitSectionHeader.m */,
+				6EBC3D81157E85DE008377B8 /* FeedCommitCell.h */,
+				6EBC3D82157E85DE008377B8 /* FeedCommitCell.m */,
 				6EC4B787159D108200E3A629 /* FeedCommitSectionFooter.h */,
 				6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */,
+				6EC77142159D26F2008AD118 /* TEMP_CommitInfo.xib */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -796,6 +804,7 @@
 				6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */,
 				6EC4B785159CDD7000E3A629 /* carat.png in Resources */,
 				6EC4B786159CDD7000E3A629 /* carat-open.png in Resources */,
+				6EC77143159D26F2008AD118 /* TEMP_CommitInfo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +888,7 @@
 				6EBC3D83157E85DE008377B8 /* FeedCommitCell.m in Sources */,
 				6EC4B781159C201600E3A629 /* FeedCommitSectionHeader.m in Sources */,
 				6EC4B789159D108200E3A629 /* FeedCommitSectionFooter.m in Sources */,
+				6EC77140159D240F008AD118 /* FeedCommitInfoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
