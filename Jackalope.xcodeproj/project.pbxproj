@@ -43,7 +43,6 @@
 		6E8B053E14D0CC1F00EBC107 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B053214D0CC1F00EBC107 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		6E8B053F14D0CC1F00EBC107 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B053414D0CC1F00EBC107 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		6E8B054014D0CC1F00EBC107 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B053614D0CC1F00EBC107 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
-		6E8B054114D0CC1F00EBC107 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B053814D0CC1F00EBC107 /* LICENSE */; };
 		6E8B054214D0CC1F00EBC107 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B053A14D0CC1F00EBC107 /* NSAttributedString+Attributes.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		6E8B054B14D0CE9800EBC107 /* CodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054614D0CE9800EBC107 /* CodeViewController.m */; };
 		6E8B054C14D0CE9800EBC107 /* RepoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054814D0CE9800EBC107 /* RepoViewController.m */; };
@@ -97,7 +96,6 @@
 		6EB8D97714F7506F0079E140 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6EB8D97314F7506E0079E140 /* README.txt */; };
 		6EB8D97814F7506F0079E140 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6EB8D97414F7506E0079E140 /* release_notes.txt */; };
 		6EB8D97B14F750CB0079E140 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB8D97A14F750CB0079E140 /* libz.dylib */; };
-		6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */; };
 		6EB90C3414D77C4000B7D378 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3314D77C4000B7D378 /* User.m */; };
 		6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB90C3614D78A4300B7D378 /* GithubLoginViewController.m */; };
 		6EBC3D7D1576CE50008377B8 /* CommitFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC3D7C1576CE50008377B8 /* CommitFile.m */; };
@@ -107,12 +105,13 @@
 		6EC4B786159CDD7000E3A629 /* carat-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4B784159CDD7000E3A629 /* carat-open.png */; };
 		6EC4B789159D108200E3A629 /* FeedCommitSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */; };
 		6EC77140159D240F008AD118 /* FeedCommitInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7713F159D240F008AD118 /* FeedCommitInfoCell.m */; };
-		6EC77143159D26F2008AD118 /* TEMP_CommitInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC77142159D26F2008AD118 /* TEMP_CommitInfo.xib */; };
 		6EE4140B156F588C00DD7135 /* FeedCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */; };
 		6EE41410157457AA00DD7135 /* 32-speechbubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140E157457AA00DD7135 /* 32-speechbubble.png */; };
 		6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */; };
 		6EE4141415759A9D00DD7135 /* 09-lightning.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141215759A9D00DD7135 /* 09-lightning.png */; };
 		6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */; };
+		D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */; };
+		D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,7 +264,6 @@
 		6EB8D97514F7506E0079E140 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6EB8D97A14F750CB0079E140 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6EB8D97E14F77D9A0079E140 /* Jackalope.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jackalope.entitlements; sourceTree = "<group>"; };
-		6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DroidSansMono.ttf; path = ../../../Downloads/DroidSansMono/DroidSansMono.ttf; sourceTree = "<group>"; };
 		6EB90C3214D77C4000B7D378 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6EB90C3314D77C4000B7D378 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6EB90C3514D78A4300B7D378 /* GithubLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GithubLoginViewController.h; path = ../GithubLoginViewController.h; sourceTree = "<group>"; };
@@ -282,13 +280,14 @@
 		6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitSectionFooter.m; path = View/FeedCommitSectionFooter.m; sourceTree = "<group>"; };
 		6EC7713E159D240F008AD118 /* FeedCommitInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FeedCommitInfoCell.h; path = View/FeedCommitInfoCell.h; sourceTree = "<group>"; };
 		6EC7713F159D240F008AD118 /* FeedCommitInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCommitInfoCell.m; path = View/FeedCommitInfoCell.m; sourceTree = "<group>"; };
-		6EC77142159D26F2008AD118 /* TEMP_CommitInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TEMP_CommitInfo.xib; sourceTree = "<group>"; };
 		6EE41409156F588C00DD7135 /* FeedCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCommitViewController.h; sourceTree = "<group>"; };
 		6EE4140A156F588C00DD7135 /* FeedCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCommitViewController.m; sourceTree = "<group>"; };
 		6EE4140E157457AA00DD7135 /* 32-speechbubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble.png"; sourceTree = "<group>"; };
 		6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble@2x.png"; sourceTree = "<group>"; };
 		6EE4141215759A9D00DD7135 /* 09-lightning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning.png"; sourceTree = "<group>"; };
 		6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning@2x.png"; sourceTree = "<group>"; };
+		D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSansMono.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,6 +359,7 @@
 		6E8B04C714D0C47900EBC107 = {
 			isa = PBXGroup;
 			children = (
+				D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */,
 				6EB1898014FEF72E00B17DF9 /* IconIPad.png */,
 				6E895F0A14D9D13900D98866 /* Icon.png */,
 				6E895F0814D9D13400D98866 /* Icon@2x.png */,
@@ -645,7 +645,6 @@
 				6EBC3D82157E85DE008377B8 /* FeedCommitCell.m */,
 				6EC4B787159D108200E3A629 /* FeedCommitSectionFooter.h */,
 				6EC4B788159D108200E3A629 /* FeedCommitSectionFooter.m */,
-				6EC77142159D26F2008AD118 /* TEMP_CommitInfo.xib */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -685,8 +684,8 @@
 		6EB90C1314D68B3300B7D378 /* font */ = {
 			isa = PBXGroup;
 			children = (
+				D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */,
 				6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */,
-				6EB90C1414D68B4900B7D378 /* DroidSansMono.ttf */,
 			);
 			name = font;
 			sourceTree = "<group>";
@@ -764,13 +763,11 @@
 				6E8B04E114D0C47900EBC107 /* InfoPlist.strings in Resources */,
 				6E8B052614D0CBF800EBC107 /* file.png in Resources */,
 				6E8B052714D0CBF800EBC107 /* folder.png in Resources */,
-				6E8B054114D0CC1F00EBC107 /* LICENSE in Resources */,
 				6E4101B114D2346A0067A321 /* CodeView_iPad.xib in Resources */,
 				6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */,
 				6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */,
 				6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */,
 				6E8B058914D0DD3100EBC107 /* decorations.json in Resources */,
-				6EB90C1514D68B4900B7D378 /* DroidSansMono.ttf in Resources */,
 				6E895F0314D9D07A00D98866 /* jackalope.png in Resources */,
 				6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */,
 				6E895F0B14D9D13A00D98866 /* Icon.png in Resources */,
@@ -804,7 +801,8 @@
 				6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */,
 				6EC4B785159CDD7000E3A629 /* carat.png in Resources */,
 				6EC4B786159CDD7000E3A629 /* carat-open.png in Resources */,
-				6EC77143159D26F2008AD118 /* TEMP_CommitInfo.xib in Resources */,
+				D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */,
+				D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1182,71 @@
 			};
 			name = "Ad Hoc";
 		};
+		D0BAA5E1164206AE00C82A16 /* Debug Local */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Local";
+		};
+		D0BAA5E2164206AE00C82A16 /* Debug Local */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "LOCAL=1";
+				INFOPLIST_FILE = "Jackalope/Jackalope-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Jackalope/libs/TestFlightSDK0.8.3\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug Local";
+		};
+		D0BAA5E3164206AE00C82A16 /* Debug Local */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jackalope.app/Jackalope";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jackalope/Jackalope-Prefix.pch";
+				INFOPLIST_FILE = "JackalopeTests/JackalopeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "Debug Local";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1191,6 +1254,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E8B050F14D0C47900EBC107 /* Debug */,
+				D0BAA5E1164206AE00C82A16 /* Debug Local */,
 				6E8B051014D0C47900EBC107 /* Release */,
 				6EB8D97F14F833600079E140 /* Ad Hoc */,
 			);
@@ -1201,6 +1265,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E8B051214D0C47900EBC107 /* Debug */,
+				D0BAA5E2164206AE00C82A16 /* Debug Local */,
 				6E8B051314D0C47900EBC107 /* Release */,
 				6EB8D98014F833600079E140 /* Ad Hoc */,
 			);
@@ -1211,6 +1276,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E8B051514D0C47900EBC107 /* Debug */,
+				D0BAA5E3164206AE00C82A16 /* Debug Local */,
 				6E8B051614D0C47900EBC107 /* Release */,
 				6EB8D98114F833600079E140 /* Ad Hoc */,
 			);

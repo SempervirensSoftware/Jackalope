@@ -19,5 +19,9 @@
 
 #define GlobalAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate) 
 #define CurrentUser [AppUser currentUser]
-#define kServerRootURL @"http://jackalope.me"
-//#define kServerRootURL @"http://localhost:3000"
+
+#ifdef LOCAL
+    #define kServerRootURL @"http://localhost:3000"
+#else
+    #define kServerRootURL  @"http://jackalope.me"
+#endif

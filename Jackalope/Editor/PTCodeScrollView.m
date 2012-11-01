@@ -565,6 +565,10 @@
     return CGRectMake(0, 0, 0, 0);
 }
 
+- (NSArray *)selectionRectsForRange:(UITextRange *)range{
+    return @[];
+}
+
 /* Hit testing. */
 - (UITextPosition *)closestPositionToPoint:(CGPoint)point{
     NSLog(@"Unimplemented - closestPositionToPoint:");

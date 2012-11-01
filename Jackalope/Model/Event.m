@@ -44,7 +44,7 @@
     }
     else if (delta < 60)
     {
-        return [NSString stringWithFormat:@"%ds", delta];
+        return [NSString stringWithFormat:@"%fs", delta];
     }
     else if (delta < 3600)
     {
