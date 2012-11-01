@@ -347,7 +347,7 @@
         // line number setup
         if (_displayMode == EDITOR_DISPLAY_LINENUMS)
         {
-            nsGutterString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",(lineIndex+_startingLineNum)]] mutableCopy];
+            nsGutterString = [[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",(lineIndex+_startingLineNum)]] mutableCopy];
         }
         else if (_displayMode == EDITOR_DISPLAY_DIFF)
         {
