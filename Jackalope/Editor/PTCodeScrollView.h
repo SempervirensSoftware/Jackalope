@@ -12,6 +12,11 @@
 #import "PTCodeLayer.h"
 #import "PTCursorView.h"
 
+@protocol PTCodeScrollViewDelegate
+@optional
+-(void) keyboardDidShow:(NSNotification*)notification
+@end
+
 @interface PTCodeScrollView : UIScrollView <UITextInput, UIScrollViewDelegate>
 {
     CodeDecorator*              _decorator;
@@ -38,6 +43,7 @@
 
 @property (nonatomic, retain)   PTTextRange*  selection;
 @property (nonatomic, retain)   Code*         code;
+@property (nonatomic,retain) PTCodeScrollViewDelegate* delegate;
 @property (nonatomic)           BOOL          isDiff;
 
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;

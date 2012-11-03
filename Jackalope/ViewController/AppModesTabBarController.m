@@ -24,7 +24,7 @@
     FeedTableViewController* feedController = [[FeedTableViewController alloc] init];
     UINavigationController* feedNavController = [[UINavigationController alloc] initWithRootViewController:feedController];
     
-    NSArray* modesArray = [[NSArray alloc] initWithObjects:feedNavController, repoNavController, nil];
+    NSArray* modesArray = @[repoNavController, feedNavController];
     self.viewControllers = modesArray;
 }
 

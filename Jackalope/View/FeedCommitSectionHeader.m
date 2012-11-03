@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 CGFloat const _disclosureWidth = 35.f;
-CGFloat const _xPadding = 20.f;
+CGFloat const _commitHeaderXPadding = 20.f;
 
 @implementation FeedCommitSectionHeader
 
@@ -44,7 +44,7 @@ CGFloat const _xPadding = 20.f;
         _section = sectionNumber;
         CGRect titleLabelFrame = self.bounds;
         titleLabelFrame.origin.x += _disclosureWidth;
-        titleLabelFrame.size.width -= (_disclosureWidth + _xPadding);
+        titleLabelFrame.size.width -= (_disclosureWidth + _commitHeaderXPadding);
         UILabel *label = [[UILabel alloc] initWithFrame:titleLabelFrame];
         label.text = title;
         label.font = [UIFont fontWithName:@"HelveticaNeue" size:14];

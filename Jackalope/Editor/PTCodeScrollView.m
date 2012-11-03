@@ -593,12 +593,12 @@
 
 - (void)registerForKeyboardNotifications
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWasShown:)
+//                                                 name:UIKeyboardDidShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void) showKeyboard{
@@ -623,7 +623,7 @@
 
     [self scrollToCursor];
     NSLog(@"beginEdit");
-    [TestFlight passCheckpoint:@"BeginEdit"];
+    [TestFlight passCheckpoint:@"BeginEdit"];    
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
