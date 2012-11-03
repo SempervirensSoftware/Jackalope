@@ -32,7 +32,7 @@ NSInteger const _cellHeight         = 50;
     self.tableView.rowHeight = _cellHeight;    
     self.tableView.allowsSelection = NO;
     
-    self.title = @"Jackalope";
+    self.title = @"Feed";
     _feed = [[NSMutableArray alloc] init];
     _isLoading  = YES;
     _isError    = NO;

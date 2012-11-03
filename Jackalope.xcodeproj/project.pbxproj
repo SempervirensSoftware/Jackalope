@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6E1EF80A14F6FA91004FEAEE /* VeraMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */; };
 		6E209E461642628A00C03703 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86B50916425EAD00829DA7 /* libTestFlight.a */; };
+		6E209E4A1642673400C03703 /* glyphicons_268_keyboard_wireless.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E209E481642673400C03703 /* glyphicons_268_keyboard_wireless.png */; };
+		6E209E4B1642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E209E491642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png */; };
 		6E3C678C152AA91D00BD8953 /* SettingsView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C678A152AA91D00BD8953 /* SettingsView_iPhone.xib */; };
 		6E3C6798152AD24D00BD8953 /* LoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C6797152AD24D00BD8953 /* LoginTableViewCell.m */; };
 		6E3C679C152B89C100BD8953 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C679B152B89C100BD8953 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
@@ -126,6 +128,8 @@
 
 /* Begin PBXFileReference section */
 		6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = VeraMono.ttf; sourceTree = "<group>"; };
+		6E209E481642673400C03703 /* glyphicons_268_keyboard_wireless.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_268_keyboard_wireless.png; sourceTree = "<group>"; };
+		6E209E491642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_268_keyboard_wireless@2x.png"; sourceTree = "<group>"; };
 		6E3C678B152AA91D00BD8953 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsView_iPhone.xib; sourceTree = "<group>"; };
 		6E3C6796152AD24D00BD8953 /* LoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCell.h; sourceTree = "<group>"; };
 		6E3C6797152AD24D00BD8953 /* LoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCell.m; sourceTree = "<group>"; };
@@ -452,6 +456,8 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				6E209E481642673400C03703 /* glyphicons_268_keyboard_wireless.png */,
+				6E209E491642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png */,
 				6EC4B783159CDD7000E3A629 /* carat.png */,
 				6EC4B784159CDD7000E3A629 /* carat-open.png */,
 				6EE4141215759A9D00DD7135 /* 09-lightning.png */,
@@ -803,6 +809,8 @@
 				D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */,
 				6E86B50E16425EAE00829DA7 /* README.md in Resources */,
 				6E86B50F16425EAE00829DA7 /* release_notes.md in Resources */,
+				6E209E4A1642673400C03703 /* glyphicons_268_keyboard_wireless.png in Resources */,
+				6E209E4B1642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
