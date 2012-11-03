@@ -7,6 +7,7 @@
 //
 
 #import "GitNode.h"
+#import "Constants.h"
 
 @implementation GitNode
 
