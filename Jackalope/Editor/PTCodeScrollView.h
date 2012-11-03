@@ -12,9 +12,13 @@
 #import "PTCodeLayer.h"
 #import "PTCursorView.h"
 
-@protocol PTCodeScrollViewDelegate
+@protocol PTCodeViewDelegate <UITextInputDelegate>
+
 @optional
--(void) keyboardDidShow:(NSNotification*)notification
+
+-(void) keyboardDidShow:(NSNotification*)notification;
+-(void) keyboardWillHide:(NSNotification*)notification;
+
 @end
 
 @interface PTCodeScrollView : UIScrollView <UITextInput, UIScrollViewDelegate>
@@ -31,7 +35,7 @@
     NSRegularExpression*        _whiteSpaceRegex;
     
     NSOperationQueue*           _operationQueue; // for rendering layers on a seperate thread
-    NSMutableArray*             _textInputDelegates; // want to be able to notify multiple delegates not just the system
+    NSMutableArray*             _codeViewDelegates; // want to be able to notify multiple delegates not just the system
     
     // Display scaling factors
     // Tune these for ideal performance and appearance.
@@ -43,7 +47,6 @@
 
 @property (nonatomic, retain)   PTTextRange*  selection;
 @property (nonatomic, retain)   Code*         code;
-@property (nonatomic,retain) PTCodeScrollViewDelegate* delegate;
 @property (nonatomic)           BOOL          isDiff;
 
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;
@@ -53,8 +56,8 @@
 
 -(void) showKeyboard;
 -(void) hideKeyboard;
--(void) addTextInputDelegate:(id <UITextInputDelegate>)delegate;
--(void) removeTextInputDelegate:(id <UITextInputDelegate>)delegate;
+-(void) addCodeViewDelegate:(id <PTCodeViewDelegate>)delegate;
+-(void) removeCodeViewDelegate:(id <PTCodeViewDelegate>)delegate;
 
 #pragma mark UITextInput properties
 

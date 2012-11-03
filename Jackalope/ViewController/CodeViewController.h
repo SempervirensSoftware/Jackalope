@@ -10,7 +10,7 @@
 #import "BlobNode.h"
 #import "PTCodeScrollView.h"
 
-@interface CodeViewController : UIViewController <UISplitViewControllerDelegate, UITextInputDelegate,PTCodeScrollViewDelegate>
+@interface CodeViewController : UIViewController <UISplitViewControllerDelegate, PTCodeViewDelegate>
 {
     UIBarButtonItem*            _commitBtn;
     UIActivityIndicatorView*    _activityView;

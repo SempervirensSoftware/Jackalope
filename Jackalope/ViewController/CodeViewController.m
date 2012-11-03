@@ -20,8 +20,6 @@
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 
 - (void)configureView;
-- (void)registerForKeyboardNotifications;
-- (void)keyboardWasShown:(NSNotification*)notification;
 
 @end
 
@@ -38,7 +36,7 @@
 
 - (void)configureView
 {
-    [_codeView addTextInputDelegate:self];
+    [_codeView addCodeViewDelegate:self];
     CALayer *layer = _codeView.layer;
     [layer setMasksToBounds:YES];
     [layer setCornerRadius:3];    
@@ -59,13 +57,11 @@
     _activityBtn = [[UIBarButtonItem alloc] initWithCustomView:_activityView];
     
     [self.navigationItem setRightBarButtonItem:_commitBtn];
-    
-    [self registerForKeyboardNotifications];
 }
 
 -(void) dealloc
 {
-    [_codeView removeTextInputDelegate:self];
+    [_codeView removeCodeViewDelegate:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -124,41 +120,37 @@
 }
 
 #pragma Keyboard Events
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
 
 // Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)notification
+- (void)keyboardDidShow:(NSNotification *)notification
 {
     if (!_hideKeyboardButton){
         _hideKeyboardButton = [[UIButton alloc] init];
         [_hideKeyboardButton setImage:[UIImage imageNamed:@"glyphicons_268_keyboard_wireless"] forState:UIControlStateNormal];
+        [_hideKeyboardButton addTarget:self action:@selector(hideKeyboardPressed:) forControlEvents:UIControlEventTouchUpInside];
         [_hideKeyboardButton sizeToFit];
     }
 
+    // find out where the keyboard is
     NSDictionary* info = [notification userInfo];
-    CGRect abstractRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardRect = [self.view convertRect:abstractRect toView:nil];
+    CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = [self.view.window convertRect:keyboardRect fromWindow:nil];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
 
     CGFloat hideButtonX = keyboardRect.origin.x + keyboardRect.size.width - (_hideKeyboardButton.frame.size.width + 5);
-    CGFloat hideButtonY = keyboardRect.origin.y - _hideKeyboardButton.frame.size.height - 5;
-    CGRect hideButtonFrame = CGRectMake(0, 0, _hideKeyboardButton.frame.size.width, _hideKeyboardButton.frame.size.height);
+    CGFloat hideButtonY =  keyboardRect.origin.y - self.codeView.frame.origin.y - _hideKeyboardButton.frame.size.height - 5;
+    CGRect hideButtonFrame = CGRectMake(hideButtonX, hideButtonY, _hideKeyboardButton.frame.size.width, _hideKeyboardButton.frame.size.height);
     _hideKeyboardButton.frame = hideButtonFrame;
     [self.view addSubview:_hideKeyboardButton];
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)notification{
+- (void)keyboardWillHide:(NSNotification *)notification{
     [_hideKeyboardButton removeFromSuperview];
 }
 
+-(void) hideKeyboardPressed:(id)sender{
+    [self.codeView hideKeyboard];
+}
 
 -(void) textDidChange:(id<UITextInput>)textInput
 {
@@ -171,6 +163,8 @@
 -(void) textWillChange:(id<UITextInput>)textInput {}
 -(void) selectionDidChange:(id<UITextInput>)textInput {}
 -(void) selectionWillChange:(id<UITextInput>)textInput {}
+
+# pragma mark Commits
 
 -(void) commitPressed
 {    

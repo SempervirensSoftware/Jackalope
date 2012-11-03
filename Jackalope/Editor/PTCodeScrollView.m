@@ -86,7 +86,7 @@
                         error:NULL];
     
     _operationQueue = [[NSOperationQueue alloc] init];
-    _textInputDelegates = [[NSMutableArray alloc] initWithCapacity:1];
+    _codeViewDelegates = [[NSMutableArray alloc] initWithCapacity:1];
     
     self.contentMode = UIViewContentModeLeft;
     self.minimumZoomScale = 1.0;
@@ -456,37 +456,37 @@
     [self textDidChange];
 }
 
--(void) addTextInputDelegate:(id<UITextInputDelegate>)delegate{
-    [_textInputDelegates addObject:delegate];
+-(void) addCodeViewDelegate:(id<PTCodeViewDelegate>)delegate{
+    [_codeViewDelegates addObject:delegate];
 }
--(void) removeTextInputDelegate:(id<UITextInputDelegate>)delegate{
-    [_textInputDelegates removeObject:delegate];
+-(void) removeCodeViewDelegate:(id<PTCodeViewDelegate>)delegate{
+    [_codeViewDelegates removeObject:delegate];
 }
 -(void) textDidChange{
     [self.inputDelegate textDidChange:self];
     
-    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+    for (id<UITextInputDelegate> delegate in _codeViewDelegates){
         [delegate textDidChange:self];
     }
 }
 -(void) textWillChange{
     [self.inputDelegate textWillChange:self];
     
-    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+    for (id<UITextInputDelegate> delegate in _codeViewDelegates){
         [delegate textWillChange:self];
     }    
 }
 -(void) selectionDidChange{
     [self.inputDelegate selectionDidChange:self];
     
-    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+    for (id<UITextInputDelegate> delegate in _codeViewDelegates){
         [delegate selectionDidChange:self];
     }        
 }
 -(void) selectionWillChange{
     [self.inputDelegate selectionWillChange:self];
     
-    for (id<UITextInputDelegate> delegate in _textInputDelegates){
+    for (id<UITextInputDelegate> delegate in _codeViewDelegates){
         [delegate selectionWillChange:self];
     }    
 }
@@ -593,12 +593,12 @@
 
 - (void)registerForKeyboardNotifications
 {
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWasShown:)
-//                                                 name:UIKeyboardDidShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillBeHidden:)
-//                                                 name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void) showKeyboard{
@@ -610,7 +610,7 @@
 }
 
 // Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)notification
+- (void)keyboardDidShow:(NSNotification*)notification
 {
     NSDictionary* info = [notification userInfo];
     CGRect kbRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -623,11 +623,17 @@
 
     [self scrollToCursor];
     NSLog(@"beginEdit");
-    [TestFlight passCheckpoint:@"BeginEdit"];    
+    [TestFlight passCheckpoint:@"BeginEdit"];
+    
+    for (id<PTCodeViewDelegate> delegate in _codeViewDelegates){
+        if ([delegate respondsToSelector:@selector(keyboardDidShow:)]){
+            [delegate keyboardDidShow:notification];
+        }
+    }
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)notification
+- (void)keyboardWillHide:(NSNotification*)notification
 {
     _keyboardRect = CGRectNull;
     
@@ -636,6 +642,12 @@
     self.scrollIndicatorInsets = contentInsets;
     NSLog(@"endEdit");
     [TestFlight passCheckpoint:@"EndEdit"];
+    
+    for (id<PTCodeViewDelegate> delegate in _codeViewDelegates){
+        if ([delegate respondsToSelector:@selector(keyboardWillHide:)]){
+            [delegate keyboardWillHide:notification];
+        }
+    }
 }
 
 // If the cursor is hidden by keyboard, scroll so that it is visible with a few extra lines
