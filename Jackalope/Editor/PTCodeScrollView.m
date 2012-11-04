@@ -14,12 +14,15 @@
 #import "PTTextRange.h"
 
 // We use a tap gesture recognizer to allow the user to tap to invoke text edit mode
-@interface PTCodeScrollView() <UIGestureRecognizerDelegate>
+@interface PTCodeScrollView()
 
-- (void) tap:(UITapGestureRecognizer *)tap;
+- (void) tapsRecognized:(UITapGestureRecognizer *)recognizer;
 - (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer  withPriorityLength:(float)priorityLength;
 
 -(void) registerForKeyboardNotifications;
+
+-(void) setSelectionAtPoint:(CGPoint)point shouldSelectWord:(BOOL)selectWord;
+-(PTCodeLayer*)findCodeLayerForPoint:(CGPoint)point;
 
 -(void) textDidChange;
 -(void) textWillChange;
@@ -65,9 +68,15 @@
 
 -(void) commonInit
 {    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [self addGestureRecognizer:tap];
-    tap.delegate = self;
+    UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapsRecognized:)];
+    doubleTapRecognizer.numberOfTapsRequired=2;
+    [self addGestureRecognizer:doubleTapRecognizer];
+    
+    UITapGestureRecognizer *singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapsRecognized:)];
+    singleTapRecognizer.numberOfTapsRequired = 1;
+    singleTapRecognizer.delaysTouchesEnded = YES;
+    [singleTapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
+    [self addGestureRecognizer:singleTapRecognizer];
     
     [self registerForKeyboardNotifications];
     
@@ -208,28 +217,84 @@
 
 #pragma mark Custom user interaction
 
--(void) setSelectionAtPoint:(CGPoint)point
-{
-    NSInteger frameIndex = 0;
+-(void) setSelectionAtPoint:(CGPoint)point shouldSelectWord:(BOOL)selectWord {
+    PTCodeLayer *currentLayer = [self findCodeLayerForPoint:point];
+    if (currentLayer) {
+        _currentLayer = currentLayer;
+        PTTextRange* range = nil;
+        PTTextPosition* tapPosition = [currentLayer closestPositionToPoint:point];
+        
+        if (selectWord){
+            CFStringRef lineString = CFAttributedStringGetString(tapPosition.loc.attributedText);
+            if (lineString != NULL){
+                
+                CFMutableCharacterSetRef wordCharacters = CFCharacterSetCreateMutableCopy(kCFAllocatorDefault, CFCharacterSetGetPredefined(kCFCharacterSetAlphaNumeric));
+                CFCharacterSetAddCharactersInString(wordCharacters, CFSTR("_"));
+      
+                // look backwards
+                NSUInteger startIndex = tapPosition.index;
+                Boolean foundWordStart = false;
+                while (!foundWordStart && startIndex > 0){
+                    NSUInteger nextIndex = startIndex - 1;
+                    UniChar startChar = CFStringGetCharacterAtIndex(lineString, nextIndex);
+                    Boolean startCharIsInWord = CFCharacterSetIsCharacterMember(wordCharacters, startChar);
+                    
+                    if (startCharIsInWord){
+                        startIndex = nextIndex;
+                    } else {
+                        foundWordStart = true;
+                    }
+                }
+                PTTextPosition *startPosition = [PTTextPosition positionInLine:tapPosition.loc WithIndex:startIndex];
+                
+                // look forwards
+                NSUInteger endIndex = tapPosition.index;
+                NSUInteger length = CFStringGetLength(lineString);
+                Boolean foundWordEnd = false;
+                while (!foundWordEnd && endIndex < length){
+                    UniChar endChar = CFStringGetCharacterAtIndex(lineString, endIndex);
+                    Boolean endCharIsInWord = CFCharacterSetIsCharacterMember(wordCharacters, endChar);
+
+                    if (endCharIsInWord){
+                        endIndex++;
+                    } else {
+                        foundWordEnd = true;
+                    }
+                }
+                PTTextPosition *endPosition = [PTTextPosition positionInLine:tapPosition.loc WithIndex:endIndex];
+                
+                NSLog(@"Selected word: [%i - %i]",startIndex, endIndex);
+                range = [[PTTextRange alloc] initWithStartPosition:startPosition andEndPosition:endPosition];
+                
+                CFRelease(wordCharacters);
+                CFRelease(lineString);
+            }
+            
+        } else {
+            range = [[PTTextRange alloc] initWithStartPosition:tapPosition andEndPosition:tapPosition];
+        }
+
+        self.selection = range;
+        currentLayer.selection = range;
+    }
+}
+
+-(PTCodeLayer*)findCodeLayerForPoint:(CGPoint)point {
+    PTCodeLayer *result = nil;
+    
     for (PTCodeLayer* layer in _layerArray)
     {
         if ((point.y >= layer.frame.origin.y) && (point.y <= (layer.frame.origin.y + layer.frame.size.height)))
         {
-            _currentLayer = layer;
-            PTTextPosition* pos = [layer closestPositionToPoint:point];
-            PTTextRange* range = [[PTTextRange alloc] initWithStartPosition:pos andEndPosition:pos];
-
-            self.selection = range;
-            layer.selection = range;
-            
-            return;
+            result = layer;
+            break;
         }
-        
-        frameIndex += 1;
-    }    
+    }
+    
+    return result;
 }
   
-- (void)tap:(UITapGestureRecognizer *)tap{
+- (void)tapsRecognized:(UITapGestureRecognizer *)recognizer{
     if (![self isFirstResponder]) { 
 		// Inform controller that we're about to enter editing mode
 		//[self.editableCoreTextViewDelegate editableCoreTextViewWillEdit:self];
@@ -239,14 +304,20 @@
         [self showKeyboard];
     }
         
-    // Find and update insertion point    
+    // Find and update selection
     [self selectionWillChange];
-    [self setSelectionAtPoint:[tap locationInView:_codeEditor]];    
-    [self selectionDidChange];            
+    
+    CGPoint tapPoint = [recognizer locationInView:_codeEditor];
+    if (recognizer.numberOfTapsRequired == 1){
+        [self setSelectionAtPoint:tapPoint shouldSelectWord:NO];
+    } else {
+        [self setSelectionAtPoint:tapPoint shouldSelectWord:YES];
+    }
+    
+    [self selectionDidChange];
 }
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     //return _codeEditor;
     return nil;
 }
@@ -614,8 +685,8 @@
 {
     NSDictionary* info = [notification userInfo];
     CGRect kbRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    _keyboardRect = [self convertRect:kbRect toView:nil];
-    
+    kbRect = [self.window convertRect:kbRect fromWindow:nil];
+    _keyboardRect = [self convertRect:kbRect fromView:nil];
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, _keyboardRect.size.height, 0.0); 
     self.contentInset = contentInsets;

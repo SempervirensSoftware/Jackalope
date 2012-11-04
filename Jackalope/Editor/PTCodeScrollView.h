@@ -50,7 +50,6 @@
 @property (nonatomic)           BOOL          isDiff;
 
 -(void) insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor;
--(void) setSelectionAtPoint:(CGPoint)point;
 -(void) scrollToCursor;
 -(void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer;
 
