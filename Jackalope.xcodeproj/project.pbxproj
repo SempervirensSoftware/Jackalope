@@ -673,9 +673,9 @@
 			children = (
 				D0006CB716460DCD0089B0A4 /* PTCodeDecorator.h */,
 				D0006C9916460D4B0089B0A4 /* PTCodeDecorator.m */,
-				D0006C9A16460D4B0089B0A4 /* decorations.json */,
 				D0006C9B16460D4B0089B0A4 /* PTDecoratorCollection.h */,
 				D0006C9C16460D4B0089B0A4 /* PTDecoratorCollection.m */,
+				D0006C9A16460D4B0089B0A4 /* decorations.json */,
 			);
 			path = Decorator;
 			sourceTree = "<group>";
