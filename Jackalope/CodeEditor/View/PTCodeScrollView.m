@@ -8,7 +8,7 @@
 
 #import "PTCodeScrollView.h"
 #import <CoreText/CoreText.h>
-#import "LineOfCode.h"
+#import "PTLineOfCode.h"
 
 #import "PTTextPosition.h"
 #import "PTTextRange.h"
@@ -83,7 +83,7 @@
     _keyboardRect = CGRectNull;
     _newlineCharSet = [NSCharacterSet newlineCharacterSet];
     _layerArray = [[NSMutableArray alloc] initWithCapacity:1];
-    _cursorView = [[PTCursorView alloc] init];
+    _cursorView = [[PTCursorLayer alloc] init];
 
     _maxFrameSize               = 50;
     _numberOfScreensToBuffer    = 3;
@@ -153,7 +153,7 @@
     }
     
     _code = code;    
-    _decorator = [[DecoratorCollection getInstance] decoratorForFileName:code.fileName];        
+    _decorator = [[PTDecoratorCollection getInstance] decoratorForFileName:code.fileName];        
     _layerArray = [[NSMutableArray alloc] init];
     [self hideKeyboard];
     
@@ -388,7 +388,7 @@
 
             NSMutableString*    lineString  = [(__bridge NSString*)CFAttributedStringGetString(currentPos.loc.attributedText) mutableCopy];                        
             PTTextPosition*     nextPos     = nil;
-            LineOfCode*         newLoc      = nil;
+            PTLineOfCode*         newLoc      = nil;
             
             if (substringRange.length > 0)
             {                
@@ -416,7 +416,7 @@
                 [lineString replaceCharactersInRange:remainingRange withString:@"\n"]; //hardcoding the neline character right now...                
                 NSAttributedString* newLine = [_decorator decorateString:newlineText];
 
-                newLoc = [[LineOfCode alloc] initWithAttributedString:(__bridge CFAttributedStringRef)newLine];            
+                newLoc = [[PTLineOfCode alloc] initWithAttributedString:(__bridge CFAttributedStringRef)newLine];            
                 nextPos = [PTTextPosition positionInLine:newLoc WithIndex:indentationRange.length];
             }
 
@@ -478,8 +478,8 @@
     else
     {
         NSArray* currentLocArray = _currentLayer.locArray;
-        LineOfCode* oldLoc = currentPos.loc;
-        LineOfCode* newLoc = nil;
+        PTLineOfCode* oldLoc = currentPos.loc;
+        PTLineOfCode* newLoc = nil;
         NSInteger locIndex = [currentLocArray indexOfObject:oldLoc];        
         
         // if this isn't the first line in the layer. we want to update it's predecessor

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface PTCursorView : CALayer
+@interface PTCursorLayer : CALayer
 {
     NSTimer *_blinkTimer;
 }

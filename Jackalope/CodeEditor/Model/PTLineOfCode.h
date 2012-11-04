@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
 
-@interface LineOfCode : NSObject
+@interface PTLineOfCode : NSObject
 
 @property(nonatomic) CFAttributedStringRef  attributedText;
 @property(nonatomic) NSInteger              startIndexAtTypesetting;

@@ -54,18 +54,9 @@
 		6E8B054D14D0CE9800EBC107 /* GitNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */; };
 		6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */; };
 		6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B055D14D0D42B00EBC107 /* TreeView_iPhone.xib */; };
-		6E8B057814D0DD0900EBC107 /* LineOfCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056814D0DD0900EBC107 /* LineOfCode.m */; };
-		6E8B057914D0DD0900EBC107 /* PTCodeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056A14D0DD0900EBC107 /* PTCodeLayer.m */; };
-		6E8B057A14D0DD0900EBC107 /* PTTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056C14D0DD0900EBC107 /* PTTextPosition.m */; };
-		6E8B057B14D0DD0900EBC107 /* PTTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B056E14D0DD0900EBC107 /* PTTextRange.m */; };
 		6E8B057C14D0DD0900EBC107 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057114D0DD0900EBC107 /* AppUser.m */; };
 		6E8B057D14D0DD0900EBC107 /* BlobNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057314D0DD0900EBC107 /* BlobNode.m */; };
 		6E8B057F14D0DD0900EBC107 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B057714D0DD0900EBC107 /* TreeNode.m */; };
-		6E8B058714D0DD3100EBC107 /* CodeDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058214D0DD3100EBC107 /* CodeDecorator.m */; };
-		6E8B058914D0DD3100EBC107 /* decorations.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8B058414D0DD3100EBC107 /* decorations.json */; };
-		6E8B058A14D0DD3100EBC107 /* DecoratorCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */; };
-		6E8B059014D0DDC300EBC107 /* PTCodeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058D14D0DDC300EBC107 /* PTCodeScrollView.m */; };
-		6E8B059114D0DDC300EBC107 /* PTCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B058F14D0DDC300EBC107 /* PTCursorView.m */; };
 		6E8B059414D0DFC000EBC107 /* Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B059314D0DFC000EBC107 /* Code.m */; };
 		6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B059514D0E03E00EBC107 /* QuartzCore.framework */; };
 		6E910E401560CCAD00C71B1D /* glyphicons_358_file_import.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E910E3E1560CCAD00C71B1D /* glyphicons_358_file_import.png */; };
@@ -112,6 +103,16 @@
 		6EE41411157457AA00DD7135 /* 32-speechbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */; };
 		6EE4141415759A9D00DD7135 /* 09-lightning.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141215759A9D00DD7135 /* 09-lightning.png */; };
 		6EE4141515759A9D00DD7135 /* 09-lightning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */; };
+		D0006CAD16460D4B0089B0A4 /* PTCodeDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006C9916460D4B0089B0A4 /* PTCodeDecorator.m */; };
+		D0006CAE16460D4B0089B0A4 /* decorations.json in Resources */ = {isa = PBXBuildFile; fileRef = D0006C9A16460D4B0089B0A4 /* decorations.json */; };
+		D0006CAF16460D4B0089B0A4 /* PTDecoratorCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006C9C16460D4B0089B0A4 /* PTDecoratorCollection.m */; };
+		D0006CB016460D4B0089B0A4 /* PTLineOfCode.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006C9F16460D4B0089B0A4 /* PTLineOfCode.m */; };
+		D0006CB116460D4B0089B0A4 /* PTTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CA116460D4B0089B0A4 /* PTTextPosition.m */; };
+		D0006CB216460D4B0089B0A4 /* PTTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CA316460D4B0089B0A4 /* PTTextRange.m */; };
+		D0006CB316460D4B0089B0A4 /* PTCodeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CA616460D4B0089B0A4 /* PTCodeLayer.m */; };
+		D0006CB416460D4B0089B0A4 /* PTCodeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CA816460D4B0089B0A4 /* PTCodeScrollView.m */; };
+		D0006CB516460D4B0089B0A4 /* PTCursorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CAA16460D4B0089B0A4 /* PTCursorLayer.m */; };
+		D0006CB616460D4B0089B0A4 /* PTSelectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */; };
 		D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */; };
 		D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */; };
 /* End PBXBuildFile section */
@@ -199,29 +200,12 @@
 		6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitNodeViewController.m; sourceTree = "<group>"; };
 		6E8B055C14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPad.xib; sourceTree = "<group>"; };
 		6E8B055E14D0D42B00EBC107 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TreeView_iPhone.xib; sourceTree = "<group>"; };
-		6E8B056714D0DD0900EBC107 /* LineOfCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineOfCode.h; sourceTree = "<group>"; };
-		6E8B056814D0DD0900EBC107 /* LineOfCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineOfCode.m; sourceTree = "<group>"; };
-		6E8B056914D0DD0900EBC107 /* PTCodeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeLayer.h; sourceTree = "<group>"; };
-		6E8B056A14D0DD0900EBC107 /* PTCodeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCodeLayer.m; sourceTree = "<group>"; };
-		6E8B056B14D0DD0900EBC107 /* PTTextPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTextPosition.h; sourceTree = "<group>"; };
-		6E8B056C14D0DD0900EBC107 /* PTTextPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextPosition.m; sourceTree = "<group>"; };
-		6E8B056D14D0DD0900EBC107 /* PTTextRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTextRange.h; sourceTree = "<group>"; };
-		6E8B056E14D0DD0900EBC107 /* PTTextRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextRange.m; sourceTree = "<group>"; };
 		6E8B057014D0DD0900EBC107 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUser.h; path = Git/AppUser.h; sourceTree = "<group>"; };
 		6E8B057114D0DD0900EBC107 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUser.m; path = Git/AppUser.m; sourceTree = "<group>"; };
 		6E8B057214D0DD0900EBC107 /* BlobNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlobNode.h; sourceTree = "<group>"; };
 		6E8B057314D0DD0900EBC107 /* BlobNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlobNode.m; sourceTree = "<group>"; };
 		6E8B057614D0DD0900EBC107 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNode.h; sourceTree = "<group>"; };
 		6E8B057714D0DD0900EBC107 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeNode.m; sourceTree = "<group>"; };
-		6E8B058114D0DD3100EBC107 /* CodeDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeDecorator.h; sourceTree = "<group>"; };
-		6E8B058214D0DD3100EBC107 /* CodeDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeDecorator.m; sourceTree = "<group>"; };
-		6E8B058414D0DD3100EBC107 /* decorations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = decorations.json; sourceTree = "<group>"; };
-		6E8B058514D0DD3100EBC107 /* DecoratorCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecoratorCollection.h; sourceTree = "<group>"; };
-		6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecoratorCollection.m; sourceTree = "<group>"; };
-		6E8B058C14D0DDC300EBC107 /* PTCodeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeScrollView.h; sourceTree = "<group>"; };
-		6E8B058D14D0DDC300EBC107 /* PTCodeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCodeScrollView.m; sourceTree = "<group>"; };
-		6E8B058E14D0DDC300EBC107 /* PTCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCursorView.h; sourceTree = "<group>"; };
-		6E8B058F14D0DDC300EBC107 /* PTCursorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCursorView.m; sourceTree = "<group>"; };
 		6E8B059214D0DFC000EBC107 /* Code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Code.h; sourceTree = "<group>"; };
 		6E8B059314D0DFC000EBC107 /* Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Code.m; sourceTree = "<group>"; };
 		6E8B059514D0E03E00EBC107 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -290,6 +274,25 @@
 		6EE4140F157457AA00DD7135 /* 32-speechbubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-speechbubble@2x.png"; sourceTree = "<group>"; };
 		6EE4141215759A9D00DD7135 /* 09-lightning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning.png"; sourceTree = "<group>"; };
 		6EE4141315759A9D00DD7135 /* 09-lightning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-lightning@2x.png"; sourceTree = "<group>"; };
+		D0006C9916460D4B0089B0A4 /* PTCodeDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCodeDecorator.m; sourceTree = "<group>"; };
+		D0006C9A16460D4B0089B0A4 /* decorations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = decorations.json; sourceTree = "<group>"; };
+		D0006C9B16460D4B0089B0A4 /* PTDecoratorCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTDecoratorCollection.h; sourceTree = "<group>"; };
+		D0006C9C16460D4B0089B0A4 /* PTDecoratorCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTDecoratorCollection.m; sourceTree = "<group>"; };
+		D0006C9E16460D4B0089B0A4 /* PTLineOfCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTLineOfCode.h; sourceTree = "<group>"; };
+		D0006C9F16460D4B0089B0A4 /* PTLineOfCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTLineOfCode.m; sourceTree = "<group>"; };
+		D0006CA016460D4B0089B0A4 /* PTTextPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTextPosition.h; sourceTree = "<group>"; };
+		D0006CA116460D4B0089B0A4 /* PTTextPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextPosition.m; sourceTree = "<group>"; };
+		D0006CA216460D4B0089B0A4 /* PTTextRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTextRange.h; sourceTree = "<group>"; };
+		D0006CA316460D4B0089B0A4 /* PTTextRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTextRange.m; sourceTree = "<group>"; };
+		D0006CA516460D4B0089B0A4 /* PTCodeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeLayer.h; sourceTree = "<group>"; };
+		D0006CA616460D4B0089B0A4 /* PTCodeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCodeLayer.m; sourceTree = "<group>"; };
+		D0006CA716460D4B0089B0A4 /* PTCodeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeScrollView.h; sourceTree = "<group>"; };
+		D0006CA816460D4B0089B0A4 /* PTCodeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCodeScrollView.m; sourceTree = "<group>"; };
+		D0006CA916460D4B0089B0A4 /* PTCursorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCursorLayer.h; sourceTree = "<group>"; };
+		D0006CAA16460D4B0089B0A4 /* PTCursorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCursorLayer.m; sourceTree = "<group>"; };
+		D0006CAB16460D4B0089B0A4 /* PTSelectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSelectionLayer.h; sourceTree = "<group>"; };
+		D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSelectionLayer.m; sourceTree = "<group>"; };
+		D0006CB716460DCD0089B0A4 /* PTCodeDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeDecorator.h; sourceTree = "<group>"; };
 		D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSansMono.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -355,7 +358,6 @@
 			isa = PBXGroup;
 			children = (
 				6E910E55156300CA00C71B1D /* Feed */,
-				6E8B058B14D0DDC300EBC107 /* Editor */,
 				6EB3D92915490F1F003BD13E /* GithubLogin_iPad.xib */,
 				6EB3D92C15490F55003BD13E /* GithubLogin_iPhone.xib */,
 				6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */,
@@ -414,6 +416,7 @@
 				6EB8D97E14F77D9A0079E140 /* Jackalope.entitlements */,
 				6EB90C1114D68B1E00B7D378 /* Assets */,
 				6E8B052814D0CC1F00EBC107 /* Libs */,
+				D0006C9616460D4B0089B0A4 /* CodeEditor */,
 				6E514C2F14D8B2F7000CBF1B /* Categories */,
 				6E8B056514D0DD0900EBC107 /* Model */,
 				6E895EFE14D8C8FB00D98866 /* View */,
@@ -558,8 +561,6 @@
 			isa = PBXGroup;
 			children = (
 				6E910E431560E43E00C71B1D /* Feed */,
-				6E8B058014D0DD3100EBC107 /* Decorator */,
-				6E8B056614D0DD0900EBC107 /* Editor */,
 				6E8B056F14D0DD0900EBC107 /* Git */,
 				6E8B057014D0DD0900EBC107 /* AppUser.h */,
 				6E8B057114D0DD0900EBC107 /* AppUser.m */,
@@ -570,21 +571,6 @@
 				6EB312E415328BE1000C8046 /* Constants.h */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		6E8B056614D0DD0900EBC107 /* Editor */ = {
-			isa = PBXGroup;
-			children = (
-				6E8B056714D0DD0900EBC107 /* LineOfCode.h */,
-				6E8B056814D0DD0900EBC107 /* LineOfCode.m */,
-				6E8B056914D0DD0900EBC107 /* PTCodeLayer.h */,
-				6E8B056A14D0DD0900EBC107 /* PTCodeLayer.m */,
-				6E8B056B14D0DD0900EBC107 /* PTTextPosition.h */,
-				6E8B056C14D0DD0900EBC107 /* PTTextPosition.m */,
-				6E8B056D14D0DD0900EBC107 /* PTTextRange.h */,
-				6E8B056E14D0DD0900EBC107 /* PTTextRange.m */,
-			);
-			path = Editor;
 			sourceTree = "<group>";
 		};
 		6E8B056F14D0DD0900EBC107 /* Git */ = {
@@ -606,30 +592,6 @@
 				6E910E4E1560E5DD00C71B1D /* Commit.m */,
 			);
 			path = Git;
-			sourceTree = "<group>";
-		};
-		6E8B058014D0DD3100EBC107 /* Decorator */ = {
-			isa = PBXGroup;
-			children = (
-				6E8B058114D0DD3100EBC107 /* CodeDecorator.h */,
-				6E8B058214D0DD3100EBC107 /* CodeDecorator.m */,
-				6E8B058414D0DD3100EBC107 /* decorations.json */,
-				6E8B058514D0DD3100EBC107 /* DecoratorCollection.h */,
-				6E8B058614D0DD3100EBC107 /* DecoratorCollection.m */,
-			);
-			name = Decorator;
-			path = ../Decorator;
-			sourceTree = "<group>";
-		};
-		6E8B058B14D0DDC300EBC107 /* Editor */ = {
-			isa = PBXGroup;
-			children = (
-				6E8B058C14D0DDC300EBC107 /* PTCodeScrollView.h */,
-				6E8B058D14D0DDC300EBC107 /* PTCodeScrollView.m */,
-				6E8B058E14D0DDC300EBC107 /* PTCursorView.h */,
-				6E8B058F14D0DDC300EBC107 /* PTCursorView.m */,
-			);
-			path = Editor;
 			sourceTree = "<group>";
 		};
 		6E910E431560E43E00C71B1D /* Feed */ = {
@@ -694,6 +656,56 @@
 				6E1EF80914F6FA91004FEAEE /* VeraMono.ttf */,
 			);
 			name = font;
+			sourceTree = "<group>";
+		};
+		D0006C9616460D4B0089B0A4 /* CodeEditor */ = {
+			isa = PBXGroup;
+			children = (
+				D0006C9716460D4B0089B0A4 /* Decorator */,
+				D0006C9D16460D4B0089B0A4 /* Model */,
+				D0006CA416460D4B0089B0A4 /* View */,
+			);
+			path = CodeEditor;
+			sourceTree = "<group>";
+		};
+		D0006C9716460D4B0089B0A4 /* Decorator */ = {
+			isa = PBXGroup;
+			children = (
+				D0006CB716460DCD0089B0A4 /* PTCodeDecorator.h */,
+				D0006C9916460D4B0089B0A4 /* PTCodeDecorator.m */,
+				D0006C9A16460D4B0089B0A4 /* decorations.json */,
+				D0006C9B16460D4B0089B0A4 /* PTDecoratorCollection.h */,
+				D0006C9C16460D4B0089B0A4 /* PTDecoratorCollection.m */,
+			);
+			path = Decorator;
+			sourceTree = "<group>";
+		};
+		D0006C9D16460D4B0089B0A4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0006C9E16460D4B0089B0A4 /* PTLineOfCode.h */,
+				D0006C9F16460D4B0089B0A4 /* PTLineOfCode.m */,
+				D0006CA016460D4B0089B0A4 /* PTTextPosition.h */,
+				D0006CA116460D4B0089B0A4 /* PTTextPosition.m */,
+				D0006CA216460D4B0089B0A4 /* PTTextRange.h */,
+				D0006CA316460D4B0089B0A4 /* PTTextRange.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0006CA416460D4B0089B0A4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0006CA516460D4B0089B0A4 /* PTCodeLayer.h */,
+				D0006CA616460D4B0089B0A4 /* PTCodeLayer.m */,
+				D0006CA716460D4B0089B0A4 /* PTCodeScrollView.h */,
+				D0006CA816460D4B0089B0A4 /* PTCodeScrollView.m */,
+				D0006CA916460D4B0089B0A4 /* PTCursorLayer.h */,
+				D0006CAA16460D4B0089B0A4 /* PTCursorLayer.m */,
+				D0006CAB16460D4B0089B0A4 /* PTSelectionLayer.h */,
+				D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -773,7 +785,6 @@
 				6E4101B214D2346A0067A321 /* CodeView_iPhone.xib in Resources */,
 				6E8B055F14D0D42B00EBC107 /* TreeView_iPad.xib in Resources */,
 				6E8B056014D0D42B00EBC107 /* TreeView_iPhone.xib in Resources */,
-				6E8B058914D0DD3100EBC107 /* decorations.json in Resources */,
 				6E895F0314D9D07A00D98866 /* jackalope.png in Resources */,
 				6E895F0914D9D13400D98866 /* Icon@2x.png in Resources */,
 				6E895F0B14D9D13A00D98866 /* Icon.png in Resources */,
@@ -811,6 +822,7 @@
 				6E86B50F16425EAE00829DA7 /* release_notes.md in Resources */,
 				6E209E4A1642673400C03703 /* glyphicons_268_keyboard_wireless.png in Resources */,
 				6E209E4B1642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png in Resources */,
+				D0006CAE16460D4B0089B0A4 /* decorations.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -857,17 +869,9 @@
 				6E8B054B14D0CE9800EBC107 /* CodeViewController.m in Sources */,
 				6E8B054C14D0CE9800EBC107 /* RepoViewController.m in Sources */,
 				6E8B054D14D0CE9800EBC107 /* GitNodeViewController.m in Sources */,
-				6E8B057814D0DD0900EBC107 /* LineOfCode.m in Sources */,
-				6E8B057914D0DD0900EBC107 /* PTCodeLayer.m in Sources */,
-				6E8B057A14D0DD0900EBC107 /* PTTextPosition.m in Sources */,
-				6E8B057B14D0DD0900EBC107 /* PTTextRange.m in Sources */,
 				6E8B057C14D0DD0900EBC107 /* AppUser.m in Sources */,
 				6E8B057D14D0DD0900EBC107 /* BlobNode.m in Sources */,
 				6E8B057F14D0DD0900EBC107 /* TreeNode.m in Sources */,
-				6E8B058714D0DD3100EBC107 /* CodeDecorator.m in Sources */,
-				6E8B058A14D0DD3100EBC107 /* DecoratorCollection.m in Sources */,
-				6E8B059014D0DDC300EBC107 /* PTCodeScrollView.m in Sources */,
-				6E8B059114D0DDC300EBC107 /* PTCursorView.m in Sources */,
 				6E8B059414D0DFC000EBC107 /* Code.m in Sources */,
 				6EB90C3414D77C4000B7D378 /* User.m in Sources */,
 				6EB90C3814D78A4300B7D378 /* GithubLoginViewController.m in Sources */,
@@ -895,6 +899,15 @@
 				6EC4B781159C201600E3A629 /* FeedCommitSectionHeader.m in Sources */,
 				6EC4B789159D108200E3A629 /* FeedCommitSectionFooter.m in Sources */,
 				6EC77140159D240F008AD118 /* FeedCommitInfoCell.m in Sources */,
+				D0006CAD16460D4B0089B0A4 /* PTCodeDecorator.m in Sources */,
+				D0006CAF16460D4B0089B0A4 /* PTDecoratorCollection.m in Sources */,
+				D0006CB016460D4B0089B0A4 /* PTLineOfCode.m in Sources */,
+				D0006CB116460D4B0089B0A4 /* PTTextPosition.m in Sources */,
+				D0006CB216460D4B0089B0A4 /* PTTextRange.m in Sources */,
+				D0006CB316460D4B0089B0A4 /* PTCodeLayer.m in Sources */,
+				D0006CB416460D4B0089B0A4 /* PTCodeScrollView.m in Sources */,
+				D0006CB516460D4B0089B0A4 /* PTCursorLayer.m in Sources */,
+				D0006CB616460D4B0089B0A4 /* PTSelectionLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

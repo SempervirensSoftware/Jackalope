@@ -74,9 +74,9 @@
     [_locArray removeAllObjects];
 }
 
--(void) updateLine:(LineOfCode*) updatedLine
+-(void) updateLine:(PTLineOfCode*) updatedLine
 {
-    for (LineOfCode* loc in _locArray)
+    for (PTLineOfCode* loc in _locArray)
     {
         if (loc == updatedLine)
         {
@@ -88,12 +88,12 @@
     }
 }
 
--(void) insertLine:(LineOfCode*) newLine afterLine:(LineOfCode*) exitingLine;
+-(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) exitingLine;
 {
     NSInteger locIndex = 0;
     BOOL found = NO;
     
-    for (LineOfCode* loc in _locArray)
+    for (PTLineOfCode* loc in _locArray)
     {
         locIndex++;
         
@@ -120,7 +120,7 @@
 }
 
 
--(void) removeLine:(LineOfCode*) line
+-(void) removeLine:(PTLineOfCode*) line
 {
     [self updateLineHeightsBy:(-1*line.numDisplayLines) startingAtLine:line];
     [_locArray removeObject:line];
@@ -128,7 +128,7 @@
     [self display];
 }
 
--(void)layoutLoc:(LineOfCode*)loc
+-(void)layoutLoc:(PTLineOfCode*)loc
 {
     // create frame for the entire code document
     CTFramesetterRef fullFramesetter = CTFramesetterCreateWithAttributedString(loc.attributedText);
@@ -155,7 +155,7 @@
     [self updateLineHeightsBy:deltaLineCount startingAtLine:loc];
 }
 
--(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(LineOfCode*) updatedLoc
+-(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(PTLineOfCode*) updatedLoc
 {
     if (deltaRows == 0)
     {
@@ -166,7 +166,7 @@
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, (self.frame.size.height + deltaHeight));
     
     BOOL startUpdating = NO;        
-    for (LineOfCode* loc in _locArray)
+    for (PTLineOfCode* loc in _locArray)
     {
         if (loc == updatedLoc)
         {
@@ -248,11 +248,11 @@
         
         if ([_newlineCharSet characterIsMember:lastChar] || (currentIndex == lineCount-1))
         {            
-            LineOfCode *loc = nil;
+            PTLineOfCode *loc = nil;
             
             if (tempLineArray == NULL)
             {                    
-                loc = [[LineOfCode alloc] initWithAttributedString:lineString typsetterOffset:currentLineRange.location andLine:currentLine];                                       
+                loc = [[PTLineOfCode alloc] initWithAttributedString:lineString typsetterOffset:currentLineRange.location andLine:currentLine];                                       
             }
             else
             {
@@ -263,7 +263,7 @@
                 CFRelease(lineString);
                 lineString = CFAttributedStringCreateWithSubstring(kCFAllocatorDefault, attrCode, tempRange);
                 
-                loc = [[LineOfCode alloc] initWithAttributedString:lineString typsetterOffset:tempRange.location andLineArray:tempLineArray];
+                loc = [[PTLineOfCode alloc] initWithAttributedString:lineString typsetterOffset:tempRange.location andLineArray:tempLineArray];
                 
                 CFRelease(tempLineArray);
                 tempLineArray = NULL;
@@ -338,7 +338,7 @@
 //    CGContextFillRect(ctx, leftColumnBorder);        
     
     long int lineIndex = 0;
-    for (LineOfCode* loc in _locArray)
+    for (PTLineOfCode* loc in _locArray)
     {                    
         NSMutableAttributedString* nsGutterString;
         CFAttributedStringRef cfGutterString;
@@ -421,7 +421,7 @@
     point.x = (point.x - _leftCodeOffset);
     point.y = (point.y - self.frame.origin.y);
     
-    for (LineOfCode* loc in _locArray)
+    for (PTLineOfCode* loc in _locArray)
     {        
         NSInteger index = kCFNotFound;        
         CGRect displayRect = loc.displayRect;
@@ -493,7 +493,7 @@
         return CGRectMake(0, 0, 1, 11);
     }
     
-    LineOfCode* loc = pos.loc;
+    PTLineOfCode* loc = pos.loc;
     NSInteger actualIndex = (pos.index + loc.startIndexAtTypesetting);
     CGFloat xOffset = 0.0;
     CGFloat yOffset = 0.0;
@@ -530,15 +530,19 @@
 -(void) setSelection:(PTTextRange *)selection
 {
     _selection = selection;
-    PTTextPosition* pos = (PTTextPosition*)selection.start;
+    PTTextPosition* start = (PTTextPosition*)selection.start;
+    PTTextPosition* end = (PTTextPosition*)selection.end;
 
     [_cursorView stopBlinking];
     [_cursorView removeFromSuperlayer];
     
-    _cursorView.frame = [self createCursorRectForPosition:pos];    
-    [self addSublayer:_cursorView];    
-    [_cursorView startBlinking];
-    
+    if ([start isEqualToPosition:end]){
+        _cursorView.frame = [self createCursorRectForPosition:start];
+        [self addSublayer:_cursorView];    
+        [_cursorView startBlinking];
+    } else {
+        
+    }
 }
 
 -(void) setStartingLineNum:(NSInteger)startingLineNum
@@ -550,7 +554,7 @@
 {
     CFMutableAttributedStringRef fullText = CFAttributedStringCreateMutable(kCFAllocatorDefault,0);
 
-    for (LineOfCode* loc in _locArray)        
+    for (PTLineOfCode* loc in _locArray)        
     {
         CFAttributedStringReplaceAttributedString(fullText,CFRangeMake(CFAttributedStringGetLength(fullText), 0),loc.attributedText);
     }

@@ -14,7 +14,7 @@
 @synthesize loc = _loc;
 
 // Class method to create an instance with a given integer index
-+ (PTTextPosition *)positionInLine:(LineOfCode *)loc WithIndex:(NSUInteger)index
++ (PTTextPosition *)positionInLine:(PTLineOfCode *)loc WithIndex:(NSUInteger)index
 {
     PTTextPosition *pos = [[PTTextPosition alloc] init];    
     pos.index = index;
@@ -26,6 +26,10 @@
 -(id) copy
 {
     return [PTTextPosition positionInLine:_loc WithIndex:_index];
+}
+
+-(BOOL) isEqualToPosition:(PTTextPosition *)otherPosition{
+    return ((self.loc == otherPosition.loc) && (self.index == otherPosition.index));
 }
 
 @end

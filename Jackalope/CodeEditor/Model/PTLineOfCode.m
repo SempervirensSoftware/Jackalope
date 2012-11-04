@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "LineOfCode.h"
+#import "PTLineOfCode.h"
 
-@implementation LineOfCode
+@implementation PTLineOfCode
 
 @synthesize attributedText = _attributedText;
 @synthesize startIndexAtTypesetting = _startIndexAtTypesetting;

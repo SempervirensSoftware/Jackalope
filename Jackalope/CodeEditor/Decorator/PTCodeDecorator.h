@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CodeDecorator : NSObject
+@interface PTCodeDecorator : NSObject
 {
             NSMutableArray*                 _decorations;
             NSError*                        _regexError;

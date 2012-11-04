@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LineOfCode.h"
+#import "PTLineOfCode.h"
 
 @interface PTTextPosition : UITextPosition
 
 @property (nonatomic) NSUInteger index;
-@property (nonatomic, retain) LineOfCode* loc;
+@property (nonatomic, retain) PTLineOfCode* loc;
 
-+ (PTTextPosition *)positionInLine:(LineOfCode*)loc WithIndex:(NSUInteger)index;
++ (PTTextPosition *)positionInLine:(PTLineOfCode*)loc WithIndex:(NSUInteger)index;
+
+-(BOOL) isEqualToPosition:(PTTextPosition *)otherPosition;
 
 @end

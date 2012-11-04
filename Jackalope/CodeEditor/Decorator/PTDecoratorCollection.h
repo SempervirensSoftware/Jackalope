@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CodeDecorator.h"
+#import "PTCodeDecorator.h"
 
-@interface DecoratorCollection : NSObject
+@interface PTDecoratorCollection : NSObject
 {
     NSMutableDictionary*    _decoratorsForExtension;
     NSMutableDictionary*    _defaultTheme;
-    CodeDecorator*          _defaultDecorator;
+    PTCodeDecorator*          _defaultDecorator;
 }
 
-+(DecoratorCollection *) getInstance;
++(PTDecoratorCollection *) getInstance;
 
--(CodeDecorator *) decoratorForFileName:(NSString *) filename;
+-(PTCodeDecorator *) decoratorForFileName:(NSString *) filename;
 
 @end

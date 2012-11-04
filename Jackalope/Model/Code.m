@@ -8,7 +8,6 @@
 
 #import "Code.h"
 #import "NSAttributedString+Attributes.h"
-#import "LineOfCode.h"
 
 @implementation Code
 

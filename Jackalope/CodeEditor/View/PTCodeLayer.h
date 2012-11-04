@@ -11,8 +11,8 @@
 #import <CoreText/CoreText.h>
 #import "NSAttributedString+Attributes.h"
 #import "PTTextRange.h"
-#import "LineOfCode.h"
-#import "PTCursorView.h"
+#import "PTLineOfCode.h"
+#import "PTCursorLayer.h"
 
 @interface PTCodeLayer : CALayer
 {
@@ -40,18 +40,18 @@
 @property (nonatomic)                   NSInteger       suggestedLineLimit;
 @property (nonatomic, assign, readonly) NSArray*        locArray;
 
-@property (nonatomic, retain)           PTCursorView*   cursorView;
+@property (nonatomic, retain)           PTCursorLayer*   cursorView;
 @property (nonatomic, retain)           PTTextRange*    selection;
 
 -(CFAttributedStringRef)                                copyAttributedText;
 -(NSString*)                                            fullText;
 
--(void) updateLine:(LineOfCode*) line;
--(void) insertLine:(LineOfCode*) newLine afterLine:(LineOfCode*) exitingLine;
--(void) removeLine:(LineOfCode*) line;
+-(void) updateLine:(PTLineOfCode*) line;
+-(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) exitingLine;
+-(void) removeLine:(PTLineOfCode*) line;
 
 - (PTTextPosition *) closestPositionToPoint:(CGPoint)point;
--(void)layoutLoc:(LineOfCode*)loc;
--(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(LineOfCode*) updatedLoc;
+-(void)layoutLoc:(PTLineOfCode*)loc;
+-(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(PTLineOfCode*) updatedLoc;
 
 @end

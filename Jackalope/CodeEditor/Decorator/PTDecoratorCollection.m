@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "DecoratorCollection.h"
+#import "PTDecoratorCollection.h"
 #import "SBJSON.h"
 
-static DecoratorCollection *_instance = nil;
+static PTDecoratorCollection *_instance = nil;
 
-@implementation DecoratorCollection
+@implementation PTDecoratorCollection
 
 -(void) hardcodeTheme
 {
@@ -28,7 +28,7 @@ static DecoratorCollection *_instance = nil;
     [_defaultTheme setValue:@"0x318495" forKey:@"variable.language"];  
 }
 
-+ (DecoratorCollection *) getInstance
++ (PTDecoratorCollection *) getInstance
 {
     if (!_instance) {
         // Create the singleton
@@ -55,7 +55,7 @@ static DecoratorCollection *_instance = nil;
     
     if (self)
     {
-        _defaultDecorator = [[CodeDecorator alloc] init];
+        _defaultDecorator = [[PTCodeDecorator alloc] init];
         
         _defaultTheme = [[NSMutableDictionary alloc] init];        
         [self hardcodeTheme];
@@ -89,7 +89,7 @@ static DecoratorCollection *_instance = nil;
     return self;
 }
 
--(CodeDecorator *) decoratorForFileName:(NSString *) filename{
+-(PTCodeDecorator *) decoratorForFileName:(NSString *) filename{
 
     //TODO: parse filename and get real extension
     // For now hardcode to ruby because that's all I have ;)
@@ -102,11 +102,11 @@ static DecoratorCollection *_instance = nil;
         NSLog(@"decoratorMissing:%@",ext);        
         return _defaultDecorator;
     }
-    else if ([decorator isKindOfClass:[CodeDecorator class]]){
+    else if ([decorator isKindOfClass:[PTCodeDecorator class]]){
         return decorator;
     }
     else if ([decorator isKindOfClass:[NSDictionary class]]){
-        CodeDecorator *newDecorator = [[CodeDecorator alloc] initFromDictionary:decorator andTheme:_defaultTheme];
+        PTCodeDecorator *newDecorator = [[PTCodeDecorator alloc] initFromDictionary:decorator andTheme:_defaultTheme];
         for (NSString* tempExt in [newDecorator extensions]){
             [_decoratorsForExtension setValue:newDecorator forKey:tempExt];
         }

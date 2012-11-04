@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "CodeDecorator.h"
+#import "PTCodeDecorator.h"
 #import "NSAttributedString+Attributes.h"
 
-@implementation CodeDecorator
+@implementation PTCodeDecorator
 
 @synthesize name = _name;
 @synthesize theme = _theme;
@@ -58,7 +58,7 @@ typedef void (^DecoratorBlock)(NSTextCheckingResult*, NSMatchingFlags, BOOL*);
                                  error:&error];
             
             tempStyleName   = [decoration objectForKey:@"name"];
-            tempColor       = [CodeDecorator colorForHexString:[_theme objectForKey:tempStyleName]];
+            tempColor       = [PTCodeDecorator colorForHexString:[_theme objectForKey:tempStyleName]];
             
             tempBlock = ^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){                
                 NSRange matchRange = [match range];

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PTCursorView.h"
+#import "PTCursorLayer.h"
 
-@implementation PTCursorView
+@implementation PTCursorLayer
 
 static const NSTimeInterval InitialBlinkDelay = 0.7;
 static const NSTimeInterval BlinkRate = 0.5;

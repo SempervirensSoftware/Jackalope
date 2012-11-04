@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DecoratorCollection.h"
+#import "PTDecoratorCollection.h"
 #import "Code.h"
 #import "PTCodeLayer.h"
-#import "PTCursorView.h"
+#import "PTCursorLayer.h"
 
 @protocol PTCodeViewDelegate <UITextInputDelegate>
 
@@ -23,8 +23,8 @@
 
 @interface PTCodeScrollView : UIScrollView <UITextInput, UIScrollViewDelegate>
 {
-    CodeDecorator*              _decorator;
-    PTCursorView*               _cursorView;
+    PTCodeDecorator*              _decorator;
+    PTCursorLayer*               _cursorView;
     CGRect                      _keyboardRect;
     
             UIView*             _codeEditor;
