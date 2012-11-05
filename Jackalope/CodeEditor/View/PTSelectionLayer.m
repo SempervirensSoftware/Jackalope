@@ -11,18 +11,24 @@
 @implementation PTSelectionLayer
 
 -(void) drawInContext:(CGContextRef)context{
-    CGColorRef bgColor = [UIColor colorWithRed:0.f green:0.f blue:1.f alpha:1.f].CGColor;
+    CGColorRef bgColor = [UIColor colorWithRed:172/255.f green:204/255.f blue:252/255.f alpha:1.f].CGColor;
     CGContextSetFillColorWithColor(context, bgColor);
     
-    if (self.numLines == 1){
-        CGRect selectRect = CGRectMake(self.frame.origin.x + self.xStartOffset, self.frame.origin.y, self.frame.origin.x+ self.xEndOffset, self.lineHeight);
-        CGContextFillRect(context, selectRect);
-    } else if (self.numLines > 1){
-        CGRect firstRect = CGRectMake(self.frame.origin.x + self.xStartOffset, self.frame.origin.y, self.frame.size.width, self.lineHeight);
-        CGContextFillRect(context, firstRect);
-        
-        for (int i = 1; i < (numLines-1)
+    if (self.endRect.origin.y > (self.startRect.origin.y + self.startRect.size.height)){
+        CGFloat width = (self.frame.origin.x + self.frame.size.width - self.startRect.origin.x);
+        CGRect topRect = CGRectMake(self.startRect.origin.x, 0, width, self.startRect.size.height);
+        CGContextFillRect(context, topRect);
+    } else {
+        CGFloat width = (self.endRect.origin.x - self.startRect.origin.x);
+        CGRect topRect = CGRectMake(self.startRect.origin.x,0,width,self.startRect.size.height);
+        CGContextFillRect(context, topRect);
     }
 }
+
+-(void) drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
+    CGColorRef bgColor = [UIColor colorWithRed:0.f green:0.f blue:1.f alpha:1.f].CGColor;
+    CGContextSetFillColorWithColor(context, bgColor);    
+}
+
 
 @end

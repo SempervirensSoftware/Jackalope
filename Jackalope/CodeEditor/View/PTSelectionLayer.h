@@ -10,9 +10,7 @@
 
 @interface PTSelectionLayer : CALayer
 
-@property (nonatomic) NSUInteger    numLines;
-@property (nonatomic) CGFloat       lineHeight;
-@property (nonatomic) CGFloat       xStartOffset;
-@property (nonatomic) CGFloat       xEndOffset;
+@property (nonatomic) CGRect    startRect;
+@property (nonatomic) CGRect    endRect;
 
 @end

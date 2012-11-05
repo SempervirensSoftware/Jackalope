@@ -267,7 +267,6 @@
                 range = [[PTTextRange alloc] initWithStartPosition:startPosition andEndPosition:endPosition];
                 
                 CFRelease(wordCharacters);
-                CFRelease(lineString);
             }
             
         } else {

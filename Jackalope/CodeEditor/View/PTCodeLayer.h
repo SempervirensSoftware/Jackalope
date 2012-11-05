@@ -13,6 +13,7 @@
 #import "PTTextRange.h"
 #import "PTLineOfCode.h"
 #import "PTCursorLayer.h"
+#import "PTSelectionLayer.h"
 
 @interface PTCodeLayer : CALayer
 {
@@ -40,14 +41,15 @@
 @property (nonatomic)                   NSInteger       suggestedLineLimit;
 @property (nonatomic, assign, readonly) NSArray*        locArray;
 
-@property (nonatomic, retain)           PTCursorLayer*   cursorView;
-@property (nonatomic, retain)           PTTextRange*    selection;
+@property (nonatomic, retain)           PTTextRange*        selection;
+@property (nonatomic, retain)           PTCursorLayer*      cursorView;
+@property (nonatomic, retain)           PTSelectionLayer*   selectionLayer;
 
 -(CFAttributedStringRef)                                copyAttributedText;
 -(NSString*)                                            fullText;
 
 -(void) updateLine:(PTLineOfCode*) line;
--(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) exitingLine;
+-(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) existingLine;
 -(void) removeLine:(PTLineOfCode*) line;
 
 - (PTTextPosition *) closestPositionToPoint:(CGPoint)point;

@@ -7,6 +7,7 @@
 //
 
 #import "PTCodeLayer.h"
+#import "PTSelectionLayer.h"
 
 @implementation PTCodeLayer
 
@@ -88,7 +89,7 @@
     }
 }
 
--(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) exitingLine;
+-(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) existingLine;
 {
     NSInteger locIndex = 0;
     BOOL found = NO;
@@ -97,7 +98,7 @@
     {
         locIndex++;
         
-        if (loc == exitingLine)
+        if (loc == existingLine)
         {
             if (locIndex == [_locArray count]){
                 [_locArray addObject:newLine];
@@ -112,8 +113,8 @@
         }
     }
     
-    CGRect oldRect = exitingLine.displayRect;    
-    newLine.displayRect = CGRectMake(oldRect.origin.x, (oldRect.origin.y + (exitingLine.numDisplayLines * _lineHeight)), oldRect.size.width, (newLine.numDisplayLines * _lineHeight));
+    CGRect oldRect = existingLine.displayRect;    
+    newLine.displayRect = CGRectMake(oldRect.origin.x, (oldRect.origin.y + (existingLine.numDisplayLines * _lineHeight)), oldRect.size.width, (newLine.numDisplayLines * _lineHeight));
     
     [self layoutLoc:newLine];
     [self needsDisplay];
@@ -294,17 +295,8 @@
     if (currentLine != NULL)
     {
         CTLineGetTypographicBounds(currentLine, &_ascent, &_descent, &_leading);
-        
-// TODO: revisit if the full pixel alignment is still neccesary. could have been solved with scaling fix and haven't revisited
         _lineHeight = (_ascent+_descent+_leading);        
-        _lineHeight = ceilf(_ascent+_descent+_leading);        
-        
-        _ascent = ceilf(_ascent);
-        _descent = ceilf(_descent);
-        _leading = ceilf(_leading);    
-        
-        _lineHeight = (_ascent+_descent+_leading);        
-    }    
+    }
     
     CGRect codeFrame = self.frame;
     codeFrame.size.height = (currentIndex * _lineHeight);
@@ -326,7 +318,7 @@
     CGContextScaleCTM(ctx, 1.0, -1.0);   
     
     CGFloat y = self.bounds.origin.y;
-    y += self.bounds.size.height; // CoreText draws bottom up so wee need to set the drawing point at the bottom of the layer
+    y += self.bounds.size.height; // CoreText draws bottom up so we need to set the drawing point at the bottom of the layer
     y -= (_lineHeight - _descent); // Lineheight-descent calculates the text baseline, which is where CoreText expects to start drawing
     
 //    CGRect leftColumnRect = {self.frame.origin.x, self.frame.origin.y, _leftColumnWidth, self.frame.size.height};
@@ -386,7 +378,7 @@
             
             CGContextSetTextPosition(ctx, (self.bounds.origin.x + _leftCodeOffset), y);            
             CTLineDraw((CTLineRef)codeLine, ctx);
-            loc.displayRect = CGRectMake(self.bounds.origin.x, ((self.bounds.size.height-y) - _lineHeight), self.bounds.size.width, _lineHeight);
+            loc.displayRect = CGRectMake(self.bounds.origin.x, ((self.bounds.size.height-y) - _ascent), self.bounds.size.width, _lineHeight);
             
             y -= _lineHeight;
         }
@@ -404,7 +396,6 @@
             }
             
         }
-        
         
         lineIndex +=1;        
     }                                        
@@ -486,8 +477,17 @@
 }
 
 
--(CGRect) createCursorRectForPosition:(PTTextPosition*)pos
-{        
+-(CGRect) createCursorRectForPosition:(PTTextPosition*)pos{
+    return [self createRectForPosition:pos includeDescent:NO];
+}
+
+-(CGRect) createSelectionRectForPosition:(PTTextPosition*)pos{
+    return [self createRectForPosition:pos includeDescent:YES];
+}
+
+
+-(CGRect) createRectForPosition:(PTTextPosition*)pos includeDescent:(BOOL)descentIncluded
+{
     if (!pos || !pos.loc || pos.index == NSUIntegerMax)
     {
         return CGRectMake(0, 0, 1, 11);
@@ -523,25 +523,57 @@
 
     float ascent,descent,leading;    
     CTLineGetTypographicBounds(cursorLine, &ascent, &descent, &leading);
-        
-    return CGRectMake((_leftCodeOffset + xOffset), (loc.displayRect.origin.y + yOffset + descent), 1, (ascent + descent));
+
+    CGRect result;
+    if (descentIncluded){
+        result = CGRectMake((_leftCodeOffset + xOffset), (loc.displayRect.origin.y + yOffset+descent), 1, (ascent + descent + leading));
+    } else {
+        result = CGRectMake((_leftCodeOffset + xOffset), (loc.displayRect.origin.y + yOffset), 1, (ascent+ descent + leading));
+    }
+
+    return result;
 }
 
 -(void) setSelection:(PTTextRange *)selection
 {
+    [self clearSelectionLayers];
+    
     _selection = selection;
     PTTextPosition* start = (PTTextPosition*)selection.start;
     PTTextPosition* end = (PTTextPosition*)selection.end;
-
-    [_cursorView stopBlinking];
-    [_cursorView removeFromSuperlayer];
     
-    if ([start isEqualToPosition:end]){
-        _cursorView.frame = [self createCursorRectForPosition:start];
-        [self addSublayer:_cursorView];    
-        [_cursorView startBlinking];
+    if (!start){
+        return;
+    }
+    else if ([start isEqualToPosition:end]){
+        self.cursorView.frame = [self createCursorRectForPosition:start];
+        [self addSublayer:self.cursorView];
+        [self.cursorView startBlinking];
     } else {
+        CGRect startRect = [self createSelectionRectForPosition:start];
+        CGRect endRect = [self createSelectionRectForPosition:end];
         
+        CGFloat height = (endRect.origin.y + endRect.size.height) - startRect.origin.y;
+        CGRect selectionRect = CGRectMake(0, startRect.origin.y, start.loc.displayRect.size.width, height);
+        self.selectionLayer = [[PTSelectionLayer alloc] init];
+        self.selectionLayer.frame = selectionRect;
+        self.selectionLayer.startRect = startRect;
+        self.selectionLayer.endRect = endRect;
+        [self.selectionLayer setNeedsDisplay];
+        [self.superlayer insertSublayer:self.selectionLayer below:self];
+    }
+}
+
+-(void) clearSelectionLayers{
+    if (self.cursorView){
+        [self.cursorView stopBlinking];
+        [self.cursorView removeFromSuperlayer];
+        self.cursorView = nil;
+    }
+
+    if (self.selectionLayer){
+        [self.selectionLayer removeFromSuperlayer];
+        self.selectionLayer = nil;
     }
 }
 
