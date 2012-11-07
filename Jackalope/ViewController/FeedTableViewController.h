@@ -8,16 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "Commit.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface FeedTableViewController : UITableViewController
+@interface FeedTableViewController : UITableViewController <EGORefreshTableHeaderDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     BOOL _isLoading;
+    BOOL _isReloading;
     BOOL _isError;
     
-    NSMutableArray*     _feed;
-    UITableViewCell*    _notifyCell;
-    
-    UINavigationController* _navController;    
+    NSMutableArray*             _feed;
+    UITableViewCell*            _notifyCell;
+
+    EGORefreshTableHeaderView*  _refreshHeaderView;
+
+    UINavigationController* _navController;
 }
 
 -(void) refreshFeed;

@@ -10,6 +10,8 @@
 
 @implementation LoginTableViewCell
 
+@synthesize textField = _textField;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,20 +26,17 @@
     return self;
 }
 
--(NSString *) getFieldText
-{
-    return _textField.text;
-}
-
 -(void) setFieldType:(NSString *)LOGIN_CELL_TYPE
 {
     if (LOGIN_CELL_TYPE == LOGIN_CELL_EMAIL){
         _textField.placeholder = @"Email";
         _textField.secureTextEntry = NO;
+        _textField.returnKeyType = UIReturnKeyNext;
     }
     else if (LOGIN_CELL_TYPE == LOGIN_CELL_PASSWORD) {
         _textField.placeholder = @"Password";
         _textField.secureTextEntry = YES;
+        _textField.returnKeyType = UIReturnKeyDone;
     }
 }
 

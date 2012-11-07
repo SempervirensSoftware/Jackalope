@@ -113,6 +113,15 @@
 		D0006CB416460D4B0089B0A4 /* PTCodeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CA816460D4B0089B0A4 /* PTCodeScrollView.m */; };
 		D0006CB516460D4B0089B0A4 /* PTCursorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CAA16460D4B0089B0A4 /* PTCursorLayer.m */; };
 		D0006CB616460D4B0089B0A4 /* PTSelectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */; };
+		D0A5C7E3164A368000055CF6 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
+		D0A5C7E4164A368000055CF6 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DB164A368000055CF6 /* blackArrow.png */; };
+		D0A5C7E5164A368000055CF6 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DC164A368000055CF6 /* blackArrow@2x.png */; };
+		D0A5C7E6164A368000055CF6 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DD164A368000055CF6 /* blueArrow.png */; };
+		D0A5C7E7164A368000055CF6 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DE164A368000055CF6 /* blueArrow@2x.png */; };
+		D0A5C7E8164A368000055CF6 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DF164A368000055CF6 /* grayArrow.png */; };
+		D0A5C7E9164A368000055CF6 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E0164A368000055CF6 /* grayArrow@2x.png */; };
+		D0A5C7EA164A368000055CF6 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E1164A368000055CF6 /* whiteArrow.png */; };
+		D0A5C7EB164A368000055CF6 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */; };
 		D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */; };
 		D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */; };
 /* End PBXBuildFile section */
@@ -293,6 +302,16 @@
 		D0006CAB16460D4B0089B0A4 /* PTSelectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSelectionLayer.h; sourceTree = "<group>"; };
 		D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSelectionLayer.m; sourceTree = "<group>"; };
 		D0006CB716460DCD0089B0A4 /* PTCodeDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeDecorator.h; sourceTree = "<group>"; };
+		D0A5C7D8164A368000055CF6 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		D0A5C7DB164A368000055CF6 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		D0A5C7DC164A368000055CF6 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		D0A5C7DD164A368000055CF6 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		D0A5C7DE164A368000055CF6 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		D0A5C7DF164A368000055CF6 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		D0A5C7E0164A368000055CF6 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		D0A5C7E1164A368000055CF6 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSansMono.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -491,6 +510,7 @@
 		6E8B052814D0CC1F00EBC107 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D0A5C7D5164A368000055CF6 /* EGOTableViewPullRefresh */,
 				6E86B50816425EAD00829DA7 /* TestFlightSDK1.1 */,
 				6EB467221558A39B00CF3C1E /* UDID */,
 				6E3C6799152B89C100BD8953 /* NSData_Base64 */,
@@ -708,6 +728,47 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D0A5C7D5164A368000055CF6 /* EGOTableViewPullRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				D0A5C7D6164A368000055CF6 /* Classes */,
+				D0A5C7DA164A368000055CF6 /* Resources */,
+			);
+			path = EGOTableViewPullRefresh;
+			sourceTree = "<group>";
+		};
+		D0A5C7D6164A368000055CF6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D0A5C7D7164A368000055CF6 /* View */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		D0A5C7D7164A368000055CF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0A5C7D8164A368000055CF6 /* EGORefreshTableHeaderView.h */,
+				D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D0A5C7DA164A368000055CF6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D0A5C7DB164A368000055CF6 /* blackArrow.png */,
+				D0A5C7DC164A368000055CF6 /* blackArrow@2x.png */,
+				D0A5C7DD164A368000055CF6 /* blueArrow.png */,
+				D0A5C7DE164A368000055CF6 /* blueArrow@2x.png */,
+				D0A5C7DF164A368000055CF6 /* grayArrow.png */,
+				D0A5C7E0164A368000055CF6 /* grayArrow@2x.png */,
+				D0A5C7E1164A368000055CF6 /* whiteArrow.png */,
+				D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -823,6 +884,14 @@
 				6E209E4A1642673400C03703 /* glyphicons_268_keyboard_wireless.png in Resources */,
 				6E209E4B1642673400C03703 /* glyphicons_268_keyboard_wireless@2x.png in Resources */,
 				D0006CAE16460D4B0089B0A4 /* decorations.json in Resources */,
+				D0A5C7E4164A368000055CF6 /* blackArrow.png in Resources */,
+				D0A5C7E5164A368000055CF6 /* blackArrow@2x.png in Resources */,
+				D0A5C7E6164A368000055CF6 /* blueArrow.png in Resources */,
+				D0A5C7E7164A368000055CF6 /* blueArrow@2x.png in Resources */,
+				D0A5C7E8164A368000055CF6 /* grayArrow.png in Resources */,
+				D0A5C7E9164A368000055CF6 /* grayArrow@2x.png in Resources */,
+				D0A5C7EA164A368000055CF6 /* whiteArrow.png in Resources */,
+				D0A5C7EB164A368000055CF6 /* whiteArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +977,7 @@
 				D0006CB416460D4B0089B0A4 /* PTCodeScrollView.m in Sources */,
 				D0006CB516460D4B0089B0A4 /* PTCursorLayer.m in Sources */,
 				D0006CB616460D4B0089B0A4 /* PTSelectionLayer.m in Sources */,
+				D0A5C7E3164A368000055CF6 /* EGORefreshTableHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

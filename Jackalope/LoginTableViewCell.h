@@ -8,15 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginTableViewCell : UITableViewCell{
-    UITextField* _textField;
-}
+@interface LoginTableViewCell : UITableViewCell
 
--(NSString *) getFieldText;
+@property (retain, nonatomic) UITextField* textField;
 
 -(void) setFieldType:(NSString *)LOGIN_CELL_TYPE;
 -(void) setFocus;
-
 
 extern NSString *const LOGIN_CELL_EMAIL;
 extern NSString *const LOGIN_CELL_PASSWORD;

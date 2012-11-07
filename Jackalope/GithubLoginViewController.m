@@ -12,7 +12,7 @@
 #import "SBJSON.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface  GithubLoginViewController ()
+@interface  GithubLoginViewController () <UITextFieldDelegate>
 -(void) initLoginTable;
 @end
 
@@ -22,7 +22,7 @@
 
 - (IBAction)login:(id)sender
 {
-    NSString* email = [emailCell getFieldText];
+    NSString* email = emailCell.textField.text;
     if (!email || email.length < 1)
     {
         statusLabel.text = @"*Email Required";
@@ -31,7 +31,7 @@
         return;
     }
         
-    NSString* password = [passwordCell getFieldText];
+    NSString* password = passwordCell.textField.text;
     if (!password || password.length < 1)
     {
         statusLabel.text = @"*Password Required";
@@ -230,6 +230,7 @@
         if (emailCell == nil)
         {
             emailCell = [[LoginTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"email"];
+            emailCell.textField.delegate = self;
             [emailCell setFieldType:LOGIN_CELL_EMAIL];
             [emailCell setFocus];
         }
@@ -238,12 +239,23 @@
     else if (indexPath.row == 1) {
         if (passwordCell == nil){
             passwordCell = [[LoginTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"password"];
+            passwordCell.textField.delegate = self;
             [passwordCell setFieldType:LOGIN_CELL_PASSWORD];
         }
         return passwordCell;
     }
 
     return nil;
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if (textField.returnKeyType == UIReturnKeyDone){
+        [self login:nil];
+    } else {
+        [passwordCell setFocus];
+    }
+    
+    return YES;
 }
 
 
