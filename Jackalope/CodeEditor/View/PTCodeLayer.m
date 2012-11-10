@@ -13,8 +13,6 @@
 
 @synthesize startingLineNum = _startingLineNum;
 @synthesize suggestedLineLimit = _suggestedLineLimit;
-@synthesize cursorView = _cursorView;
-@synthesize selection = _selection;
 @synthesize displayMode = _displayMode;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -309,8 +307,16 @@
     return (currentLineRange.location + currentLineRange.length);
 }
 
--(void)drawInContext:(CGContextRef)ctx{             
+-(void)drawInContext:(CGContextRef)ctx{
     CGContextSaveGState(ctx);
+    
+    // draw the left column
+    CGRect leftColumnRect = {0, 0, _leftColumnWidth, self.frame.size.height};
+    CGContextSetRGBFillColor(ctx, 220/255.f, 220/255.f, 220/255.f, 1);
+    CGContextFillRect(ctx, leftColumnRect);
+    CGRect leftColumnBorder = {_leftColumnWidth, 0, 1, self.frame.size.height};
+    CGContextSetRGBFillColor(ctx, 140/255.f, 140/255.f, 140/255.f, 1);
+    CGContextFillRect(ctx, leftColumnBorder);
     
     CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
     CGContextTranslateCTM(ctx, 0, self.bounds.size.height);
@@ -319,15 +325,7 @@
     CGFloat y = self.bounds.origin.y;
     y += self.bounds.size.height; // CoreText draws bottom up so we need to set the drawing point at the bottom of the layer
     y -= (_lineHeight - _descent); // Lineheight-descent calculates the text baseline, which is where CoreText expects to start drawing
-    
-//    CGRect leftColumnRect = {self.frame.origin.x, self.frame.origin.y, _leftColumnWidth, self.frame.size.height};
-//    CGContextSetRGBFillColor(ctx, 220/255.f, 220/255.f, 220/255.f, 1);
-//    CGContextFillRect(ctx, leftColumnRect);        
-//    
-//    CGRect leftColumnBorder = {(self.frame.origin.x + _leftColumnWidth), self.bounds.origin.y, 1, self.frame.size.height};
-//    CGContextSetRGBFillColor(ctx, 140/255.f, 140/255.f, 140/255.f, 1);
-//    CGContextFillRect(ctx, leftColumnBorder);        
-    
+        
     long int lineIndex = 0;
     for (PTLineOfCode* loc in _locArray)
     {                    
@@ -371,7 +369,7 @@
             float   cA, cD, cL;
             CTLineGetTypographicBounds(codeLine,&cA,&cD,&cL);
 
-            CGContextSetTextPosition(ctx, roundf(self.bounds.origin.x + (_leftColumnWidth - gWidth - 2)), y + 0);
+            CGContextSetTextPosition(ctx, self.bounds.origin.x + (_leftColumnWidth - gWidth - 2), y);
             CTLineDraw(gutterLine, ctx);
             CFRelease(gutterLine);
             
@@ -513,48 +511,6 @@
     CGFloat fudgeFactor = 0.5; // the rect looks just a little too tight on the line visually so I am artificially bumping it up
 
     return CGRectMake((_leftCodeOffset + xOffset), (self.frame.origin.y + loc.displayRect.origin.y + yOffset + fudgeFactor), 1, (ascent + descent + leading + fudgeFactor));
-}
-
--(void) setSelection:(PTTextRange *)selection
-{
-    [self clearSelectionLayers];
-    
-    _selection = selection;
-    PTTextPosition* start = (PTTextPosition*)selection.start;
-    PTTextPosition* end = (PTTextPosition*)selection.end;
-    
-    if (!start){
-        return;
-    }
-    else if ([start isEqualToPosition:end]){
-        self.cursorView.frame = [self createRectForPosition:start];
-        [self.cursorView startBlinking];
-        [self.superlayer insertSublayer:self.cursorView above:self];
-    } else {
-        CGRect startRect = [self createRectForPosition:start];
-        CGRect endRect = [self createRectForPosition:end];
-        
-        CGFloat height = (endRect.origin.y + endRect.size.height) - startRect.origin.y;
-        CGRect selectionRect = CGRectMake(0, startRect.origin.y, start.loc.displayRect.size.width, height);
-        self.selectionLayer = [[PTSelectionLayer alloc] init];
-        self.selectionLayer.frame = selectionRect;
-        self.selectionLayer.startRect = startRect;
-        self.selectionLayer.endRect = endRect;
-        [self.selectionLayer setNeedsDisplay];
-        [self.superlayer insertSublayer:self.selectionLayer below:self];
-    }
-}
-
--(void) clearSelectionLayers{
-    if (self.cursorView){
-        [self.cursorView stopBlinking];
-        [self.cursorView removeFromSuperlayer];
-    }
-
-    if (self.selectionLayer){
-        [self.selectionLayer removeFromSuperlayer];
-        self.selectionLayer = nil;
-    }
 }
 
 -(void) setStartingLineNum:(NSInteger)startingLineNum

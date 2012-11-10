@@ -9,40 +9,32 @@
 #import "PTTextRange.h"
 #import "PTTextPosition.h"
 
+@interface PTTextRange ()
+    @property (nonatomic, retain) UITextPosition* start;
+    @property (nonatomic, retain) UITextPosition* end;
+@end
+
 @implementation PTTextRange
 
 @synthesize range = _range;
+@synthesize start = _start;
+@synthesize end = _end;
 
 // Class method to create an instance with a given range
-- (id)initWithStartPosition:(PTTextPosition *)startPosition andEndPosition:(PTTextPosition *)endPosition
++(PTTextRange*)rangeWithStartPosition:(PTTextPosition *)startPosition andEndPosition:(PTTextPosition *)endPosition
 {
-    self = [super init];
-    
-    if (self)
-    {
-        _startPos = startPosition;
-        _endPos = endPosition;
-    }
-    
-    return self;
-}
-
-// UITextRange read-only property - returns start index of range
-- (UITextPosition *)start
-{
-    return _startPos;
-}
-
-// UITextRange read-only property - returns end index of range
-- (UITextPosition *)end
-{
-	return _endPos;
+    PTTextRange *range = [[PTTextRange alloc] init];
+    range.start = startPosition;
+    range.end = endPosition;
+    return range;
 }
 
 // UITextRange read-only property - returns YES if range is zero length
 -(BOOL)isEmpty
 {
-    return (_startPos && _endPos);
+    PTTextPosition *start = (PTTextPosition*)self.start;
+    PTTextPosition *end = (PTTextPosition*)self.end;
+    return [start isEqualToPosition:end];
 }
 
 @end

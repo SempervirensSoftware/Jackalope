@@ -24,7 +24,6 @@
 @interface PTCodeScrollView : UIScrollView <UITextInput, UIScrollViewDelegate>
 {
     PTCodeDecorator*             _decorator;
-    PTCursorLayer*               _cursorView;
     CGRect                      _keyboardRect;
     
             UIView*             _codeEditor;

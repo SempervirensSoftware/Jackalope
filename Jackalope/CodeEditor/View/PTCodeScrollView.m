@@ -16,6 +16,9 @@
 // We use a tap gesture recognizer to allow the user to tap to invoke text edit mode
 @interface PTCodeScrollView()
 
+@property (nonatomic, retain) PTCursorLayer* cursorLayer;
+@property (nonatomic, retain) PTSelectionLayer* selectionLayer;
+
 - (void) tapsRecognized:(UITapGestureRecognizer *)recognizer;
 - (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer  withPriorityLength:(float)priorityLength;
 
@@ -83,7 +86,23 @@
     _keyboardRect = CGRectNull;
     _newlineCharSet = [NSCharacterSet newlineCharacterSet];
     _layerArray = [[NSMutableArray alloc] initWithCapacity:1];
-    _cursorView = [[PTCursorLayer alloc] init];
+
+    // setup the selection sub layers
+    
+    NSDictionary *layerActionOverride = @{
+        @"onOrderIn": [NSNull null],
+        @"onOrderOut": [NSNull null],
+        @"sublayers": [NSNull null],
+        @"contents": [NSNull null],
+        @"bounds": [NSNull null],
+        @"position": [NSNull null]
+    };        
+    self.cursorLayer = [[PTCursorLayer alloc] init];
+    self.cursorLayer.contentsScale = [UIScreen mainScreen].scale;
+    self.cursorLayer.actions = layerActionOverride;
+    self.selectionLayer = [[PTSelectionLayer alloc] init];
+    self.selectionLayer.contentsScale = [UIScreen mainScreen].scale;
+    self.selectionLayer.actions = layerActionOverride;
 
     _maxFrameSize               = 50;
     _numberOfScreensToBuffer    = 3;
@@ -176,7 +195,6 @@
         PTCodeLayer* currentLayer = [[PTCodeLayer alloc] init];
         currentLayer.frame = currentFrame;
         currentLayer.contentsScale = [UIScreen mainScreen].scale;
-        currentLayer.cursorView = _cursorView;
         currentLayer.suggestedLineLimit = 10;
         currentLayer.startingLineNum = currentLineNum;
         if (self.isDiff)
@@ -263,15 +281,14 @@
                 PTTextPosition *endPosition = [PTTextPosition positionInLine:tapPosition.loc WithIndex:endIndex];
                 
                 NSLog(@"Selected word: [%i - %i]",startIndex, endIndex);
-                range = [[PTTextRange alloc] initWithStartPosition:startPosition andEndPosition:endPosition];
+                range = [PTTextRange rangeWithStartPosition:startPosition andEndPosition:endPosition];
             }
             
         } else {
-            range = [[PTTextRange alloc] initWithStartPosition:tapPosition andEndPosition:tapPosition];
+            range = [PTTextRange rangeWithStartPosition:tapPosition andEndPosition:tapPosition];
         }
 
         self.selection = range;
-        currentLayer.selection = range;
     }
 }
 
@@ -289,6 +306,47 @@
     
     return result;
 }
+
+-(void) setSelection:(PTTextRange *)selection {    
+    _selection = selection;
+    
+    [self clearSelectionLayers];
+    
+    PTTextPosition* start = (PTTextPosition*)selection.start;
+    PTTextPosition* end = (PTTextPosition*)selection.end;
+    
+    if (!start){
+        return;
+    }
+    else if (selection.empty){
+        self.cursorLayer.frame = [_currentLayer createRectForPosition:start];
+        [self.cursorLayer startBlinking];
+        [_codeEditor.layer insertSublayer:self.cursorLayer above:_currentLayer];
+    } else {
+        CGRect startRect = [_currentLayer createRectForPosition:start];
+        CGRect endRect = [_currentLayer createRectForPosition:end];
+        
+        CGFloat height = (endRect.origin.y + endRect.size.height) - startRect.origin.y;
+        CGRect selectionRect = CGRectMake(0, startRect.origin.y, start.loc.displayRect.size.width, height);
+        self.selectionLayer.frame = selectionRect;
+        self.selectionLayer.startRect = startRect;
+        self.selectionLayer.endRect = endRect;
+        [self.selectionLayer setNeedsDisplay];
+        [_codeEditor.layer insertSublayer:self.selectionLayer below:_currentLayer];
+    }
+}
+
+-(void) clearSelectionLayers{
+    if ([self.cursorLayer superlayer]){
+        [self.cursorLayer stopBlinking];
+        [self.cursorLayer removeFromSuperlayer];
+    }
+    
+    if ([self.selectionLayer superlayer]){
+        [self.selectionLayer removeFromSuperlayer];
+    }
+}
+
   
 - (void)tapsRecognized:(UITapGestureRecognizer *)recognizer{
     if (![self isFirstResponder]) { 
@@ -428,8 +486,7 @@
      ];
     
     if (moveCursor){
-        self.selection = [[PTTextRange alloc] initWithStartPosition:currentPos andEndPosition:currentPos];
-        _currentLayer.selection = self.selection;
+        self.selection = [PTTextRange rangeWithStartPosition:currentPos andEndPosition:currentPos];
         [self scrollToCursor];
     }
     
@@ -445,78 +502,73 @@
 // the delete software keyboard key)
 - (void)deleteBackward 
 {
-    PTTextPosition* currentPos = (PTTextPosition*)self.selection.start;
-    if (!currentPos)
-    {
-        return;
-    }
+    [self textWillChange];    
     
-    [self textWillChange];
-    NSMutableString* lineString = [(__bridge NSString*)CFAttributedStringGetString(currentPos.loc.attributedText) mutableCopy];    
-
-    // Standard case. Just delete the character to the left of the cursor
-    if (currentPos.index != 0)
-    {            
-        [lineString deleteCharactersInRange:NSMakeRange((currentPos.index-1), 1)];
+    if (self.selection.empty){
+        PTTextPosition* currentPos = (PTTextPosition*)self.selection.start;
         
-        CGFloat oldHeight = _currentLayer.frame.size.height;
-        currentPos.loc.attributedText = (__bridge CFAttributedStringRef)[_decorator decorateString:lineString];
-        [_currentLayer updateLine:currentPos.loc];
-        
-        CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);        
-        [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:0 startingAfterLayer:_currentLayer];
-        
-        currentPos.index -= 1;
-        _currentLayer.selection = self.selection;
-    }
-    
-    // Special Case. Need to add this line's text to the previous line (if there is one)
-    else
-    {
-        NSArray* currentLocArray = _currentLayer.locArray;
-        PTLineOfCode* oldLoc = currentPos.loc;
-        PTLineOfCode* newLoc = nil;
-        NSInteger locIndex = [currentLocArray indexOfObject:oldLoc];        
-        
-        // if this isn't the first line in the layer. we want to update it's predecessor
-        if (locIndex > 0){
-            CGFloat oldHeight = _currentLayer.frame.size.height;
-            [_currentLayer removeLine:oldLoc];
+        NSMutableString* lineString = [(__bridge NSString*)CFAttributedStringGetString(currentPos.loc.attributedText) mutableCopy];    
 
-            CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);            
-            [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:(-1) startingAfterLayer:_currentLayer];
-
-            newLoc = [currentLocArray objectAtIndex:(locIndex-1)];
-
-        }
-        // if this is the first line in the layer, we need to pull up the last loc in the previous frame
-        else
-        {
-            NSInteger currentLayerIndex = [_layerArray indexOfObject:_currentLayer];
+        // Standard case. Just delete the character to the left of the cursor
+        if (currentPos.index != 0)
+        {            
+            [lineString deleteCharactersInRange:NSMakeRange((currentPos.index-1), 1)];
             
-            // if there are no previous loc's or layers we don't do anything for the delete key
-            if (currentLayerIndex > 0)
-            {
-                CGFloat oldHeight = _currentLayer.frame.size.height;                
+            CGFloat oldHeight = _currentLayer.frame.size.height;
+            currentPos.loc.attributedText = (__bridge CFAttributedStringRef)[_decorator decorateString:lineString];
+            [_currentLayer updateLine:currentPos.loc];
+            
+            CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);        
+            [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:0 startingAfterLayer:_currentLayer];
+            
+            currentPos.index -= 1;
+            self.selection = [PTTextRange rangeWithStartPosition:currentPos andEndPosition:currentPos];
+        }
+        
+        // Special Case. Need to add this line's text to the previous line (if there is one)
+        else {
+            NSArray* currentLocArray = _currentLayer.locArray;
+            PTLineOfCode* oldLoc = currentPos.loc;
+            PTLineOfCode* newLoc = nil;
+            NSInteger locIndex = [currentLocArray indexOfObject:oldLoc];        
+            
+            // if this isn't the first line in the layer. we want to update it's predecessor
+            if (locIndex > 0) {
+                CGFloat oldHeight = _currentLayer.frame.size.height;
                 [_currentLayer removeLine:oldLoc];
 
-                CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);                
+                CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);            
                 [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:(-1) startingAfterLayer:_currentLayer];
+
+                newLoc = [currentLocArray objectAtIndex:(locIndex-1)];
+            }
+            // if this is the first line in the layer, we need to pull up the last loc in the previous frame
+            else {
+                NSInteger currentLayerIndex = [_layerArray indexOfObject:_currentLayer];
                 
-                _currentLayer = [_layerArray objectAtIndex:(currentLayerIndex-1)];
-                newLoc = _currentLayer.locArray.lastObject;
+                // if there are no previous loc's or layers we don't do anything for the delete key
+                if (currentLayerIndex > 0) {
+                    CGFloat oldHeight = _currentLayer.frame.size.height;                
+                    [_currentLayer removeLine:oldLoc];
+
+                    CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);                
+                    [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:(-1) startingAfterLayer:_currentLayer];
+                    
+                    _currentLayer = [_layerArray objectAtIndex:(currentLayerIndex-1)];
+                    newLoc = _currentLayer.locArray.lastObject;
+                }
+            }
+
+            if (newLoc) {
+                // strip the newline off this guy. there should already be one on the line above
+                [lineString replaceOccurrencesOfString:@"\n" withString:@"" options:0 range:NSMakeRange(0, [lineString length])];
+                PTTextPosition* newPos = [PTTextPosition positionInLine:newLoc WithIndex:(CFAttributedStringGetLength(newLoc.attributedText)-1)];
+                self.selection = [PTTextRange rangeWithStartPosition:newPos andEndPosition:newPos];
+                [self insertText:lineString andMoveCursor:NO];
             }
         }
-
-        if (newLoc)
-        {
-            // strip the newline off this guy. there should already be one on the line above
-            [lineString replaceOccurrencesOfString:@"\n" withString:@"" options:0 range:NSMakeRange(0, [lineString length])];
-            PTTextPosition* newPos = [PTTextPosition positionInLine:newLoc WithIndex:(CFAttributedStringGetLength(newLoc.attributedText)-1)];
-            self.selection = [[PTTextRange alloc] initWithStartPosition:newPos andEndPosition:newPos];
-            _currentLayer.selection = self.selection;
-            [self insertText:lineString andMoveCursor:NO];
-        }
+    } else { // this means we need to delete all the selected text
+        //???
     }
     
     [self scrollToCursor];
@@ -726,9 +778,8 @@
         displayRect.origin.y += self.contentOffset.y;
         displayRect.size.height -= _keyboardRect.size.height;  
         
-        CGRect cursorRect = _cursorView.frame;
+        CGRect cursorRect = self.cursorLayer.frame;
         cursorRect = [self convertRect:cursorRect toView:self];
-        cursorRect.origin.y += _currentLayer.frame.origin.y;
         // enlarge the 'cursor' rect to make sure we have a couple lines visible on each side
         cursorRect.origin.y -= (cursorRect.size.height * _numberOfExtraScrollLines);
         cursorRect.size.height += (cursorRect.size.height * (_numberOfExtraScrollLines*2));        

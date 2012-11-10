@@ -18,14 +18,10 @@
 // and UITextPosition objects for communicating text-layout information.
 
 @interface PTTextRange : UITextRange
-{
-    PTTextPosition* _startPos;
-    PTTextPosition* _endPos;
-}
 
 @property (nonatomic) NSRange range;
 
-- (id)initWithStartPosition:(PTTextPosition *)startPosition andEndPosition:(PTTextPosition *)endPosition;
++(id)rangeWithStartPosition:(PTTextPosition *)startPosition andEndPosition:(PTTextPosition *)endPosition;
 
 @end
 

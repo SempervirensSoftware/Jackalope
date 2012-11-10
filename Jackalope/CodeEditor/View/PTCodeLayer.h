@@ -41,10 +41,6 @@
 @property (nonatomic)                   NSInteger       suggestedLineLimit;
 @property (nonatomic, assign, readonly) NSArray*        locArray;
 
-@property (nonatomic, retain)           PTTextRange*        selection;
-@property (nonatomic, retain)           PTCursorLayer*      cursorView;
-@property (nonatomic, retain)           PTSelectionLayer*   selectionLayer;
-
 -(CFAttributedStringRef)                                copyAttributedText;
 -(NSString*)                                            fullText;
 
@@ -52,7 +48,9 @@
 -(void) insertLine:(PTLineOfCode*) newLine afterLine:(PTLineOfCode*) existingLine;
 -(void) removeLine:(PTLineOfCode*) line;
 
-- (PTTextPosition *) closestPositionToPoint:(CGPoint)point;
+-(PTTextPosition *) closestPositionToPoint:(CGPoint)point;
+-(CGRect) createRectForPosition:(PTTextPosition*)pos;
+
 -(void)layoutLoc:(PTLineOfCode*)loc;
 -(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(PTLineOfCode*) updatedLoc;
 
