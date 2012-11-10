@@ -169,8 +169,6 @@
         
     while (currentIndex < fullLength)
     {
-        currentFrame.origin.y = ceilf(currentFrame.origin.y);
-        
         if ((fullLength - currentIndex) < loadSize){
             loadSize = (fullLength - currentIndex);
         }
@@ -228,18 +226,19 @@
             CFStringRef lineString = CFAttributedStringGetString(tapPosition.loc.attributedText);
             if (lineString != NULL){
                 
-                CFMutableCharacterSetRef wordCharacters = CFCharacterSetCreateMutableCopy(kCFAllocatorDefault, CFCharacterSetGetPredefined(kCFCharacterSetAlphaNumeric));
-                CFCharacterSetAddCharactersInString(wordCharacters, CFSTR("_"));
+                NSMutableCharacterSet *wordCharacters = [[NSCharacterSet alphanumericCharacterSet] mutableCopy];
+                [wordCharacters addCharactersInString:@"_"];
       
                 // look backwards
                 NSUInteger startIndex = tapPosition.index;
                 Boolean foundWordStart = false;
                 while (!foundWordStart && startIndex > 0){
                     NSUInteger nextIndex = startIndex - 1;
-                    UniChar startChar = CFStringGetCharacterAtIndex(lineString, nextIndex);
-                    Boolean startCharIsInWord = CFCharacterSetIsCharacterMember(wordCharacters, startChar);
+                    UniChar prevChar = CFStringGetCharacterAtIndex(lineString, nextIndex);
+                    Boolean prevCharIsInWord = [wordCharacters characterIsMember:prevChar];
+                    Boolean prevCharIsNewLine = [_newlineCharSet characterIsMember:prevChar];
                     
-                    if (startCharIsInWord){
+                    if (prevCharIsInWord && !prevCharIsNewLine){
                         startIndex = nextIndex;
                     } else {
                         foundWordStart = true;
@@ -253,7 +252,7 @@
                 Boolean foundWordEnd = false;
                 while (!foundWordEnd && endIndex < length){
                     UniChar endChar = CFStringGetCharacterAtIndex(lineString, endIndex);
-                    Boolean endCharIsInWord = CFCharacterSetIsCharacterMember(wordCharacters, endChar);
+                    Boolean endCharIsInWord = [wordCharacters characterIsMember:endChar];
 
                     if (endCharIsInWord){
                         endIndex++;
@@ -265,8 +264,6 @@
                 
                 NSLog(@"Selected word: [%i - %i]",startIndex, endIndex);
                 range = [[PTTextRange alloc] initWithStartPosition:startPosition andEndPosition:endPosition];
-                
-                CFRelease(wordCharacters);
             }
             
         } else {
@@ -380,7 +377,7 @@
     [self textWillChange];
     
     NSInteger initLocCount = [_currentLayer.locArray count];
-    CGFloat initLayerHeight = _currentLayer.frame.size.height;    
+    CGFloat initLayerHeight = _currentLayer.frame.size.height;
     
     [text enumerateSubstringsInRange:NSMakeRange(0, [text length]) options:NSStringEnumerationByLines usingBlock:
         ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {                        
@@ -395,7 +392,7 @@
                 currentPos.index += substringRange.length;
             }
        
-            // if this substring isn't at the end up the insertText there must bea newline up next
+            // if this substring isn't at the end up the insertText there must be a newline up next
             if ((substringRange.location + substringRange.length) < (enclosingRange.location + enclosingRange.length))
             {                
                 NSMutableString* newlineText = [[lineString substringFromIndex:currentPos.index] mutableCopy];

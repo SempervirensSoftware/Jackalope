@@ -247,17 +247,16 @@
         CFStringRef str = CFAttributedStringGetString(lineString);
         UniChar lastChar = CFStringGetCharacterAtIndex(str, (CFStringGetLength(str)-1));
         
-        if ([_newlineCharSet characterIsMember:lastChar] || (currentIndex == lineCount-1))
+        if ([_newlineCharSet characterIsMember:lastChar] || (currentIndex == lineCount-1)) //
         {            
             PTLineOfCode *loc = nil;
             
-            if (tempLineArray == NULL)
+            if (tempLineArray == NULL) // we are at the end of a line and there are no other display lines that haven't been assigned
             {                    
                 loc = [[PTLineOfCode alloc] initWithAttributedString:lineString typsetterOffset:currentLineRange.location andLine:currentLine];                                       
             }
-            else
+            else // we are at the end of a visible line and we have multiple display lines to group together
             {
-                // this is a bit awkward but I wanted to assume that most lines wouldn't wrap                    
                 CFArrayAppendValue(tempLineArray, currentLine);
                 tempRange.length += currentLineRange.length;
                 
@@ -476,17 +475,7 @@
     return theAnimation;
 }
 
-
--(CGRect) createCursorRectForPosition:(PTTextPosition*)pos{
-    return [self createRectForPosition:pos includeDescent:NO];
-}
-
--(CGRect) createSelectionRectForPosition:(PTTextPosition*)pos{
-    return [self createRectForPosition:pos includeDescent:YES];
-}
-
-
--(CGRect) createRectForPosition:(PTTextPosition*)pos includeDescent:(BOOL)descentIncluded
+-(CGRect) createRectForPosition:(PTTextPosition*)pos
 {
     if (!pos || !pos.loc || pos.index == NSUIntegerMax)
     {
@@ -497,24 +486,22 @@
     NSInteger actualIndex = (pos.index + loc.startIndexAtTypesetting);
     CGFloat xOffset = 0.0;
     CGFloat yOffset = 0.0;
-    CTLineRef cursorLine;
+    CTLineRef currentLine;
 
             
     if (loc.numDisplayLines == 1)
     {
         xOffset = CTLineGetOffsetForStringIndex(loc.lineRef, actualIndex, NULL);
-        cursorLine = loc.lineRef;
+        currentLine = loc.lineRef;
     }
     else if (loc.numDisplayLines > 1)
     {
-        // we want to loop backwards through the line because calling the lineOffset function will always return an index.
-        // so we want to start with the last display line because it knows nothing of the earlier line's strings
-        for (int i = (loc.numDisplayLines -1); i >=0 ; i--)
+        for (int i =0; i < loc.numDisplayLines ; i++)
         {
-            cursorLine = CFArrayGetValueAtIndex(loc.lineRef, i);
-            xOffset = CTLineGetOffsetForStringIndex(cursorLine, actualIndex, NULL);    
-            
-            if (xOffset > 0.0){            
+            currentLine = CFArrayGetValueAtIndex(loc.lineRef, i);
+            CFRange currentLineRange = CTLineGetStringRange(currentLine);
+            if (actualIndex >= currentLineRange.location && actualIndex < (currentLineRange.location + currentLineRange.length)){
+                xOffset = CTLineGetOffsetForStringIndex(currentLine, actualIndex, NULL);
                 yOffset = (i * _lineHeight);
                 break;
             }
@@ -522,16 +509,10 @@
     }
 
     float ascent,descent,leading;    
-    CTLineGetTypographicBounds(cursorLine, &ascent, &descent, &leading);
+    CTLineGetTypographicBounds(currentLine, &ascent, &descent, &leading);
+    CGFloat fudgeFactor = 0.5; // the rect looks just a little too tight on the line visually so I am artificially bumping it up
 
-    CGRect result;
-    if (descentIncluded){
-        result = CGRectMake((_leftCodeOffset + xOffset), (loc.displayRect.origin.y + yOffset+descent), 1, (ascent + descent + leading));
-    } else {
-        result = CGRectMake((_leftCodeOffset + xOffset), (loc.displayRect.origin.y + yOffset), 1, (ascent+ descent + leading));
-    }
-
-    return result;
+    return CGRectMake((_leftCodeOffset + xOffset), (self.frame.origin.y + loc.displayRect.origin.y + yOffset + fudgeFactor), 1, (ascent + descent + leading + fudgeFactor));
 }
 
 -(void) setSelection:(PTTextRange *)selection
@@ -546,12 +527,12 @@
         return;
     }
     else if ([start isEqualToPosition:end]){
-        self.cursorView.frame = [self createCursorRectForPosition:start];
-        [self addSublayer:self.cursorView];
+        self.cursorView.frame = [self createRectForPosition:start];
         [self.cursorView startBlinking];
+        [self.superlayer insertSublayer:self.cursorView above:self];
     } else {
-        CGRect startRect = [self createSelectionRectForPosition:start];
-        CGRect endRect = [self createSelectionRectForPosition:end];
+        CGRect startRect = [self createRectForPosition:start];
+        CGRect endRect = [self createRectForPosition:end];
         
         CGFloat height = (endRect.origin.y + endRect.size.height) - startRect.origin.y;
         CGRect selectionRect = CGRectMake(0, startRect.origin.y, start.loc.displayRect.size.width, height);
@@ -568,7 +549,6 @@
     if (self.cursorView){
         [self.cursorView stopBlinking];
         [self.cursorView removeFromSuperlayer];
-        self.cursorView = nil;
     }
 
     if (self.selectionLayer){
