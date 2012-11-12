@@ -113,6 +113,20 @@
 		D0006CB416460D4B0089B0A4 /* PTCodeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CA816460D4B0089B0A4 /* PTCodeScrollView.m */; };
 		D0006CB516460D4B0089B0A4 /* PTCursorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CAA16460D4B0089B0A4 /* PTCursorLayer.m */; };
 		D0006CB616460D4B0089B0A4 /* PTSelectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */; };
+		D033E1451650C84300100D70 /* popoverArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E1341650C84300100D70 /* popoverArrowDown.png */; };
+		D033E1461650C84300100D70 /* popoverArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E1351650C84300100D70 /* popoverArrowDown@2x.png */; };
+		D033E1471650C84300100D70 /* popoverArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E1361650C84300100D70 /* popoverArrowLeft.png */; };
+		D033E1481650C84300100D70 /* popoverArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E1371650C84300100D70 /* popoverArrowLeft@2x.png */; };
+		D033E1491650C84300100D70 /* popoverArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E1381650C84300100D70 /* popoverArrowRight.png */; };
+		D033E14A1650C84300100D70 /* popoverArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E1391650C84300100D70 /* popoverArrowRight@2x.png */; };
+		D033E14B1650C84300100D70 /* popoverArrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E13A1650C84300100D70 /* popoverArrowUp.png */; };
+		D033E14C1650C84300100D70 /* popoverArrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E13B1650C84300100D70 /* popoverArrowUp@2x.png */; };
+		D033E14D1650C84300100D70 /* popoverBg.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E13C1650C84300100D70 /* popoverBg.png */; };
+		D033E14E1650C84300100D70 /* popoverBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D033E13D1650C84300100D70 /* popoverBg@2x.png */; };
+		D033E14F1650C84300100D70 /* WEPopoverContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E13F1650C84300100D70 /* WEPopoverContainerView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
+		D033E1501650C84300100D70 /* WEPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E1411650C84300100D70 /* WEPopoverController.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
+		D033E1511650C84300100D70 /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E1441650C84300100D70 /* WETouchableView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
+		D033E15A1650CE8400100D70 /* TextSelectionPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E1581650CE7E00100D70 /* TextSelectionPopupViewController.m */; };
 		D0A5C7E3164A368000055CF6 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		D0A5C7E4164A368000055CF6 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DB164A368000055CF6 /* blackArrow.png */; };
 		D0A5C7E5164A368000055CF6 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DC164A368000055CF6 /* blackArrow@2x.png */; };
@@ -302,6 +316,25 @@
 		D0006CAB16460D4B0089B0A4 /* PTSelectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSelectionLayer.h; sourceTree = "<group>"; };
 		D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSelectionLayer.m; sourceTree = "<group>"; };
 		D0006CB716460DCD0089B0A4 /* PTCodeDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCodeDecorator.h; sourceTree = "<group>"; };
+		D033E1341650C84300100D70 /* popoverArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popoverArrowDown.png; sourceTree = "<group>"; };
+		D033E1351650C84300100D70 /* popoverArrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popoverArrowDown@2x.png"; sourceTree = "<group>"; };
+		D033E1361650C84300100D70 /* popoverArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popoverArrowLeft.png; sourceTree = "<group>"; };
+		D033E1371650C84300100D70 /* popoverArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popoverArrowLeft@2x.png"; sourceTree = "<group>"; };
+		D033E1381650C84300100D70 /* popoverArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popoverArrowRight.png; sourceTree = "<group>"; };
+		D033E1391650C84300100D70 /* popoverArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popoverArrowRight@2x.png"; sourceTree = "<group>"; };
+		D033E13A1650C84300100D70 /* popoverArrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popoverArrowUp.png; sourceTree = "<group>"; };
+		D033E13B1650C84300100D70 /* popoverArrowUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popoverArrowUp@2x.png"; sourceTree = "<group>"; };
+		D033E13C1650C84300100D70 /* popoverBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popoverBg.png; sourceTree = "<group>"; };
+		D033E13D1650C84300100D70 /* popoverBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popoverBg@2x.png"; sourceTree = "<group>"; };
+		D033E13E1650C84300100D70 /* WEPopoverContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverContainerView.h; sourceTree = "<group>"; };
+		D033E13F1650C84300100D70 /* WEPopoverContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WEPopoverContainerView.m; sourceTree = "<group>"; };
+		D033E1401650C84300100D70 /* WEPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverController.h; sourceTree = "<group>"; };
+		D033E1411650C84300100D70 /* WEPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WEPopoverController.m; sourceTree = "<group>"; };
+		D033E1421650C84300100D70 /* WEPopoverParentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WEPopoverParentView.h; sourceTree = "<group>"; };
+		D033E1431650C84300100D70 /* WETouchableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WETouchableView.h; sourceTree = "<group>"; };
+		D033E1441650C84300100D70 /* WETouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WETouchableView.m; sourceTree = "<group>"; };
+		D033E1571650CE7E00100D70 /* TextSelectionPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextSelectionPopupViewController.h; path = Controller/TextSelectionPopupViewController.h; sourceTree = "<group>"; };
+		D033E1581650CE7E00100D70 /* TextSelectionPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextSelectionPopupViewController.m; path = Controller/TextSelectionPopupViewController.m; sourceTree = "<group>"; };
 		D0A5C7D8164A368000055CF6 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		D0A5C7DB164A368000055CF6 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
@@ -510,6 +543,7 @@
 		6E8B052814D0CC1F00EBC107 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D033E1321650C84300100D70 /* WEPopover */,
 				D0A5C7D5164A368000055CF6 /* EGOTableViewPullRefresh */,
 				6E86B50816425EAD00829DA7 /* TestFlightSDK1.1 */,
 				6EB467221558A39B00CF3C1E /* UDID */,
@@ -681,6 +715,7 @@
 		D0006C9616460D4B0089B0A4 /* CodeEditor */ = {
 			isa = PBXGroup;
 			children = (
+				D033E1531650CE1500100D70 /* Controller */,
 				D0006C9716460D4B0089B0A4 /* Decorator */,
 				D0006C9D16460D4B0089B0A4 /* Model */,
 				D0006CA416460D4B0089B0A4 /* View */,
@@ -726,6 +761,47 @@
 				D0006CAC16460D4B0089B0A4 /* PTSelectionLayer.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D033E1321650C84300100D70 /* WEPopover */ = {
+			isa = PBXGroup;
+			children = (
+				D033E1331650C84300100D70 /* img */,
+				D033E13E1650C84300100D70 /* WEPopoverContainerView.h */,
+				D033E13F1650C84300100D70 /* WEPopoverContainerView.m */,
+				D033E1401650C84300100D70 /* WEPopoverController.h */,
+				D033E1411650C84300100D70 /* WEPopoverController.m */,
+				D033E1421650C84300100D70 /* WEPopoverParentView.h */,
+				D033E1431650C84300100D70 /* WETouchableView.h */,
+				D033E1441650C84300100D70 /* WETouchableView.m */,
+			);
+			path = WEPopover;
+			sourceTree = "<group>";
+		};
+		D033E1331650C84300100D70 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				D033E1341650C84300100D70 /* popoverArrowDown.png */,
+				D033E1351650C84300100D70 /* popoverArrowDown@2x.png */,
+				D033E1361650C84300100D70 /* popoverArrowLeft.png */,
+				D033E1371650C84300100D70 /* popoverArrowLeft@2x.png */,
+				D033E1381650C84300100D70 /* popoverArrowRight.png */,
+				D033E1391650C84300100D70 /* popoverArrowRight@2x.png */,
+				D033E13A1650C84300100D70 /* popoverArrowUp.png */,
+				D033E13B1650C84300100D70 /* popoverArrowUp@2x.png */,
+				D033E13C1650C84300100D70 /* popoverBg.png */,
+				D033E13D1650C84300100D70 /* popoverBg@2x.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		D033E1531650CE1500100D70 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D033E1571650CE7E00100D70 /* TextSelectionPopupViewController.h */,
+				D033E1581650CE7E00100D70 /* TextSelectionPopupViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		D0A5C7D5164A368000055CF6 /* EGOTableViewPullRefresh */ = {
@@ -892,6 +968,16 @@
 				D0A5C7E9164A368000055CF6 /* grayArrow@2x.png in Resources */,
 				D0A5C7EA164A368000055CF6 /* whiteArrow.png in Resources */,
 				D0A5C7EB164A368000055CF6 /* whiteArrow@2x.png in Resources */,
+				D033E1451650C84300100D70 /* popoverArrowDown.png in Resources */,
+				D033E1461650C84300100D70 /* popoverArrowDown@2x.png in Resources */,
+				D033E1471650C84300100D70 /* popoverArrowLeft.png in Resources */,
+				D033E1481650C84300100D70 /* popoverArrowLeft@2x.png in Resources */,
+				D033E1491650C84300100D70 /* popoverArrowRight.png in Resources */,
+				D033E14A1650C84300100D70 /* popoverArrowRight@2x.png in Resources */,
+				D033E14B1650C84300100D70 /* popoverArrowUp.png in Resources */,
+				D033E14C1650C84300100D70 /* popoverArrowUp@2x.png in Resources */,
+				D033E14D1650C84300100D70 /* popoverBg.png in Resources */,
+				D033E14E1650C84300100D70 /* popoverBg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +1064,10 @@
 				D0006CB516460D4B0089B0A4 /* PTCursorLayer.m in Sources */,
 				D0006CB616460D4B0089B0A4 /* PTSelectionLayer.m in Sources */,
 				D0A5C7E3164A368000055CF6 /* EGORefreshTableHeaderView.m in Sources */,
+				D033E14F1650C84300100D70 /* WEPopoverContainerView.m in Sources */,
+				D033E1501650C84300100D70 /* WEPopoverController.m in Sources */,
+				D033E1511650C84300100D70 /* WETouchableView.m in Sources */,
+				D033E15A1650CE8400100D70 /* TextSelectionPopupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

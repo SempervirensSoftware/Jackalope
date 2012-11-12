@@ -13,11 +13,15 @@
 #import "PTTextPosition.h"
 #import "PTTextRange.h"
 
+#import "TextSelectionPopupViewController.h"
+#import "WEPopoverController.h"
+
 // We use a tap gesture recognizer to allow the user to tap to invoke text edit mode
-@interface PTCodeScrollView()
+@interface PTCodeScrollView() <WEPopoverControllerDelegate>
 
 @property (nonatomic, retain) PTCursorLayer* cursorLayer;
 @property (nonatomic, retain) PTSelectionLayer* selectionLayer;
+@property (nonatomic, retain) WEPopoverController *textSelectionPopupController;
 
 - (void) tapsRecognized:(UITapGestureRecognizer *)recognizer;
 - (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer  withPriorityLength:(float)priorityLength;
@@ -333,6 +337,7 @@
         self.selectionLayer.endRect = endRect;
         [self.selectionLayer setNeedsDisplay];
         [_codeEditor.layer insertSublayer:self.selectionLayer below:_currentLayer];
+        [self showTextSelectionPopup];
     }
 }
 
@@ -347,7 +352,22 @@
     }
 }
 
-  
+#pragma mark Text Selection Popup
+
+-(void) showTextSelectionPopup{
+    TextSelectionPopupViewController *popupViewController = [[TextSelectionPopupViewController alloc] init];
+
+    self.textSelectionPopupController = [[WEPopoverController alloc] initWithContentViewController:popupViewController];
+    self.textSelectionPopupController.delegate = self;
+    
+    [self.textSelectionPopupController presentPopoverFromRect:self.selectionLayer.endRect inView:self permittedArrowDirections:(UIPopoverArrowDirectionDown | UIPopoverArrowDirectionUp) animated:YES];
+}
+
+- (void)popoverControllerDidDismissPopover:(WEPopoverController *)popoverController {}
+- (BOOL)popoverControllerShouldDismissPopover:(WEPopoverController *)popoverController{
+    return YES;
+}
+
 - (void)tapsRecognized:(UITapGestureRecognizer *)recognizer{
     if (![self isFirstResponder]) { 
 		// Inform controller that we're about to enter editing mode
