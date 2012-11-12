@@ -11,12 +11,8 @@
 @implementation PTSelectionLayer
 
 -(void) drawInContext:(CGContextRef)context{
-    [self drawLayer:self inContext:context];
-}
-
--(void) drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
-    CGColorRef bgColor = [UIColor colorWithRed:172/255.f green:204/255.f blue:252/255.f alpha:1.f].CGColor;
-    CGContextSetFillColorWithColor(context, bgColor);
+    UIColor *bgColor = [UIColor colorWithRed:172/255.f green:204/255.f blue:252/255.f alpha:1.f];
+    CGContextSetFillColorWithColor(context, bgColor.CGColor);
     
     if (self.endRect.origin.y == self.startRect.origin.y){
         // only need to highlight a single line
