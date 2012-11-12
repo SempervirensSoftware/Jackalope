@@ -420,23 +420,23 @@
 
 - (void)insertText:(NSString *)text andMoveCursor:(BOOL)moveCursor
 {
-    if (!text || ([text length] == 0))
-    {
+    if (!text || ([text length] == 0) || !self.selection) {
         return;
     }
 
-    // need to split up the inserted text to accommodate any newline characters
-    __block PTTextPosition* currentPos = [((PTTextPosition*)self.selection.start) copy];    
-    if (!currentPos)
-    {
-        return;
+    if (!self.selection.empty){
+        // we want to clear out the selected text before inserting the new stuff
+        // why? because that how text editors work!
+        [self deleteBackward];
     }
     
     [self textWillChange];
     
     NSInteger initLocCount = [_currentLayer.locArray count];
     CGFloat initLayerHeight = _currentLayer.frame.size.height;
+    __block PTTextPosition* currentPos = [((PTTextPosition*)self.selection.start) copy];
     
+    // need to split up the inserted text in a block to accommodate any newline characters
     [text enumerateSubstringsInRange:NSMakeRange(0, [text length]) options:NSStringEnumerationByLines usingBlock:
         ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {                        
 
@@ -546,7 +546,7 @@
             else {
                 NSInteger currentLayerIndex = [_layerArray indexOfObject:_currentLayer];
                 
-                // if there are no previous loc's or layers we don't do anything for the delete key
+                // if there are no previous characters, loc's or layers we don't do anything for the delete key
                 if (currentLayerIndex > 0) {
                     CGFloat oldHeight = _currentLayer.frame.size.height;                
                     [_currentLayer removeLine:oldLoc];
@@ -568,7 +568,27 @@
             }
         }
     } else { // this means we need to delete all the selected text
-        //???
+        PTTextPosition *start = (PTTextPosition*)self.selection.start;
+        PTTextPosition *end = (PTTextPosition*)self.selection.end;
+        
+        if (start.loc == end.loc) {
+            int selectionLength = end.index - start.index;
+            NSMutableString* lineString = [(__bridge NSString*)CFAttributedStringGetString(start.loc.attributedText) mutableCopy];
+            [lineString deleteCharactersInRange:NSMakeRange((start.index), selectionLength)];
+            
+            CGFloat oldHeight = _currentLayer.frame.size.height;
+            start.loc.attributedText = (__bridge CFAttributedStringRef)[_decorator decorateString:lineString];
+            [_currentLayer updateLine:start.loc];
+            
+            CGFloat deltaLayerHeight = (_currentLayer.frame.size.height - oldHeight);
+            [self updateLayersByYOffset:deltaLayerHeight andLineNumOffset:0 startingAfterLayer:_currentLayer];
+            
+            self.selection = [PTTextRange rangeWithStartPosition:start andEndPosition:start];
+        } else {
+            // The selection covers multiple lines
+            // TODO support multi loc selection
+        }
+        
     }
     
     [self scrollToCursor];
