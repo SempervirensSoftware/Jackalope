@@ -127,6 +127,7 @@
 		D033E1501650C84300100D70 /* WEPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E1411650C84300100D70 /* WEPopoverController.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		D033E1511650C84300100D70 /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E1441650C84300100D70 /* WETouchableView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		D033E15A1650CE8400100D70 /* TextSelectionPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E1581650CE7E00100D70 /* TextSelectionPopupViewController.m */; };
+		D033E19316538B4100100D70 /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = D033E19216538B4100100D70 /* UIBarButtonItem+WEPopover.m */; };
 		D0A5C7E3164A368000055CF6 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		D0A5C7E4164A368000055CF6 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DB164A368000055CF6 /* blackArrow.png */; };
 		D0A5C7E5164A368000055CF6 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DC164A368000055CF6 /* blackArrow@2x.png */; };
@@ -335,6 +336,8 @@
 		D033E1441650C84300100D70 /* WETouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WETouchableView.m; sourceTree = "<group>"; };
 		D033E1571650CE7E00100D70 /* TextSelectionPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextSelectionPopupViewController.h; path = Controller/TextSelectionPopupViewController.h; sourceTree = "<group>"; };
 		D033E1581650CE7E00100D70 /* TextSelectionPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextSelectionPopupViewController.m; path = Controller/TextSelectionPopupViewController.m; sourceTree = "<group>"; };
+		D033E19116538B4100100D70 /* UIBarButtonItem+WEPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WEPopover.h"; sourceTree = "<group>"; };
+		D033E19216538B4100100D70 /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
 		D0A5C7D8164A368000055CF6 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		D0A5C7DB164A368000055CF6 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
@@ -774,6 +777,8 @@
 				D033E1421650C84300100D70 /* WEPopoverParentView.h */,
 				D033E1431650C84300100D70 /* WETouchableView.h */,
 				D033E1441650C84300100D70 /* WETouchableView.m */,
+				D033E19116538B4100100D70 /* UIBarButtonItem+WEPopover.h */,
+				D033E19216538B4100100D70 /* UIBarButtonItem+WEPopover.m */,
 			);
 			path = WEPopover;
 			sourceTree = "<group>";
@@ -1068,6 +1073,7 @@
 				D033E1501650C84300100D70 /* WEPopoverController.m in Sources */,
 				D033E1511650C84300100D70 /* WETouchableView.m in Sources */,
 				D033E15A1650CE8400100D70 /* TextSelectionPopupViewController.m in Sources */,
+				D033E19316538B4100100D70 /* UIBarButtonItem+WEPopover.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
