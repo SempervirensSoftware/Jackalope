@@ -30,10 +30,15 @@
         _isError = NO;
     }
     
-    UIBarButtonItem* _settingsBtn = [[UIBarButtonItem alloc] 
-                                     initWithImage:[UIImage imageNamed:@"glyphicons_019_cogwheel.png"] 
-                                     style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];                                     
-    self.navigationItem.rightBarButtonItem = _settingsBtn;
+//    UIBarButtonItem* _settingsBtn = [[UIBarButtonItem alloc] 
+//                                     initWithImage:[UIImage imageNamed:@"glyphicons_019_cogwheel.png"] 
+//                                     style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
+//    self.navigationItem.rightBarButtonItem = _settingsBtn;
+    
+    UIBarButtonItem* _hackBtn = [[UIBarButtonItem alloc]
+                                     initWithImage:[UIImage imageNamed:@"07-band-aid.png"]
+                                     style:UIBarButtonItemStylePlain target:self action:@selector(showStaticFile)];
+    self.navigationItem.rightBarButtonItem = _hackBtn;
 
     self.clearsSelectionOnViewWillAppear = YES;    
     
@@ -211,6 +216,11 @@
 {
     [CurrentUser logout];
     [GlobalAppDelegate showLogin];
+}
+
+- (void) showStaticFile
+{
+    [[RepoViewController getInstance] showSampleCode];
 }
 
 @end

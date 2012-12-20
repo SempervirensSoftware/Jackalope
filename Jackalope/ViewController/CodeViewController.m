@@ -79,20 +79,31 @@
             _commitBtn.enabled = NO;
         }
 
-        self.loadingLabel.hidden = YES;
-        self.loadingActivityIndicator.hidden = YES;
-        self.codeView.hidden = NO;
-        [self.loadingActivityIndicator stopAnimating];
-        
-        if (self.masterPopoverController != nil) {
-            [self.masterPopoverController dismissPopoverAnimated:YES];
-        }
+        [self showCodeView];
         
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc removeObserver:self];
         [nc addObserver:self selector:@selector(BlobCommitSuccess:) 
                    name:NODE_COMMIT_SUCCESS object:_blobNode]; 
     }
+}
+
+-(void) showSampleCode
+{
+    _blobNode = nil;
+    self.title = @"**Sample**";
+    
+    // load the samplefile    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"tree_controller" ofType:@"rb"];
+    NSString *text = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    
+    Code *code = [[Code alloc] init];
+    code.plainText = text;
+    code.fileName = @"tree_controller.rb";
+    _codeView.code = code;
+    
+    [self showCodeView];
+    
 }
 
 -(void) showLoadingWithTitle:(NSString *)titleString 
@@ -117,6 +128,17 @@
     self.loadingLabel.hidden = YES;
     self.loadingActivityIndicator.hidden = YES;
     [self.loadingActivityIndicator stopAnimating];
+}
+
+-(void) showCodeView {
+    self.loadingLabel.hidden = YES;
+    self.loadingActivityIndicator.hidden = YES;
+    self.codeView.hidden = NO;
+    [self.loadingActivityIndicator stopAnimating];
+    
+    if (self.masterPopoverController != nil) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    }
 }
 
 #pragma Keyboard Events

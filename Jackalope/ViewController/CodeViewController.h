@@ -24,6 +24,7 @@
 @property (nonatomic, retain)           BlobNode*                   blobNode;
 @property (nonatomic, readonly)         BOOL                        unsavedChanges;
 
+-(void) showSampleCode;
 -(void) showLoadingWithTitle:(NSString *)titleString;
 -(void) showErrorWithTitle:(NSString *)titleString andMessage:(NSString *) message;
 

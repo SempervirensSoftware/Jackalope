@@ -176,8 +176,10 @@
     if ([self forwardAppearanceMethods]) {
         [contentViewController viewWillAppear:animated];
     }
+
 	[self.view becomeFirstResponder];
-	popoverVisible = YES;
+	
+    popoverVisible = YES;
 	if (animated) {
 		self.view.alpha = 0.0;
         
@@ -346,31 +348,7 @@
 
 //Enable to use the simple popover style
 - (WEPopoverContainerViewProperties *)defaultContainerViewProperties {
-	WEPopoverContainerViewProperties *ret = [[WEPopoverContainerViewProperties new] autorelease];
-	
-	CGSize imageSize = CGSizeMake(30.0f, 30.0f);
-	NSString *bgImageName = @"popoverBgSimple.png";
-	CGFloat bgMargin = 6.0;
-	CGFloat contentMargin = 2.0;
-	
-	ret.leftBgMargin = bgMargin;
-	ret.rightBgMargin = bgMargin;
-	ret.topBgMargin = bgMargin;
-	ret.bottomBgMargin = bgMargin;
-	ret.leftBgCapSize = imageSize.width/2;
-	ret.topBgCapSize = imageSize.height/2;
-	ret.bgImageName = bgImageName;
-	ret.leftContentMargin = contentMargin;
-	ret.rightContentMargin = contentMargin;
-	ret.topContentMargin = contentMargin;
-	ret.bottomContentMargin = contentMargin;
-	ret.arrowMargin = 1.0;
-	
-	ret.upArrowImageName = @"popoverArrowUpSimple.png";
-	ret.downArrowImageName = @"popoverArrowDownSimple.png";
-	ret.leftArrowImageName = @"popoverArrowLeftSimple.png";
-	ret.rightArrowImageName = @"popoverArrowRightSimple.png";
-	return ret;
+    return WEPopoverContainerViewProperties.standardProperties;    
 }
 
 @end

@@ -31,6 +31,9 @@
 -(void) setSelectionAtPoint:(CGPoint)point shouldSelectWord:(BOOL)selectWord;
 -(PTCodeLayer*)findCodeLayerForPoint:(CGPoint)point;
 
+-(void) showTextSelectionPopup;
+-(void) dismissTextSelectionPopupAnimated:(BOOL)shouldAnimate;
+
 -(void) textDidChange;
 -(void) textWillChange;
 -(void) selectionDidChange;
@@ -323,6 +326,8 @@
         return;
     }
     else if (selection.empty){
+        [self dismissTextSelectionPopupAnimated:NO];
+        
         self.cursorLayer.frame = [_currentLayer createRectForPosition:start];
         [self.cursorLayer startBlinking];
         [_codeEditor.layer insertSublayer:self.cursorLayer above:_currentLayer];
@@ -354,11 +359,19 @@
 
 #pragma mark Text Selection Popup
 
+-(void) dismissTextSelectionPopupAnimated:(BOOL)shouldAnimate{
+    if (self.textSelectionPopupController){
+        [self.textSelectionPopupController dismissPopoverAnimated:shouldAnimate];
+        self.textSelectionPopupController = nil;
+    }
+}
+
 -(void) showTextSelectionPopup{
     TextSelectionPopupViewController *popupViewController = [[TextSelectionPopupViewController alloc] init];
 
     self.textSelectionPopupController = [[WEPopoverController alloc] initWithContentViewController:popupViewController];
     self.textSelectionPopupController.delegate = self;
+    self.textSelectionPopupController.parentView = self;
     
     [self.textSelectionPopupController presentPopoverFromRect:self.selectionLayer.endRect inView:self permittedArrowDirections:(UIPopoverArrowDirectionDown | UIPopoverArrowDirectionUp) animated:YES];
 }
@@ -369,12 +382,7 @@
 }
 
 - (void)tapsRecognized:(UITapGestureRecognizer *)recognizer{
-    if (![self isFirstResponder]) { 
-		// Inform controller that we're about to enter editing mode
-		//[self.editableCoreTextViewDelegate editableCoreTextViewWillEdit:self];
-		// Flag that underlying SimpleCoreTextView is now in edit mode
-        //_textView.editing = YES;
-		// Become first responder state (which shows software keyboard, if applicable)
+    if (![self isFirstResponder]) {
         [self showKeyboard];
     }
         

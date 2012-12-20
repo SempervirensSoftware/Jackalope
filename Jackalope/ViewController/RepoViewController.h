@@ -30,5 +30,6 @@
 
 - (void) showRootNode;
 - (void) showNode:(GitNode*)node withParent:(GitNode*)parentNode;
+- (void) showSampleCode;
 
 @end

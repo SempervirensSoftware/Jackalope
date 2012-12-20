@@ -148,6 +148,12 @@ static RepoViewController *_instance = nil;
     [blob refresh];    
 }
 
+-(void) showSampleCode {
+    [self showCodeView];
+    [_codeViewController showSampleCode];
+}
+
+
 -(void) showCodeView{
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
