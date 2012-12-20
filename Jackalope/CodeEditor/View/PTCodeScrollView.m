@@ -326,8 +326,6 @@
         return;
     }
     else if (selection.empty){
-        [self dismissTextSelectionPopupAnimated:NO];
-        
         self.cursorLayer.frame = [_currentLayer createRectForPosition:start];
         [self.cursorLayer startBlinking];
         [_codeEditor.layer insertSublayer:self.cursorLayer above:_currentLayer];
@@ -357,35 +355,19 @@
     }
 }
 
-#pragma mark Text Selection Popup
+#pragma mark -
+#pragma mark Menu commands and validation
 
--(void) dismissTextSelectionPopupAnimated:(BOOL)shouldAnimate{
-    if (self.textSelectionPopupController){
-        [self.textSelectionPopupController dismissPopoverAnimated:shouldAnimate];
-        self.textSelectionPopupController = nil;
-    }
-}
-
--(void) showTextSelectionPopup{
-    TextSelectionPopupViewController *popupViewController = [[TextSelectionPopupViewController alloc] init];
-
-    self.textSelectionPopupController = [[WEPopoverController alloc] initWithContentViewController:popupViewController];
-    self.textSelectionPopupController.delegate = self;
-    self.textSelectionPopupController.parentView = self;
-    
-    [self.textSelectionPopupController presentPopoverFromRect:self.selectionLayer.endRect inView:self permittedArrowDirections:(UIPopoverArrowDirectionDown | UIPopoverArrowDirectionUp) animated:YES];
-}
-
-- (void)popoverControllerDidDismissPopover:(WEPopoverController *)popoverController {}
-- (BOOL)popoverControllerShouldDismissPopover:(WEPopoverController *)popoverController{
-    return YES;
-}
+/*
+ The view implements this method to conditionally enable or disable commands of the editing menu.
+ The canPerformAction:withSender method is declared by UIResponder.
+ */
 
 - (void)tapsRecognized:(UITapGestureRecognizer *)recognizer{
     if (![self isFirstResponder]) {
         [self showKeyboard];
     }
-        
+    
     // Find and update selection
     [self selectionWillChange];
     
@@ -397,6 +379,46 @@
     }
     
     [self selectionDidChange];
+}
+
+
+-(void) showTextSelectionPopup{
+    UIMenuController *theMenu = [UIMenuController sharedMenuController];
+    [theMenu setTargetRect:self.selectionLayer.endRect inView:self];
+    [theMenu setMenuVisible:YES animated:YES];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    BOOL retValue = NO;
+	
+	if (action == @selector(paste:) || action == @selector(cut:) || action == @selector(copy:)) {
+		// The square must have no tile and there must be a ColorTile object in the pasteboard.
+		retValue = YES;
+	}
+
+    return retValue;
+}
+
+/*
+ These methods are declared by the UIResponderStandardEditActions informal protocol.
+ */
+- (void)copy:(id)sender {
+    
+	UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+	pasteBoard.string = [self textInRange:self.selection];
+}
+
+
+- (void)cut:(id)sender {
+    [self copy:sender];
+    [self deleteBackward];
+}
+
+
+- (void)paste:(id)sender {    
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    NSString *newText = pasteBoard.string;
+    [self insertText:newText];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -665,8 +687,22 @@
 
 #pragma mark UITextInput methods
 - (NSString *)textInRange:(UITextRange *)range{
-    NSLog(@"Unimplemented - textInRange:");
-    return nil;
+    NSString *result = nil;
+    
+    if ([range isKindOfClass:[PTTextRange class]]){
+        PTTextPosition *start = (PTTextPosition*)range.start;
+        PTTextPosition *end = (PTTextPosition*)range.end;
+        
+        if (start.loc == end.loc) {
+            int selectionLength = end.index - start.index;
+            CFStringRef lineString = CFAttributedStringGetString(start.loc.attributedText);
+            result = (__bridge_transfer NSString*)CFStringCreateWithSubstring(CFAllocatorGetDefault(), lineString, CFRangeMake(start.index, selectionLength));
+        } else {
+            // TODO: support selecting multple lines
+        }
+    }
+    
+    return result;
 }
 - (void)replaceRange:(UITextRange *)range withText:(NSString *)text{
     NSLog(@"Unimplemented - replaceRange:withText:");
