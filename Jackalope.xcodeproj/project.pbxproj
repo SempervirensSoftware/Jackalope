@@ -131,6 +131,8 @@
 		D0585D9516826CCE00E94251 /* tree_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = D0585D9416826CCE00E94251 /* tree_controller.rb */; };
 		D0585D991682746B00E94251 /* 07-band-aid.png in Resources */ = {isa = PBXBuildFile; fileRef = D0585D971682746B00E94251 /* 07-band-aid.png */; };
 		D0585D9A1682746B00E94251 /* 07-band-aid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0585D981682746B00E94251 /* 07-band-aid@2x.png */; };
+		D067C39216843F9300841294 /* 01-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = D067C39016843F9300841294 /* 01-magnify.png */; };
+		D067C39316843F9300841294 /* 01-magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D067C39116843F9300841294 /* 01-magnify@2x.png */; };
 		D0A5C7E3164A368000055CF6 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		D0A5C7E4164A368000055CF6 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DB164A368000055CF6 /* blackArrow.png */; };
 		D0A5C7E5164A368000055CF6 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7DC164A368000055CF6 /* blackArrow@2x.png */; };
@@ -344,6 +346,8 @@
 		D0585D9416826CCE00E94251 /* tree_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = tree_controller.rb; sourceTree = "<group>"; };
 		D0585D971682746B00E94251 /* 07-band-aid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-band-aid.png"; sourceTree = "<group>"; };
 		D0585D981682746B00E94251 /* 07-band-aid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-band-aid@2x.png"; sourceTree = "<group>"; };
+		D067C39016843F9300841294 /* 01-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-magnify.png"; sourceTree = "<group>"; };
+		D067C39116843F9300841294 /* 01-magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-magnify@2x.png"; sourceTree = "<group>"; };
 		D0A5C7D8164A368000055CF6 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		D0A5C7D9164A368000055CF6 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		D0A5C7DB164A368000055CF6 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
@@ -520,6 +524,8 @@
 		6E8B052314D0CBF800EBC107 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				D067C39016843F9300841294 /* 01-magnify.png */,
+				D067C39116843F9300841294 /* 01-magnify@2x.png */,
 				D0585D971682746B00E94251 /* 07-band-aid.png */,
 				D0585D981682746B00E94251 /* 07-band-aid@2x.png */,
 				6E209E481642673400C03703 /* glyphicons_268_keyboard_wireless.png */,
@@ -995,6 +1001,8 @@
 				D0585D9516826CCE00E94251 /* tree_controller.rb in Resources */,
 				D0585D991682746B00E94251 /* 07-band-aid.png in Resources */,
 				D0585D9A1682746B00E94251 /* 07-band-aid@2x.png in Resources */,
+				D067C39216843F9300841294 /* 01-magnify.png in Resources */,
+				D067C39316843F9300841294 /* 01-magnify@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface CodeViewController (){
-    UIButton *_hideKeyboardButton;
+    UIButton *_keyboardButton;
+    UIButton *_searchButton;
 }
 
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -146,11 +147,17 @@
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    if (!_hideKeyboardButton){
-        _hideKeyboardButton = [[UIButton alloc] init];
-        [_hideKeyboardButton setImage:[UIImage imageNamed:@"glyphicons_268_keyboard_wireless"] forState:UIControlStateNormal];
-        [_hideKeyboardButton addTarget:self action:@selector(hideKeyboardPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [_hideKeyboardButton sizeToFit];
+    if (!_keyboardButton){
+        _keyboardButton = [[UIButton alloc] init];
+        [_keyboardButton setImage:[UIImage imageNamed:@"glyphicons_268_keyboard_wireless"] forState:UIControlStateNormal];
+        [_keyboardButton addTarget:self action:@selector(hideKeyboardPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_keyboardButton sizeToFit];
+    }
+    if (!_searchButton){
+        _searchButton = [[UIButton alloc] init];
+        [_searchButton setImage:[UIImage imageNamed:@"01-magnify.png"] forState:UIControlStateNormal];
+        [_searchButton addTarget:self action:@selector(searchButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_searchButton sizeToFit];
     }
 
     // find out where the keyboard is
@@ -159,15 +166,30 @@
     keyboardRect = [self.view.window convertRect:keyboardRect fromWindow:nil];
     keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
 
-    CGFloat hideButtonX = keyboardRect.origin.x + keyboardRect.size.width - (_hideKeyboardButton.frame.size.width + 5);
-    CGFloat hideButtonY =  keyboardRect.origin.y - self.codeView.frame.origin.y - _hideKeyboardButton.frame.size.height - 5;
-    CGRect hideButtonFrame = CGRectMake(hideButtonX, hideButtonY, _hideKeyboardButton.frame.size.width, _hideKeyboardButton.frame.size.height);
-    _hideKeyboardButton.frame = hideButtonFrame;
-    [self.view addSubview:_hideKeyboardButton];
+    // show the keyboard button
+    CGFloat hideButtonX = keyboardRect.origin.x + keyboardRect.size.width - (_keyboardButton.frame.size.width + 5);
+    CGFloat hideButtonY =  keyboardRect.origin.y - self.codeView.frame.origin.y - _keyboardButton.frame.size.height - 5;
+    CGRect hideButtonFrame = CGRectMake(hideButtonX, hideButtonY, _keyboardButton.frame.size.width, _keyboardButton.frame.size.height);
+    _keyboardButton.frame = hideButtonFrame;
+    [self.view addSubview:_keyboardButton];
+    
+    // show the find button
+    CGRect searchFrame = CGRectMake(hideButtonX-5-_searchButton.frame.size.width , hideButtonY, _searchButton.frame.size.width, _searchButton.frame.size.height);
+    _searchButton.frame = searchFrame;
+    [self.view addSubview:_searchButton];
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification{
-    [_hideKeyboardButton removeFromSuperview];
+-(void) searchButtonPressed:(id)sender {
+    CGRect frame = _searchButton.frame;
+    CGRect newFrame = CGRectMake(0, frame.origin.y, frame.size.width, frame.size.height);
+    [UIView animateWithDuration:0.5 animations:^{
+        _searchButton.frame = newFrame;
+    }];
+}
+
+-(void) keyboardWillHide:(NSNotification *)notification{
+    [_keyboardButton removeFromSuperview];
+    [_searchButton removeFromSuperview];
 }
 
 -(void) hideKeyboardPressed:(id)sender{
