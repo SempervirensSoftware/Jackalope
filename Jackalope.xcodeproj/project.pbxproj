@@ -144,6 +144,7 @@
 		D0A5C7EB164A368000055CF6 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */; };
 		D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */; };
 		D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */; };
+		D0FB120D1684FE0F00F2E036 /* PTKeyboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FB120C1684FE0E00F2E036 /* PTKeyboardHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +361,8 @@
 		D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSansMono.ttf; sourceTree = "<group>"; };
+		D0FB120B1684FE0E00F2E036 /* PTKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTKeyboardHelper.h; path = View/PTKeyboardHelper.h; sourceTree = "<group>"; };
+		D0FB120C1684FE0E00F2E036 /* PTKeyboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTKeyboardHelper.m; path = View/PTKeyboardHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +437,8 @@
 				6E3C678A152AA91D00BD8953 /* SettingsView_iPhone.xib */,
 				6E3C6796152AD24D00BD8953 /* LoginTableViewCell.h */,
 				6E3C6797152AD24D00BD8953 /* LoginTableViewCell.m */,
+				D0FB120B1684FE0E00F2E036 /* PTKeyboardHelper.h */,
+				D0FB120C1684FE0E00F2E036 /* PTKeyboardHelper.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1094,6 +1099,7 @@
 				D033E1511650C84300100D70 /* WETouchableView.m in Sources */,
 				D033E15A1650CE8400100D70 /* TextSelectionPopupViewController.m in Sources */,
 				D033E19316538B4100100D70 /* UIBarButtonItem+WEPopover.m in Sources */,
+				D0FB120D1684FE0F00F2E036 /* PTKeyboardHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
