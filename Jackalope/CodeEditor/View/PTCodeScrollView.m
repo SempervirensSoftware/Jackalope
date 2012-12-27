@@ -810,6 +810,7 @@
 
 -(void) hideKeyboard{
     [self resignFirstResponder];
+    [self clearSelectionLayers];
 }
 
 // Called when the UIKeyboardDidShowNotification is sent.

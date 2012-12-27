@@ -14,7 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PTKeyboardHelper.h"
 
-@interface CodeViewController (){
+@interface CodeViewController () <KeyboardHelperDelegate>{
     PTKeyboardHelper *_keyboardHelper;
 }
 
@@ -156,13 +156,14 @@
     if (!_keyboardHelper) {
         CGRect helperFrame = CGRectMake(5, keyboardRect.origin.y-35, keyboardRect.size.width-10, 30);
         _keyboardHelper = [[PTKeyboardHelper alloc] initWithFrame:helperFrame];
+        _keyboardHelper.delegate = self;
         
     }
     [self.view addSubview:_keyboardHelper];
 }
 
 -(void) keyboardWillHide:(NSNotification *)notification{
-    [_keyboardHelper removeFromSuperview];
+//    [_keyboardHelper removeFromSuperview];
 }
 
 
@@ -177,6 +178,23 @@
 -(void) textWillChange:(id<UITextInput>)textInput {}
 -(void) selectionDidChange:(id<UITextInput>)textInput {}
 -(void) selectionWillChange:(id<UITextInput>)textInput {}
+
+# pragma mark Keyboard Helper Delegate
+
+-(void)keyboardHelperWillCollapse:(PTKeyboardHelper*)helper {
+    [self.codeView showKeyboard];
+}
+-(void)keyboardHelperDidExpand:(PTKeyboardHelper*)helper {
+    [self.codeView hideKeyboard];
+}
+
+-(void)keyboardHelperHideKeyboard:(PTKeyboardHelper*)helper {
+    [self.codeView hideKeyboard];
+}
+-(void)keyboardHelper:(PTKeyboardHelper*)helper SearchForString:(NSString*)searchString {
+    
+}
+
 
 # pragma mark Commits
 
