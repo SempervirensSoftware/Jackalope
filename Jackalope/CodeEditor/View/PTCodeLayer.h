@@ -50,6 +50,7 @@
 
 -(PTTextPosition *) closestPositionToPoint:(CGPoint)point;
 -(CGRect) createRectForPosition:(PTTextPosition*)pos;
+-(PTTextRange*) rangeForSearchString:(NSString*)searchText;
 
 -(void)layoutLoc:(PTLineOfCode*)loc;
 -(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(PTLineOfCode*) updatedLoc;

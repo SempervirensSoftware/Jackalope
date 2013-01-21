@@ -48,7 +48,8 @@ static const NSTimeInterval BlinkRate = 0.5;
 -(void)stopBlinking
 {
     [_blinkTimer invalidate];
-    _blinkTimer = nil;        
+    _blinkTimer = nil;
+    self.hidden = YES;
 }
 
 // Helper method to set an initial blink delay

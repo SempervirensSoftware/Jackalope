@@ -18,6 +18,7 @@
     NSDictionary    *_collapsedFrames;
     
     BOOL            _isCollapsed;
+    BOOL            _isKeyboardShown;
 }
 @end
 
@@ -29,7 +30,7 @@ const int v_padding = 5;
 const int min_height = 35;
 
 NSString *const kMainFrame = @"main";
-NSString *const kKeyboardFrame = @"keyboard";
+NSString *const kKeyboardIconFrame = @"keyboard";
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -50,7 +51,7 @@ NSString *const kKeyboardFrame = @"keyboard";
     CGFloat expandedKeyboardX = (fullFrame.size.width - h_padding - _keyboardButton.frame.size.width);
     CGFloat keyboardY = ((height - _keyboardButton.frame.size.height)/2);
     CGRect expandedKeyboardFrame = CGRectMake(expandedKeyboardX, keyboardY, _keyboardButton.frame.size.width, _keyboardButton.frame.size.height);
-    _expandedFrames = @{kMainFrame:[NSValue valueWithCGRect:fullFrame], kKeyboardFrame:[NSValue valueWithCGRect:expandedKeyboardFrame]};
+    _expandedFrames = @{kMainFrame:[NSValue valueWithCGRect:fullFrame], kKeyboardIconFrame:[NSValue valueWithCGRect:expandedKeyboardFrame]};
     
     // setup the search button
     CGFloat searchY = ((height - _searchButton.frame.size.height)/2);
@@ -73,7 +74,7 @@ NSString *const kKeyboardFrame = @"keyboard";
     CGRect collapsedFrame = CGRectMake(collapsedX, frame.origin.y, collapsedWidth, height);
     CGFloat collapsedKeyboardX = (collapsedFrame.size.width - h_padding - _keyboardButton.frame.size.width);
     CGRect collapsedKeyboardFrame = CGRectMake(collapsedKeyboardX, keyboardY, _keyboardButton.frame.size.width, _keyboardButton.frame.size.height);
-    _collapsedFrames = @{kMainFrame:[NSValue valueWithCGRect:collapsedFrame], kKeyboardFrame:[NSValue valueWithCGRect:collapsedKeyboardFrame]};
+    _collapsedFrames = @{kMainFrame:[NSValue valueWithCGRect:collapsedFrame], kKeyboardIconFrame:[NSValue valueWithCGRect:collapsedKeyboardFrame]};
     _keyboardButton.frame = collapsedKeyboardFrame;
     _isCollapsed = YES;
     
@@ -92,6 +93,14 @@ NSString *const kKeyboardFrame = @"keyboard";
         // show the keyboard button        
         [self addSubview:_keyboardButton];
     }
+
+    // Monitor the keyboard
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
     return self;
 }
 
@@ -109,11 +118,13 @@ NSString *const kKeyboardFrame = @"keyboard";
     }
     
     CGRect viewFrame = [_collapsedFrames[kMainFrame] CGRectValue];
-    CGRect keyboardFrame = [_collapsedFrames[kKeyboardFrame] CGRectValue];
+    CGRect keyboardFrame = [_collapsedFrames[kKeyboardIconFrame] CGRectValue];
+    CGFloat currentY = self.frame.origin.y;
+    viewFrame.origin.y = currentY;
+    
     _isCollapsed = YES;
     
     [_searchTextField resignFirstResponder];
-
     
     [UIView animateWithDuration:0.5 animations:^{
         self.frame = viewFrame;
@@ -135,7 +146,7 @@ NSString *const kKeyboardFrame = @"keyboard";
     }
     
     CGRect viewFrame = [_expandedFrames[kMainFrame] CGRectValue];
-    CGRect keyboardFrame = [_expandedFrames[kKeyboardFrame] CGRectValue];
+    CGRect keyboardFrame = [_expandedFrames[kKeyboardIconFrame] CGRectValue];
     _isCollapsed = NO;
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -146,24 +157,43 @@ NSString *const kKeyboardFrame = @"keyboard";
         if (finished){
             [self addSubview:_searchTextField];
             [_searchTextField becomeFirstResponder];
-            if ([self.delegate respondsToSelector:@selector(keyboardHelperDidExpand:)]) {
-                [self.delegate keyboardHelperDidExpand:self];
-            }
         }
     }];
 }
 
--(void) hideKeyboardPressed:(id)sender{
-    if ([_searchTextField isFirstResponder]){
-        [_searchTextField resignFirstResponder];
-    }
-    else if ([self.delegate respondsToSelector:@selector(keyboardHelperHideKeyboard:)]) {
-        [self.delegate keyboardHelperHideKeyboard:self];
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if ([self.delegate respondsToSelector:@selector(keyboardHelperDidExpand:)]) {
+        [self.delegate keyboardHelperDidExpand:self];
     }
 }
 
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    // find out where the keyboard is
+    NSDictionary* info = [notification userInfo];
+    CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = [self.window convertRect:keyboardRect fromWindow:nil];
+    keyboardRect = [self.superview convertRect:keyboardRect fromView:nil];
+    
+    CGRect newFrame = CGRectMake(self.frame.origin.x, keyboardRect.origin.y-self.frame.size.height, self.frame.size.width, self.frame.size.height);
+    self.frame = newFrame;
+    self.hidden = NO;
+}
+
+-(void) keyboardWillHide:(NSNotification *)notification{
+    self.hidden = YES;
+}
+
+-(void) hideKeyboardPressed:(id)sender{
+    [self endEditing:YES];
+    [self.delegate keyboardHelperHideKeyboard:self];
+}
+
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
-    return YES;
+    NSString *searchText = textField.text;
+    BOOL textFound = [self.delegate keyboardHelper:self searchForString:searchText];
+    return NO;
 }
 
 

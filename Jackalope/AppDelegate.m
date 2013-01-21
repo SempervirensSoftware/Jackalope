@@ -40,14 +40,15 @@
         _iPhoneDevice = YES;
         
         codeViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPhone" bundle:nil];        
-        
+        codeViewController.hidesBottomBarWhenPushed = YES;
         self.tabBarController = appTab;        
     } 
     else 
     {
         _iPhoneDevice = NO;
         
-        codeViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPad" bundle:nil];        
+        codeViewController = [[CodeViewController alloc] initWithNibName:@"CodeView_iPad" bundle:nil];
+        codeViewController.hidesBottomBarWhenPushed = YES;
         UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:codeViewController];
         
         self.splitViewController = [[UISplitViewController alloc] init];

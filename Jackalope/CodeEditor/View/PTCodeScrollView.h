@@ -54,6 +54,11 @@
 
 -(void) showKeyboard;
 -(void) hideKeyboard;
+-(void) activateSelectionLayers;
+-(void) deactivateSelectionLayers;
+
+-(BOOL) highlightText:(NSString*)searchText;
+
 -(void) addCodeViewDelegate:(id <PTCodeViewDelegate>)delegate;
 -(void) removeCodeViewDelegate:(id <PTCodeViewDelegate>)delegate;
 

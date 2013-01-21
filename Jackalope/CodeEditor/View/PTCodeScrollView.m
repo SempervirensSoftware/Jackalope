@@ -17,11 +17,10 @@
 #import "WEPopoverController.h"
 
 // We use a tap gesture recognizer to allow the user to tap to invoke text edit mode
-@interface PTCodeScrollView() <WEPopoverControllerDelegate>
+@interface PTCodeScrollView()
 
 @property (nonatomic, retain) PTCursorLayer* cursorLayer;
 @property (nonatomic, retain) PTSelectionLayer* selectionLayer;
-@property (nonatomic, retain) WEPopoverController *textSelectionPopupController;
 
 - (void) tapsRecognized:(UITapGestureRecognizer *)recognizer;
 - (void) updateLayersByYOffset:(float)deltaY andLineNumOffset:(NSInteger)deltaLineNums startingAfterLayer:(PTCodeLayer*) updatedLayer  withPriorityLength:(float)priorityLength;
@@ -238,6 +237,23 @@
     [_layerArray removeAllObjects];
 }
 
+-(BOOL) highlightText:(NSString*)searchText {
+    if (searchText) {
+        PTTextRange *range = nil;
+        
+        for (PTCodeLayer* layer in _layerArray)
+        {
+            range = [layer rangeForSearchString:searchText];
+            if (range){
+                [self setSelection:range];
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
 #pragma mark Custom user interaction
 
 -(void) setSelectionAtPoint:(CGPoint)point shouldSelectWord:(BOOL)selectWord {
@@ -342,6 +358,28 @@
         [_codeEditor.layer insertSublayer:self.selectionLayer below:_currentLayer];
         [self showTextSelectionPopup];
     }
+}
+
+-(void) activateSelectionLayers {
+    if ([self.cursorLayer superlayer]){
+        [self.cursorLayer startBlinking];
+    }
+    
+    if ([self.selectionLayer superlayer]){
+
+    }
+}
+
+
+-(void) deactivateSelectionLayers {
+    if ([self.cursorLayer superlayer]){
+        [self.cursorLayer stopBlinking];
+    }
+    
+    if ([self.selectionLayer superlayer]){
+        
+    }
+
 }
 
 -(void) clearSelectionLayers{
@@ -488,7 +526,7 @@
     
     // need to split up the inserted text in a block to accommodate any newline characters
     [text enumerateSubstringsInRange:NSMakeRange(0, [text length]) options:NSStringEnumerationByLines usingBlock:
-        ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {                        
+        ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
 
             NSMutableString*    lineString  = [(__bridge NSString*)CFAttributedStringGetString(currentPos.loc.attributedText) mutableCopy];                        
             PTTextPosition*     nextPos     = nil;

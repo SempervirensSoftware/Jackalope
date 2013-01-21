@@ -14,6 +14,9 @@
 @end
 
 @protocol KeyboardHelperDelegate <NSObject>
+
+-(BOOL)keyboardHelper:(PTKeyboardHelper*)helper searchForString:(NSString*)searchString;
+
 @optional
 
 -(void)keyboardHelperWillExpand:(PTKeyboardHelper*)helper;
@@ -23,7 +26,5 @@
 -(void)keyboardHelperDidCollapse:(PTKeyboardHelper*)helper;
 
 -(void)keyboardHelperHideKeyboard:(PTKeyboardHelper*)helper;
--(void)keyboardHelper:(PTKeyboardHelper*)helper SearchForString:(NSString*)searchString;
 
 @end
-

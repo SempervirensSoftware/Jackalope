@@ -542,6 +542,24 @@
     return text;
 }
 
+-(PTTextRange*) rangeForSearchString:(NSString*)searchText {
+    PTTextRange* range = nil;
+    
+    for (PTLineOfCode* loc in _locArray)
+    {
+        NSString* text = [(__bridge NSString*)CFAttributedStringGetString(loc.attributedText) copy];
+        NSRange searchRange = [text rangeOfString:searchText];
+        if (searchRange.location != NSNotFound) {
+            PTTextPosition *startPosition = [PTTextPosition positionInLine:loc WithIndex:searchRange.location];
+            PTTextPosition *endPosition = [PTTextPosition positionInLine:loc WithIndex:(searchRange.location+searchRange.length)];
+            range = [PTTextRange rangeWithStartPosition:startPosition andEndPosition:endPosition];
+            break;
+        }
+    }
+    
+    return range;
+}
+
 -(NSRange) lineNumRange
 {
     return NSMakeRange(_startingLineNum, [_locArray count]);

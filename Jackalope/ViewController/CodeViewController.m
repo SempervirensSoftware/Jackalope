@@ -147,25 +147,22 @@
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    // find out where the keyboard is
-    NSDictionary* info = [notification userInfo];
-    CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    keyboardRect = [self.view.window convertRect:keyboardRect fromWindow:nil];
-    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
 
     if (!_keyboardHelper) {
+        // find out where the keyboard is
+        NSDictionary* info = [notification userInfo];
+        CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        keyboardRect = [self.view.window convertRect:keyboardRect fromWindow:nil];
+        keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+
+        
         CGRect helperFrame = CGRectMake(5, keyboardRect.origin.y-35, keyboardRect.size.width-10, 30);
         _keyboardHelper = [[PTKeyboardHelper alloc] initWithFrame:helperFrame];
         _keyboardHelper.delegate = self;
-        
+        [self.view addSubview:_keyboardHelper];
     }
-    [self.view addSubview:_keyboardHelper];
-}
 
--(void) keyboardWillHide:(NSNotification *)notification{
-//    [_keyboardHelper removeFromSuperview];
 }
-
 
 -(void) textDidChange:(id<UITextInput>)textInput
 {
@@ -182,17 +179,19 @@
 # pragma mark Keyboard Helper Delegate
 
 -(void)keyboardHelperWillCollapse:(PTKeyboardHelper*)helper {
-    [self.codeView showKeyboard];
+    [self.codeView becomeFirstResponder];
+    [self.codeView activateSelectionLayers];
 }
 -(void)keyboardHelperDidExpand:(PTKeyboardHelper*)helper {
-    [self.codeView hideKeyboard];
+    [self.codeView deactivateSelectionLayers];
 }
 
 -(void)keyboardHelperHideKeyboard:(PTKeyboardHelper*)helper {
     [self.codeView hideKeyboard];
 }
--(void)keyboardHelper:(PTKeyboardHelper*)helper SearchForString:(NSString*)searchString {
-    
+
+-(BOOL)keyboardHelper:(PTKeyboardHelper*)helper searchForString:(NSString*)searchString {
+    return [self.codeView highlightText:searchString];
 }
 
 
@@ -231,6 +230,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 
     [self configureView];
 }
