@@ -7,29 +7,30 @@
 //
 
 #import "PTTextPosition.h"
+#import "PTCodeLayer.h"
 
 @implementation PTTextPosition
 
-@synthesize index = _index;
-@synthesize loc = _loc;
-
-// Class method to create an instance with a given integer index
-+ (PTTextPosition *)positionInLine:(PTLineOfCode *)loc WithIndex:(NSUInteger)index
-{
-    PTTextPosition *pos = [[PTTextPosition alloc] init];    
-    pos.index = index;
++ (PTTextPosition *)positionInLayer:(PTCodeLayer*)layer InLine:(PTLineOfCode*)loc WithIndex:(NSUInteger)index{
+    PTTextPosition *pos = [[PTTextPosition alloc] init];
+    pos.layer = layer;
     pos.loc = loc;
+    pos.index = index;
     
     return pos;
 }
 
--(id) copy
-{
-    return [PTTextPosition positionInLine:_loc WithIndex:_index];
+-(CGRect) createRect {
+    return [self.layer createRectForPosition:self];
 }
 
 -(BOOL) isEqualToPosition:(PTTextPosition *)otherPosition{
-    return ((self.loc == otherPosition.loc) && (self.index == otherPosition.index));
+    return ((self.layer == otherPosition.layer) && (self.loc == otherPosition.loc) && (self.index == otherPosition.index));
+}
+
+-(id) copy
+{
+    return [PTTextPosition positionInLayer:self.layer InLine:self.loc WithIndex:self.index];
 }
 
 @end

@@ -454,7 +454,7 @@
                 lineIndex -= 1;
             }
                         
-            return [PTTextPosition positionInLine:loc WithIndex:lineIndex];
+            return [PTTextPosition positionInLayer:self InLine:loc WithIndex:lineIndex];
         }
     }
     
@@ -542,22 +542,34 @@
     return text;
 }
 
--(PTTextRange*) rangeForSearchString:(NSString*)searchText {
-    PTTextRange* range = nil;
+-(PTTextRange*) rangeForSearchString:(NSString*)searchText startingAtPosition:(PTTextPosition*)startOffset {
+    NSRange searchRange;
+    PTTextRange* result = nil;
+    BOOL startSearching = startOffset ? false : true;
     
     for (PTLineOfCode* loc in _locArray)
     {
+        if (!startSearching && (startOffset.loc != loc)){
+            continue;
+        } else if (!startSearching) {
+            startSearching = YES;
+            NSUInteger rangeLength = CFAttributedStringGetLength(loc.attributedText) - startOffset.index;
+            searchRange = NSMakeRange(startOffset.index, rangeLength);
+        } else {
+            searchRange = NSMakeRange(0, CFAttributedStringGetLength(loc.attributedText));
+        }
+        
         NSString* text = [(__bridge NSString*)CFAttributedStringGetString(loc.attributedText) copy];
-        NSRange searchRange = [text rangeOfString:searchText];
-        if (searchRange.location != NSNotFound) {
-            PTTextPosition *startPosition = [PTTextPosition positionInLine:loc WithIndex:searchRange.location];
-            PTTextPosition *endPosition = [PTTextPosition positionInLine:loc WithIndex:(searchRange.location+searchRange.length)];
-            range = [PTTextRange rangeWithStartPosition:startPosition andEndPosition:endPosition];
+        NSRange resultRange = [text rangeOfString:searchText options:NSLiteralSearch range:searchRange];
+        if (resultRange.location != NSNotFound) {
+            PTTextPosition *startPosition = [PTTextPosition positionInLayer:self InLine:loc WithIndex:resultRange.location];
+            PTTextPosition *endPosition = [PTTextPosition positionInLayer:self InLine:loc WithIndex:(resultRange.location+resultRange.length)];
+            result = [PTTextRange rangeWithStartPosition:startPosition andEndPosition:endPosition];
             break;
         }
     }
     
-    return range;
+    return result;
 }
 
 -(NSRange) lineNumRange

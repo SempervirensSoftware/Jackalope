@@ -9,13 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "PTLineOfCode.h"
 
+@class PTCodeLayer;
+
 @interface PTTextPosition : UITextPosition
 
 @property (nonatomic) NSUInteger index;
 @property (nonatomic, retain) PTLineOfCode* loc;
+@property (nonatomic, retain) PTCodeLayer* layer;
 
-+ (PTTextPosition *)positionInLine:(PTLineOfCode*)loc WithIndex:(NSUInteger)index;
++ (PTTextPosition *)positionInLayer:(PTCodeLayer*)layer InLine:(PTLineOfCode*)loc WithIndex:(NSUInteger)index;
 
+-(CGRect) createRect;
 -(BOOL) isEqualToPosition:(PTTextPosition *)otherPosition;
 
 @end

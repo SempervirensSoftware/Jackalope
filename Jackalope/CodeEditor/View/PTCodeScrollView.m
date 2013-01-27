@@ -9,7 +9,7 @@
 #import "PTCodeScrollView.h"
 #import <CoreText/CoreText.h>
 #import "PTLineOfCode.h"
-
+#import "PTCursorLayer.h"
 #import "PTTextPosition.h"
 #import "PTTextRange.h"
 
@@ -240,10 +240,19 @@
 -(BOOL) highlightText:(NSString*)searchText {
     if (searchText) {
         PTTextRange *range = nil;
+        PTTextPosition *startPosition = (PTTextPosition*) self.selection.end;
+        PTCodeLayer *startLayer = startPosition.layer;
+        BOOL startSearching = startLayer ? false : true;
         
         for (PTCodeLayer* layer in _layerArray)
         {
-            range = [layer rangeForSearchString:searchText];
+            if (!startSearching && (layer != startLayer)){
+                continue;
+            } else if (!startSearching) {
+                startSearching = YES;
+            }
+            
+            range = [layer rangeForSearchString:searchText startingAtPosition:startPosition];
             if (range){
                 [self setSelection:range];
                 return YES;
@@ -285,7 +294,7 @@
                         foundWordStart = true;
                     }
                 }
-                PTTextPosition *startPosition = [PTTextPosition positionInLine:tapPosition.loc WithIndex:startIndex];
+                PTTextPosition *startPosition = [PTTextPosition positionInLayer:currentLayer InLine:tapPosition.loc WithIndex:startIndex];
                 
                 // look forwards
                 NSUInteger endIndex = tapPosition.index;
@@ -301,7 +310,7 @@
                         foundWordEnd = true;
                     }
                 }
-                PTTextPosition *endPosition = [PTTextPosition positionInLine:tapPosition.loc WithIndex:endIndex];
+                PTTextPosition *endPosition = [PTTextPosition positionInLayer:currentLayer InLine:tapPosition.loc WithIndex:endIndex];
                 
                 NSLog(@"Selected word: [%i - %i]",startIndex, endIndex);
                 range = [PTTextRange rangeWithStartPosition:startPosition andEndPosition:endPosition];
@@ -363,11 +372,7 @@
 -(void) activateSelectionLayers {
     if ([self.cursorLayer superlayer]){
         [self.cursorLayer startBlinking];
-    }
-    
-    if ([self.selectionLayer superlayer]){
-
-    }
+    }  
 }
 
 
@@ -375,11 +380,6 @@
     if ([self.cursorLayer superlayer]){
         [self.cursorLayer stopBlinking];
     }
-    
-    if ([self.selectionLayer superlayer]){
-        
-    }
-
 }
 
 -(void) clearSelectionLayers{
@@ -559,7 +559,7 @@
                 NSAttributedString* newLine = [_decorator decorateString:newlineText];
 
                 newLoc = [[PTLineOfCode alloc] initWithAttributedString:(__bridge CFAttributedStringRef)newLine];            
-                nextPos = [PTTextPosition positionInLine:newLoc WithIndex:indentationRange.length];
+                nextPos = [PTTextPosition positionInLayer:_currentLayer InLine:newLoc WithIndex:indentationRange.length];
             }
 
             currentPos.loc.attributedText = (__bridge CFAttributedStringRef)[_decorator decorateString:lineString];
@@ -650,7 +650,7 @@
             if (newLoc) {
                 // strip the newline off this guy. there should already be one on the line above
                 [lineString replaceOccurrencesOfString:@"\n" withString:@"" options:0 range:NSMakeRange(0, [lineString length])];
-                PTTextPosition* newPos = [PTTextPosition positionInLine:newLoc WithIndex:(CFAttributedStringGetLength(newLoc.attributedText)-1)];
+                PTTextPosition* newPos = [PTTextPosition positionInLayer:_currentLayer InLine:newLoc WithIndex:(CFAttributedStringGetLength(newLoc.attributedText)-1)];
                 self.selection = [PTTextRange rangeWithStartPosition:newPos andEndPosition:newPos];
                 [self insertText:lineString andMoveCursor:NO];
             }

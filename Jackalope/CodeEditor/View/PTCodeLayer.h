@@ -12,7 +12,6 @@
 #import "NSAttributedString+Attributes.h"
 #import "PTTextRange.h"
 #import "PTLineOfCode.h"
-#import "PTCursorLayer.h"
 #import "PTSelectionLayer.h"
 
 @interface PTCodeLayer : CALayer
@@ -50,7 +49,7 @@
 
 -(PTTextPosition *) closestPositionToPoint:(CGPoint)point;
 -(CGRect) createRectForPosition:(PTTextPosition*)pos;
--(PTTextRange*) rangeForSearchString:(NSString*)searchText;
+-(PTTextRange*) rangeForSearchString:(NSString*)searchText startingAtPosition:(PTTextPosition*)startOffset;
 
 -(void)layoutLoc:(PTLineOfCode*)loc;
 -(void) updateLineHeightsBy:(NSInteger)deltaRows startingAtLine:(PTLineOfCode*) updatedLoc;

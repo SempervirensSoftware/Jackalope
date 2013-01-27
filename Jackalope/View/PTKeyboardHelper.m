@@ -65,6 +65,8 @@ NSString *const kKeyboardIconFrame = @"keyboard";
     _searchTextField = [[UITextField alloc] initWithFrame:searchFieldFrame];
     _searchTextField.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(255.0/255.0) blue:(255.0/255.0) alpha:1.f];
     _searchTextField.borderStyle = UITextBorderStyleLine;
+    _searchTextField.autocorrectionType=UITextAutocorrectionTypeNo;
+    _searchTextField.autocapitalizationType=UITextAutocapitalizationTypeNone;
     _searchTextField.returnKeyType = UIReturnKeySearch;
     _searchTextField.delegate = self;
     

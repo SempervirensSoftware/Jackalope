@@ -10,7 +10,6 @@
 #import "PTDecoratorCollection.h"
 #import "Code.h"
 #import "PTCodeLayer.h"
-#import "PTCursorLayer.h"
 
 @protocol PTCodeViewDelegate <UITextInputDelegate>
 
