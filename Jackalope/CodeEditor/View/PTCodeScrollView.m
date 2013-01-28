@@ -112,7 +112,7 @@
 
     _maxFrameSize               = 50;
     _numberOfScreensToBuffer    = 3;
-    _numberOfExtraScrollLines   = 2;
+    _numberOfExtraScrollLines   = 6;
     
     _whiteSpaceRegex = [NSRegularExpression 
                         regularExpressionWithPattern:@"^[\t ]*"
@@ -242,7 +242,7 @@
         PTTextRange *range = nil;
         PTTextPosition *startPosition = (PTTextPosition*) self.selection.end;
         PTCodeLayer *startLayer = startPosition.layer;
-        BOOL startSearching = startLayer ? false : true;
+        BOOL startSearching = startLayer ? NO : YES;
         
         for (PTCodeLayer* layer in _layerArray)
         {
@@ -254,8 +254,12 @@
             
             range = [layer rangeForSearchString:searchText startingAtPosition:startPosition];
             if (range){
-                [self setSelection:range];
+                [self setSelection:range DoHighlight:YES];
+                [self scrollToCursor];
                 return YES;
+            } else {
+                startPosition = nil;
+                startLayer = nil;
             }
         }
     }
@@ -339,7 +343,11 @@
     return result;
 }
 
--(void) setSelection:(PTTextRange *)selection {    
+-(void) setSelection:(PTTextRange *)selection {
+    [self setSelection:selection DoHighlight:NO];
+}
+
+-(void) setSelection:(PTTextRange *)selection DoHighlight:(BOOL)highlight{
     _selection = selection;
     
     [self clearSelectionLayers];
@@ -355,17 +363,21 @@
         [self.cursorLayer startBlinking];
         [_codeEditor.layer insertSublayer:self.cursorLayer above:_currentLayer];
     } else {
-        CGRect startRect = [_currentLayer createRectForPosition:start];
-        CGRect endRect = [_currentLayer createRectForPosition:end];
+        CGRect startRect = [start.layer createRectForPosition:start];
+        CGRect endRect = [end.layer createRectForPosition:end];
         
         CGFloat height = (endRect.origin.y + endRect.size.height) - startRect.origin.y;
         CGRect selectionRect = CGRectMake(0, startRect.origin.y, start.loc.displayRect.size.width, height);
         self.selectionLayer.frame = selectionRect;
+        self.selectionLayer.highlight = highlight;
         self.selectionLayer.startRect = startRect;
         self.selectionLayer.endRect = endRect;
         [self.selectionLayer setNeedsDisplay];
         [_codeEditor.layer insertSublayer:self.selectionLayer below:_currentLayer];
-        [self showTextSelectionPopup];
+
+        if (!highlight){
+            [self showTextSelectionPopup];
+        }
     }
 }
 
@@ -522,7 +534,7 @@
     
     NSInteger initLocCount = [_currentLayer.locArray count];
     CGFloat initLayerHeight = _currentLayer.frame.size.height;
-    __block PTTextPosition* currentPos = [((PTTextPosition*)self.selection.start) copy];
+    __block PTTextPosition* currentPos = [self.selection.startPosition copy];
     
     // need to split up the inserted text in a block to accommodate any newline characters
     [text enumerateSubstringsInRange:NSMakeRange(0, [text length]) options:NSStringEnumerationByLines usingBlock:
@@ -593,7 +605,7 @@
     [self textWillChange];    
     
     if (self.selection.empty){
-        PTTextPosition* currentPos = (PTTextPosition*)self.selection.start;
+        PTTextPosition* currentPos = self.selection.startPosition;
         
         NSMutableString* lineString = [(__bridge NSString*)CFAttributedStringGetString(currentPos.loc.attributedText) mutableCopy];    
 
@@ -656,8 +668,8 @@
             }
         }
     } else { // this means we need to delete all the selected text
-        PTTextPosition *start = (PTTextPosition*)self.selection.start;
-        PTTextPosition *end = (PTTextPosition*)self.selection.end;
+        PTTextPosition *start = self.selection.startPosition;
+        PTTextPosition *end = self.selection.endPosition;
         
         if (start.loc == end.loc) {
             int selectionLength = end.index - start.index;
@@ -901,8 +913,14 @@
         displayRect.origin.y += self.contentOffset.y;
         displayRect.size.height -= _keyboardRect.size.height;  
         
-        CGRect cursorRect = self.cursorLayer.frame;
+        CGRect cursorRect;
+        if (self.cursorLayer.superlayer){
+            cursorRect = self.cursorLayer.frame;
+        } else {
+            cursorRect = self.selectionLayer.endRect;
+        }
         cursorRect = [self convertRect:cursorRect toView:self];
+
         // enlarge the 'cursor' rect to make sure we have a couple lines visible on each side
         cursorRect.origin.y -= (cursorRect.size.height * _numberOfExtraScrollLines);
         cursorRect.size.height += (cursorRect.size.height * (_numberOfExtraScrollLines*2));        

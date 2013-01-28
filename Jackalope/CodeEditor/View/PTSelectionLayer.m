@@ -11,7 +11,12 @@
 @implementation PTSelectionLayer
 
 -(void) drawInContext:(CGContextRef)context{
-    UIColor *bgColor = [UIColor colorWithRed:172/255.f green:204/255.f blue:252/255.f alpha:1.f];
+    UIColor *bgColor;
+    if (self.highlight){
+       bgColor = [UIColor colorWithRed:255/255.f green:250/255.f blue:0/255.f alpha:1.f];
+    } else {
+        bgColor = [UIColor colorWithRed:172/255.f green:204/255.f blue:252/255.f alpha:1.f];
+    }
     CGContextSetFillColorWithColor(context, bgColor.CGColor);
     
     if (self.endRect.origin.y == self.startRect.origin.y){

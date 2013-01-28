@@ -8,6 +8,7 @@
 
 #import "PTTextPosition.h"
 #import "PTCodeLayer.h"
+#import "PTLineOfCode.h"
 
 @implementation PTTextPosition
 
@@ -31,6 +32,10 @@
 -(id) copy
 {
     return [PTTextPosition positionInLayer:self.layer InLine:self.loc WithIndex:self.index];
+}
+
+-(NSString *) description {
+    return [NSString stringWithFormat:@"(%d, %d)", self.loc.lineNum, self.index];
 }
 
 @end

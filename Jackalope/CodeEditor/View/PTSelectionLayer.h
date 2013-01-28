@@ -10,6 +10,7 @@
 
 @interface PTSelectionLayer : CALayer
 
+@property (nonatomic) BOOL      highlight;
 @property (nonatomic) CGRect    startRect;
 @property (nonatomic) CGRect    endRect;
 

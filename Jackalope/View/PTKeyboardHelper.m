@@ -127,14 +127,13 @@ NSString *const kKeyboardIconFrame = @"keyboard";
     _isCollapsed = YES;
     
     [_searchTextField resignFirstResponder];
+    [_searchTextField removeFromSuperview];
     
     [UIView animateWithDuration:0.5 animations:^{
         self.frame = viewFrame;
         _keyboardButton.frame = keyboardFrame;
-        _searchTextField.alpha = 0.f;
     } completion:^(BOOL finished) {
         if (finished){
-            [_searchTextField removeFromSuperview];
             if ([self.delegate respondsToSelector:@selector(keyboardHelperDidCollapse:)]) {
                 [self.delegate keyboardHelperDidCollapse:self];
             }

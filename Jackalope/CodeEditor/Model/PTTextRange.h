@@ -19,7 +19,8 @@
 
 @interface PTTextRange : UITextRange
 
-@property (nonatomic) NSRange range;
+@property (nonatomic, retain) PTTextPosition* startPosition;
+@property (nonatomic, retain) PTTextPosition* endPosition;
 
 +(id)rangeWithStartPosition:(PTTextPosition *)startPosition andEndPosition:(PTTextPosition *)endPosition;
 
