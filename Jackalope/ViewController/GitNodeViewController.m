@@ -9,6 +9,7 @@
 #import "GitNodeViewController.h"
 #import "RepoViewController.h"
 #import "CodeViewController.h"
+#import "SettingsViewController.h"
 
 #import "RootNode.h"
 #import "BranchNode.h"
@@ -30,15 +31,16 @@
         _isError = NO;
     }
     
-//    UIBarButtonItem* _settingsBtn = [[UIBarButtonItem alloc] 
-//                                     initWithImage:[UIImage imageNamed:@"glyphicons_019_cogwheel.png"] 
-//                                     style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
-//    self.navigationItem.rightBarButtonItem = _settingsBtn;
-    
-    UIBarButtonItem* _hackBtn = [[UIBarButtonItem alloc]
-                                     initWithImage:[UIImage imageNamed:@"07-band-aid.png"]
-                                     style:UIBarButtonItemStylePlain target:self action:@selector(showStaticFile)];
-    self.navigationItem.rightBarButtonItem = _hackBtn;
+    UIBarButtonItem* _settingsBtn = [[UIBarButtonItem alloc] 
+                                     initWithImage:[UIImage imageNamed:@"glyphicons_019_cogwheel.png"] 
+                                     style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
+    self.navigationItem.rightBarButtonItem = _settingsBtn;
+
+//    Hack to enable quick editing without a internet connection
+//    UIBarButtonItem* _hackBtn = [[UIBarButtonItem alloc]
+//                                     initWithImage:[UIImage imageNamed:@"07-band-aid.png"]
+//                                     style:UIBarButtonItemStylePlain target:self action:@selector(showStaticFile)];
+//    self.navigationItem.rightBarButtonItem = _hackBtn;
 
     self.clearsSelectionOnViewWillAppear = YES;    
     
@@ -214,8 +216,9 @@
 
 - (void) showSettings
 {
-    [CurrentUser logout];
-    [GlobalAppDelegate showLogin];
+    UIViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsView_iPhone" bundle:nil];
+    settingsController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 - (void) showStaticFile

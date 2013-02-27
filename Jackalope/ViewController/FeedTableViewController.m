@@ -12,6 +12,7 @@
 #import "Commit.h"
 #import "PushEventCell.h"
 #import "FeedCommitViewController.h"
+#import "SettingsViewController.h"
 
 NSString* const _cellIdentifier     = @"FeedCell";
 NSInteger const _cellHeight         = 50;
@@ -38,7 +39,13 @@ NSInteger const _cellHeight         = 50;
     _isError    = NO;
     _notifyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notify"];
     
-    _navController = [[UINavigationController alloc] initWithRootViewController:self];
+
+    
+    UIBarButtonItem* _settingsBtn = [[UIBarButtonItem alloc]
+                                     initWithImage:[UIImage imageNamed:@"glyphicons_019_cogwheel.png"]
+                                     style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
+    self.navigationItem.rightBarButtonItem = _settingsBtn;
+
     
     // Refresh view
     if (_refreshHeaderView == nil) {
@@ -71,6 +78,8 @@ NSInteger const _cellHeight         = 50;
     }
     return self;
 }
+
+#pragma mark - User Interactions
 
 - (void)refreshFeed
 {
@@ -116,6 +125,14 @@ NSInteger const _cellHeight         = 50;
     FeedCommitViewController* feedVC = [[FeedCommitViewController alloc] initWithCommit:commit];
     [self.navigationController pushViewController:feedVC animated:YES];
 }
+
+- (void) showSettings
+{
+    UIViewController *settingsController = [[SettingsViewController alloc] initWithNibName:@"SettingsView_iPhone" bundle:nil];
+    settingsController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingsController animated:YES];
+}
+
 
 -(void) UserLoggedIn:(NSNotification*) note
 {

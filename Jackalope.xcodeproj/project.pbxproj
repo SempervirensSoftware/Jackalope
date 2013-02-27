@@ -142,6 +142,10 @@
 		D0A5C7E9164A368000055CF6 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E0164A368000055CF6 /* grayArrow@2x.png */; };
 		D0A5C7EA164A368000055CF6 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E1164A368000055CF6 /* whiteArrow.png */; };
 		D0A5C7EB164A368000055CF6 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */; };
+		D0AA7FEF16DDCA94005E7A04 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA7FEE16DDCA94005E7A04 /* SettingsViewController.m */; };
+		D0AA7FF316DDE06B005E7A04 /* logo_small.png in Resources */ = {isa = PBXBuildFile; fileRef = D0AA7FF216DDE06B005E7A04 /* logo_small.png */; };
+		D0AA7FF616DDE333005E7A04 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA7FF516DDE333005E7A04 /* MessageUI.framework */; };
+		D0AA7FF816DDEE61005E7A04 /* logo_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0AA7FF716DDEE61005E7A04 /* logo_small@2x.png */; };
 		D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */; };
 		D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */; };
 		D0FB120D1684FE0F00F2E036 /* PTKeyboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FB120C1684FE0E00F2E036 /* PTKeyboardHelper.m */; };
@@ -359,6 +363,11 @@
 		D0A5C7E0164A368000055CF6 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		D0A5C7E1164A368000055CF6 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		D0A5C7E2164A368000055CF6 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		D0AA7FED16DDCA94005E7A04 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		D0AA7FEE16DDCA94005E7A04 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		D0AA7FF216DDE06B005E7A04 /* logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_small.png; sourceTree = "<group>"; };
+		D0AA7FF516DDE333005E7A04 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D0AA7FF716DDEE61005E7A04 /* logo_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_small@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSansMono.ttf; sourceTree = "<group>"; };
 		D0FB120B1684FE0E00F2E036 /* PTKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTKeyboardHelper.h; path = View/PTKeyboardHelper.h; sourceTree = "<group>"; };
@@ -370,6 +379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0AA7FF616DDE333005E7A04 /* MessageUI.framework in Frameworks */,
 				6EB8D97B14F750CB0079E140 /* libz.dylib in Frameworks */,
 				6E8B059614D0E03E00EBC107 /* QuartzCore.framework in Frameworks */,
 				6E8B051C14D0CA4F00EBC107 /* CoreText.framework in Frameworks */,
@@ -470,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB8D97A14F750CB0079E140 /* libz.dylib */,
+				D0AA7FF516DDE333005E7A04 /* MessageUI.framework */,
 				6E8B059514D0E03E00EBC107 /* QuartzCore.framework */,
 				6E8B051B14D0CA4F00EBC107 /* CoreText.framework */,
 				6E8B04D614D0C47900EBC107 /* UIKit.framework */,
@@ -556,6 +567,8 @@
 				6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */,
 				6EA61F5A14FA25A200A36228 /* blacktocat.png */,
 				6E895F0214D9D07A00D98866 /* jackalope.png */,
+				D0AA7FF216DDE06B005E7A04 /* logo_small.png */,
+				D0AA7FF716DDEE61005E7A04 /* logo_small@2x.png */,
 				6E8B052414D0CBF800EBC107 /* file.png */,
 				6E8B052514D0CBF800EBC107 /* folder.png */,
 			);
@@ -628,6 +641,8 @@
 				6E8B054A14D0CE9800EBC107 /* GitNodeViewController.m */,
 				6E8B054714D0CE9800EBC107 /* RepoViewController.h */,
 				6E8B054814D0CE9800EBC107 /* RepoViewController.m */,
+				D0AA7FED16DDCA94005E7A04 /* SettingsViewController.h */,
+				D0AA7FEE16DDCA94005E7A04 /* SettingsViewController.m */,
 			);
 			name = Controller;
 			path = ViewController;
@@ -1008,6 +1023,8 @@
 				D0585D9A1682746B00E94251 /* 07-band-aid@2x.png in Resources */,
 				D067C39216843F9300841294 /* 01-magnify.png in Resources */,
 				D067C39316843F9300841294 /* 01-magnify@2x.png in Resources */,
+				D0AA7FF316DDE06B005E7A04 /* logo_small.png in Resources */,
+				D0AA7FF816DDEE61005E7A04 /* logo_small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1117,7 @@
 				D033E15A1650CE8400100D70 /* TextSelectionPopupViewController.m in Sources */,
 				D033E19316538B4100100D70 /* UIBarButtonItem+WEPopover.m in Sources */,
 				D0FB120D1684FE0F00F2E036 /* PTKeyboardHelper.m in Sources */,
+				D0AA7FEF16DDCA94005E7A04 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
