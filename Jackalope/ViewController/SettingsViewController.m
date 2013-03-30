@@ -27,12 +27,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect viewFrame = self.view.frame;
+
+    CGRect buttonFrame = self.logoutBtn.frame;
+    CGFloat logoutY = (viewFrame.origin.y + viewFrame.size.height - buttonFrame.size.height - 20);
+    self.logoutBtn.frame = CGRectMake(buttonFrame.origin.x, logoutY, buttonFrame.size.width, buttonFrame.size.height);
+    
+    buttonFrame = self.feedbackBtn.frame;
+    self.feedbackBtn.frame = CGRectMake(buttonFrame.origin.x, (self.logoutBtn.frame.origin.y - 10 - buttonFrame.size.height), buttonFrame.size.width, buttonFrame.size.height);
+    
 }
 - (IBAction)sendFeedback:(id)sender{
     if([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *controller=[[MFMailComposeViewController alloc] init];
         
-        controller.mailComposeDelegate=self;
+        controller.mailComposeDelegate = self;
         
         NSDictionary *appInfo=[[NSBundle mainBundle] infoDictionary];
         
@@ -45,14 +54,13 @@
             build=[NSString stringWithFormat:@"%@", buildShort];
         }
         
-        NSString *subject=[NSString stringWithFormat:@"Jackalope Feedback -  %@",build];
+        NSString *subject=@"Jackalope Feedback";
         
         UIDevice *device=[UIDevice currentDevice];
         NSArray* appProfile=@[
                              @[ @"App Version", build ],
                              @[ @"OS", [NSString stringWithFormat:@"%@ %@", [device systemName], [device systemVersion]]],
-                             @[ @"Model", [device model]],
-                             @[ @"Screen Scale", [NSString stringWithFormat:@"%.2f",[[UIScreen mainScreen] scale]]]
+                             @[ @"Model", [device model]]
                             ];
         
         NSMutableString* description = [[NSMutableString alloc] init];
@@ -63,11 +71,15 @@
         
         [controller setSubject:subject];
         [controller setMessageBody:[NSString stringWithFormat:@"\n\n\n---------------\nDebug Info\n---------------\n%@",description] isHTML:NO];
-        [controller setToRecipients:@[@"peter@jackalope.me"]];
+        [controller setToRecipients:@[@"feedback@jackalope.me"]];
         [self presentModalViewController:controller animated:YES];
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You can't send mail from this device!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
+}
+
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)logout:(id)sender{

@@ -242,25 +242,35 @@
         PTTextRange *range = nil;
         PTTextPosition *startPosition = (PTTextPosition*) self.selection.end;
         PTCodeLayer *startLayer = startPosition.layer;
+
         BOOL startSearching = startLayer ? NO : YES;
+        BOOL textFound = NO;
+        NSInteger iterations = 0;
         
-        for (PTCodeLayer* layer in _layerArray)
-        {
-            if (!startSearching && (layer != startLayer)){
-                continue;
-            } else if (!startSearching) {
-                startSearching = YES;
+        while (!textFound && iterations <= 1) {
+        
+            for (PTCodeLayer* layer in _layerArray)
+            {
+                if (!startSearching && (layer != startLayer)){
+                    continue;
+                } else if (!startSearching) {
+                    startSearching = YES;
+                }
+                
+                range = [layer rangeForSearchString:searchText startingAtPosition:startPosition];
+                if (range){
+                    [self setSelection:range DoHighlight:YES];
+                    [self scrollToCursor];
+                    return YES;
+                } else {
+                    startPosition = nil;
+                    startLayer = nil;
+                }
             }
             
-            range = [layer rangeForSearchString:searchText startingAtPosition:startPosition];
-            if (range){
-                [self setSelection:range DoHighlight:YES];
-                [self scrollToCursor];
-                return YES;
-            } else {
-                startPosition = nil;
-                startLayer = nil;
-            }
+            // For the second pass through the code we want to start searching immediately
+            iterations++;
+            startSearching = YES;
         }
     }
     

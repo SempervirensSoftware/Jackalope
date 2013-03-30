@@ -10,7 +10,10 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface SettingsViewController : UIViewController <MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
+@interface SettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
+
+@property (nonatomic, retain) IBOutlet  UIButton*   feedbackBtn;
+@property (nonatomic, retain) IBOutlet  UIButton*   logoutBtn;
 
 - (IBAction)sendFeedback:(id)sender;
 - (IBAction)logout:(id)sender;
