@@ -148,6 +148,9 @@
 		D0AA7FF816DDEE61005E7A04 /* logo_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0AA7FF716DDEE61005E7A04 /* logo_small@2x.png */; };
 		D0BAA5DC1641F5C600C82A16 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */; };
 		D0BAA5E01641FB1700C82A16 /* DroidSansMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */; };
+		D0D7497B17079EB300FE9221 /* SplashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0D7497917079EB300FE9221 /* SplashView.xib */; };
+		D0D7497E1707A02700FE9221 /* logo_hero.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D7497C1707A02700FE9221 /* logo_hero.png */; };
+		D0D7497F1707A02700FE9221 /* logo_hero@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D7497D1707A02700FE9221 /* logo_hero@2x.png */; };
 		D0FB120D1684FE0F00F2E036 /* PTKeyboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FB120C1684FE0E00F2E036 /* PTKeyboardHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -370,6 +373,9 @@
 		D0AA7FF716DDEE61005E7A04 /* logo_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_small@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DB1641F5C600C82A16 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0BAA5DF1641FB1700C82A16 /* DroidSansMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSansMono.ttf; sourceTree = "<group>"; };
+		D0D7497A17079EB300FE9221 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SplashView.xib; sourceTree = "<group>"; };
+		D0D7497C1707A02700FE9221 /* logo_hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_hero.png; sourceTree = "<group>"; };
+		D0D7497D1707A02700FE9221 /* logo_hero@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_hero@2x.png"; sourceTree = "<group>"; };
 		D0FB120B1684FE0E00F2E036 /* PTKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTKeyboardHelper.h; path = View/PTKeyboardHelper.h; sourceTree = "<group>"; };
 		D0FB120C1684FE0E00F2E036 /* PTKeyboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTKeyboardHelper.m; path = View/PTKeyboardHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -436,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				6E910E55156300CA00C71B1D /* Feed */,
+				D0D7497917079EB300FE9221 /* SplashView.xib */,
 				6EB3D92915490F1F003BD13E /* GithubLogin_iPad.xib */,
 				6EB3D92C15490F55003BD13E /* GithubLogin_iPhone.xib */,
 				6E8B055B14D0D42B00EBC107 /* TreeView_iPad.xib */,
@@ -567,6 +574,8 @@
 				6EA68BEB1527B11800A3660E /* glyphicons_019_cogwheel@2x.png */,
 				6EA61F5A14FA25A200A36228 /* blacktocat.png */,
 				6E895F0214D9D07A00D98866 /* jackalope.png */,
+				D0D7497C1707A02700FE9221 /* logo_hero.png */,
+				D0D7497D1707A02700FE9221 /* logo_hero@2x.png */,
 				D0AA7FF216DDE06B005E7A04 /* logo_small.png */,
 				D0AA7FF716DDEE61005E7A04 /* logo_small@2x.png */,
 				6E8B052414D0CBF800EBC107 /* file.png */,
@@ -1025,6 +1034,9 @@
 				D067C39316843F9300841294 /* 01-magnify@2x.png in Resources */,
 				D0AA7FF316DDE06B005E7A04 /* logo_small.png in Resources */,
 				D0AA7FF816DDEE61005E7A04 /* logo_small@2x.png in Resources */,
+				D0D7497B17079EB300FE9221 /* SplashView.xib in Resources */,
+				D0D7497E1707A02700FE9221 /* logo_hero.png in Resources */,
+				D0D7497F1707A02700FE9221 /* logo_hero@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1239,14 @@
 				6EB3D92D15490F55003BD13E /* en */,
 			);
 			name = GithubLogin_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		D0D7497917079EB300FE9221 /* SplashView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0D7497A17079EB300FE9221 /* en */,
+			);
+			name = SplashView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
